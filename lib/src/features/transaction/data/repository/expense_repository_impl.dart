@@ -1,0 +1,61 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../../../common/common.dart';
+import '../../domain/repository/expense_repository.dart';
+import '../datasource/expense_datasource.dart';
+
+part 'expense_repository_impl.g.dart';
+
+@riverpod
+ExpenseRepositoryImpl expenseRepository(Ref ref) {
+  final datasource = ref.watch(expenseDataSourceProvider);
+  return ExpenseRepositoryImpl(datasource);
+}
+
+class ExpenseRepositoryImpl implements ExpenseRepository {
+  final ExpenseDatasource datasource;
+
+  ExpenseRepositoryImpl(this.datasource);
+
+  @override
+  Future<Either<String, int>> create(ExpenseModel expense) async {
+    try {
+      final result = await datasource.create(expense);
+      return Right(result);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, int>> delete(ExpenseModel expense) async {
+    try {
+      final result = await datasource.delete(expense);
+      return Right(result);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, List<ExpenseModel>>> read() async {
+    try {
+      final result = await datasource.read();
+      return Right(result);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, int>> update(ExpenseModel expense) async {
+    try {
+      final result = await datasource.update(expense);
+      return Right(result);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+}

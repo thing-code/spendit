@@ -1,0 +1,33 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../../../common/common.dart';
+import '../../data/repository/income_repository_impl.dart';
+
+part 'income.g.dart';
+
+@Riverpod(keepAlive: true)
+class Income extends _$Income {
+  @override
+  FutureOr<List<IncomeModel>> build() async {
+    final incomes = await ref.read(incomeRepositoryProvider).read();
+    return incomes.fold((l) => [], (r) => r);
+  }
+
+  Future<bool> add(IncomeModel income) async {
+    final result = await ref.read(incomeRepositoryProvider).create(income);
+    ref.invalidateSelf();
+    return result.fold((l) => false, (r) => true);
+  }
+
+  Future<bool> edit(IncomeModel income) async {
+    final result = await ref.read(incomeRepositoryProvider).update(income);
+    ref.invalidateSelf();
+    return result.fold((l) => false, (r) => true);
+  }
+
+  Future<bool> delete(IncomeModel income) async {
+    final result = await ref.read(incomeRepositoryProvider).delete(income);
+    ref.invalidateSelf();
+    return result.fold((l) => false, (r) => true);
+  }
+}
