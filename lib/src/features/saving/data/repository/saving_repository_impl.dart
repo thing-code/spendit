@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../domain/model/saving_model.dart';
+import '../../domain/model/saving.dart';
 import '../../domain/repository/saving_repository.dart';
 import '../datasource/planned_saving_datasource.dart';
 import '../datasource/saving_datasource.dart';
@@ -21,7 +21,7 @@ class SavingRepositoryImpl implements SavingRepository {
   SavingRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<String, int>> create(SavingModel saving) async {
+  Future<Either<String, int>> create(Saving saving) async {
     try {
       final result = await datasource.create(saving);
       return Right(result);
@@ -31,7 +31,7 @@ class SavingRepositoryImpl implements SavingRepository {
   }
 
   @override
-  Future<Either<String, int>> delete(SavingModel saving) async {
+  Future<Either<String, int>> delete(Saving saving) async {
     try {
       final result = await datasource.delete(saving);
       return Right(result);
@@ -41,7 +41,7 @@ class SavingRepositoryImpl implements SavingRepository {
   }
 
   @override
-  Future<Either<String, List<SavingModel>>> read() async {
+  Future<Either<String, List<Saving>>> read() async {
     try {
       final result = await datasource.read();
       return Right(result);
@@ -51,7 +51,7 @@ class SavingRepositoryImpl implements SavingRepository {
   }
 
   @override
-  Future<Either<String, int>> update(SavingModel saving) async {
+  Future<Either<String, int>> update(Saving saving) async {
     try {
       final result = await datasource.update(saving);
       return Right(result);

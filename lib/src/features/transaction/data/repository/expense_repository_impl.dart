@@ -20,7 +20,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   ExpenseRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<String, int>> create(ExpenseModel expense) async {
+  Future<Either<String, int>> create(Expense expense) async {
     try {
       final result = await datasource.create(expense);
       return Right(result);
@@ -30,7 +30,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   }
 
   @override
-  Future<Either<String, int>> delete(ExpenseModel expense) async {
+  Future<Either<String, int>> delete(Expense expense) async {
     try {
       final result = await datasource.delete(expense);
       return Right(result);
@@ -40,7 +40,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   }
 
   @override
-  Future<Either<String, List<ExpenseModel>>> read() async {
+  Future<Either<String, List<Expense>>> read() async {
     try {
       final result = await datasource.read();
       return Right(result);
@@ -50,7 +50,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   }
 
   @override
-  Future<Either<String, int>> update(ExpenseModel expense) async {
+  Future<Either<String, int>> update(Expense expense) async {
     try {
       final result = await datasource.update(expense);
       return Right(result);

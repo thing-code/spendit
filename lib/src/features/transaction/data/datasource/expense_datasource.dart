@@ -1,16 +1,15 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit/src/common/common.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 part 'expense_datasource.g.dart';
 
 @riverpod
-ExpenseDatasource expenseDataSource(Ref ref) {
+ExpenseDatasource expenseDatasource(Ref ref) {
   return ExpenseDatasource();
 }
-
 
 class ExpenseDatasource {
   static final ExpenseDatasource _instance = ExpenseDatasource._();
@@ -51,7 +50,7 @@ class ExpenseDatasource {
     ''');
   }
 
-  Future<int> create(ExpenseModel expense) async {
+  Future<int> create(Expense expense) async {
     final db = await database;
     return db.transaction((txn) async {
       return await txn.insert(
@@ -62,35 +61,24 @@ class ExpenseDatasource {
     });
   }
 
-  Future<List<ExpenseModel>> read() async {
+  Future<List<Expense>> read() async {
     final db = await database;
     final response = await db.query(table, orderBy: "date DESC");
-    final data = response.map((e) => ExpenseModel.fromJson(e)).toList();
+    final data = response.map((e) => Expense.fromJson(e)).toList();
     return data;
   }
 
-  Future<int> update(ExpenseModel expense) async {
+  Future<int> update(Expense expense) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.update(
-        table,
-        expense.toJson(),
-        where: 'id = ?',
-        whereArgs: [expense.id],
-      );
+      return await txn.update(table, expense.toJson(), where: 'id = ?', whereArgs: [expense.id]);
     });
   }
 
-  Future<int> delete(ExpenseModel expense) async {
+  Future<int> delete(Expense expense) async {
     final db = await database;
-    return db.transaction(
-      (txn) async {
-        return await txn.delete(
-          table,
-          where: 'id = ?',
-          whereArgs: [expense.id],
-        );
-      },
-    );
+    return db.transaction((txn) async {
+      return await txn.delete(table, where: 'id = ?', whereArgs: [expense.id]);
+    });
   }
 }

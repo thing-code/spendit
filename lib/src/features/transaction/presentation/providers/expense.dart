@@ -6,26 +6,26 @@ import '../../data/repository/expense_repository_impl.dart';
 part 'expense.g.dart';
 
 @Riverpod(keepAlive: true)
-class Expense extends _$Expense {
+class ExpenseState extends _$ExpenseState {
   @override
-  FutureOr<List<ExpenseModel>> build() async {
+  FutureOr<List<Expense>> build() async {
     final expenses = await ref.read(expenseRepositoryProvider).read();
     return expenses.fold((l) => [], (r) => r);
   }
 
-  Future<bool> add(ExpenseModel expense) async {
+  Future<bool> add(Expense expense) async {
     final result = await ref.read(expenseRepositoryProvider).create(expense);
     ref.invalidateSelf();
     return result.fold((l) => false, (r) => true);
   }
 
-  Future<bool> edit(ExpenseModel expense) async {
+  Future<bool> edit(Expense expense) async {
     final result = await ref.read(expenseRepositoryProvider).update(expense);
     ref.invalidateSelf();
     return result.fold((l) => false, (r) => true);
   }
 
-  Future<bool> delete(ExpenseModel expense) async {
+  Future<bool> delete(Expense expense) async {
     final result = await ref.read(expenseRepositoryProvider).delete(expense);
     ref.invalidateSelf();
     return result.fold((l) => false, (r) => true);

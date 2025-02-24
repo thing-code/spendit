@@ -9,13 +9,13 @@ class ExpenseSummary extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dummyExpenses = [
-      ExpenseModel(type: ExpenseType.food, value: 10000),
-      ExpenseModel(type: ExpenseType.utility, value: 8000),
-      ExpenseModel(type: ExpenseType.food, value: 12000),
-      ExpenseModel(type: ExpenseType.transportation, value: 48000),
-      ExpenseModel(type: ExpenseType.food, value: 3000),
-      ExpenseModel(type: ExpenseType.food, value: 15000),
-      ExpenseModel(type: ExpenseType.food, value: 10000),
+      Expense(type: ExpenseType.food, value: 10000),
+      Expense(type: ExpenseType.utility, value: 8000),
+      Expense(type: ExpenseType.food, value: 12000),
+      Expense(type: ExpenseType.transportation, value: 48000),
+      Expense(type: ExpenseType.food, value: 3000),
+      Expense(type: ExpenseType.food, value: 15000),
+      Expense(type: ExpenseType.food, value: 10000),
     ];
 
     return Container(
@@ -50,7 +50,7 @@ class ExpenseSummary extends ConsumerWidget {
 class ExpenseSummaryData extends StatelessWidget {
   const ExpenseSummaryData({super.key, required this.expenses});
 
-  final List<ExpenseModel> expenses;
+  final List<Expense> expenses;
 
   @override
   Widget build(BuildContext context) {

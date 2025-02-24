@@ -1,13 +1,13 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit/src/common/common.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 part 'saving_datasource.g.dart';
 
 @riverpod
-SavingDatasource savingDataSource(Ref ref) {
+SavingDatasource savingDatasource(Ref ref) {
   return SavingDatasource();
 }
 
@@ -47,46 +47,31 @@ class SavingDatasource {
     ''');
   }
 
-  Future<int> create(SavingModel saving) async {
+  Future<int> create(Saving saving) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.insert(
-        table,
-        saving.toJson(),
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      return await txn.insert(table, saving.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
     });
   }
 
-  Future<List<SavingModel>> read() async {
+  Future<List<Saving>> read() async {
     final db = await database;
     final response = await db.query(table, orderBy: "date DESC");
-    final data = response.map((e) => SavingModel.fromJson(e)).toList();
+    final data = response.map((e) => Saving.fromJson(e)).toList();
     return data;
   }
 
-  Future<int> update(SavingModel saving) async {
+  Future<int> update(Saving saving) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.update(
-        table,
-        saving.toJson(),
-        where: 'id = ?',
-        whereArgs: [saving.id],
-      );
+      return await txn.update(table, saving.toJson(), where: 'id = ?', whereArgs: [saving.id]);
     });
   }
 
-  Future<int> delete(SavingModel saving) async {
+  Future<int> delete(Saving saving) async {
     final db = await database;
-    return db.transaction(
-      (txn) async {
-        return await txn.delete(
-          table,
-          where: 'id = ?',
-          whereArgs: [saving.id],
-        );
-      },
-    );
+    return db.transaction((txn) async {
+      return await txn.delete(table, where: 'id = ?', whereArgs: [saving.id]);
+    });
   }
 }

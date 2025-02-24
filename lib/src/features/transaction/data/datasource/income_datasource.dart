@@ -7,7 +7,7 @@ import 'package:sqflite/sqflite.dart';
 part 'income_datasource.g.dart';
 
 @riverpod
-IncomeDatasource incomeDataSource(Ref ref) {
+IncomeDatasource incomeDatasource(Ref ref) {
   return IncomeDatasource();
 }
 
@@ -50,46 +50,31 @@ class IncomeDatasource {
     ''');
   }
 
-  Future<int> create(IncomeModel income) async {
+  Future<int> create(Income income) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.insert(
-        table,
-        income.toJson(),
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      return await txn.insert(table, income.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
     });
   }
 
-  Future<List<IncomeModel>> read() async {
+  Future<List<Income>> read() async {
     final db = await database;
     final response = await db.query(table, orderBy: "date DESC");
-    final data = response.map((e) => IncomeModel.fromJson(e)).toList();
+    final data = response.map((e) => Income.fromJson(e)).toList();
     return data;
   }
 
-  Future<int> update(IncomeModel income) async {
+  Future<int> update(Income income) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.update(
-        table,
-        income.toJson(),
-        where: 'id = ?',
-        whereArgs: [income.id],
-      );
+      return await txn.update(table, income.toJson(), where: 'id = ?', whereArgs: [income.id]);
     });
   }
 
-  Future<int> delete(IncomeModel income) async {
+  Future<int> delete(Income income) async {
     final db = await database;
-    return db.transaction(
-      (txn) async {
-        return await txn.delete(
-          table,
-          where: 'id = ?',
-          whereArgs: [income.id],
-        );
-      },
-    );
+    return db.transaction((txn) async {
+      return await txn.delete(table, where: 'id = ?', whereArgs: [income.id]);
+    });
   }
 }

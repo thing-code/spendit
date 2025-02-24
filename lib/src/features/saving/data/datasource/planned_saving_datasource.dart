@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'planned_saving_datasource.g.dart';
 
 @riverpod
-PlannedSavingDatasource plannedSavingDataSource(Ref ref) {
+PlannedSavingDatasource plannedSavingDatasource(Ref ref) {
   return PlannedSavingDatasource();
 }
 

@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:spendit/src/common/common.dart';
 
-part 'expense_model.freezed.dart';
-part 'expense_model.g.dart';
+part 'expense.freezed.dart';
+part 'expense.g.dart';
 
 @freezed
-class ExpenseModel with _$ExpenseModel {
-   factory ExpenseModel({
+class Expense with _$Expense {
+   factory Expense({
     int? id,
     required ExpenseType type,
     required double value,
@@ -14,7 +14,7 @@ class ExpenseModel with _$ExpenseModel {
     @Default(0) double diff,
     String? description,
     DateTime? date,
-  }) = _ExpenseModel;
+  }) = _Expense;
 
-  factory ExpenseModel.fromJson(Map<String, dynamic> json) => _$ExpenseModelFromJson(json);
+  factory Expense.fromJson(Map<String, dynamic> json) => _$ExpenseFromJson(json);
 }

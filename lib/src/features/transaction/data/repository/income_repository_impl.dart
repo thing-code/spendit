@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../domain/model/income_model.dart';
+import '../../domain/model/income.dart';
 import '../../domain/repository/income_repository.dart';
 import '../datasource/income_datasource.dart';
 
@@ -20,7 +20,7 @@ class IncomeRepositoryImpl implements IncomeRepository {
   IncomeRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<String, int>> create(IncomeModel income) async {
+  Future<Either<String, int>> create(Income income) async {
     try {
       final result = await datasource.create(income);
       return Right(result);
@@ -30,7 +30,7 @@ class IncomeRepositoryImpl implements IncomeRepository {
   }
 
   @override
-  Future<Either<String, int>> delete(IncomeModel income) async {
+  Future<Either<String, int>> delete(Income income) async {
     try {
       final result = await datasource.delete(income);
       return Right(result);
@@ -40,7 +40,7 @@ class IncomeRepositoryImpl implements IncomeRepository {
   }
 
   @override
-  Future<Either<String, List<IncomeModel>>> read() async {
+  Future<Either<String, List<Income>>> read() async {
     try {
       final result = await datasource.read();
       return Right(result);
@@ -50,7 +50,7 @@ class IncomeRepositoryImpl implements IncomeRepository {
   }
 
   @override
-  Future<Either<String, int>> update(IncomeModel income) async {
+  Future<Either<String, int>> update(Income income) async {
     try {
       final result = await datasource.update(income);
       return Right(result);

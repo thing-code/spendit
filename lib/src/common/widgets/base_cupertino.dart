@@ -16,7 +16,7 @@ class BaseCupertinoPage<T> extends StatelessWidget {
 
   Widget header(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -24,12 +24,12 @@ class BaseCupertinoPage<T> extends StatelessWidget {
             onPressed: () => context.pop(),
             child: Text(
               'Cancel',
-              style: kSemiBoldTextStyle.copyWith(color: context.colorScheme.error, fontSize: 16),
+              style: kMediumTextStyle.copyWith(color: context.colorScheme.error, fontSize: 14),
             ),
           ),
           TextButton(
             onPressed: onSave ?? context.pop,
-            child: Text('Save', style: kSemiBoldTextStyle.copyWith(fontSize: 16)),
+            child: Text('Save', style: kMediumTextStyle.copyWith(fontSize: 14)),
           ),
         ],
       ),

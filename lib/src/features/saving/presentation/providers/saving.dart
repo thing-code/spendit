@@ -5,26 +5,26 @@ import 'package:spendit/src/features/saving/data/repository/saving_repository_im
 part 'saving.g.dart';
 
 @Riverpod(keepAlive: true)
-class Saving extends _$Saving {
+class SavingState extends _$SavingState {
   @override
-  FutureOr<List<SavingModel>> build() async {
+  FutureOr<List<Saving>> build() async {
     final result = await ref.read(savingRepositoryProvider).read();
     return result.fold((l) => [], (r) => r);
   }
 
-  Future<bool> add(SavingModel saving) async {
+  Future<bool> add(Saving saving) async {
     final result = await ref.read(savingRepositoryProvider).create(saving);
     ref.invalidateSelf();
     return result.fold((l) => false, (r) => true);
   }
 
-  Future<bool> edit(SavingModel saving) async {
+  Future<bool> edit(Saving saving) async {
     final result = await ref.read(savingRepositoryProvider).update(saving);
     ref.invalidateSelf();
     return result.fold((l) => false, (r) => true);
   }
 
-  Future<bool> delete(SavingModel saving) async {
+  Future<bool> delete(Saving saving) async {
     final result = await ref.read(savingRepositoryProvider).delete(saving);
     ref.invalidateSelf();
     return result.fold((l) => false, (r) => true);

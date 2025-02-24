@@ -9,7 +9,7 @@ class IncomePageView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final incomes = ref.watch(incomeProvider);
+    final incomes = ref.watch(incomeStateProvider);
     return AsyncWidget(
       asyncValue: incomes,
       onData: (data) {

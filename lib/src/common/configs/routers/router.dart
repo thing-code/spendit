@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../features/dashboard/pages/dashboard_page.dart';
+import '../../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../../features/goals/presentation/pages/goals_page.dart';
 import '../../../features/saving/presentation/pages/saving_page.dart';
 import '../../../features/transaction/presentation/pages/transaction_page.dart';
