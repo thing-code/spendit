@@ -26,3 +26,23 @@ final kLightTextStyle = TextStyle(
   height: 1.2,
   color: MyTheme.light.primaryColor,
 );
+
+InputDecoration inputDecoration(BuildContext context, {String? hint}) {
+  return InputDecoration(
+    contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+    border: baseInputBorder(),
+    enabledBorder: baseInputBorder(),
+    focusedBorder: baseInputBorder(color: context.colorScheme.primary.withAlpha(200)),
+    hintText: hint,
+    hintStyle: kRegularTextStyle.copyWith(color: Colors.grey.shade300, fontSize: 14),
+    filled: true,
+    fillColor: Colors.white30,
+  );
+}
+
+OutlineInputBorder baseInputBorder({Color? color}) {
+  return OutlineInputBorder(
+    borderSide: BorderSide(color: color ?? Colors.grey.shade300, width: 1.5),
+    borderRadius: BorderRadius.circular(12),
+  );
+}
