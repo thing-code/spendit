@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:solar_icons/solar_icons.dart';
 
-enum TargetType {
+enum BudgetType {
   family('Family', SolarIconsOutline.userHeart, Colors.pinkAccent),
   dailyneeds('Daily Needs', SolarIconsOutline.cart_3, Colors.amber),
   internet('Internet', SolarIconsOutline.simCard, Colors.teal),
@@ -15,5 +15,5 @@ enum TargetType {
   final String label;
   final IconData icon;
   final Color color;
-  const TargetType(this.label, this.icon, this.color);
+  const BudgetType(this.label, this.icon, this.color);
 }

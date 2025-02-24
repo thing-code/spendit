@@ -4,25 +4,25 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit/src/common/common.dart';
 import 'package:sqflite/sqflite.dart';
 
-part 'target_datasource.g.dart';
+part 'budget_datasource.g.dart';
 
 @riverpod
-TargetDatasource targetDatasource(Ref ref) {
-  return TargetDatasource();
+BudgetDatasource budgetDatasource(Ref ref) {
+  return BudgetDatasource();
 }
 
-class TargetDatasource {
-  static final TargetDatasource _instance = TargetDatasource._();
+class BudgetDatasource {
+  static final BudgetDatasource _instance = BudgetDatasource._();
 
-  factory TargetDatasource() => _instance;
+  factory BudgetDatasource() => _instance;
 
-  TargetDatasource._() {
+  BudgetDatasource._() {
     _init();
   }
 
   static Database? _database;
 
-  final table = 'monthly_target';
+  final table = 'budget';
 
   Future<Database> get database async {
     _database ??= await _init();
@@ -46,31 +46,31 @@ class TargetDatasource {
     ''');
   }
 
-  Future<int> create(MonthlyTarget target) async {
+  Future<int> create(Budget budget) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.insert(table, target.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
+      return await txn.insert(table, budget.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
     });
   }
 
-  Future<List<MonthlyTarget>> read() async {
+  Future<List<Budget>> read() async {
     final db = await database;
     final response = await db.query(table, orderBy: "date DESC");
-    final data = response.map((e) => MonthlyTarget.fromJson(e)).toList();
+    final data = response.map((e) => Budget.fromJson(e)).toList();
     return data;
   }
 
-  Future<int> update(MonthlyTarget target) async {
+  Future<int> update(Budget budget) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.update(table, target.toJson(), where: 'id = ?', whereArgs: [target.id]);
+      return await txn.update(table, budget.toJson(), where: 'id = ?', whereArgs: [budget.id]);
     });
   }
 
-  Future<int> delete(MonthlyTarget target) async {
+  Future<int> delete(Budget budget) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.delete(table, where: 'id = ?', whereArgs: [target.id]);
+      return await txn.delete(table, where: 'id = ?', whereArgs: [budget.id]);
     });
   }
 }

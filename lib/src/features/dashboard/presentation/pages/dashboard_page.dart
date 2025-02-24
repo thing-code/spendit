@@ -5,8 +5,8 @@ import 'package:gap/gap.dart';
 
 import '../../../../common/common.dart';
 import '../widgets/balance.dart';
+import '../widgets/budget_form.dart';
 import '../widgets/expense_summary.dart';
-import '../widgets/target_form.dart';
 
 class DashboardPage extends ConsumerWidget {
   const DashboardPage({super.key});
@@ -44,12 +44,12 @@ class MonthlyTarget extends StatelessWidget {
           height: 150,
           child: ListView.separated(
             physics: BouncingScrollPhysics(),
-            itemCount: TargetType.values.length,
+            itemCount: BudgetType.values.length,
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.all(16),
             separatorBuilder: (context, index) => Gap(8),
             itemBuilder: (context, index) {
-              return TargetCard(type: TargetType.values[index], value: 1000000);
+              return TargetCard(type: BudgetType.values[index], value: 1000000);
             },
           ),
         ),
@@ -61,14 +61,14 @@ class MonthlyTarget extends StatelessWidget {
 class TargetCard extends StatelessWidget {
   const TargetCard({super.key, required this.type, required this.value});
 
-  final TargetType type;
+  final BudgetType type;
   final int value;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showCupertinoSheet(context: context, pageBuilder: (context) => TargetForm(type: type));
+        showCupertinoSheet(context: context, pageBuilder: (context) => BudgetForm(type: type));
       },
       child: AspectRatio(
         aspectRatio: 4 / 3,
