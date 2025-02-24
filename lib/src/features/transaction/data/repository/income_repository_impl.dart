@@ -10,7 +10,7 @@ part 'income_repository_impl.g.dart';
 
 @riverpod
 IncomeRepository incomeRepository(Ref ref) {
-  final datasource = ref.watch(incomeDataSourceProvider);
+  final datasource = ref.watch(incomeDatasourceProvider);
   return IncomeRepositoryImpl(datasource);
 }
 

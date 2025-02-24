@@ -11,7 +11,7 @@ part 'saving_repository_impl.g.dart';
 
 @riverpod
 SavingRepository savingRepository(Ref ref) {
-  final datasource = ref.watch(savingDataSourceProvider);
+  final datasource = ref.watch(savingDatasourceProvider);
   return SavingRepositoryImpl(datasource);
 }
 
@@ -63,7 +63,7 @@ class SavingRepositoryImpl implements SavingRepository {
 
 @riverpod
 PlannedSavingRepository plannedSavingRepository(Ref ref) {
-  final datasource = ref.watch(plannedSavingDataSourceProvider);
+  final datasource = ref.watch(plannedSavingDatasourceProvider);
   return PlannedSavingRepositoryImpl(datasource);
 }
 

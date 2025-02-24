@@ -10,7 +10,7 @@ part 'expense_repository_impl.g.dart';
 
 @riverpod
 ExpenseRepositoryImpl expenseRepository(Ref ref) {
-  final datasource = ref.watch(expenseDataSourceProvider);
+  final datasource = ref.watch(expenseDatasourceProvider);
   return ExpenseRepositoryImpl(datasource);
 }
 
