@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:spendit/src/common/common.dart';
 
+import '../../../common/common.dart';
 import '../widgets/balance.dart';
 import '../widgets/expense_summary.dart';
+import '../widgets/target_form.dart';
 
 class DashboardPage extends ConsumerWidget {
   const DashboardPage({super.key});
@@ -66,39 +66,7 @@ class TargetCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showCupertinoSheet(
-          context: context,
-          pageBuilder: (context) {
-            return Scaffold(
-              body: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          onPressed: () => context.pop(false),
-                          child: Text(
-                            'Cancel',
-                            style: kSemiBoldTextStyle.copyWith(
-                              color: context.colorScheme.error,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () => context.pop(true),
-                          child: Text('Save', style: kSemiBoldTextStyle.copyWith(fontSize: 16)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
+        showCupertinoSheet(context: context, pageBuilder: (context) => TargetForm());
       },
       child: AspectRatio(
         aspectRatio: 4.4 / 5,
