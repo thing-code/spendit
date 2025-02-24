@@ -67,10 +67,10 @@ class ExpenseSummaryData extends StatelessWidget {
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
-                reservedSize: 50,
+                reservedSize: 70,
                 interval: 12000,
                 getTitlesWidget: (value, meta) {
-                  return Text(value.toInt().thousand);
+                  return Text(value.toInt().compactCurrency);
                 },
               ),
             ),
@@ -92,7 +92,6 @@ class ExpenseSummaryData extends StatelessWidget {
               dotData: FlDotData(
                 getDotPainter: (spot, p1, p2, p3) {
                   return FlDotCirclePainter(
-                    radius: 5,
                     color: Colors.blueAccent,
                     strokeWidth: 0,
                     strokeColor: context.colorScheme.primaryContainer,

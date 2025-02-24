@@ -9,7 +9,7 @@ class MyBalance extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16),
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         gradient: LinearGradient(
@@ -23,8 +23,22 @@ class MyBalance extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Total Balance', style: kRegularTextStyle.copyWith(fontSize: 18)),
-          Text(1500000.currency, style: kBoldTextStyle.copyWith(fontSize: 28)),
+          Padding(
+            padding: EdgeInsetsDirectional.only(start: 12, top: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Total Balance',
+                  style: kRegularTextStyle.copyWith(
+                    fontSize: 18,
+                    color: context.colorScheme.primary.withValues(alpha: .6),
+                  ),
+                ),
+                Text(1500000.currency, style: kBoldTextStyle.copyWith(fontSize: 28)),
+              ],
+            ),
+          ),
           Gap(12),
           Container(
             constraints: BoxConstraints(maxWidth: context.deviceSize.width),
@@ -63,7 +77,7 @@ class TransactionFlowCard extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.white.withAlpha(50),
           borderRadius: BorderRadius.circular(12),
@@ -73,10 +87,15 @@ class TransactionFlowCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           spacing: 8,
           children: [
-            Text(title, style: kMediumTextStyle),
+            Text(
+              title,
+              style: kMediumTextStyle.copyWith(
+                color: context.colorScheme.primary.withValues(alpha: .6),
+              ),
+            ),
             Text(
               '$symbol ${value.currency}',
-              style: kBoldTextStyle.copyWith(fontSize: 16),
+              style: kBoldTextStyle.copyWith(fontSize: 14),
               overflow: TextOverflow.ellipsis,
             ),
           ],

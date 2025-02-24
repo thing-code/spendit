@@ -16,6 +16,8 @@ class DashboardPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 48,
+        forceMaterialTransparency: true,
+        surfaceTintColor: Colors.transparent,
         title: Text('Hi, ${GreetingUtil.greeting} 🖐️', style: kMediumTextStyle),
       ),
       body: ListView(
@@ -39,13 +41,13 @@ class MonthlyTarget extends StatelessWidget {
           child: Text('Monthly Target', style: kSemiBoldTextStyle.copyWith(fontSize: 18)),
         ),
         SizedBox(
-          height: 236,
+          height: 150,
           child: ListView.separated(
             physics: BouncingScrollPhysics(),
             itemCount: TargetType.values.length,
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.all(16),
-            separatorBuilder: (context, index) => Gap(12),
+            separatorBuilder: (context, index) => Gap(8),
             itemBuilder: (context, index) {
               return TargetCard(type: TargetType.values[index], value: 1000000);
             },
@@ -66,10 +68,10 @@ class TargetCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showCupertinoSheet(context: context, pageBuilder: (context) => TargetForm());
+        showCupertinoSheet(context: context, pageBuilder: (context) => TargetForm(type: type));
       },
       child: AspectRatio(
-        aspectRatio: 4.4 / 5,
+        aspectRatio: 4 / 3,
         child: Container(
           margin: EdgeInsets.only(bottom: 8),
           decoration: BoxDecoration(
@@ -88,30 +90,13 @@ class TargetCard extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(16),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                spacing: 4,
                 children: [
-                  Expanded(
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        value: .8,
-                        strokeCap: StrokeCap.round,
-                        // ignore: deprecated_member_use
-                        year2023: false,
-                        strokeWidth: 6,
-                        strokeAlign: .5,
-                      ),
-                    ),
-                  ),
-                  Column(
-                    spacing: 4,
-                    children: [
-                      Icon(type.icon, color: type.color, size: 28),
-                      Text(type.label, style: kSemiBoldTextStyle.copyWith(fontSize: 18)),
-                      Text(
-                        value == 0 ? 'Rp. -' : value.currency,
-                        style: kMediumTextStyle.copyWith(fontSize: 14),
-                      ),
-                    ],
+                  Icon(type.icon, color: type.color, size: 28),
+                  Text(type.label, style: kSemiBoldTextStyle.copyWith(fontSize: 16)),
+                  Text(
+                    value == 0 ? 'Rp. -' : value.currency,
+                    style: kMediumTextStyle.copyWith(fontSize: 14),
                   ),
                 ],
               ),

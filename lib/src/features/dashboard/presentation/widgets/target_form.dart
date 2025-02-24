@@ -9,9 +9,9 @@ import 'package:spendit/src/common/common.dart';
 import '../../../../common/widgets/base_cupertino.dart';
 
 class TargetForm extends HookConsumerWidget {
-  const TargetForm({super.key});
-  
+  const TargetForm({super.key, required this.type});
 
+  final TargetType type;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
