@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'src/common/common.dart';
 
@@ -19,30 +20,38 @@ class MainApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
-    return MaterialApp.router(
-      scaffoldMessengerKey: scaffoldMsgKey,
-      title: 'Spend It : Atur Pengeluaranmu',
-      theme: MyTheme.light,
-      darkTheme: MyTheme.dark,
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [Locale('id')],
-      locale: const Locale('id'),
-      builder: (context, child) {
-        return Stack(
-          children: [
-            child!,
-            // Loading Widget
-            LoadingOverlay(),
-            // Error Connection Widget
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      fontSizeResolver: FontSizeResolvers.height,
+      builder: (context, _) {
+        return MaterialApp.router(
+          scaffoldMessengerKey: scaffoldMsgKey,
+          title: 'Spend It : Atur Pengeluaranmu',
+          theme: MyTheme.light,
+          darkTheme: MyTheme.dark,
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
           ],
+          supportedLocales: const [Locale('id')],
+          locale: const Locale('id'),
+          builder: (context, child) {
+            return Stack(
+              children: [
+                child!,
+                // Loading Widget
+                LoadingOverlay(),
+                // Error Connection Widget
+              ],
+            );
+          },
+          debugShowCheckedModeBanner: false,
+          routerConfig: router,
         );
       },
-      debugShowCheckedModeBanner: false,
-      routerConfig: router,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spendit/src/common/common.dart';
 
 class ExpenseSummary extends ConsumerWidget {
@@ -32,12 +33,12 @@ class ExpenseSummary extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 12,
         children: [
-          Text('Expense Summary', style: kSemiBoldTextStyle.copyWith(fontSize: 18)),
+          Text('Expense Summary', style: kSemiBoldTextStyle.copyWith(fontSize: 18.sp)),
           ClipRRect(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
             child: Container(
               color: Colors.white.withAlpha(100),
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.all(16.w),
               child: ExpenseSummaryData(expenses: dummyExpenses),
             ),
           ),
@@ -60,14 +61,14 @@ class ExpenseSummaryData extends StatelessWidget {
         LineChartData(
           gridData: FlGridData(show: false),
           titlesData: FlTitlesData(
-            show: true,
+            show: false,
             topTitles: AxisTitles(sideTitles: SideTitles()),
             rightTitles: AxisTitles(sideTitles: SideTitles()),
             bottomTitles: AxisTitles(sideTitles: SideTitles()),
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
-                reservedSize: 70,
+                reservedSize: 70.w,
                 interval: 12000,
                 getTitlesWidget: (value, meta) {
                   return Text(value.toInt().compactCurrency);
@@ -90,7 +91,7 @@ class ExpenseSummaryData extends StatelessWidget {
               preventCurveOverShooting: true,
               isStrokeCapRound: true,
               dotData: FlDotData(
-                getDotPainter: (spot, p1, p2, p3) {
+                getDotPainter: (spot, _, _, _) {
                   return FlDotCirclePainter(
                     color: Colors.blueAccent,
                     strokeWidth: 0,
