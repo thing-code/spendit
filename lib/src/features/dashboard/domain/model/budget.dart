@@ -6,7 +6,7 @@ part 'budget.g.dart';
 
 @freezed
 class Budget with _$Budget {
-  const factory Budget({int? id, @Default(0) double value, required BudgetType type}) =
+  const factory Budget({int? id, @Default(0) double value, @Default(0) double target, required BudgetType type}) =
       _Budget;
 
   factory Budget.fromJson(Map<String, dynamic> json) => _$BudgetFromJson(json);

@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spendit/src/features/dashboard/presentation/providers/budget.dart';
 
 import '../../../../common/common.dart';
 import 'budget_card.dart';
 
-class MonthlyBudget extends StatelessWidget {
+class MonthlyBudget extends ConsumerWidget {
   const MonthlyBudget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final data = ref.watch(budgetStateProvider);
+
+    return switch (data) {
+      AsyncData(:final value) => _MonthlyBudgetData(value),
+      AsyncError(:final error) => _MonthlyBudgetError(error),
+      _ => _MonthlyBudgetLoading(),
+    };
+  }
+}
+
+class _MonthlyBudgetData extends StatelessWidget {
+  const _MonthlyBudgetData(this.budgets);
+
+  final List<Budget> budgets;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +36,29 @@ class MonthlyBudget extends StatelessWidget {
         childAspectRatio: 1.2,
       ),
       itemBuilder: (context, index) {
-        return BudgetCard(type: BudgetType.values[index], value: 1000000);
+        final budget = budgets[index];
+        return BudgetCard(budget: budget,);
       },
     );
+  }
+}
+
+class _MonthlyBudgetLoading extends StatelessWidget {
+  const _MonthlyBudgetLoading();
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(child: Center(child: CircularProgressIndicator()));
+  }
+}
+
+class _MonthlyBudgetError extends StatelessWidget {
+  const _MonthlyBudgetError(this.error);
+
+  final Object error;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(child: Center(child: Text('Error: $error')));
   }
 }

@@ -41,7 +41,8 @@ class BudgetDatasource {
       CREATE TABLE $table (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         type TEXT NOT NULL,
-        value DOUBLE NOT NULL
+        value DOUBLE NOT NULL,
+        target DOUBLE NOT NULL
       )
     ''');
   }
@@ -55,7 +56,7 @@ class BudgetDatasource {
 
   Future<List<Budget>> read() async {
     final db = await database;
-    final response = await db.query(table, orderBy: "date DESC");
+    final response = await db.query(table);
     final data = response.map((e) => Budget.fromJson(e)).toList();
     return data;
   }
@@ -67,10 +68,10 @@ class BudgetDatasource {
     });
   }
 
-  Future<int> delete(Budget budget) async {
-    final db = await database;
-    return db.transaction((txn) async {
-      return await txn.delete(table, where: 'id = ?', whereArgs: [budget.id]);
-    });
-  }
+  // Future<int> delete(Budget budget) async {
+  //   final db = await database;
+  //   return db.transaction((txn) async {
+  //     return await txn.delete(table, where: 'id = ?', whereArgs: [budget.id]);
+  //   });
+  // }
 }

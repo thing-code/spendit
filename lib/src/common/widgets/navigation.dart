@@ -1,9 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:spendit/src/common/common.dart';
+import 'package:spendit/src/features/dashboard/data/datasource/budget_datasource.dart';
 
 class NavigationWrapper extends ConsumerWidget {
   const NavigationWrapper({super.key, required this.child, required this.state});
@@ -36,23 +39,7 @@ class NavigationWrapper extends ConsumerWidget {
               selectedIcon: Icon(SolarIconsBold.billList, color: context.colorScheme.primary),
               label: 'Transactions',
             ),
-            Container(
-              color: Colors.transparent,
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FloatingActionButton(
-                    onPressed: () {},
-                    elevation: 0,
-                    backgroundColor: context.colorScheme.primary,
-                    foregroundColor: Colors.white,
-                    shape: CircleBorder(),
-                    child: Icon(Icons.add),
-                  ),
-                ],
-              ),
-            ),
+            _PlusButton(),
             NavigationDestination(
               icon: Icon(SolarIconsOutline.rocket, color: Colors.grey.shade400),
               selectedIcon: Icon(SolarIconsBold.rocket, color: context.colorScheme.primary),
@@ -98,5 +85,33 @@ class NavigationWrapper extends ConsumerWidget {
       case 4:
         context.go(MyRoute.saving.route);
     }
+  }
+}
+
+class _PlusButton extends ConsumerWidget {
+  const _PlusButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container(
+      color: Colors.transparent,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FloatingActionButton(
+            onPressed: () async {
+              final budgets = await ref.read(budgetDatasourceProvider).read();
+              log(budgets.toString());
+            },
+            elevation: 0,
+            backgroundColor: context.colorScheme.primary,
+            foregroundColor: Colors.white,
+            shape: CircleBorder(),
+            child: Icon(Icons.add),
+          ),
+        ],
+      ),
+    );
   }
 }

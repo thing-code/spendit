@@ -3,15 +3,32 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../common/common.dart';
+import '../providers/budget.dart';
 import '../widgets/balance.dart';
 import '../widgets/expense_summary.dart';
 import '../widgets/monthly_budget.dart';
 
-class DashboardPage extends ConsumerWidget {
+class DashboardPage extends ConsumerStatefulWidget {
   const DashboardPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends ConsumerState<DashboardPage> {
+  @override
+  void initState() {
+    Future.microtask(() async {
+      final budgets = await ref.read(budgetStateProvider.future);
+      if (budgets.isEmpty) {
+        await ref.read(budgetStateProvider.notifier).init();
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 48,

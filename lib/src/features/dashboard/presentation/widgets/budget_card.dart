@@ -5,17 +5,22 @@ import '../../../../common/common.dart';
 import 'budget_form.dart';
 
 class BudgetCard extends StatelessWidget {
-  const BudgetCard({super.key, required this.type, required this.value});
+  const BudgetCard({super.key, required this.budget});
 
-  final BudgetType type;
-  final int value;
+  final Budget budget;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        showCupertinoSheet(context: context, pageBuilder: (context) => BudgetForm(type: type));
-      },
+      onTap:
+          budget.target > 0
+              ? null
+              : () {
+                showCupertinoSheet(
+                  context: context,
+                  pageBuilder: (context) => BudgetForm(budget: budget),
+                );
+              },
       child: Container(
         // margin: EdgeInsets.only(bottom: 8),
         decoration: BoxDecoration(
@@ -36,22 +41,22 @@ class BudgetCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(type.icon, color: type.color, size: 28),
+                Icon(budget.type.icon, color: budget.type.color, size: 28),
                 Column(
                   children: [
-                    Text(type.label, style: kSemiBoldTextStyle.copyWith(fontSize: 16)),
+                    Text(budget.type.label, style: kSemiBoldTextStyle.copyWith(fontSize: 16)),
                     Text(
-                      value == 0 ? 'Rp. -' : value.currency,
+                      budget.value == 0 ? 'Rp. -' : budget.value.toInt().currency,
                       style: kMediumTextStyle.copyWith(fontSize: 14),
                     ),
                   ],
                 ),
                 LinearProgressIndicator(
-                  value: value / 10000000,
+                  value: budget.target == 0 ? budget.target : budget.value / budget.target,
                   borderRadius: BorderRadius.circular(100),
                   backgroundColor: Colors.grey[200],
-                  valueColor: AlwaysStoppedAnimation(type.color),
-                  stopIndicatorColor: type.color,
+                  valueColor: AlwaysStoppedAnimation(budget.type.color),
+                  stopIndicatorColor: budget.type.color,
                   // ignore: deprecated_member_use
                   year2023: false,
                 ),

@@ -9,9 +9,9 @@ import 'package:spendit/src/common/common.dart';
 import '../../../../common/widgets/base_cupertino.dart';
 
 class BudgetForm extends HookConsumerWidget {
-  const BudgetForm({super.key, required this.type});
+  const BudgetForm({super.key, required this.budget});
 
-  final BudgetType type;
+  final Budget budget;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,10 +22,10 @@ class BudgetForm extends HookConsumerWidget {
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            Icon(type.icon, color: type.color, size: 32),
+            Icon(budget.type.icon, color: budget.type.color, size: 32),
             Gap(8),
             Text(DateTime.now().getMonthAndYear, style: kMediumTextStyle.copyWith(fontSize: 20)),
-            Text('Budget for ${type.label}', style: kLightTextStyle.copyWith(fontSize: 16)),
+            Text('Budget for ${budget.type.label}', style: kLightTextStyle.copyWith(fontSize: 16)),
             Gap(12),
             TextFieldInput(
               controller: controller,
