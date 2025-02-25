@@ -17,6 +17,7 @@ class TextFieldInput extends StatelessWidget {
     this.textInputAction,
     this.onSubmitted,
     this.onChanged,
+    this.prefixIcon,
   });
 
   final TextEditingController controller;
@@ -28,6 +29,7 @@ class TextFieldInput extends StatelessWidget {
   final int? maxLength;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
+  final Widget? prefixIcon;
   final void Function(String value)? onSubmitted;
   final void Function(String value)? onChanged;
 
@@ -45,7 +47,7 @@ class TextFieldInput extends StatelessWidget {
       onChanged: onChanged,
       onFieldSubmitted: onSubmitted,
       style: kRegularTextStyle.copyWith(fontSize: 14),
-      decoration: inputDecoration(context, hint: hint),
+      decoration: inputDecoration(context, hint: hint, prefixIcon: prefixIcon),
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
     );
   }

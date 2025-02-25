@@ -27,16 +27,27 @@ final kLightTextStyle = TextStyle(
   color: MyTheme.light.primaryColor,
 );
 
-InputDecoration inputDecoration(BuildContext context, {String? hint}) {
+InputDecoration inputDecoration(BuildContext context, {String? hint, Widget? prefixIcon}) {
   return InputDecoration(
     contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
     border: baseInputBorder(),
     enabledBorder: baseInputBorder(),
     focusedBorder: baseInputBorder(color: context.colorScheme.primary.withAlpha(200)),
+    errorBorder: baseInputBorder(color: context.colorScheme.error),
     hintText: hint,
     hintStyle: kRegularTextStyle.copyWith(color: Colors.grey.shade300, fontSize: 14),
     filled: true,
     fillColor: Colors.white30,
+    prefixIcon: prefixIcon,
+    prefixIconColor: WidgetStateColor.resolveWith((states) {
+      if (states.contains(WidgetState.focused)) {
+        return context.colorScheme.primary;
+      }
+      if (states.contains(WidgetState.error)) {
+        return context.colorScheme.error;
+      }
+      return Colors.grey.shade300;
+    }),
   );
 }
 
