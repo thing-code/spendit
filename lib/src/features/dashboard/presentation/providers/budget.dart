@@ -22,26 +22,37 @@ class BudgetState extends _$BudgetState {
   }
 
   Future<void> init() async {
-    for (var type in BudgetType.values) {
-      final budget = Budget(type: type);
+    final budgets = await future;
+    if (budgets.isEmpty) {
+      for (var type in BudgetType.values) {
+        final budget = Budget(type: type);
 
-      final result = await ref.read(budgetRepositoryProvider).create(budget);
+        final result = await ref.read(budgetRepositoryProvider).create(budget);
 
-      result.fold(
-        (l) {
-          log(l);
-        },
-        (r) {
-          log('Success on ${type.label}');
-        },
-      );
+        result.fold(
+          (l) {
+            log(l);
+          },
+          (r) {
+            log('Success on ${type.label}');
+          },
+        );
+      }
+      ref.invalidateSelf();
     }
-    ref.invalidateSelf();
   }
 
   Future<bool> edit(Budget budget) async {
     final result = await ref.read(budgetRepositoryProvider).update(budget);
     ref.invalidateSelf();
     return result.fold((l) => false, (r) => true);
+  }
+
+  Future<void> monthlyReset() async {
+    final result = await future;
+    for (var data in result) {
+      await ref.read(budgetRepositoryProvider).update(data.copyWith(value: 0));
+    }
+    ref.invalidateSelf();
   }
 }

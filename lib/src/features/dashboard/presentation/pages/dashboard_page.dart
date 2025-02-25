@@ -19,12 +19,15 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
   @override
   void initState() {
     Future.microtask(() async {
-      final budgets = await ref.read(budgetStateProvider.future);
-      if (budgets.isEmpty) {
-        await ref.read(budgetStateProvider.notifier).init();
-      }
+      await _reset();
+      await ref.read(budgetStateProvider.notifier).init();
     });
     super.initState();
+  }
+
+  Future<void> _reset() async {
+    final resetUtil = COSResetUtil(ref);
+    await resetUtil.monthlyReset();
   }
 
   @override
@@ -34,7 +37,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
         toolbarHeight: 48,
         forceMaterialTransparency: true,
         surfaceTintColor: Colors.transparent,
-        title: Text('Hi, ${GreetingUtil.greeting} 🖐️', style: kMediumTextStyle),
+        title: Text('Hi, ${COSGreetingUtil.greeting} 🖐️', style: kMediumTextStyle),
       ),
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),

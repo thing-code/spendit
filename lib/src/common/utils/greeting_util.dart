@@ -1,4 +1,4 @@
-class GreetingUtil {
+class COSGreetingUtil {
   static String _greeting() {
     final now = DateTime.now();
 

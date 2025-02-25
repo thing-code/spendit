@@ -11,6 +11,8 @@ void main() async {
   runApp(ProviderScope(child: const MainApp()));
 }
 
+final scaffoldMsgKey = GlobalKey<ScaffoldMessengerState>();
+
 class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
@@ -18,6 +20,7 @@ class MainApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
     return MaterialApp.router(
+      scaffoldMessengerKey: scaffoldMsgKey,
       title: 'Spend It : Atur Pengeluaranmu',
       theme: MyTheme.light,
       darkTheme: MyTheme.dark,
