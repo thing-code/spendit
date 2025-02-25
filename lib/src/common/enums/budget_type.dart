@@ -7,6 +7,7 @@ enum BudgetType {
   internet('Internet', SolarIconsOutline.simCard, Colors.teal),
   livingcost('Living Cost', SolarIconsOutline.home1, Colors.pink),
   transportation('Transportation', SolarIconsOutline.gasStation, Colors.blue),
+  shopping('Shopping', SolarIconsOutline.cart, Colors.orange),
   saving('Saving', SolarIconsOutline.wallet, Colors.deepPurpleAccent),
   emergency('Emergency', SolarIconsOutline.danger, Colors.red),
   investment('Investment', SolarIconsOutline.diagramUp, Colors.green),
