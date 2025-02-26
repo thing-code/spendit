@@ -10,7 +10,7 @@ class ExpensePageView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final expenses = ref.watch(expenseStateProvider);
+    final expenses = ref.watch(expenseStateProvider(date: now));
     return COSAsyncWidget(
       asyncValue: expenses,
       onData: (data) {

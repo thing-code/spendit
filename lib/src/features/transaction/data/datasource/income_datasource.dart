@@ -62,6 +62,20 @@ class IncomeDatasource {
     return data;
   }
 
+  Future<List<Income>> readByMonth(DateTime date) async {
+    final db = await database;
+    final start = DateTime(date.year, date.month, 1);
+    final end = DateTime(date.year, date.month + 1, 0);
+    final response = await db.query(
+      table,
+      where: 'date BETWEEN ? AND ?',
+      whereArgs: [start.getCompact, end.getCompact],
+      orderBy: "date DESC",
+    );
+    final data = response.map((e) => Income.fromJson(e)).toList();
+    return data;
+  }
+
   Future<int> update(Income income) async {
     final db = await database;
     return db.transaction((txn) async {

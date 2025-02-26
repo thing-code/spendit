@@ -8,7 +8,11 @@ part 'expense.g.dart';
 @Riverpod(keepAlive: true)
 class ExpenseState extends _$ExpenseState {
   @override
-  FutureOr<List<Expense>> build() async {
+  FutureOr<List<Expense>> build({DateTime? date}) async {
+    if (date != null) {
+      final expenses = await ref.read(expenseRepositoryProvider).readByMonth(date);
+      return expenses.fold((l) => [], (r) => r);
+    }
     final expenses = await ref.read(expenseRepositoryProvider).read();
     return expenses.fold((l) => [], (r) => r);
   }

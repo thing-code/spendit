@@ -36,7 +36,7 @@ class COSNavigation extends ConsumerWidget {
               selectedIcon: Icon(SolarIconsBold.billList, color: context.colorScheme.primary),
               label: 'Transactions',
             ),
-            _PlusButton(),
+            COSAddTransactionButton(),
             NavigationDestination(
               icon: Icon(SolarIconsOutline.rocket, color: Colors.grey.shade400),
               selectedIcon: Icon(SolarIconsBold.rocket, color: context.colorScheme.primary),
@@ -82,30 +82,5 @@ class COSNavigation extends ConsumerWidget {
       case 4:
         context.go(MyRoute.saving.route);
     }
-  }
-}
-
-class _PlusButton extends ConsumerWidget {
-  const _PlusButton();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      color: Colors.transparent,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FloatingActionButton(
-            onPressed: () async {},
-            elevation: 0,
-            backgroundColor: context.colorScheme.primary,
-            foregroundColor: Colors.white,
-            shape: CircleBorder(),
-            child: Icon(Icons.add),
-          ),
-        ],
-      ),
-    );
   }
 }

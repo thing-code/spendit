@@ -31,7 +31,7 @@ class ExpenseDatasource {
 
   Future<Database> _init() async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'expense.db');
+    final path = join(dbPath, '$table.db');
 
     return await openDatabase(path, version: 1, onCreate: _onCreate);
   }
@@ -62,6 +62,20 @@ class ExpenseDatasource {
   Future<List<Expense>> read() async {
     final db = await database;
     final response = await db.query(table, orderBy: "date DESC");
+    final data = response.map((e) => Expense.fromJson(e)).toList();
+    return data;
+  }
+
+  Future<List<Expense>> readByMonth(DateTime date) async {
+    final db = await database;
+    final start = DateTime(date.year, date.month, 1);
+    final end = DateTime(date.year, date.month + 1, 0);
+    final response = await db.query(
+      table,
+      where: 'date BETWEEN ? AND ?',
+      whereArgs: [start.getCompact, end.getCompact],
+      orderBy: "date DESC",
+    );
     final data = response.map((e) => Expense.fromJson(e)).toList();
     return data;
   }

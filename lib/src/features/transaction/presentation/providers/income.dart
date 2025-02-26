@@ -8,7 +8,11 @@ part 'income.g.dart';
 @Riverpod(keepAlive: true)
 class IncomeState extends _$IncomeState {
   @override
-  FutureOr<List<Income>> build() async {
+  FutureOr<List<Income>> build({DateTime? date}) async {
+    if (date != null) {
+      final incomes = await ref.read(incomeRepositoryProvider).readByMonth(date);
+      return incomes.fold((l) => [], (r) => r);
+    }
     final incomes = await ref.read(incomeRepositoryProvider).read();
     return incomes.fold((l) => [], (r) => r);
   }

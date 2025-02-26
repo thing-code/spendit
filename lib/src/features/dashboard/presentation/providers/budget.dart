@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit/src/common/common.dart';
 
@@ -22,21 +21,21 @@ class BudgetState extends _$BudgetState {
   }
 
   Future<void> init() async {
-      for (var type in BudgetType.values) {
-        final budget = Budget(type: type);
+    for (var type in BudgetType.values) {
+      final budget = Budget(type: type);
 
-        final result = await ref.read(budgetRepositoryProvider).create(budget);
+      final result = await ref.read(budgetRepositoryProvider).create(budget);
 
-        result.fold(
-          (l) {
-            log(l);
-          },
-          (r) {
-            log('Success on ${type.label}');
-          },
-        );
-      }
-      ref.invalidateSelf();
+      result.fold(
+        (l) {
+          debugPrint(l);
+        },
+        (r) {
+          debugPrint('Success on ${type.label}');
+        },
+      );
+    }
+    ref.invalidateSelf();
   }
 
   Future<bool> edit(Budget budget) async {

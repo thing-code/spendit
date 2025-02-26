@@ -58,4 +58,14 @@ class SavingRepositoryImpl implements SavingRepository {
       return Left(e.toString());
     }
   }
+  
+  @override
+  Future<Either<String, List<Saving>>> readByMonth(DateTime date) async {
+    try {
+      final result = await datasource.readByMonth(date);
+      return Right(result);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

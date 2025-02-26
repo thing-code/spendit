@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:spendit/src/common/common.dart';
-import 'package:spendit/src/features/transaction/presentation/providers/income.dart';
+
+import '../../../../common/common.dart';
+import '../providers/income.dart';
 
 class IncomePageView extends ConsumerWidget {
   const IncomePageView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final incomes = ref.watch(incomeStateProvider);
+    final incomes = ref.watch(incomeStateProvider(date: now));
     return COSAsyncWidget(
       asyncValue: incomes,
       onData: (data) {

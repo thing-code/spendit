@@ -8,5 +8,5 @@ class DateQueryConverter implements JsonConverter<DateTime, String> {
   DateTime fromJson(String json) => DateTime.parse(json);
 
   @override
-  String toJson(DateTime object) => object.getCompactDate;
+  String toJson(DateTime object) => object.getCompact;
 }

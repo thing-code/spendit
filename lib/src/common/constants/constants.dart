@@ -57,3 +57,9 @@ OutlineInputBorder baseInputBorder({Color? color}) {
     borderRadius: BorderRadius.circular(12),
   );
 }
+
+final now = DateTime.now();
+
+final thisMonth = now.month;
+
+final thisYear = now.year;

@@ -1,19 +1,21 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:spendit/main.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spendit/src/common/common.dart';
 
 enum SnackBarStatus { success, error }
 
 class COSSnackBar {
-  void success({required String message}) {
-    _show(message: message, type: SnackBarStatus.success);
+  static void success(BuildContext context, {required String message}) {
+    _show(context, message: message, type: SnackBarStatus.success);
   }
 
-  void error({required String message}) {
-    _show(message: message, type: SnackBarStatus.error);
+  static void error(BuildContext context, {required String message}) {
+    _show(context, message: message, type: SnackBarStatus.error);
   }
 
-  void _show({
+  static void _show(
+    BuildContext context, {
     required String message,
     SnackBarStatus type = SnackBarStatus.success,
   }) {
@@ -22,33 +24,24 @@ class COSSnackBar {
       SnackBarStatus.error => Icons.error,
     };
 
+    final title = switch (type) {
+      SnackBarStatus.success => 'SUCCESS',
+      SnackBarStatus.error => 'FAIL',
+    };
 
-    scaffoldMsgKey.currentState?.showSnackBar(
-      SnackBar(
-        backgroundColor: Color(0xFF1C304F),
-        dismissDirection: DismissDirection.horizontal,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        duration: Duration(milliseconds: 1200),
-        behavior: SnackBarBehavior.floating,
-        elevation: 0,
-        content: Row(
-          spacing: 16,
-          children: [
-            Icon(icon, color: Colors.white),
-            Flexible(
-              child: Text(
-                message,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                style: kSemiBoldTextStyle.copyWith(
-                    color: Colors.white, fontSize: 14),
-              ),
-            ),
-          ],
-        ),
+    Flushbar(
+      title: '',
+      message: '',
+      backgroundColor: Color(0xFF1C304F),
+      titleText: Text(title, style: kSemiBoldTextStyle.copyWith(color: Colors.white, fontSize: 14)),
+      messageText: Text(
+        message,
+        style: kRegularTextStyle.copyWith(color: Colors.white, fontSize: 14),
       ),
-    );
+      icon: Icon(icon, color: Colors.white),
+      padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
+      shouldIconPulse: false,
+      duration: Duration(seconds: 3),
+    ).show(context);
   }
 }

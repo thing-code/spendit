@@ -6,18 +6,23 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:spendit/src/common/common.dart';
 
-import '../../../../common/widgets/cupertino_widget.dart';
-
 class BudgetForm extends HookConsumerWidget {
-  const BudgetForm({super.key, required this.budget});
+  const BudgetForm({super.key, required this.budget, required this.dctx});
 
   final Budget budget;
+  final BuildContext dctx;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = useTextEditingController();
 
-    return BaseCupertinoPage(
+    return COSCupertinoPage(
+      onSave: () {
+        debugPrint(controller.text);
+        if (controller.text.isEmpty) {
+          COSSnackBar.error(dctx, message: 'Budget cannot be empty.');
+        }
+      },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(

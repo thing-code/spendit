@@ -3,15 +3,17 @@ import 'package:go_router/go_router.dart';
 
 import '../common.dart';
 
-class BaseCupertinoPage<T> extends StatelessWidget {
-  const BaseCupertinoPage({super.key, required this.child, this.onSave});
+final cupertinoBtmSheetKey = GlobalKey<ScaffoldState>();
+
+class COSCupertinoPage extends StatelessWidget {
+  const COSCupertinoPage({super.key, required this.child, this.onSave});
 
   final Widget child;
   final VoidCallback? onSave;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Column(children: [header(context), Expanded(child: child)]));
+    return Scaffold(key: cupertinoBtmSheetKey, body: Column(children: [header(context), Expanded(child: child)]));
   }
 
   Widget header(BuildContext context) {
@@ -28,7 +30,7 @@ class BaseCupertinoPage<T> extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: onSave ?? context.pop,
+            onPressed: onSave,
             child: Text('Save', style: kMediumTextStyle.copyWith(fontSize: 14)),
           ),
         ],

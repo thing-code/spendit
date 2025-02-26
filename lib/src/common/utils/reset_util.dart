@@ -42,12 +42,11 @@ class COSResetUtil {
     await ref.read(budgetStateProvider.notifier).monthlyReset();
   }
 
-  Future<void> monthlyReset() async {
+  Future<void> monthlyReset(BuildContext context) async {
     bool wasReset = await checkAndResetIfNeeded();
 
-    if (wasReset) {
-      final snackbar = COSSnackBar();
-      snackbar.success(message: 'Monthly reset successful');
+    if (wasReset && context.mounted) {
+      COSSnackBar.success(context, message: 'Monthly reset successful');
     }
   }
 }

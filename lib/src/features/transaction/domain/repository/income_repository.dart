@@ -6,4 +6,5 @@ abstract class IncomeRepository {
   Future<Either<String, int>> update(Income income);
   Future<Either<String, int>> delete(Income income);
   Future<Either<String, List<Income>>> read();
+  Future<Either<String, List<Income>>> readByMonth(DateTime date);
 }
