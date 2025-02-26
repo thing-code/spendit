@@ -1,27 +1,16 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spendit/src/common/common.dart';
+import 'package:spendit/src/features/dashboard/presentation/providers/summary.dart';
 
-class COSTransactionSummary extends StatelessWidget {
+class COSTransactionSummary extends ConsumerWidget {
   const COSTransactionSummary({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final summaries = [
-      TransactionSummary(month: 1, income: 4850000, expense: 3000000),
-      TransactionSummary(month: 2, income: 4850000, expense: 3000000),
-      TransactionSummary(month: 3, income: 4850000, expense: 3000000),
-      TransactionSummary(month: 4, income: 4850000, expense: 3000000),
-      TransactionSummary(month: 5, income: 4850000, expense: 3000000),
-      TransactionSummary(month: 6, income: 4850000, expense: 3000000),
-      TransactionSummary(month: 7, income: 4850000, expense: 3000000),
-      TransactionSummary(month: 8, income: 4850000, expense: 3000000),
-      TransactionSummary(month: 9, income: 4850000, expense: 3000000),
-      TransactionSummary(month: 10, income: 4850000, expense: 2500000),
-      TransactionSummary(month: 11, income: 4850000, expense: 2500000),
-      TransactionSummary(month: 12, income: 4650000, expense: 2500000),
-    ];
+  Widget build(BuildContext context, WidgetRef ref) {
+    final summaries = ref.watch(summariesProvider);
 
     return Card(
       color: context.colorScheme.primary,
@@ -81,7 +70,7 @@ class COSTransactionSummary extends StatelessWidget {
                   ),
                   barTouchData: BarTouchData(enabled: false),
                   borderData: FlBorderData(show: false),
-                  gridData: const FlGridData(show: false),
+                  gridData: const FlGridData(show: true, drawHorizontalLine: false),
                   groupsSpace: 12,
                   extraLinesData: ExtraLinesData(
                     horizontalLines: [
@@ -94,7 +83,7 @@ class COSTransactionSummary extends StatelessWidget {
                     ],
                   ),
                   barGroups: [
-                    ...summaries.map(
+                    ...(summaries.valueOrNull ?? []).map(
                       (e) => BarChartGroupData(
                         x: e.month,
                         groupVertically: true,

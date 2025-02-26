@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:spendit/src/common/common.dart';
-
-import '../../../features/dashboard/presentation/providers/budget.dart';
 
 class COSAddTransactionButton extends ConsumerWidget {
   const COSAddTransactionButton({super.key});
@@ -20,8 +19,7 @@ class COSAddTransactionButton extends ConsumerWidget {
         children: [
           FloatingActionButton(
             onPressed: () async {
-              final res = await ref.read(budgetStateProvider.future);
-              debugPrint(res.toString());
+              showOptions(context).then((type) {});
             },
             elevation: 0,
             backgroundColor: context.colorScheme.primary,
@@ -40,13 +38,7 @@ class COSAddTransactionButton extends ConsumerWidget {
       transitionDuration: Durations.medium2,
       pageBuilder: (context, _, _) => Container(),
       transitionBuilder: (context, animation, _, _) {
-        return ScaleTransition(
-          scale: Tween<double>(begin: .5, end: 1).animate(animation),
-          child: FadeTransition(
-            opacity: Tween<double>(begin: .5, end: 1).animate(animation),
-            child: AddTransactionDialog(),
-          ),
-        );
+        return AddTransactionDialog().animate().fade(begin: .5, end: 1).scale();
       },
     );
   }
