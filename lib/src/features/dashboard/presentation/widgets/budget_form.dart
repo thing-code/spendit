@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:spendit/src/common/common.dart';
 
-import '../../../../common/widgets/base_cupertino.dart';
+import '../../../../common/widgets/cupertino_widget.dart';
 
 class BudgetForm extends HookConsumerWidget {
   const BudgetForm({super.key, required this.budget});
@@ -27,7 +27,7 @@ class BudgetForm extends HookConsumerWidget {
             Text(DateTime.now().getMonthAndYear, style: kMediumTextStyle.copyWith(fontSize: 20)),
             Text('Budget for ${budget.type.label}', style: kLightTextStyle.copyWith(fontSize: 16)),
             Gap(12),
-            TextFieldInput(
+            COSTextInput(
               controller: controller,
               hint: 'Budget',
               prefixIcon: Icon(SolarIconsOutline.wadOfMoney),

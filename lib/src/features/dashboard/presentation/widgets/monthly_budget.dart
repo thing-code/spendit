@@ -5,8 +5,8 @@ import '../../../../common/common.dart';
 import '../providers/budget.dart';
 import 'budget_card.dart';
 
-class MonthlyBudget extends ConsumerWidget {
-  const MonthlyBudget({super.key});
+class COSMonthlyBudget extends ConsumerWidget {
+  const COSMonthlyBudget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,7 +33,7 @@ class _MonthlyBudgetData extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
-        childAspectRatio: 1.2,
+        childAspectRatio: 1.1,
       ),
       itemBuilder: (context, index) {
         final budget = budgets[index];
@@ -58,7 +58,7 @@ class _MonthlyBudgetLoading extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
-        childAspectRatio: 1.2,
+        childAspectRatio: 1.1,
       ),
       itemBuilder: (context, index) {
         final budget = budgets[index];

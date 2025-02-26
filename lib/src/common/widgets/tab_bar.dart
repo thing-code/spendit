@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:spendit/src/common/common.dart';
 
-class MyTabBar extends StatelessWidget {
-  const MyTabBar({super.key, this.controller, required this.tabs});
+class COSTabBar extends StatelessWidget {
+  const COSTabBar({super.key, this.controller, required this.tabs});
 
   final TabController? controller;
   final List<Widget> tabs;

@@ -11,13 +11,11 @@ class ExpensePageView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final expenses = ref.watch(expenseStateProvider);
-    return AsyncWidget(
+    return COSAsyncWidget(
       asyncValue: expenses,
       onData: (data) {
         if (data.isEmpty) {
-          return Center(
-            child: Text('Tidak ada data'),
-          );
+          return Center(child: Text('Tidak ada data'));
         }
         return ListView.separated(
           itemBuilder: (context, index) {

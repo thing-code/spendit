@@ -1,15 +1,15 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solar_icons/solar_icons.dart';
-import 'package:spendit/src/common/common.dart';
-import 'package:spendit/src/features/dashboard/data/datasource/budget_datasource.dart';
 
-class NavigationWrapper extends ConsumerWidget {
-  const NavigationWrapper({super.key, required this.child, required this.state});
+import '../../features/dashboard/data/datasource/budget_datasource.dart';
+import '../common.dart';
+
+class COSNavigation extends ConsumerWidget {
+  const COSNavigation({super.key, required this.child, required this.state});
 
   final Widget child;
   final GoRouterState state;

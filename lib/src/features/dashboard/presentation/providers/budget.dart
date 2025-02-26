@@ -22,8 +22,6 @@ class BudgetState extends _$BudgetState {
   }
 
   Future<void> init() async {
-    final budgets = await future;
-    if (budgets.isEmpty) {
       for (var type in BudgetType.values) {
         final budget = Budget(type: type);
 
@@ -39,7 +37,6 @@ class BudgetState extends _$BudgetState {
         );
       }
       ref.invalidateSelf();
-    }
   }
 
   Future<bool> edit(Budget budget) async {

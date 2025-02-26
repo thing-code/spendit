@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AsyncWidget<T> extends ConsumerWidget {
-  const AsyncWidget({super.key, required this.asyncValue, required this.onData});
+class COSAsyncWidget<T> extends ConsumerWidget {
+  const COSAsyncWidget({super.key, required this.asyncValue, required this.onData});
 
   final AsyncValue<T> asyncValue;
   final Widget Function(T data) onData;

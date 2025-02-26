@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spendit/src/common/common.dart';
 
-class MyLoading extends StatelessWidget {
-  const MyLoading({super.key});
+class COSLoading extends StatelessWidget {
+  const COSLoading({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class LoadingContainer extends StatelessWidget {
             ),
           ],
         ),
-        child: MyLoading(),
+        child: COSLoading(),
       ),
     );
   }

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spendit/src/common/common.dart';
 
-class MyBalance extends StatelessWidget {
-  const MyBalance({super.key});
+class COSBalance extends StatelessWidget {
+  const COSBalance({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.w),
-      padding: EdgeInsets.all(8),
+      margin: EdgeInsets.all(4.w),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
         gradient: LinearGradient(
@@ -24,21 +24,18 @@ class MyBalance extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 12.h,
         children: [
-          Padding(
-            padding: EdgeInsetsDirectional.only(start: 12.w, top: 12.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Total Balance',
-                  style: kRegularTextStyle.copyWith(
-                    fontSize: 18.sp,
-                    color: context.colorScheme.primary.withValues(alpha: .6),
-                  ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Total Balance',
+                style: kRegularTextStyle.copyWith(
+                  fontSize: 18.sp,
+                  color: context.colorScheme.primary.withValues(alpha: .6),
                 ),
-                Text(1500000.currency, style: kBoldTextStyle.copyWith(fontSize: 28.sp)),
-              ],
-            ),
+              ),
+              Text(1500000.currency, style: kBoldTextStyle.copyWith(fontSize: 28.sp)),
+            ],
           ),
           Container(
             constraints: BoxConstraints(maxWidth: context.deviceSize.width),

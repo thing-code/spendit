@@ -33,7 +33,7 @@ GoRouter router(Ref ref) {
     routes: [
       ShellRoute(
         navigatorKey: shellNavigatorKey,
-        builder: (context, state, child) => NavigationWrapper(state: state, child: child),
+        builder: (context, state, child) => COSNavigation(state: state, child: child),
         routes: [
           GoRoute(
             path: MyRoute.dashboard.route,

@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../domain/model/budget.dart';
+import '../../../../common/models/budget.dart';
 import '../../domain/repository/budget_repository.dart';
 import '../datasource/budget_datasource.dart';
 

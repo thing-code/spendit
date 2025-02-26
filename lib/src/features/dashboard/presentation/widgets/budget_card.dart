@@ -39,7 +39,7 @@ class BudgetCard extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(16.w),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Icon(budget.type.icon, color: budget.type.color, size: 28.sp),
                 Column(
@@ -57,6 +57,8 @@ class BudgetCard extends StatelessWidget {
                   backgroundColor: Colors.grey[200],
                   valueColor: AlwaysStoppedAnimation(budget.type.color),
                   stopIndicatorColor: budget.type.color,
+                  stopIndicatorRadius: 4.r,
+                  minHeight: 6.h,
                   // ignore: deprecated_member_use
                   year2023: false,
                 ),

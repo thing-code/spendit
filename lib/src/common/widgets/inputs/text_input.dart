@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 
 import '../../common.dart';
 
-class TextFieldInput extends StatelessWidget {
-  const TextFieldInput({
+class COSTextInput extends StatelessWidget {
+  const COSTextInput({
     super.key,
     required this.controller,
     this.hint,

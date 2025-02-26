@@ -1,0 +1,15 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'summary.freezed.dart';
+part 'summary.g.dart';
+
+@freezed
+class TransactionSummary with _$TransactionSummary {
+  const factory TransactionSummary({
+    required int month,
+    @Default(0) double income,
+    @Default(0) double expense,
+  }) = _TransactionSummary;
+
+  factory TransactionSummary.fromJson(Map<String, dynamic> json) => _$TransactionSummaryFromJson(json);
+}
