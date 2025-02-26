@@ -3,11 +3,11 @@ import 'package:solar_icons/solar_icons.dart';
 
 enum BudgetType {
   family('Family', SolarIconsOutline.userHeart, Colors.pinkAccent),
-  dailyneeds('Daily Needs', SolarIconsOutline.cart_3, Colors.amber),
+  foods('Foods', SolarIconsOutline.chefHat, Colors.amber),
   internet('Internet', SolarIconsOutline.simCard, Colors.teal),
   livingcost('Living Cost', SolarIconsOutline.home1, Colors.pink),
   transportation('Transportation', SolarIconsOutline.gasStation, Colors.blue),
-  shopping('Shopping', SolarIconsOutline.cart, Colors.orange),
+  shopping('Shopping', SolarIconsOutline.cartLarge, Colors.orange),
   saving('Saving', SolarIconsOutline.wallet, Colors.deepPurpleAccent),
   emergency('Emergency', SolarIconsOutline.danger, Colors.red),
   investment('Investment', SolarIconsOutline.diagramUp, Colors.green),
