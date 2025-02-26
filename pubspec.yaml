@@ -36,6 +36,7 @@ dependencies:
   hooks_riverpod: ^2.6.1
   flutter_hooks: ^0.20.5
   skeletonizer: ^1.4.3
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:

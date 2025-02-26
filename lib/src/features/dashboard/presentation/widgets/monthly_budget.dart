@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spendit/src/features/dashboard/presentation/providers/budget.dart';
 
 import '../../../../common/common.dart';
+import '../providers/budget.dart';
 import 'budget_card.dart';
 
 class MonthlyBudget extends ConsumerWidget {
@@ -28,7 +28,7 @@ class _MonthlyBudgetData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverGrid.builder(
-      itemCount: BudgetType.values.length,
+      itemCount: budgets.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 8,
@@ -37,7 +37,7 @@ class _MonthlyBudgetData extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         final budget = budgets[index];
-        return BudgetCard(budget: budget,);
+        return BudgetCard(budget: budget);
       },
     );
   }
@@ -48,7 +48,23 @@ class _MonthlyBudgetLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(child: Center(child: CircularProgressIndicator()));
+    final budgets = List.generate(
+      BudgetType.values.length,
+      (index) => Budget(type: BudgetType.values[index]),
+    );
+    return SliverGrid.builder(
+      itemCount: budgets.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
+        childAspectRatio: 1.2,
+      ),
+      itemBuilder: (context, index) {
+        final budget = budgets[index];
+        return BudgetCard(budget: budget).skeleton();
+      },
+    );
   }
 }
 

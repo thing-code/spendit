@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../common/common.dart';
 import 'budget_form.dart';
@@ -22,9 +23,8 @@ class BudgetCard extends StatelessWidget {
                 );
               },
       child: Container(
-        // margin: EdgeInsets.only(bottom: 8),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -33,21 +33,21 @@ class BudgetCard extends StatelessWidget {
           ),
         ),
         child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
           color: Colors.white,
-          margin: EdgeInsets.all(2),
+          margin: EdgeInsets.all(2.w),
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.all(16.w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(budget.type.icon, color: budget.type.color, size: 28),
+                Icon(budget.type.icon, color: budget.type.color, size: 28.sp),
                 Column(
                   children: [
-                    Text(budget.type.label, style: kSemiBoldTextStyle.copyWith(fontSize: 16)),
+                    Text(budget.type.label, style: kSemiBoldTextStyle.copyWith(fontSize: 16.sp)),
                     Text(
                       budget.value == 0 ? 'Rp. -' : budget.value.toInt().currency,
-                      style: kMediumTextStyle.copyWith(fontSize: 14),
+                      style: kMediumTextStyle.copyWith(fontSize: 14.sp),
                     ),
                   ],
                 ),
