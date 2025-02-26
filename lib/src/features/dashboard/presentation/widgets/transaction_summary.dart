@@ -58,7 +58,7 @@ class COSTransactionSummary extends StatelessWidget {
               spacing: 8,
               children: [
                 COSLegendWidget(color: context.colorScheme.primaryContainer, title: 'Income'),
-                COSLegendWidget(color: context.colorScheme.errorContainer, title: 'Expense'),
+                COSLegendWidget(color: context.colorScheme.secondaryContainer, title: 'Expense'),
               ],
             ),
             16.verticalSpace,
@@ -107,7 +107,7 @@ class COSTransactionSummary extends StatelessWidget {
                           ),
                           BarChartRodData(
                             toY: -e.expense.toDouble(),
-                            color: context.colorScheme.errorContainer,
+                            color: context.colorScheme.secondaryContainer,
                             width: 10,
                             borderRadius: BorderRadius.vertical(bottom: Radius.circular(12.r)),
                           ),

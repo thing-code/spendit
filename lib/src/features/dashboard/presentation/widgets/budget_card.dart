@@ -13,15 +13,12 @@ class BudgetCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:
-          budget.target > 0
-              ? null
-              : () {
-                showCupertinoSheet(
-                  context: context,
-                  pageBuilder: (dctx) => BudgetForm(budget: budget, dctx: dctx),
-                );
-              },
+      onTap: () {
+        showCupertinoSheet(
+          context: context,
+          pageBuilder: (dctx) => BudgetForm(budget: budget, dctx: dctx),
+        );
+      },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
@@ -46,7 +43,7 @@ class BudgetCard extends StatelessWidget {
                   children: [
                     Text(budget.type.label, style: kSemiBoldTextStyle.copyWith(fontSize: 16.sp)),
                     Text(
-                      budget.value == 0 ? 'Rp. -' : budget.value.toInt().currency,
+                      budget.target == 0 ? 'Rp. -' : budget.target.currency,
                       style: kMediumTextStyle.copyWith(fontSize: 14.sp),
                     ),
                   ],

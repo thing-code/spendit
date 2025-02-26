@@ -1,10 +1,11 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:spendit/src/common/common.dart';
+
+import '../../../features/dashboard/presentation/providers/budget.dart';
 
 class COSAddTransactionButton extends ConsumerWidget {
   const COSAddTransactionButton({super.key});
@@ -19,8 +20,8 @@ class COSAddTransactionButton extends ConsumerWidget {
         children: [
           FloatingActionButton(
             onPressed: () async {
-              // showOptions(context).then((value) => debugPrint(value.toString()));
-              await Flushbar(title: 'Coba', message: 'message',).show(context);
+              final res = await ref.read(budgetStateProvider.future);
+              debugPrint(res.toString());
             },
             elevation: 0,
             backgroundColor: context.colorScheme.primary,
@@ -76,8 +77,8 @@ class AddTransactionDialog extends StatelessWidget {
             _button(
               'Expense',
               SolarIconsOutline.archiveUpMinimalistic,
-              context.colorScheme.errorContainer,
-              context.colorScheme.error,
+              context.colorScheme.secondaryContainer,
+              context.colorScheme.secondary,
               onTap: () {
                 context.pop(TransactionType.expense);
               },
