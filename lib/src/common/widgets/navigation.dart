@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solar_icons/solar_icons.dart';
 
-import '../../features/dashboard/data/datasource/budget_datasource.dart';
 import '../common.dart';
 
 class COSNavigation extends ConsumerWidget {
@@ -100,10 +97,7 @@ class _PlusButton extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FloatingActionButton(
-            onPressed: () async {
-              final budgets = await ref.read(budgetDatasourceProvider).read();
-              log(budgets.toString());
-            },
+            onPressed: () async {},
             elevation: 0,
             backgroundColor: context.colorScheme.primary,
             foregroundColor: Colors.white,

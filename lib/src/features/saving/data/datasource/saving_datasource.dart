@@ -40,7 +40,7 @@ class SavingDatasource {
     await db.execute('''
       CREATE TABLE $table (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        value DOUBLE NOT NULL,
+        value INTEGER NOT NULL,
         description TEXT,
         date DATE NOT NULL
       )

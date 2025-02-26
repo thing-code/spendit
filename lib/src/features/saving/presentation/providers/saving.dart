@@ -31,15 +31,3 @@ class SavingState extends _$SavingState {
   }
 }
 
-@Riverpod(keepAlive: true)
-class PlannedSaving extends _$PlannedSaving {
-  @override
-  double? build() {
-    return ref.watch(plannedSavingRepositoryProvider).value;
-  }
-
-  void save(double val) {
-    ref.read(plannedSavingRepositoryProvider).save(val);
-    ref.invalidateSelf();
-  }
-}

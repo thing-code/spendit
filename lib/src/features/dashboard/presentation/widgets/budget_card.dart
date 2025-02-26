@@ -52,7 +52,7 @@ class BudgetCard extends StatelessWidget {
                   ],
                 ),
                 LinearProgressIndicator(
-                  value: budget.target == 0 ? budget.target : budget.value / budget.target,
+                  value: budget.target == 0 ? 0 : budget.value / budget.target,
                   borderRadius: BorderRadius.circular(100),
                   backgroundColor: Colors.grey[200],
                   valueColor: AlwaysStoppedAnimation(budget.type.color),

@@ -28,7 +28,7 @@ class COSBalance extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Total Balance',
+                'Balance',
                 style: kRegularTextStyle.copyWith(
                   fontSize: 18.sp,
                   color: context.colorScheme.primary.withValues(alpha: .6),

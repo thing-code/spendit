@@ -8,12 +8,10 @@ part 'expense.g.dart';
 class Expense with _$Expense {
    factory Expense({
     int? id,
-    required ExpenseType type,
-    required double value,
-    @Default(0) double planned,
-    @Default(0) double diff,
+    required BudgetType type,
+    required int value,
     String? description,
-    DateTime? date,
+    @DateQueryConverter() required DateTime date,
   }) = _Expense;
 
   factory Expense.fromJson(Map<String, dynamic> json) => _$ExpenseFromJson(json);

@@ -9,11 +9,9 @@ class Income with _$Income {
   const factory Income({
     int? id,
     required IncomeType type,
-    required double value,
-    @Default(0) double planned,
-    @Default(0) double diff,
+    required int value,
     String? description,
-    required DateTime date,
+    @DateQueryConverter() required DateTime date,
   }) = _Income;
 
   factory Income.fromJson(Map<String, dynamic> json) => _$IncomeFromJson(json);

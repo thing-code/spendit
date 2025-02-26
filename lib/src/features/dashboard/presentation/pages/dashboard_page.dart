@@ -159,13 +159,13 @@ class COSTransactionSummary extends StatelessWidget {
                         groupVertically: true,
                         barRods: [
                           BarChartRodData(
-                            toY: e.income,
+                            toY: e.income.toDouble(),
                             color: context.colorScheme.primaryContainer,
                             width: 10,
                             borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
                           ),
                           BarChartRodData(
-                            toY: -e.expense,
+                            toY: -e.expense.toDouble(),
                             color: context.colorScheme.errorContainer,
                             width: 10,
                             borderRadius: BorderRadius.vertical(bottom: Radius.circular(12.r)),

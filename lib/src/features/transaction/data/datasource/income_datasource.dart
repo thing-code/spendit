@@ -41,9 +41,7 @@ class IncomeDatasource {
       CREATE TABLE $table (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         type TEXT NOT NULL,
-        value DOUBLE NOT NULL,
-        planned DOUBLE,
-        diff DOUBLE,
+        value INTEGER NOT NULL,
         description TEXT,
         date DATE NOT NULL
       )

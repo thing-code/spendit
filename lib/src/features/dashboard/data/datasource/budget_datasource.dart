@@ -41,8 +41,8 @@ class BudgetDatasource {
       CREATE TABLE $table (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         type TEXT NOT NULL,
-        value DOUBLE NOT NULL,
-        target DOUBLE NOT NULL
+        value INTEGER NOT NULL,
+        target INTEGER NOT NULL
       )
     ''');
   }
