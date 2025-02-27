@@ -5,7 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solar_icons/solar_icons.dart';
+import 'package:spendit/src/features/dashboard/presentation/providers/budget.dart';
 
+import '../../../features/transaction/presentation/providers/expense.dart';
+import '../../../features/transaction/presentation/providers/income.dart';
 import '../../../features/transaction/presentation/widgets/transaction_form.dart';
 import '../../common.dart';
 
@@ -23,12 +26,26 @@ class COSAddTransactionButton extends ConsumerWidget {
           FloatingActionButton(
             onPressed: () async {
               showOptions(context).then((type) async {
-                if (type != null && context.mounted) {
-                  final res = await showCupertinoSheet<(Income?, Expense?)>(
+                if (type == null) return;
+                if (context.mounted) {
+                  final res = await showCupertinoSheet<(Income?, Expense?, DateTime?)>(
                     context: context,
                     pageBuilder: (dctx) => TransactionForm(type: type),
                   );
-                  debugPrint(res.toString());
+                  if (res == null) return;
+                  if (res.$1 != null) {
+                    await ref.onLoading(() async {
+                      await ref.read(incomeStateProvider(date: res.$3).notifier).add(res.$1!);
+                    });
+                  }
+                  if (res.$2 != null) {
+                    await ref.onLoading(() async {
+                      await ref.read(expenseStateProvider(date: res.$3).notifier).add(res.$2!);
+                      await ref
+                          .read(budgetStateProvider.notifier)
+                          .updateUsage(res.$2!.type, res.$2!.value);
+                    });
+                  }
                 }
               });
             },

@@ -1,10 +1,15 @@
+// ignore_for_file: unused_result
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../common/common.dart';
+import '../../../transaction/presentation/providers/expense.dart';
+import '../../../transaction/presentation/providers/income.dart';
 import '../providers/budget.dart';
+import '../providers/summary.dart';
 import '../widgets/balance.dart';
 import '../widgets/monthly_budget.dart';
 import '../widgets/transaction_summary.dart';
@@ -32,6 +37,12 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
     await resetUtil.monthlyReset(context);
   }
 
+  Future<void> _onRefresh() async {
+    ref.refresh(incomeStateProvider(date: now));
+    ref.refresh(expenseStateProvider(date: now));
+    await ref.read(summariesProvider.future);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,20 +52,23 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
         surfaceTintColor: Colors.transparent,
         title: Text('Hi, ${COSGreetingUtil.greeting} 🖐️', style: kMediumTextStyle),
       ),
-      body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
-        slivers: [
-          SliverToBoxAdapter(child: COSBalance()),
-          SliverToBoxAdapter(child: COSTransactionSummary()),
-          SliverToBoxAdapter(child: Gap(12.h)),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Text('Monthly Target', style: kSemiBoldTextStyle.copyWith(fontSize: 18.sp)),
+      body: RefreshIndicator(
+        onRefresh: _onRefresh,
+        child: CustomScrollView(
+          physics: BouncingScrollPhysics(),
+          slivers: [
+            SliverToBoxAdapter(child: COSBalance()),
+            SliverToBoxAdapter(child: COSTransactionSummary()),
+            SliverToBoxAdapter(child: Gap(12.h)),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Text('Monthly Target', style: kSemiBoldTextStyle.copyWith(fontSize: 18.sp)),
+              ),
             ),
-          ),
-          SliverPadding(padding: EdgeInsets.all(16.w), sliver: COSMonthlyBudget()),
-        ],
+            SliverPadding(padding: EdgeInsets.all(16.w), sliver: COSMonthlyBudget()),
+          ],
+        ),
       ),
     );
   }

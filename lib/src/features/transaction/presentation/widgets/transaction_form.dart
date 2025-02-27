@@ -60,6 +60,7 @@ class TransactionForm extends ConsumerWidget {
                   value: fg.price.value!.parseThousand,
                   date: fg.date.value!,
                 ),
+                fg.date.value,
               ));
               break;
             default:
@@ -70,6 +71,7 @@ class TransactionForm extends ConsumerWidget {
                   date: fg.date.value!,
                 ),
                 null,
+                fg.date.value,
               ));
           }
         }

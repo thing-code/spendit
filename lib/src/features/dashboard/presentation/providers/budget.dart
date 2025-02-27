@@ -44,6 +44,16 @@ class BudgetState extends _$BudgetState {
     return result.fold((l) => false, (r) => true);
   }
 
+  Future<bool> updateUsage(BudgetType type, int value) async {
+    final budgets = await future;
+    final budget = budgets.firstWhere((b) => b.type == type);
+    final result = await ref
+        .read(budgetRepositoryProvider)
+        .update(budget.copyWith(value: budget.value + value));
+    ref.invalidateSelf();
+    return result.fold((l) => false, (r) => true);
+  }
+
   Future<void> monthlyReset() async {
     final result = await future;
     for (var data in result) {
