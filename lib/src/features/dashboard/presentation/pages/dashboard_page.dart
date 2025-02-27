@@ -40,7 +40,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
   Future<void> _onRefresh() async {
     ref.refresh(incomeStateProvider(date: now));
     ref.refresh(expenseStateProvider(date: now));
-    await ref.read(summariesProvider.future);
+    ref.refresh(summariesProvider);
   }
 
   @override
