@@ -22,12 +22,13 @@ class COSAddTransactionButton extends ConsumerWidget {
         children: [
           FloatingActionButton(
             onPressed: () async {
-              showOptions(context).then((type) {
+              showOptions(context).then((type) async {
                 if (type != null && context.mounted) {
-                  showCupertinoSheet(
+                  final res = await showCupertinoSheet<(Income?, Expense?)>(
                     context: context,
                     pageBuilder: (dctx) => TransactionForm(type: type),
                   );
+                  debugPrint(res.toString());
                 }
               });
             },

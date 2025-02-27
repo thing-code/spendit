@@ -42,7 +42,6 @@ InputDecoration inputDecoration(BuildContext context, {String? hint, Widget? pre
     fillColor: Colors.white30,
     prefixIcon: prefixIcon,
     prefixIconColor: WidgetStateColor.resolveWith((states) {
-      debugPrint(states.toString());
       if (states.contains(WidgetState.focused) && !states.contains(WidgetState.error)) {
         return context.colorScheme.primary;
       }
