@@ -68,7 +68,20 @@ class COSTransactionSummary extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  barTouchData: BarTouchData(enabled: false),
+                  barTouchData: BarTouchData(
+                    enabled: true,
+                    touchTooltipData: BarTouchTooltipData(
+                      fitInsideHorizontally: true,
+                      fitInsideVertically: true,
+                      getTooltipColor: (group) => context.colorScheme.onPrimary,
+                      getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                        return BarTooltipItem(
+                          rod.toY.toInt().currency,
+                          kMediumTextStyle.copyWith(fontSize: 12.sp),
+                        );
+                      },
+                    ),
+                  ),
                   borderData: FlBorderData(show: false),
                   gridData: const FlGridData(show: true, drawHorizontalLine: false),
                   groupsSpace: 12,

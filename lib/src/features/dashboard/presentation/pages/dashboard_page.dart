@@ -1,5 +1,3 @@
-// ignore_for_file: unused_result
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,9 +36,9 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
   }
 
   Future<void> _onRefresh() async {
-    ref.refresh(incomeStateProvider(date: now));
-    ref.refresh(expenseStateProvider(date: now));
-    ref.refresh(summariesProvider);
+    ref.invalidate(incomeStateProvider(date: now));
+    ref.invalidate(expenseStateProvider(date: now));
+    ref.invalidate(summariesProvider);
   }
 
   @override

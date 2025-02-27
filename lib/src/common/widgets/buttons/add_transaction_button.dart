@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:spendit/src/features/dashboard/presentation/providers/budget.dart';
 
+import '../../../features/dashboard/presentation/providers/summary.dart';
 import '../../../features/transaction/presentation/providers/expense.dart';
 import '../../../features/transaction/presentation/providers/income.dart';
 import '../../../features/transaction/presentation/widgets/transaction_form.dart';
@@ -36,6 +37,7 @@ class COSAddTransactionButton extends ConsumerWidget {
                   if (res.$1 != null) {
                     await ref.onLoading(() async {
                       await ref.read(incomeStateProvider(date: res.$3).notifier).add(res.$1!);
+                      await _onRefresh(ref);
                     });
                   }
                   if (res.$2 != null) {
@@ -44,6 +46,7 @@ class COSAddTransactionButton extends ConsumerWidget {
                       await ref
                           .read(budgetStateProvider.notifier)
                           .updateUsage(res.$2!.type, res.$2!.value);
+                      await _onRefresh(ref);
                     });
                   }
                 }
@@ -58,6 +61,12 @@ class COSAddTransactionButton extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _onRefresh(WidgetRef ref) async {
+    ref.invalidate(incomeStateProvider(date: now));
+    ref.invalidate(expenseStateProvider(date: now));
+    ref.invalidate(summariesProvider);
   }
 
   Future<TransactionType?> showOptions(BuildContext context) {
