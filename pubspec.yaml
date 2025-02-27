@@ -36,6 +36,7 @@ dependencies:
   skeletonizer: ^1.4.3
   flutter_screenutil: ^5.9.3
   another_flushbar: ^1.12.30
+  reactive_dropdown_search: ^5.0.5
 
 dev_dependencies:
   flutter_test:

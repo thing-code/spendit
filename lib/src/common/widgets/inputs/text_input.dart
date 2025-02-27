@@ -5,7 +5,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../common.dart';
 
-class COSTextInput extends StatelessWidget {
+class COSTextInput<T> extends StatelessWidget {
   const COSTextInput({
     super.key,
     required this.control,
@@ -22,10 +22,13 @@ class COSTextInput extends StatelessWidget {
     this.prefixIcon,
     this.label,
     this.validationMessages,
+    this.onTap,
+    this.valueAccessor,
+    this.selectable = true,
   });
 
   final String? label;
-  final FormControl<String> control;
+  final FormControl<T> control;
   final String? hint;
   final bool obscureText;
   final TextInputType? keyboardType;
@@ -35,9 +38,12 @@ class COSTextInput extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
   final Widget? prefixIcon;
-  final void Function(FormControl<String> control)? onSubmitted;
-  final void Function(FormControl<String> control)? onChanged;
+  final void Function(FormControl<T> control)? onSubmitted;
+  final void Function(FormControl<T> control)? onChanged;
   final Map<String, String Function(Object)>? validationMessages;
+  final void Function(FormControl<T> control, BuildContext context)? onTap;
+  final ControlValueAccessor<T, String>? valueAccessor;
+  final bool selectable;
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +65,12 @@ class COSTextInput extends StatelessWidget {
           onSubmitted: onSubmitted,
           style: kRegularTextStyle.copyWith(fontSize: 14.sp),
           decoration: inputDecoration(context, hint: hint, prefixIcon: prefixIcon),
-          onTapOutside: (event) => FocusScope.of(context).unfocus(),
+          onTapOutside: (event) => control.unfocus(),
           validationMessages: validationMessages,
+          onTap: (control) => onTap?.call(control, context),
+          valueAccessor: valueAccessor,
+          enableInteractiveSelection: selectable,
+          showCursor: selectable,
         ),
       ],
     );

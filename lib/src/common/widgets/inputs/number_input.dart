@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:spendit/src/common/common.dart';
 
-class COSNumberInput extends COSTextInput {
+class COSNumberInput extends COSTextInput<String> {
   COSNumberInput({
     super.key,
     required super.control,

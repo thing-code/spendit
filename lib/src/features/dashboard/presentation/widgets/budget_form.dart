@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -52,13 +51,11 @@ class BudgetForm extends ConsumerWidget {
                   style: kLightTextStyle.copyWith(fontSize: 16),
                 ),
                 Gap(12),
-                COSTextInput(
+                COSNumberInput(
                   control: form.control('budget') as FormControl<String>,
                   hint: 'Budget',
                   prefixIcon: Icon(SolarIconsOutline.wadOfMoney),
-                  keyboardType: TextInputType.numberWithOptions(),
                   validationMessages: {ValidationMessage.required: (_) => "Budget can't be empty."},
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly, ThousandFormatter()],
                 ),
               ],
             );

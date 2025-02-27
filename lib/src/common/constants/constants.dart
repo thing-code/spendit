@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spendit/src/common/common.dart';
 
 final kBoldTextStyle = TextStyle(
@@ -29,6 +30,7 @@ final kLightTextStyle = TextStyle(
 
 InputDecoration inputDecoration(BuildContext context, {String? hint, Widget? prefixIcon}) {
   return InputDecoration(
+    counter: 0.verticalSpace,
     contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
     border: baseInputBorder(),
     enabledBorder: baseInputBorder(),
@@ -40,7 +42,8 @@ InputDecoration inputDecoration(BuildContext context, {String? hint, Widget? pre
     fillColor: Colors.white30,
     prefixIcon: prefixIcon,
     prefixIconColor: WidgetStateColor.resolveWith((states) {
-      if (states.contains(WidgetState.focused)) {
+      debugPrint(states.toString());
+      if (states.contains(WidgetState.focused) && !states.contains(WidgetState.error)) {
         return context.colorScheme.primary;
       }
       if (states.contains(WidgetState.error)) {
