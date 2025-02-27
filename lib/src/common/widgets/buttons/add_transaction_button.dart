@@ -1,10 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solar_icons/solar_icons.dart';
-import 'package:spendit/src/common/common.dart';
+
+import '../../../features/transaction/presentation/widgets/transaction_form.dart';
+import '../../common.dart';
 
 class COSAddTransactionButton extends ConsumerWidget {
   const COSAddTransactionButton({super.key});
@@ -19,7 +22,14 @@ class COSAddTransactionButton extends ConsumerWidget {
         children: [
           FloatingActionButton(
             onPressed: () async {
-              showOptions(context).then((type) {});
+              showOptions(context).then((type) {
+                if (type != null && context.mounted) {
+                  showCupertinoSheet(
+                    context: context,
+                    pageBuilder: (dctx) => TransactionForm(type: type),
+                  );
+                }
+              });
             },
             elevation: 0,
             backgroundColor: context.colorScheme.primary,
@@ -36,9 +46,14 @@ class COSAddTransactionButton extends ConsumerWidget {
     return showGeneralDialog<TransactionType>(
       context: context,
       transitionDuration: Durations.medium2,
+      barrierDismissible: true,
+      barrierLabel: '',
       pageBuilder: (context, _, _) => Container(),
       transitionBuilder: (context, animation, _, _) {
-        return AddTransactionDialog().animate().fade(begin: .5, end: 1).scale();
+        return AddTransactionDialog()
+            .animate()
+            .fade(begin: .5, end: 1, curve: Curves.easeInOut)
+            .scale(curve: Curves.easeInOut);
       },
     );
   }
