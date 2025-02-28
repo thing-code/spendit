@@ -7,4 +7,5 @@ export 'legend_widget.dart';
 export 'list_tile.dart';
 export 'loading_widget.dart';
 export 'navigation.dart';
+export 'progress_widget.dart';
 export 'tab_bar.dart';

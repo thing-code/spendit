@@ -1,0 +1,17 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'goals.freezed.dart';
+part 'goals.g.dart';
+
+@freezed
+class Goals with _$Goals {
+  const factory Goals({
+    int? id,
+    required String name,
+    required int target,
+    required int progress,
+    required int deadline,
+  }) = _Goals;
+
+  factory Goals.fromJson(Map<String, dynamic> json) => _$GoalsFromJson(json);
+}

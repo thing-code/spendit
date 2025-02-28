@@ -1,4 +1,3 @@
-
 import '../../../../common/common.dart';
 import '../../data/repository/income_repository_impl.dart';
 
@@ -28,7 +27,7 @@ class IncomeState extends _$IncomeState {
     return result.fold((l) => false, (r) => true);
   }
 
-  Future<bool> delete(Income income) async {
+  Future<bool> remove(Income income) async {
     final result = await ref.read(incomeRepositoryProvider).delete(income);
     ref.invalidateSelf();
     return result.fold((l) => false, (r) => true);

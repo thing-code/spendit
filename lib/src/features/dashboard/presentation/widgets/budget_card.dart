@@ -55,19 +55,7 @@ class BudgetCard extends StatelessWidget {
                   child: Column(
                     spacing: 4.h,
                     children: [
-                      LinearProgressIndicator(
-                        value: percentage,
-                        borderRadius: BorderRadius.circular(100),
-                        backgroundColor: Colors.grey[200],
-                        valueColor: AlwaysStoppedAnimation(budget.type.color),
-                        stopIndicatorColor: budget.type.color,
-                        stopIndicatorRadius: 4.r,
-                        minHeight: 8.h,
-                        trackGap: 2,
-                        // ignore: deprecated_member_use
-                        year2023: false,
-                      ),
-
+                      COSLinearProgress(value: percentage, color: budget.type.color),
                       Center(
                         child: Text(
                           '${(percentage * 100).round()}% ${budget.value > 0 ? '(${budget.value.compactCurrency})' : ''}',

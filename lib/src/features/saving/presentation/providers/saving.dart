@@ -27,10 +27,9 @@ class SavingState extends _$SavingState {
     return result.fold((l) => false, (r) => true);
   }
 
-  Future<bool> delete(Saving saving) async {
+  Future<bool> remove(Saving saving) async {
     final result = await ref.read(savingRepositoryProvider).delete(saving);
     ref.invalidateSelf();
     return result.fold((l) => false, (r) => true);
   }
 }
-

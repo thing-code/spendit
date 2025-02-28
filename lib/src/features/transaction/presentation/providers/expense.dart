@@ -28,7 +28,7 @@ class ExpenseState extends _$ExpenseState {
     return result.fold((l) => false, (r) => true);
   }
 
-  Future<bool> delete(Expense expense) async {
+  Future<bool> remove(Expense expense) async {
     final result = await ref.read(expenseRepositoryProvider).delete(expense);
     ref.invalidateSelf();
     return result.fold((l) => false, (r) => true);
