@@ -22,7 +22,7 @@ class COSTabBar extends StatelessWidget {
           color: context.colorScheme.primary,
           borderRadius: BorderRadius.circular(12),
         ),
-        labelColor: Colors.white,
+        labelColor: context.colorScheme.onPrimary,
         unselectedLabelColor: context.colorScheme.primary,
         tabs: tabs,
       ),
@@ -30,8 +30,8 @@ class COSTabBar extends StatelessWidget {
   }
 }
 
-class TabItem extends StatelessWidget {
-  const TabItem({super.key, required this.title, required this.icon});
+class COSTabItem extends StatelessWidget {
+  const COSTabItem({super.key, required this.title, required this.icon});
 
   final String title;
   final IconData icon;
@@ -42,7 +42,7 @@ class TabItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         spacing: 4,
-        children: [Text(title, style: kMediumTextStyle), Icon(icon, size: 20)],
+        children: [Text(title), Icon(icon, size: 18.sp)],
       ),
     );
   }
