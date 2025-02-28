@@ -42,12 +42,14 @@ class BudgetCard extends StatelessWidget {
                   spacing: 2.h,
                   children: [
                     Text(budget.type.label, style: kSemiBoldTextStyle.copyWith(fontSize: 16.sp)),
-                    Text(
-                      budget.target == 0 ? '-' : budget.target.currency,
-                      style: kMediumTextStyle.copyWith(fontSize: 14.sp),
-                    ),
+                    if (budget.target > 0)
+                      Text(
+                        budget.target.currency,
+                        style: kMediumTextStyle.copyWith(fontSize: 14.sp),
+                      ),
                   ],
                 ),
+
                 Padding(
                   padding: EdgeInsets.only(top: 4.h),
                   child: Column(
@@ -65,12 +67,13 @@ class BudgetCard extends StatelessWidget {
                         // ignore: deprecated_member_use
                         year2023: false,
                       ),
+
                       Center(
                         child: Text(
-                          '${(percentage * 100).round()}% (${budget.value.compactCurrency})',
+                          '${(percentage * 100).round()}% ${budget.value > 0 ? '(${budget.value.compactCurrency})' : ''}',
                           style: kMediumTextStyle.copyWith(
-                            fontSize: 10.sp,
-                            color: budget.type.color,
+                            fontSize: 12.sp,
+                            color: budget.type.color.withValues(alpha: .5),
                           ),
                         ),
                       ),

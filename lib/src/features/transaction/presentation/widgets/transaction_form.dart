@@ -1,7 +1,6 @@
-import 'package:spendit/src/features/dashboard/data/repository/budget_repository_impl.dart';
-
 import '../../../../common/common.dart';
 import '../../../../common/widgets/inputs/datetime_input.dart';
+import '../../../dashboard/data/repository/budget_repository_impl.dart';
 
 part 'transaction_form.g.dart';
 
@@ -47,27 +46,8 @@ class TransactionForm extends ConsumerWidget {
         if (fg.valid) {
           switch (type) {
             case TransactionType.expense:
-              final budget = await ref.read(budgetRepositoryProvider).single(fg.budgetType.value!);
-              if (budget.budget != null) {
-                final isOverSpending =
-                    (budget.budget!.value + fg.spend.value!.parseThousand) > budget.budget!.target;
-                final targetNotSet = budget.budget!.target == 0;
-                if (targetNotSet && context.mounted) {
-                  COSSnackBar.error(
-                    context,
-                    message: 'Spending target for ${fg.budgetType.value!.name} not set.',
-                  );
-                  return;
-                }
-                if (isOverSpending && context.mounted) {
-                  COSSnackBar.error(
-                    context,
-                    message: 'Spending on the ${fg.budgetType.value!.name} exceeds the target.',
-                  );
-                  return;
-                }
-              }
-              if (context.mounted) _expense(context, fg);
+              final checked = await _check(context, ref, fg);
+              if (checked && context.mounted) _expense(context, fg);
               break;
             default:
               _income(context, fg);
@@ -171,33 +151,28 @@ class TransactionForm extends ConsumerWidget {
       fg.date.value,
     ));
   }
-}
 
-class COSListTile extends StatelessWidget {
-  const COSListTile._({required this.title, this.selected = false, this.leading});
-
-  final Widget title;
-  final Widget? leading;
-  final bool selected;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: title,
-      dense: false,
-      selected: selected,
-      leading: leading,
-      minLeadingWidth: 16,
-      selectedTileColor: context.colorScheme.primaryContainer.withValues(alpha: .2),
-      contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
-    );
+  Future<bool> _check(BuildContext context, WidgetRef ref, TransactionFormGroup fg) async {
+    final budget = await ref.read(budgetRepositoryProvider).single(fg.budgetType.value!);
+    if (budget.budget != null) {
+      final isOverSpending =
+          (budget.budget!.value + fg.spend.value!.parseThousand) > budget.budget!.target;
+      final targetNotSet = budget.budget!.target == 0;
+      if (targetNotSet && context.mounted) {
+        COSSnackBar.error(
+          context,
+          message: 'Spending target for ${fg.budgetType.value!.name} not set.',
+        );
+        return false;
+      }
+      if (isOverSpending && context.mounted) {
+        COSSnackBar.error(
+          context,
+          message: 'Spending on the ${fg.budgetType.value!.name} exceeds the target.',
+        );
+        return false;
+      }
+    }
+    return true;
   }
-
-  factory COSListTile.dropdown({required String title, IconData? icon, bool selected = false}) =>
-      COSListTile._(
-        title: Text(title, style: kRegularTextStyle.copyWith(fontSize: 14.sp)),
-        leading: icon != null ? Icon(icon, size: 18.sp) : null,
-        selected: selected,
-      );
 }
