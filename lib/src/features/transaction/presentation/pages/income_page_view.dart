@@ -15,12 +15,38 @@ class IncomePageView extends ConsumerWidget {
         }
         return ListView.separated(
           physics: BouncingScrollPhysics(),
-          itemBuilder: (context, index) {
-            final income = data[index];
+          itemBuilder: (_, i) {
+            final income = data[i];
+            bool isSameDate = true;
+
+            if (i == 0) {
+              isSameDate = false;
+            } else {
+              final prev = data[i - 1].date;
+              isSameDate = income.date.isSameDate(prev);
+            }
+
+            if (i == 0 || !isSameDate) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (i > 0) 8.verticalSpace,
+                  Text(
+                    income.date.getDate,
+                    style: kSemiBoldTextStyle.copyWith(
+                      color: context.colorScheme.primary.withAlpha(100),
+                    ),
+                  ),
+                  8.verticalSpace,
+                  COSIncomeListTile(income: income),
+                ],
+              );
+            }
+
             return COSIncomeListTile(income: income);
           },
           padding: EdgeInsets.all(16.w),
-          separatorBuilder: (context, index) => 12.verticalSpace,
+          separatorBuilder: (context, index) => 8.verticalSpace,
           itemCount: data.length,
         );
       },
@@ -37,7 +63,7 @@ class COSIncomeListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       elevation: 2,
-      shadowColor: context.colorScheme.primaryContainer,
+      shadowColor: context.colorScheme.primary,
       borderRadius: BorderRadius.circular(12.r),
       child: COSListTile.transaction(
         title: Row(
@@ -45,14 +71,20 @@ class COSIncomeListTile extends StatelessWidget {
           children: [
             Text('+ ${income.value.currency}', style: kSemiBoldTextStyle.copyWith(fontSize: 16.sp)),
             Text(
-              income.date.getDate,
-              style: kRegularTextStyle.copyWith(fontSize: 14.sp, color: Colors.grey.shade500),
+              income.date.getCompact,
+              style: kRegularTextStyle.copyWith(
+                fontSize: 14.sp,
+                color: context.colorScheme.primary.withAlpha(100),
+              ),
             ),
           ],
         ),
         subtitle: Text(
           income.type.label,
-          style: kRegularTextStyle.copyWith(fontSize: 14.sp, color: Colors.grey.shade500),
+          style: kRegularTextStyle.copyWith(
+            fontSize: 14.sp,
+            color: context.colorScheme.primary.withAlpha(100),
+          ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

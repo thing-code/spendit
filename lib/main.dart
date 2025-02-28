@@ -26,8 +26,8 @@ class MainApp extends ConsumerWidget {
         return MaterialApp.router(
           scaffoldMessengerKey: scaffoldMsgKey,
           title: 'Spend It : Atur Pengeluaranmu',
-          theme: MyTheme.light,
-          darkTheme: MyTheme.dark,
+          theme: COSTheme.light,
+          darkTheme: COSTheme.dark,
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

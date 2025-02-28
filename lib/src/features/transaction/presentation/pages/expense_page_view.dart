@@ -16,11 +16,37 @@ class ExpensePageView extends ConsumerWidget {
         return ListView.separated(
           physics: BouncingScrollPhysics(),
           padding: EdgeInsets.all(16.w),
-          itemBuilder: (context, index) {
-            final expense = data[index];
+          itemBuilder: (_, i) {
+            final expense = data[i];
+            bool isSameDate = true;
+
+            if (i == 0) {
+              isSameDate = false;
+            } else {
+              final prev = data[i - 1].date;
+              isSameDate = expense.date.isSameDate(prev);
+            }
+
+            if (i == 0 || !isSameDate) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (i > 0) 8.verticalSpace,
+                  Text(
+                    expense.date.getDate,
+                    style: kSemiBoldTextStyle.copyWith(
+                      color: context.colorScheme.primary.withAlpha(100),
+                    ),
+                  ),
+                  8.verticalSpace,
+                  COSExpenseListTile(expense: expense),
+                ],
+              );
+            }
+
             return COSExpenseListTile(expense: expense);
           },
-          separatorBuilder: (context, index) => 12.verticalSpace,
+          separatorBuilder: (context, index) => 8.verticalSpace,
           itemCount: data.length,
         );
       },
@@ -37,7 +63,7 @@ class COSExpenseListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       elevation: 2,
-      shadowColor: context.colorScheme.primaryContainer,
+      shadowColor: context.colorScheme.primary,
       borderRadius: BorderRadius.circular(12.r),
       child: COSListTile.transaction(
         title: Row(
@@ -48,14 +74,20 @@ class COSExpenseListTile extends StatelessWidget {
               style: kSemiBoldTextStyle.copyWith(fontSize: 16.sp),
             ),
             Text(
-              expense.date.getDate,
-              style: kRegularTextStyle.copyWith(fontSize: 14.sp, color: Colors.grey.shade500),
+              expense.date.getCompact,
+              style: kRegularTextStyle.copyWith(
+                fontSize: 14.sp,
+                color: context.colorScheme.primary.withAlpha(100),
+              ),
             ),
           ],
         ),
         subtitle: Text(
           expense.type.label,
-          style: kRegularTextStyle.copyWith(fontSize: 14.sp, color: Colors.grey.shade500),
+          style: kRegularTextStyle.copyWith(
+            fontSize: 14.sp,
+            color: context.colorScheme.primary.withAlpha(100),
+          ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

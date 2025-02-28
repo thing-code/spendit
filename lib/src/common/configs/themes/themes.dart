@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 ///   darkTheme: AppTheme.dark,
 ///     :
 /// );
-abstract final class MyTheme {
+abstract final class COSTheme {
   // The defined light theme.
   static ThemeData light = FlexThemeData.light(
     fontFamily: 'SF Pro Display',

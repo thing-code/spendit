@@ -66,7 +66,7 @@ class SavingDatasource {
     final response = await db.query(
       table,
       where: 'date BETWEEN ? AND ?',
-      whereArgs: [start.getCompact, end.getCompact],
+      whereArgs: [start.getPeriod, end.getPeriod],
       orderBy: "date DESC",
     );
     final data = response.map((e) => Saving.fromJson(e)).toList();

@@ -30,34 +30,48 @@ class COSAddTransactionButton extends ConsumerWidget {
                   );
                   if (res == null) return;
                   if (res.$1 != null && res.$3 != null) {
-                    await ref.onLoading(() async {
-                      await ref.read(incomeStateProvider(date: res.$3).notifier).add(res.$1!);
-                      ref.invalidate(incomeStateProvider);
-                      await ref.read(transactionSummaryStateProvider.notifier).update(res.$3!, type);
-                    });
+                    await _income(ref, res, type);
                   }
                   if (res.$2 != null && res.$3 != null) {
-                    await ref.onLoading(() async {
-                      await ref.read(expenseStateProvider(date: res.$3).notifier).add(res.$2!);
-                      await ref
-                          .read(budgetStateProvider.notifier)
-                          .updateUsage(res.$2!.type, res.$2!.value);
-                      ref.invalidate(expenseStateProvider);
-                      await ref.read(transactionSummaryStateProvider.notifier).update(res.$3!, type);
-                    });
+                    await _expense(ref, res, type);
                   }
                 }
               });
             },
             elevation: 0,
             backgroundColor: context.colorScheme.primary,
-            foregroundColor: Colors.white,
+            foregroundColor: context.colorScheme.onPrimary,
             shape: CircleBorder(),
-            child: Icon(Icons.add),
+            child: Icon(Icons.add, size: 28.sp),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> _expense(
+    WidgetRef ref,
+    (Income?, Expense?, DateTime?) res,
+    TransactionType type,
+  ) async {
+    await ref.onLoading(() async {
+      await ref.read(expenseStateProvider(date: res.$3).notifier).add(res.$2!);
+      await ref.read(budgetStateProvider.notifier).updateUsage(res.$2!.type, res.$2!.value);
+      ref.invalidate(expenseStateProvider);
+      await ref.read(transactionSummaryStateProvider.notifier).update(res.$3!, type);
+    });
+  }
+
+  Future<void> _income(
+    WidgetRef ref,
+    (Income?, Expense?, DateTime?) res,
+    TransactionType type,
+  ) async {
+    await ref.onLoading(() async {
+      await ref.read(incomeStateProvider(date: res.$3).notifier).add(res.$1!);
+      ref.invalidate(incomeStateProvider);
+      await ref.read(transactionSummaryStateProvider.notifier).update(res.$3!, type);
+    });
   }
 
   Future<TransactionType?> showOptions(BuildContext context) {

@@ -30,7 +30,7 @@ class BudgetCard extends StatelessWidget {
         ),
         child: Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
-          color: Colors.white,
+          color: context.colorScheme.onPrimary,
           margin: EdgeInsets.all(2.w),
           child: Padding(
             padding: EdgeInsets.all(16.w),
@@ -63,7 +63,7 @@ class BudgetCard extends StatelessWidget {
                         stopIndicatorColor: budget.type.color,
                         stopIndicatorRadius: 4.r,
                         minHeight: 8.h,
-                        trackGap: 0,
+                        trackGap: 2,
                         // ignore: deprecated_member_use
                         year2023: false,
                       ),
@@ -73,7 +73,7 @@ class BudgetCard extends StatelessWidget {
                           '${(percentage * 100).round()}% ${budget.value > 0 ? '(${budget.value.compactCurrency})' : ''}',
                           style: kMediumTextStyle.copyWith(
                             fontSize: 12.sp,
-                            color: budget.type.color.withValues(alpha: .5),
+                            color: budget.type.color,
                           ),
                         ),
                       ),
