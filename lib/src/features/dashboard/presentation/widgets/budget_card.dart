@@ -12,6 +12,7 @@ class BudgetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double percentage = budget.target == 0 ? 0 : budget.value / budget.target;
     return GestureDetector(
       onTap: () {
         showCupertinoSheet(
@@ -40,24 +41,43 @@ class BudgetCard extends StatelessWidget {
               children: [
                 Icon(budget.type.icon, color: budget.type.color, size: 28.sp),
                 Column(
+                  spacing: 2.h,
                   children: [
                     Text(budget.type.label, style: kSemiBoldTextStyle.copyWith(fontSize: 16.sp)),
                     Text(
-                      budget.target == 0 ? 'Rp. -' : budget.target.currency,
+                      budget.target == 0 ? '-' : budget.target.currency,
                       style: kMediumTextStyle.copyWith(fontSize: 14.sp),
                     ),
                   ],
                 ),
-                LinearProgressIndicator(
-                  value: budget.target == 0 ? 0 : budget.value / budget.target,
-                  borderRadius: BorderRadius.circular(100),
-                  backgroundColor: Colors.grey[200],
-                  valueColor: AlwaysStoppedAnimation(budget.type.color),
-                  stopIndicatorColor: budget.type.color,
-                  stopIndicatorRadius: 4.r,
-                  minHeight: 6.h,
-                  // ignore: deprecated_member_use
-                  year2023: false,
+                Padding(
+                  padding: EdgeInsets.only(top: 4.h),
+                  child: Column(
+                    spacing: 4.h,
+                    children: [
+                      LinearProgressIndicator(
+                        value: percentage,
+                        borderRadius: BorderRadius.circular(100),
+                        backgroundColor: Colors.grey[200],
+                        valueColor: AlwaysStoppedAnimation(budget.type.color),
+                        stopIndicatorColor: budget.type.color,
+                        stopIndicatorRadius: 4.r,
+                        minHeight: 8.h,
+                        trackGap: 0,
+                        // ignore: deprecated_member_use
+                        year2023: false,
+                      ),
+                      Center(
+                        child: Text(
+                          '${(percentage * 100).round()}%',
+                          style: kMediumTextStyle.copyWith(
+                            fontSize: 10.sp,
+                            color: Colors.grey.shade500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

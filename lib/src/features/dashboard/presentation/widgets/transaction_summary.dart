@@ -2,15 +2,16 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:spendit/src/common/common.dart';
-import 'package:spendit/src/features/dashboard/presentation/providers/summary.dart';
+
+import '../../../../common/common.dart';
+import '../providers/summary.dart';
 
 class COSTransactionSummary extends ConsumerWidget {
   const COSTransactionSummary({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final summaries = ref.watch(summariesProvider);
+    final summaries = ref.watch(transactionSummaryStateProvider);
 
     return Card(
       color: context.colorScheme.primary,
@@ -96,7 +97,7 @@ class COSTransactionSummary extends ConsumerWidget {
                     ],
                   ),
                   barGroups: [
-                    ...(summaries.valueOrNull ?? []).map(
+                    ...summaries.map(
                       (e) => BarChartGroupData(
                         x: e.month,
                         groupVertically: true,

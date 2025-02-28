@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:solar_icons/solar_icons.dart';
-import 'package:spendit/src/features/dashboard/presentation/providers/budget.dart';
 
+import '../../../features/dashboard/presentation/providers/budget.dart';
 import '../../../features/dashboard/presentation/providers/summary.dart';
 import '../../../features/transaction/presentation/providers/expense.dart';
 import '../../../features/transaction/presentation/providers/income.dart';
@@ -34,19 +34,21 @@ class COSAddTransactionButton extends ConsumerWidget {
                     pageBuilder: (dctx) => TransactionForm(type: type),
                   );
                   if (res == null) return;
-                  if (res.$1 != null) {
+                  if (res.$1 != null && res.$3 != null) {
                     await ref.onLoading(() async {
                       await ref.read(incomeStateProvider(date: res.$3).notifier).add(res.$1!);
-                      await _onRefresh(ref);
+                      ref.invalidate(incomeStateProvider);
+                      await ref.read(transactionSummaryStateProvider.notifier).update(res.$3!, type);
                     });
                   }
-                  if (res.$2 != null) {
+                  if (res.$2 != null && res.$3 != null) {
                     await ref.onLoading(() async {
                       await ref.read(expenseStateProvider(date: res.$3).notifier).add(res.$2!);
                       await ref
                           .read(budgetStateProvider.notifier)
                           .updateUsage(res.$2!.type, res.$2!.value);
-                      await _onRefresh(ref);
+                      ref.invalidate(expenseStateProvider);
+                      await ref.read(transactionSummaryStateProvider.notifier).update(res.$3!, type);
                     });
                   }
                 }
@@ -61,12 +63,6 @@ class COSAddTransactionButton extends ConsumerWidget {
         ],
       ),
     );
-  }
-
-  Future<void> _onRefresh(WidgetRef ref) async {
-    ref.invalidate(incomeStateProvider(date: now));
-    ref.invalidate(expenseStateProvider(date: now));
-    ref.invalidate(summariesProvider);
   }
 
   Future<TransactionType?> showOptions(BuildContext context) {

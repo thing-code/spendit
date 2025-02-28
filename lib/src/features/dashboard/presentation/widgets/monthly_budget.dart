@@ -58,7 +58,7 @@ class _MonthlyBudgetLoading extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
-        childAspectRatio: 1.1,
+        childAspectRatio: 1,
       ),
       itemBuilder: (context, index) {
         final budget = budgets[index];

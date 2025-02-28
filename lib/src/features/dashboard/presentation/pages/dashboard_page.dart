@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +39,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
   Future<void> _onRefresh() async {
     ref.invalidate(incomeStateProvider(date: now));
     ref.invalidate(expenseStateProvider(date: now));
-    ref.invalidate(summariesProvider);
+    ref.invalidate(transactionSummaryStateProvider);
   }
 
   @override
@@ -49,6 +50,18 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
         forceMaterialTransparency: true,
         surfaceTintColor: Colors.transparent,
         title: Text('Hi, ${COSGreetingUtil.greeting} 🖐️', style: kMediumTextStyle),
+        actions: [
+          if (kDebugMode) ...[
+            IconButton.filled(
+              onPressed: () async {
+                final summary = ref.watch(transactionSummaryStateProvider);
+                debugPrint(summary.toString());
+              },
+              icon: Icon(Icons.bug_report_outlined, color: Colors.white),
+            ),
+            8.horizontalSpace,
+          ],
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: _onRefresh,

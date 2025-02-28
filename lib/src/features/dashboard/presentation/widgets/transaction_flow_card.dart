@@ -21,7 +21,7 @@ class TransactionFlowCard extends StatelessWidget {
       TransactionType.income => '+',
     };
 
-    String v = value == 0 ? '-' : '$symbol ${value.currency}';
+    String v = value == 0 ? '-' : '$symbol ${value.compactCurrency}';
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),

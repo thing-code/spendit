@@ -5,9 +5,9 @@ enum BudgetType {
   family('Family', SolarIconsOutline.userHeart, Colors.pinkAccent),
   foods('Foods', SolarIconsOutline.chefHat, Colors.amber),
   internet('Internet', SolarIconsOutline.simCard, Colors.teal),
-  livingcost('Living Cost', SolarIconsOutline.home1, Colors.pink),
-  transportation('Transportation', SolarIconsOutline.gasStation, Colors.blue),
+  livingcost('Living Cost', SolarIconsOutline.home1, Colors.brown),
   shopping('Shopping', SolarIconsOutline.cartLarge, Colors.orange),
+  transportation('Transportation', SolarIconsOutline.gasStation, Colors.blue),
   saving('Saving', SolarIconsOutline.wallet, Colors.deepPurpleAccent),
   emergency('Emergency', SolarIconsOutline.danger, Colors.red),
   investment('Investment', SolarIconsOutline.diagramUp, Colors.green),
@@ -18,3 +18,4 @@ enum BudgetType {
   final Color color;
   const BudgetType(this.label, this.icon, this.color);
 }
+ 
