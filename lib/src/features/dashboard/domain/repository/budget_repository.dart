@@ -5,4 +5,5 @@ abstract class BudgetRepository {
   Future<Either<String, int>> create(Budget budget);
   Future<Either<String, int>> update(Budget budget);
   Future<Either<String, List<Budget>>> read();
+  Future<({Budget? budget, String? error})> single(BudgetType type);
 }

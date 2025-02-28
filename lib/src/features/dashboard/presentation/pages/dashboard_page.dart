@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:spendit/src/features/dashboard/data/datasource/budget_datasource.dart';
 
 import '../../../../common/common.dart';
 import '../../../transaction/presentation/providers/expense.dart';
@@ -54,8 +55,8 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
           if (kDebugMode) ...[
             IconButton.filled(
               onPressed: () async {
-                final summary = ref.watch(transactionSummaryStateProvider);
-                debugPrint(summary.toString());
+                final budget = await ref.read(budgetDatasourceProvider).single(BudgetType.family);
+                debugPrint(budget.toString());
               },
               icon: Icon(Icons.bug_report_outlined, color: Colors.white),
             ),

@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../domain/model/budget.dart';
+import '../../../../common/common.dart';
 import '../../domain/repository/budget_repository.dart';
 import '../datasource/budget_datasource.dart';
 
@@ -46,6 +46,16 @@ class BudgetRepositoryImpl implements BudgetRepository {
       return Right(result);
     } catch (e) {
       return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<({Budget? budget, String? error})> single(BudgetType type) async {
+    try {
+      final budget = await datasource.single(type);
+      return (budget: budget, error: null);
+    } catch (e) {
+      return (budget: null, error: e.toString());
     }
   }
 }

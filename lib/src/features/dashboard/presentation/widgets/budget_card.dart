@@ -72,7 +72,7 @@ class BudgetCard extends StatelessWidget {
                           '${(percentage * 100).round()}%',
                           style: kMediumTextStyle.copyWith(
                             fontSize: 10.sp,
-                            color: Colors.grey.shade500,
+                            color: budget.type.color,
                           ),
                         ),
                       ),

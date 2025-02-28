@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:solar_icons/solar_icons.dart';
+import 'package:spendit/src/features/dashboard/data/repository/budget_repository_impl.dart';
 
 import '../../../../common/common.dart';
 import '../../../../common/widgets/inputs/datetime_input.dart';
@@ -26,14 +27,14 @@ class TransactionFormGroup extends FormGroup {
         'budget_type': FormControl<BudgetType>(
           validators: [if (type == TransactionType.expense) Validators.required],
         ),
-        'price': FormControl<String>(value: '', validators: [Validators.required]),
+        'spend': FormControl<String>(value: '', validators: [Validators.required]),
         'description': FormControl<String>(),
         'date': FormControl<DateTime>(value: DateTime.now(), validators: [Validators.required]),
       });
 
   FormControl<IncomeType> get incomeType => control('income_type') as FormControl<IncomeType>;
   FormControl<BudgetType> get budgetType => control('budget_type') as FormControl<BudgetType>;
-  FormControl<String> get price => control('price') as FormControl<String>;
+  FormControl<String> get spend => control('spend') as FormControl<String>;
   FormControl<String> get description => control('description') as FormControl<String>;
   FormControl<DateTime> get date => control('date') as FormControl<DateTime>;
 }
@@ -48,31 +49,35 @@ class TransactionForm extends ConsumerWidget {
     final fg = ref.watch(transactionFgProvider(type));
     return COSCupertinoPage(
       title: type.label,
-      onSave: () {
+      onSave: () async {
         fg.markAllAsTouched();
         if (fg.valid) {
           switch (type) {
             case TransactionType.expense:
-              context.pop((
-                null,
-                Expense(
-                  type: fg.budgetType.value!,
-                  value: fg.price.value!.parseThousand,
-                  date: fg.date.value!,
-                ),
-                fg.date.value,
-              ));
+              final budget = await ref.read(budgetRepositoryProvider).single(fg.budgetType.value!);
+              if (budget.budget != null) {
+                final isOverSpending =
+                    (budget.budget!.value + fg.spend.value!.parseThousand) > budget.budget!.target;
+                final targetNotSet = budget.budget!.target == 0;
+                if (targetNotSet && context.mounted) {
+                  COSSnackBar.error(
+                    context,
+                    message: 'Spending target for ${fg.budgetType.value!.name} not set.',
+                  );
+                  return;
+                }
+                if (isOverSpending && context.mounted) {
+                  COSSnackBar.error(
+                    context,
+                    message: 'Spending on the ${fg.budgetType.value!.name} exceeds the target.',
+                  );
+                  return;
+                }
+              }
+              if (context.mounted) _expense(context, fg);
               break;
             default:
-              context.pop((
-                Income(
-                  type: fg.incomeType.value!,
-                  value: fg.price.value!.parseThousand,
-                  date: fg.date.value!,
-                ),
-                null,
-                fg.date.value,
-              ));
+              _income(context, fg);
           }
         }
       },
@@ -91,14 +96,11 @@ class TransactionForm extends ConsumerWidget {
                   stringify: (i) => i.label,
                   hint: 'Select Income From',
                   label: 'Income From',
-                  validationMessages: {ValidationMessage.required: (_) => "Income can't be empty."},
+                  validationMessages: {ValidationMessage.required: (_) => "Income is required."},
                   prefixIcon: Icon(SolarIconsOutline.archiveDownMinimalistic),
                   itemBuilder:
-                      (ctx, i, s) => ListTile(
-                        title: Text(i.label),
-                        dense: false,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                      ),
+                      (ctx, i, s) =>
+                          COSListTile.dropdown(title: i.label, selected: s, icon: i.icon),
                 ),
               if (type == TransactionType.expense)
                 COSDropdownInput(
@@ -107,36 +109,44 @@ class TransactionForm extends ConsumerWidget {
                   stringify: (i) => i.label,
                   hint: 'Select Expense For',
                   label: 'Expense For',
-                  validationMessages: {
-                    ValidationMessage.required: (_) => "Expense can't be empty.",
-                  },
+                  validationMessages: {ValidationMessage.required: (_) => "Expense is required."},
                   prefixIcon: Icon(SolarIconsOutline.archiveUpMinimalistic),
                   itemBuilder:
-                      (ctx, i, s) => ListTile(
-                        title: Text(i.label),
-                        dense: false,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                      ),
+                      (ctx, i, s) =>
+                          COSListTile.dropdown(title: i.label, selected: s, icon: i.icon),
                 ),
               COSNumberInput(
-                control: fg.price,
+                control: fg.spend,
                 hint: 'Price',
                 label: 'Price',
-                validationMessages: {ValidationMessage.required: (_) => "Price can't be empty."},
+                validationMessages: {ValidationMessage.required: (_) => "Price is required."},
                 prefixIcon: Icon(SolarIconsOutline.wadOfMoney),
               ),
               COSDateTimeInput(
                 control: fg.date,
                 label: 'Transaction Date',
                 validationMessages: {
-                  ValidationMessage.required: (_) => "Transaction Date can't be empty.",
+                  ValidationMessage.required: (_) => "Transaction date is required.",
                 },
               ),
-              COSTextInput(
-                control: fg.description,
-                hint: 'Description',
-                label: 'Description',
-                prefixIcon: Icon(SolarIconsOutline.documentText),
+              ReactiveValueListenableBuilder(
+                formControl: fg.budgetType,
+                builder: (context, control, _) {
+                  if (type.isExpense &&
+                      fg.budgetType.value != null &&
+                      fg.budgetType.value!.isOthers) {
+                    fg.description.setValidators([Validators.required]);
+                  }
+                  return COSTextInput(
+                    control: fg.description,
+                    hint: 'Description',
+                    label: 'Description',
+                    validationMessages: {
+                      ValidationMessage.required: (_) => "Description is required.",
+                    },
+                    prefixIcon: Icon(SolarIconsOutline.documentText),
+                  );
+                },
               ),
             ],
           ),
@@ -144,4 +154,59 @@ class TransactionForm extends ConsumerWidget {
       ),
     );
   }
+
+  void _income(BuildContext context, TransactionFormGroup fg) {
+    context.pop((
+      Income(
+        type: fg.incomeType.value!,
+        value: fg.spend.value!.parseThousand,
+        date: fg.date.value!,
+      ),
+      null,
+      fg.date.value,
+    ));
+  }
+
+  void _expense(BuildContext context, TransactionFormGroup fg) {
+    context.pop((
+      null,
+      Expense(
+        type: fg.budgetType.value!,
+        value: fg.spend.value!.parseThousand,
+        date: fg.date.value!,
+      ),
+      fg.date.value,
+    ));
+  }
+}
+
+class COSListTile extends StatelessWidget {
+  const COSListTile._({required this.title, this.selected = false});
+
+  final Widget title;
+  final bool selected;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: title,
+      dense: false,
+      selected: selected,
+      selectedTileColor: context.colorScheme.primaryContainer.withValues(alpha: .2),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+    );
+  }
+
+  factory COSListTile.dropdown({required String title, IconData? icon, bool selected = false}) =>
+      COSListTile._(
+        title: Row(
+          spacing: 12.w,
+          children: [
+            if (icon != null) Icon(icon, size: 18.sp),
+            Text(title, style: kRegularTextStyle.copyWith(fontSize: 14.sp)),
+          ],
+        ),
+        selected: selected,
+      );
 }

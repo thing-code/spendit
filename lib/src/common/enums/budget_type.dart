@@ -17,5 +17,6 @@ enum BudgetType {
   final IconData icon;
   final Color color;
   const BudgetType(this.label, this.icon, this.color);
+
+  bool get isOthers => this == BudgetType.others;
 }
- 

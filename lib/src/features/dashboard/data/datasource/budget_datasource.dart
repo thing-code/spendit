@@ -61,17 +61,20 @@ class BudgetDatasource {
     return data;
   }
 
+  Future<Budget> single(BudgetType type) async {
+    final db = await database;
+    final response = await db.query(table, where: 'type = ?', whereArgs: [type.name]);
+    if (response.isNotEmpty) {
+      return Budget.fromJson(response.last);
+    } else {
+      throw Exception('Budget not found');
+    }
+  }
+
   Future<int> update(Budget budget) async {
     final db = await database;
     return db.transaction((txn) async {
       return await txn.update(table, budget.toJson(), where: 'id = ?', whereArgs: [budget.id]);
     });
   }
-
-  // Future<int> delete(Budget budget) async {
-  //   final db = await database;
-  //   return db.transaction((txn) async {
-  //     return await txn.delete(table, where: 'id = ?', whereArgs: [budget.id]);
-  //   });
-  // }
 }

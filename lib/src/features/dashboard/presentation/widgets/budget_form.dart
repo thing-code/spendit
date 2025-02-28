@@ -55,7 +55,7 @@ class BudgetForm extends ConsumerWidget {
                   control: form.control('budget') as FormControl<String>,
                   hint: 'Budget',
                   prefixIcon: Icon(SolarIconsOutline.wadOfMoney),
-                  validationMessages: {ValidationMessage.required: (_) => "Budget can't be empty."},
+                  validationMessages: {ValidationMessage.required: (_) => "Budget is required."},
                 ),
               ],
             );
