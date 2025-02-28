@@ -181,9 +181,10 @@ class TransactionForm extends ConsumerWidget {
 }
 
 class COSListTile extends StatelessWidget {
-  const COSListTile._({required this.title, this.selected = false});
+  const COSListTile._({required this.title, this.selected = false, this.leading});
 
   final Widget title;
+  final Widget? leading;
   final bool selected;
 
   @override
@@ -192,6 +193,8 @@ class COSListTile extends StatelessWidget {
       title: title,
       dense: false,
       selected: selected,
+      leading: leading,
+      minLeadingWidth: 16,
       selectedTileColor: context.colorScheme.primaryContainer.withValues(alpha: .2),
       contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
@@ -200,13 +203,8 @@ class COSListTile extends StatelessWidget {
 
   factory COSListTile.dropdown({required String title, IconData? icon, bool selected = false}) =>
       COSListTile._(
-        title: Row(
-          spacing: 12.w,
-          children: [
-            if (icon != null) Icon(icon, size: 18.sp),
-            Text(title, style: kRegularTextStyle.copyWith(fontSize: 14.sp)),
-          ],
-        ),
+        title: Text(title, style: kRegularTextStyle.copyWith(fontSize: 14.sp)),
+        leading: icon != null ? Icon(icon, size: 18.sp) : null,
         selected: selected,
       );
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:solar_icons/solar_icons.dart';
 
 import '../../common.dart';
 
@@ -17,7 +18,7 @@ class COSDropdownInput<T> extends StatelessWidget {
     this.prefixIcon,
     required this.itemBuilder,
     this.label,
-    this.validationMessages
+    this.validationMessages,
   });
 
   final FormControl<T> control;
@@ -43,7 +44,15 @@ class COSDropdownInput<T> extends StatelessWidget {
           itemAsString: stringify,
           validationMessages: validationMessages,
           dropdownDecoratorProps: DropDownDecoratorProps(
+            baseStyle: kRegularTextStyle.copyWith(fontSize: 14.sp),
             decoration: inputDecoration(context, hint: hint, prefixIcon: prefixIcon),
+          ),
+          suffixProps: DropdownSuffixProps(
+            dropdownButtonProps: DropdownButtonProps(
+              color: context.colorScheme.primary,
+              iconOpened: Icon(SolarIconsOutline.altArrowUp, color: context.colorScheme.primary),
+              iconClosed: Icon(SolarIconsOutline.altArrowDown, color: Colors.grey.shade300),
+            ),
           ),
           popupProps: PopupProps.menu(
             itemClickProps: ClickProps(borderRadius: BorderRadius.circular(12)),
