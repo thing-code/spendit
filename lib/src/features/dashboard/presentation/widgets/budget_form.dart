@@ -1,10 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:solar_icons/solar_icons.dart';
-
 import '../../../../common/common.dart';
 import '../providers/budget.dart';
 
@@ -41,7 +34,7 @@ class BudgetForm extends ConsumerWidget {
             return Column(
               children: [
                 Icon(budget.type.icon, color: budget.type.color, size: 32),
-                Gap(8),
+                8.verticalSpace,
                 Text(
                   DateTime.now().getMonthAndYear,
                   style: kMediumTextStyle.copyWith(fontSize: 20),
@@ -50,7 +43,7 @@ class BudgetForm extends ConsumerWidget {
                   'Budget for ${budget.type.label}',
                   style: kLightTextStyle.copyWith(fontSize: 16),
                 ),
-                Gap(12),
+                12.verticalSpace,
                 COSNumberInput(
                   control: form.control('budget') as FormControl<String>,
                   hint: 'Budget',

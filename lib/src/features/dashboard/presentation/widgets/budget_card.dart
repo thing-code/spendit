@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../common/common.dart';
 import 'budget_form.dart';
@@ -69,7 +67,7 @@ class BudgetCard extends StatelessWidget {
                       ),
                       Center(
                         child: Text(
-                          '${(percentage * 100).round()}%',
+                          '${(percentage * 100).round()}% (${budget.value.compactCurrency})',
                           style: kMediumTextStyle.copyWith(
                             fontSize: 10.sp,
                             color: budget.type.color,

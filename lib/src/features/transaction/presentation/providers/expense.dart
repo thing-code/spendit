@@ -1,4 +1,3 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit/src/common/common.dart';
 
 import '../../data/repository/expense_repository_impl.dart';

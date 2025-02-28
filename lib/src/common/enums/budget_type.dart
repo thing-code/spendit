@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:solar_icons/solar_icons.dart';
 
 enum BudgetType {
-  family('Family', SolarIconsOutline.userHeart, Colors.pinkAccent),
-  foods('Foods', SolarIconsOutline.chefHat, Colors.amber),
-  internet('Internet', SolarIconsOutline.simCard, Colors.teal),
-  livingcost('Living Cost', SolarIconsOutline.home1, Colors.brown),
-  shopping('Shopping', SolarIconsOutline.cartLarge, Colors.orange),
-  transportation('Transportation', SolarIconsOutline.gasStation, Colors.blue),
-  saving('Saving', SolarIconsOutline.wallet, Colors.deepPurpleAccent),
-  emergency('Emergency', SolarIconsOutline.danger, Colors.red),
-  investment('Investment', SolarIconsOutline.diagramUp, Colors.green),
-  others('Others', SolarIconsOutline.widget_5, Colors.blueGrey);
+  family('Family', SolarIconsBold.userHeart, Colors.pinkAccent),
+  foods('Foods', SolarIconsBold.chefHat, Colors.amber),
+  internet('Internet', SolarIconsBold.simCard, Colors.teal),
+  livingcost('Living Cost', SolarIconsBold.home1, Colors.brown),
+  shopping('Shopping', SolarIconsBold.cartLarge, Colors.orange),
+  transportation('Transportation', SolarIconsBold.gasStation, Colors.blue),
+  saving('Saving', SolarIconsBold.wallet, Colors.deepPurpleAccent),
+  emergency('Emergency', SolarIconsBold.danger, Colors.red),
+  investment('Investment', SolarIconsBold.graphNewUp, Colors.green),
+  others('Others', SolarIconsBold.widget_5, Colors.blueGrey);
 
   final String label;
   final IconData icon;

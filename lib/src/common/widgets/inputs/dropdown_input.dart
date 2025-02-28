@@ -1,10 +1,5 @@
-import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:solar_icons/solar_icons.dart';
 
 import '../../common.dart';
 

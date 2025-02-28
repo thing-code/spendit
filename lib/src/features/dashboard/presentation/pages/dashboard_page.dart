@@ -1,10 +1,3 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
-import 'package:spendit/src/features/dashboard/data/datasource/budget_datasource.dart';
-
 import '../../../../common/common.dart';
 import '../../../transaction/presentation/providers/expense.dart';
 import '../../../transaction/presentation/providers/income.dart';
@@ -46,24 +39,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 48.h,
-        forceMaterialTransparency: true,
-        surfaceTintColor: Colors.transparent,
-        title: Text('Hi, ${COSGreetingUtil.greeting} 🖐️', style: kMediumTextStyle),
-        actions: [
-          if (kDebugMode) ...[
-            IconButton.filled(
-              onPressed: () async {
-                final budget = await ref.read(budgetDatasourceProvider).single(BudgetType.family);
-                debugPrint(budget.toString());
-              },
-              icon: Icon(Icons.bug_report_outlined, color: Colors.white),
-            ),
-            8.horizontalSpace,
-          ],
-        ],
-      ),
+      appBar: COSAppBar(title: 'Hi, ${COSGreetingUtil.greeting} 🖐️'),
       body: RefreshIndicator(
         onRefresh: _onRefresh,
         child: CustomScrollView(
@@ -71,7 +47,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
           slivers: [
             SliverToBoxAdapter(child: COSBalance()),
             SliverToBoxAdapter(child: COSTransactionSummary()),
-            SliverToBoxAdapter(child: Gap(12.h)),
+            SliverToBoxAdapter(child: 12.verticalSpace),
             SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),

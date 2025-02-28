@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:spendit/src/common/common.dart';
 
 class COSTabBar extends StatelessWidget {

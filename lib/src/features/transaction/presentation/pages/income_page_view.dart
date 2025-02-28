@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
-
 import '../../../../common/common.dart';
 import '../providers/income.dart';
 
@@ -22,7 +18,7 @@ class IncomePageView extends ConsumerWidget {
             final income = data[index];
             return ListTile(title: Text(income.value.toString()), subtitle: Text(income.type.name));
           },
-          separatorBuilder: (context, index) => Gap(12),
+          separatorBuilder: (context, index) => 12.verticalSpace,
           itemCount: data.length,
         );
       },

@@ -1,4 +1,3 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../common/common.dart';
 import '../../data/repository/income_repository_impl.dart';
