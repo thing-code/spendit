@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:solar_icons/solar_icons.dart';
 
 enum BudgetType {
-  family('Family', SolarIconsBold.userHeart, Colors.pinkAccent),
+  family('Family', SolarIconsBold.userHeart, Colors.cyan),
   foods('Foods', SolarIconsBold.chefHat, Colors.amber),
+  health('Health', SolarIconsBold.heartPulse, Colors.pink),
   internet('Internet', SolarIconsBold.simCard, Colors.teal),
-  livingcost('Living Cost', SolarIconsBold.home1, Colors.brown),
+  transportation('Transportation', SolarIconsBold.gasStation, Colors.indigoAccent),
   shopping('Shopping', SolarIconsBold.cartLarge, Colors.orange),
-  transportation('Transportation', SolarIconsBold.gasStation, Colors.blue),
-  saving('Saving', SolarIconsBold.wallet, Colors.deepPurpleAccent),
-  emergency('Emergency', SolarIconsBold.danger, Colors.red),
   investment('Investment', SolarIconsBold.graphNewUp, Colors.green),
+  livingcost('Living Cost', SolarIconsBold.home1, Colors.deepPurpleAccent),
+  emergency('Emergency', SolarIconsBold.danger, Colors.red),
   others('Others', SolarIconsBold.widget_5, Colors.blueGrey);
 
   final String label;

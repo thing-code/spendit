@@ -6,11 +6,7 @@ part 'saving.g.dart';
 @Riverpod(keepAlive: true)
 class SavingState extends _$SavingState {
   @override
-  FutureOr<List<Saving>> build({DateTime? date}) async {
-    if (date != null) {
-      final result = await ref.read(savingRepositoryProvider).readByMonth(date);
-      return result.fold((l) => [], (r) => r);
-    }
+  FutureOr<List<Saving>> build() async {
     final result = await ref.read(savingRepositoryProvider).read();
     return result.fold((l) => [], (r) => r);
   }

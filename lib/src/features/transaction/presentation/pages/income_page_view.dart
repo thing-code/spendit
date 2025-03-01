@@ -11,7 +11,7 @@ class IncomePageView extends ConsumerWidget {
       asyncValue: incomes,
       onData: (data) {
         if (data.isEmpty) {
-          return Center(child: Text('Tidak ada data'));
+          return Center(child: Text('No income data'));
         }
         return ListView.separated(
           physics: BouncingScrollPhysics(),

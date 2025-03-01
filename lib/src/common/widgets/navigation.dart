@@ -33,8 +33,8 @@ class COSNavigation extends ConsumerWidget {
             ),
             COSAddTransactionButton(),
             NavigationDestination(
-              icon: Icon(SolarIconsOutline.flag, color: Colors.grey.shade400),
-              selectedIcon: Icon(SolarIconsBold.flag, color: context.colorScheme.primary),
+              icon: Icon(SolarIconsOutline.radar2, color: Colors.grey.shade400),
+              selectedIcon: Icon(SolarIconsBold.radar2, color: context.colorScheme.primary),
               label: 'Goals',
             ),
             NavigationDestination(

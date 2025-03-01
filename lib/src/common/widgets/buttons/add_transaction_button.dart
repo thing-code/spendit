@@ -56,7 +56,9 @@ class COSAddTransactionButton extends ConsumerWidget {
   ) async {
     await ref.onLoading(() async {
       await ref.read(expenseStateProvider(date: res.$3).notifier).add(res.$2!);
-      await ref.read(budgetStateProvider.notifier).updateUsage(res.$2!.type, res.$2!.value);
+      if (res.$3?.month == now.month) {
+        await ref.read(budgetStateProvider.notifier).updateUsage(res.$2!.type, res.$2!.value);
+      }
       ref.invalidate(expenseStateProvider);
       await ref.read(transactionSummaryStateProvider.notifier).update(res.$3!, type);
     });

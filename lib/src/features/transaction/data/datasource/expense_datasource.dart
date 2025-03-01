@@ -49,11 +49,7 @@ class ExpenseDatasource {
   Future<int> create(Expense value) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.insert(
-        table,
-        value.toJson(),
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      return await txn.insert(table, value.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
     });
   }
 
@@ -72,6 +68,18 @@ class ExpenseDatasource {
       table,
       where: 'date BETWEEN ? AND ?',
       whereArgs: [start.getPeriod, end.getPeriod],
+      orderBy: "date DESC",
+    );
+    final data = response.map((e) => Expense.fromJson(e)).toList();
+    return data;
+  }
+
+  Future<List<Expense>> saving() async {
+    final db = await database;
+    final response = await db.query(
+      table,
+      where: 'type = ?',
+      whereArgs: [BudgetType.health.name],
       orderBy: "date DESC",
     );
     final data = response.map((e) => Expense.fromJson(e)).toList();

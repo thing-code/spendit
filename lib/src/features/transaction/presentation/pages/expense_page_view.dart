@@ -11,7 +11,7 @@ class ExpensePageView extends ConsumerWidget {
       asyncValue: expenses,
       onData: (data) {
         if (data.isEmpty) {
-          return Center(child: Text('Tidak ada data'));
+          return Center(child: Text('No expense data'));
         }
         return ListView.separated(
           physics: BouncingScrollPhysics(),

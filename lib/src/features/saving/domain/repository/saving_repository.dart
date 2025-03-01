@@ -6,5 +6,4 @@ abstract class SavingRepository {
   Future<Either<String, int>> update(Saving saving);
   Future<Either<String, int>> delete(Saving saving);
   Future<Either<String, List<Saving>>> read();
-  Future<Either<String, List<Saving>>> readByMonth(DateTime date);
 }
