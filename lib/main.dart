@@ -33,8 +33,8 @@ class MainApp extends ConsumerWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: const [Locale('id')],
-          locale: const Locale('id'),
+          supportedLocales: const [Locale('en', 'US'), Locale('id', 'ID')],
+          locale: const Locale('en'),
           builder: (context, child) {
             return Stack(
               children: [

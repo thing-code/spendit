@@ -9,13 +9,18 @@ final kLightTextStyle = TextStyle(fontWeight: FontWeight.w300, height: 1.2);
 InputDecoration inputDecoration(BuildContext context, {String? hint, Widget? prefixIcon}) {
   return InputDecoration(
     counter: 0.verticalSpace,
-    contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+    contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
     border: baseInputBorder(),
     enabledBorder: baseInputBorder(),
     focusedBorder: baseInputBorder(color: context.colorScheme.primary.withAlpha(200)),
     errorBorder: baseInputBorder(color: context.colorScheme.error),
     hintText: hint,
-    hintStyle: kRegularTextStyle.copyWith(color: Colors.grey.shade300, fontSize: 14),
+    hintStyle: kRegularTextStyle.copyWith(color: Colors.grey.shade300, fontSize: 14.sp),
+    errorStyle: kRegularTextStyle.copyWith(
+      color: context.colorScheme.error,
+      fontSize: 13.sp,
+      fontStyle: FontStyle.italic,
+    ),
     filled: true,
     fillColor: Colors.white30,
     prefixIcon: prefixIcon,
@@ -34,7 +39,7 @@ InputDecoration inputDecoration(BuildContext context, {String? hint, Widget? pre
 OutlineInputBorder baseInputBorder({Color? color}) {
   return OutlineInputBorder(
     borderSide: BorderSide(color: color ?? Colors.grey.shade300, width: 1.5),
-    borderRadius: BorderRadius.circular(12),
+    borderRadius: BorderRadius.circular(12.r),
   );
 }
 

@@ -8,9 +8,9 @@ class Goals with _$Goals {
   const factory Goals({
     int? id,
     required String name,
-    required int target,
-    required int progress,
-    required int deadline,
+    @Default(0) int target,
+    @Default(0) int progress,
+    required DateTime deadline,
   }) = _Goals;
 
   factory Goals.fromJson(Map<String, dynamic> json) => _$GoalsFromJson(json);

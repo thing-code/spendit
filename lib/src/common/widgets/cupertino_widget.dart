@@ -1,4 +1,3 @@
-
 import '../common.dart';
 
 final cupertinoBtmSheetKey = GlobalKey<ScaffoldState>();
@@ -36,10 +35,7 @@ class COSCupertinoPage extends StatelessWidget {
             onPressed: onSave,
             child: Text(
               'Save',
-              style: kMediumTextStyle.copyWith(
-                fontSize: 14,
-                color: context.colorScheme.primaryContainer,
-              ),
+              style: kMediumTextStyle.copyWith(fontSize: 14, color: context.colorScheme.primary),
             ),
           ),
         ],

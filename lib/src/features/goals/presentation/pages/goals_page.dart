@@ -1,10 +1,17 @@
+import 'package:flutter/cupertino.dart';
+
 import '../../../../common/common.dart';
+import '../providers/goals.dart';
+import '../widgets/goals_card.dart';
+import '../widgets/goals_form.dart';
+import '../widgets/goals_header.dart';
 
 class GoalsPage extends ConsumerWidget {
   const GoalsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final goals = ref.watch(goalsStateProvider);
     return Scaffold(
       appBar: COSAppBar(title: 'Goals', centerTitle: true),
       body: Column(
@@ -12,82 +19,10 @@ class GoalsPage extends ConsumerWidget {
         children: [
           GoalsHeader(),
           Expanded(
-            child: ListView(
-              padding: EdgeInsets.all(16.w),
-              children: [
-                Card(
-                  margin: EdgeInsets.zero,
-                  shadowColor: context.colorScheme.primary,
-                  elevation: 2,
-                  child: Padding(
-                    padding: EdgeInsets.all(16.w),
-                    child: Column(
-                      spacing: 12.h,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Goals Title',
-                              style: kSemiBoldTextStyle.copyWith(fontSize: 20.sp),
-                            ),
-                            Text(
-                              'Due to ${now.getCompact}',
-                              style: kRegularTextStyle.copyWith(
-                                color: context.colorScheme.primary.withAlpha(200),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          spacing: 4.h,
-                          children: [
-                            COSLinearProgress(
-                              value: .5,
-                              height: 16,
-                              color: context.colorScheme.primary,
-                              gap: 0,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(150000.compactCurrency),
-                                Text(300000.compactCurrency),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Row(
-                          spacing: 12.w,
-                          children: [
-                            Expanded(
-                              child: FilledButton.tonalIcon(
-                                style: FilledButton.styleFrom(
-                                  backgroundColor: context.colorScheme.primaryContainer,
-                                  foregroundColor: context.colorScheme.primary,
-                                ),
-                                onPressed: () {},
-                                label: Text('Add Funds'),
-                                icon: Icon(
-                                  SolarIconsOutline.addCircle,
-                                  color: context.colorScheme.primary,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: FilledButton.icon(
-                                onPressed: () {},
-                                label: Text('Edit Goal'),
-                                icon: Icon(SolarIconsOutline.documentAdd),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+            child: COSAsyncWidget(
+              asyncValue: goals,
+              onData: (data) => _GoalsOnData(data: data),
+              onLoading: () => _GoalsOnLoading(),
             ),
           ),
         ],
@@ -96,21 +31,56 @@ class GoalsPage extends ConsumerWidget {
   }
 }
 
-class GoalsHeader extends StatelessWidget {
-  const GoalsHeader({super.key});
+class _GoalsOnData extends ConsumerWidget {
+  const _GoalsOnData({required this.data});
+
+  final List<Goals> data;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return data.isEmpty
+        ? Center(child: Text('No goals data, create new one'))
+        : ListView.separated(
+          itemBuilder: (_, i) {
+            final goals = data[i];
+            return GoalsCard(
+              goals: goals,
+              onEdit: () async {
+                final res = await showCupertinoSheet<Goals>(
+                  context: context,
+                  pageBuilder: (_) => GoalsForm(goals: goals),
+                );
+                if (res == null) return;
+                final updated = await ref.read(goalsStateProvider.notifier).edit(goals);
+                if (updated && context.mounted) {
+                  COSSnackBar.success(context, message: 'Goals ${goals.name} has been updated.');
+                }
+              },
+              onAddFunds: () {},
+            );
+          },
+          padding: EdgeInsets.all(16.w),
+          itemCount: data.length,
+          physics: BouncingScrollPhysics(),
+          separatorBuilder: (_, _) => 12.verticalSpace,
+        );
+  }
+}
+
+class _GoalsOnLoading extends StatelessWidget {
+  const _GoalsOnLoading();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: context.colorScheme.primaryContainer,
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text('Financial Goals', style: kMediumTextStyle.copyWith(fontSize: 16.sp)),
-          FilledButton(onPressed: () {}, child: Icon(Icons.add)),
-        ],
-      ),
+    return ListView.separated(
+      padding: EdgeInsets.all(16.w),
+      itemCount: 3,
+      physics: NeverScrollableScrollPhysics(),
+      separatorBuilder: (_, _) => 12.verticalSpace,
+      itemBuilder: (context, index) {
+        final goals = Goals(name: 'Goals Title', target: 300000, progress: 150000, deadline: now);
+        return GoalsCard(goals: goals);
+      },
     );
   }
 }

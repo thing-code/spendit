@@ -1,4 +1,3 @@
-
 import '../common.dart';
 
 class COSNavigation extends ConsumerWidget {
@@ -34,8 +33,8 @@ class COSNavigation extends ConsumerWidget {
             ),
             COSAddTransactionButton(),
             NavigationDestination(
-              icon: Icon(SolarIconsOutline.rocket, color: Colors.grey.shade400),
-              selectedIcon: Icon(SolarIconsBold.rocket, color: context.colorScheme.primary),
+              icon: Icon(SolarIconsOutline.flag, color: Colors.grey.shade400),
+              selectedIcon: Icon(SolarIconsBold.flag, color: context.colorScheme.primary),
               label: 'Goals',
             ),
             NavigationDestination(

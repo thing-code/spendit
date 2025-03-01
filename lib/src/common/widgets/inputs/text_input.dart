@@ -48,7 +48,7 @@ class COSTextInput<T> extends StatelessWidget {
       spacing: 8,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (label != null) Text(label!, style: kSemiBoldTextStyle.copyWith(fontSize: 14.sp)),
+        if (label != null) Text(label!, style: kMediumTextStyle.copyWith(fontSize: 14.sp)),
         ReactiveTextField(
           formControl: control,
           textAlignVertical: TextAlignVertical.center,

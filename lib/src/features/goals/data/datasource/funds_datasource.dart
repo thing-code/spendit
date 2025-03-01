@@ -3,15 +3,8 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../../../common/common.dart';
 
-part 'goals_datasource.g.dart';
-
-@riverpod
-GoalsDatasource goalsDatasource(Ref ref) {
-  return GoalsDatasource();
-}
-
-class GoalsDatasource {
-  GoalsDatasource() {
+class FundsDatasource {
+  FundsDatasource() {
     _init();
   }
 
@@ -38,33 +31,34 @@ class GoalsDatasource {
         name TEXT NOT NULL,
         target INTEGER NOT NULL,
         progress INTEGER NOT NULL,
-        deadline DATE NOT NULL
+        deadline DATE NOT NULL,
+        FOREIGN KEY (tabunganId) REFERENCES tabungan (id) ON DELETE CASCADE
       )
     ''');
   }
 
-  Future<int> create(Goals value) async {
+  Future<int> create(Funds value) async {
     final db = await database;
     return db.transaction((txn) async {
       return await txn.insert(table, value.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
     });
   }
 
-  Future<List<Goals>> read() async {
+  Future<List<Funds>> read() async {
     final db = await database;
     final response = await db.query(table, orderBy: "deadline DESC");
-    final data = response.map((e) => Goals.fromJson(e)).toList();
+    final data = response.map((e) => Funds.fromJson(e)).toList();
     return data;
   }
 
-  Future<int> update(Goals value) async {
+  Future<int> update(Funds value) async {
     final db = await database;
     return db.transaction((txn) async {
       return await txn.update(table, value.toJson(), where: 'id = ?', whereArgs: [value.id]);
     });
   }
 
-  Future<int> delete(Goals value) async {
+  Future<int> delete(Funds value) async {
     final db = await database;
     return db.transaction((txn) async {
       return await txn.delete(table, where: 'id = ?', whereArgs: [value.id]);
