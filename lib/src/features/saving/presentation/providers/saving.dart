@@ -28,4 +28,8 @@ class SavingState extends _$SavingState {
     ref.invalidateSelf();
     return result.fold((l) => false, (r) => true);
   }
+
+  int total() {
+    return (state.value ?? []).fold(0, (p, e) => p + e.value);
+  }
 }

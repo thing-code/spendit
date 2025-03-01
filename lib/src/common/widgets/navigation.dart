@@ -38,8 +38,8 @@ class COSNavigation extends ConsumerWidget {
               label: 'Goals',
             ),
             NavigationDestination(
-              icon: Icon(SolarIconsOutline.wallet, color: Colors.grey.shade400),
-              selectedIcon: Icon(SolarIconsBold.wallet, color: context.colorScheme.primary),
+              icon: Icon(SolarIconsOutline.walletMoney, color: Colors.grey.shade400),
+              selectedIcon: Icon(SolarIconsBold.walletMoney, color: context.colorScheme.primary),
               label: 'Saving',
             ),
           ],

@@ -25,7 +25,7 @@ class BudgetCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             stops: [0.3, 0.96],
-            colors: [context.colorScheme.primaryContainer, context.colorScheme.secondary],
+            colors: [context.colorScheme.primaryContainer, context.colorScheme.primary],
           ),
         ),
         child: Card(

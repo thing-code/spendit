@@ -39,7 +39,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: COSAppBar(title: 'Hi, ${COSGreetingUtil.greeting} 🖐️'),
+      appBar: COSAppBarAlt(),
       body: RefreshIndicator(
         onRefresh: _onRefresh,
         child: CustomScrollView(
