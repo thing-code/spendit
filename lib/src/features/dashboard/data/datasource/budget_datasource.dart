@@ -45,10 +45,10 @@ class BudgetDatasource {
     ''');
   }
 
-  Future<int> create(Budget budget) async {
+  Future<int> create(Budget value) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.insert(table, budget.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
+      return await txn.insert(table, value.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
     });
   }
 
@@ -69,10 +69,10 @@ class BudgetDatasource {
     }
   }
 
-  Future<int> update(Budget budget) async {
+  Future<int> update(Budget value) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.update(table, budget.toJson(), where: 'id = ?', whereArgs: [budget.id]);
+      return await txn.update(table, value.toJson(), where: 'id = ?', whereArgs: [value.id]);
     });
   }
 }

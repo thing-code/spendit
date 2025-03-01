@@ -1,7 +1,7 @@
 export 'app_bar.dart';
 export 'async_widget.dart';
 export 'buttons/buttons.dart';
-export 'cupertino_widget.dart';
+export 'bottomsheet_wrapper.dart';
 export 'inputs/inputs.dart';
 export 'legend_widget.dart';
 export 'list_tile.dart';

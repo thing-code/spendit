@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:spendit/src/features/goals/data/repository/funds_repository_impl.dart';
+import 'package:spendit/src/features/goals/presentation/widgets/funds_form.dart';
 
 import '../../../../common/common.dart';
 import '../providers/goals.dart';
@@ -14,6 +17,16 @@ class GoalsPage extends ConsumerWidget {
     final goals = ref.watch(goalsStateProvider);
     return Scaffold(
       appBar: COSAppBar(title: 'Goals', centerTitle: true),
+      floatingActionButton:
+          kDebugMode
+              ? FloatingActionButton(
+                onPressed: () async {
+                  final res = await ref.read(fundsRepositoryProvider).read(1);
+                  debugPrint(res.toString());
+                },
+                child: Icon(SolarIconsOutline.code2),
+              )
+              : null,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -56,7 +69,12 @@ class _GoalsOnData extends ConsumerWidget {
                   COSSnackBar.success(context, message: 'Goals ${goals.name} has been updated.');
                 }
               },
-              onAddFunds: () {},
+              onAddFunds: () async {
+                final res = await showCupertinoSheet<bool>(
+                  context: context,
+                  pageBuilder: (context) => FundsForm(goals),
+                );
+              },
             );
           },
           padding: EdgeInsets.all(16.w),
@@ -79,7 +97,7 @@ class _GoalsOnLoading extends StatelessWidget {
       separatorBuilder: (_, _) => 12.verticalSpace,
       itemBuilder: (context, index) {
         final goals = Goals(name: 'Goals Title', target: 300000, progress: 150000, deadline: now);
-        return GoalsCard(goals: goals);
+        return GoalsCard(goals: goals).skeleton();
       },
     );
   }

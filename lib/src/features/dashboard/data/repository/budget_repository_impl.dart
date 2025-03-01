@@ -18,9 +18,9 @@ class BudgetRepositoryImpl implements BudgetRepository {
   BudgetRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<String, int>> create(Budget budget) async {
+  Future<Either<String, int>> create(Budget value) async {
     try {
-      final result = await datasource.create(budget);
+      final result = await datasource.create(value);
       return Right(result);
     } catch (e) {
       return Left(e.toString());
@@ -38,9 +38,9 @@ class BudgetRepositoryImpl implements BudgetRepository {
   }
 
   @override
-  Future<Either<String, int>> update(Budget budget) async {
+  Future<Either<String, int>> update(Budget value) async {
     try {
-      final result = await datasource.create(budget);
+      final result = await datasource.create(value);
       return Right(result);
     } catch (e) {
       return Left(e.toString());

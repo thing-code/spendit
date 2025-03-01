@@ -46,10 +46,10 @@ class IncomeDatasource {
     ''');
   }
 
-  Future<int> create(Income income) async {
+  Future<int> create(Income value) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.insert(table, income.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
+      return await txn.insert(table, value.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
     });
   }
 
@@ -74,17 +74,17 @@ class IncomeDatasource {
     return data;
   }
 
-  Future<int> update(Income income) async {
+  Future<int> update(Income value) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.update(table, income.toJson(), where: 'id = ?', whereArgs: [income.id]);
+      return await txn.update(table, value.toJson(), where: 'id = ?', whereArgs: [value.id]);
     });
   }
 
-  Future<int> delete(Income income) async {
+  Future<int> delete(Income value) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.delete(table, where: 'id = ?', whereArgs: [income.id]);
+      return await txn.delete(table, where: 'id = ?', whereArgs: [value.id]);
     });
   }
 }

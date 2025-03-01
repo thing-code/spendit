@@ -1,9 +1,7 @@
 import '../common.dart';
 
-final cupertinoBtmSheetKey = GlobalKey<ScaffoldState>();
-
-class COSCupertinoPage extends StatelessWidget {
-  const COSCupertinoPage({super.key, required this.child, this.onSave, this.title});
+class COSBottomSheetWrapper extends StatelessWidget {
+  const COSBottomSheetWrapper({super.key, required this.child, this.onSave, this.title});
 
   final Widget child;
   final VoidCallback? onSave;
@@ -11,10 +9,7 @@ class COSCupertinoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: cupertinoBtmSheetKey,
-      body: Column(children: [header(context), Expanded(child: child)]),
-    );
+    return Scaffold(body: Column(children: [header(context), Expanded(child: child)]));
   }
 
   Widget header(BuildContext context) {

@@ -20,9 +20,9 @@ class IncomeRepositoryImpl implements IncomeRepository {
   IncomeRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<String, int>> create(Income income) async {
+  Future<Either<String, int>> create(Income value) async {
     try {
-      final result = await datasource.create(income);
+      final result = await datasource.create(value);
       return Right(result);
     } catch (e) {
       return Left(e.toString());
@@ -30,9 +30,9 @@ class IncomeRepositoryImpl implements IncomeRepository {
   }
 
   @override
-  Future<Either<String, int>> delete(Income income) async {
+  Future<Either<String, int>> delete(Income value) async {
     try {
-      final result = await datasource.delete(income);
+      final result = await datasource.delete(value);
       return Right(result);
     } catch (e) {
       return Left(e.toString());
@@ -50,9 +50,9 @@ class IncomeRepositoryImpl implements IncomeRepository {
   }
 
   @override
-  Future<Either<String, int>> update(Income income) async {
+  Future<Either<String, int>> update(Income value) async {
     try {
-      final result = await datasource.update(income);
+      final result = await datasource.update(value);
       return Right(result);
     } catch (e) {
       return Left(e.toString());

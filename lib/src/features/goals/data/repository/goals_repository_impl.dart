@@ -16,9 +16,9 @@ class GoalsRepositoryImpl implements GoalsRepository {
   GoalsRepositoryImpl(this.datasource);
 
   @override
-  Future<({String? e, int? r})> create(Goals goals) async {
+  Future<({String? e, int? r})> create(Goals value) async {
     try {
-      final res = await datasource.create(goals);
+      final res = await datasource.create(value);
       return (e: null, r: res);
     } catch (e) {
       return (e: e.toString(), r: null);
@@ -26,9 +26,9 @@ class GoalsRepositoryImpl implements GoalsRepository {
   }
 
   @override
-  Future<({String? e, int? r})> delete(Goals goals) async {
+  Future<({String? e, int? r})> delete(Goals value) async {
     try {
-      final res = await datasource.delete(goals);
+      final res = await datasource.delete(value);
       return (e: null, r: res);
     } catch (e) {
       return (e: e.toString(), r: null);
@@ -46,9 +46,9 @@ class GoalsRepositoryImpl implements GoalsRepository {
   }
 
   @override
-  Future<({String? e, int? r})> update(Goals goals) async {
+  Future<({String? e, int? r})> update(Goals value) async {
     try {
-      final res = await datasource.update(goals);
+      final res = await datasource.update(value);
       return (e: null, r: res);
     } catch (e) {
       return (e: e.toString(), r: null);

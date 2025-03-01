@@ -34,7 +34,7 @@ class GoalsCard extends StatelessWidget {
               spacing: 6.h,
               children: [
                 COSLinearProgress(
-                  value: goals.progress == 0 ? 0 : goals.target / goals.progress,
+                  value: goals.progress == 0 ? 0 : goals.progress / goals.target,
                   height: 16,
                   color: context.colorScheme.primary,
                   gap: 0,

@@ -16,7 +16,7 @@ class BudgetForm extends ConsumerWidget {
       ),
     });
 
-    return COSCupertinoPage(
+    return COSBottomSheetWrapper(
       title: 'Budget Target',
       onSave: () async {
         final control = fg.control('budget') as FormControl<String>;

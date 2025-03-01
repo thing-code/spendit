@@ -46,12 +46,12 @@ class ExpenseDatasource {
     ''');
   }
 
-  Future<int> create(Expense expense) async {
+  Future<int> create(Expense value) async {
     final db = await database;
     return db.transaction((txn) async {
       return await txn.insert(
         table,
-        expense.toJson(),
+        value.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     });
@@ -78,17 +78,17 @@ class ExpenseDatasource {
     return data;
   }
 
-  Future<int> update(Expense expense) async {
+  Future<int> update(Expense value) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.update(table, expense.toJson(), where: 'id = ?', whereArgs: [expense.id]);
+      return await txn.update(table, value.toJson(), where: 'id = ?', whereArgs: [value.id]);
     });
   }
 
-  Future<int> delete(Expense expense) async {
+  Future<int> delete(Expense value) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.delete(table, where: 'id = ?', whereArgs: [expense.id]);
+      return await txn.delete(table, where: 'id = ?', whereArgs: [value.id]);
     });
   }
 }

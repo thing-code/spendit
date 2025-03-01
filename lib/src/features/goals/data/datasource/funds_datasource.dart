@@ -3,6 +3,13 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../../../common/common.dart';
 
+part 'funds_datasource.g.dart';
+
+@riverpod
+FundsDatasource fundsDatasource(Ref ref) {
+  return FundsDatasource();
+}
+
 class FundsDatasource {
   FundsDatasource() {
     _init();
@@ -10,7 +17,7 @@ class FundsDatasource {
 
   static Database? _database;
 
-  final table = 'goals';
+  final table = 'funds';
 
   Future<Database> get database async {
     _database ??= await _init();
@@ -28,11 +35,10 @@ class FundsDatasource {
     await db.execute('''
       CREATE TABLE $table (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        target INTEGER NOT NULL,
-        progress INTEGER NOT NULL,
-        deadline DATE NOT NULL,
-        FOREIGN KEY (tabunganId) REFERENCES tabungan (id) ON DELETE CASCADE
+        goals_id INTEGER NOT NULL,
+        value INTEGER NOT NULL,
+        date DATETIME NOT NULL,
+        FOREIGN KEY (goals_id) REFERENCES goals (id) ON DELETE CASCADE
       )
     ''');
   }
@@ -44,24 +50,15 @@ class FundsDatasource {
     });
   }
 
-  Future<List<Funds>> read() async {
+  Future<List<Funds>> read(int id) async {
     final db = await database;
-    final response = await db.query(table, orderBy: "deadline DESC");
+    final response = await db.query(
+      table,
+      where: 'goals_id = ?',
+      whereArgs: [id],
+      orderBy: "date DESC",
+    );
     final data = response.map((e) => Funds.fromJson(e)).toList();
     return data;
-  }
-
-  Future<int> update(Funds value) async {
-    final db = await database;
-    return db.transaction((txn) async {
-      return await txn.update(table, value.toJson(), where: 'id = ?', whereArgs: [value.id]);
-    });
-  }
-
-  Future<int> delete(Funds value) async {
-    final db = await database;
-    return db.transaction((txn) async {
-      return await txn.delete(table, where: 'id = ?', whereArgs: [value.id]);
-    });
   }
 }

@@ -39,7 +39,7 @@ class TransactionForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final fg = ref.watch(transactionFgProvider(type));
-    return COSCupertinoPage(
+    return COSBottomSheetWrapper(
       title: type.label,
       onSave: () async {
         fg.markAllAsTouched();

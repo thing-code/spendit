@@ -18,9 +18,9 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   ExpenseRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<String, int>> create(Expense expense) async {
+  Future<Either<String, int>> create(Expense value) async {
     try {
-      final result = await datasource.create(expense);
+      final result = await datasource.create(value);
       return Right(result);
     } catch (e) {
       return Left(e.toString());
@@ -28,9 +28,9 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   }
 
   @override
-  Future<Either<String, int>> delete(Expense expense) async {
+  Future<Either<String, int>> delete(Expense value) async {
     try {
-      final result = await datasource.delete(expense);
+      final result = await datasource.delete(value);
       return Right(result);
     } catch (e) {
       return Left(e.toString());
@@ -48,9 +48,9 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   }
 
   @override
-  Future<Either<String, int>> update(Expense expense) async {
+  Future<Either<String, int>> update(Expense value) async {
     try {
-      final result = await datasource.update(expense);
+      final result = await datasource.update(value);
       return Right(result);
     } catch (e) {
       return Left(e.toString());
