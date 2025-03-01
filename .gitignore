@@ -52,3 +52,6 @@ p
 
 # Environment Files
 .env
+
+# Upload Keystore
+upload-keystore.jks
