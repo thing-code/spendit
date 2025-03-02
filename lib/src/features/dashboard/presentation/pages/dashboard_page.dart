@@ -51,7 +51,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
             SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Text('Monthly Target', style: kSemiBoldTextStyle.copyWith(fontSize: 18.sp)),
+                child: Text('Monthly Budget', style: kSemiBoldTextStyle.copyWith(fontSize: 18.sp)),
               ),
             ),
             SliverPadding(padding: EdgeInsets.all(16.w), sliver: COSMonthlyBudget()),
