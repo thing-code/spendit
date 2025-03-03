@@ -5,7 +5,7 @@ part 'expense.freezed.dart';
 part 'expense.g.dart';
 
 @freezed
-class Expense with _$Expense {
+abstract class Expense with _$Expense {
    factory Expense({
     int? id,
     required BudgetType type,

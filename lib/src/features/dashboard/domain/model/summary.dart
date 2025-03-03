@@ -4,7 +4,7 @@ part 'summary.freezed.dart';
 part 'summary.g.dart';
 
 @freezed
-class TransactionSummary with _$TransactionSummary {
+abstract class TransactionSummary with _$TransactionSummary {
   const factory TransactionSummary({
     required int month,
     @Default(0) int income,

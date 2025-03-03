@@ -5,7 +5,7 @@ part 'income.freezed.dart';
 part 'income.g.dart';
 
 @freezed
-class Income with _$Income {
+abstract class Income with _$Income {
   const factory Income({
     int? id,
     required IncomeType type,

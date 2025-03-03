@@ -5,7 +5,7 @@ part 'budget.freezed.dart';
 part 'budget.g.dart';
 
 @freezed
-class Budget with _$Budget {
+abstract class Budget with _$Budget {
   const factory Budget({int? id, @Default(0) int value, @Default(0) int target, required BudgetType type}) =
       _Budget;
 

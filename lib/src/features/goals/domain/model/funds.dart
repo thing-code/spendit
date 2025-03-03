@@ -4,7 +4,7 @@ part 'funds.g.dart';
 part 'funds.freezed.dart';
 
 @freezed
-class Funds with _$Funds {
+abstract class Funds with _$Funds {
   const factory Funds({
     int? id,
     required int value,

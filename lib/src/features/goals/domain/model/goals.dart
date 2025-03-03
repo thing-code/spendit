@@ -4,7 +4,7 @@ part 'goals.freezed.dart';
 part 'goals.g.dart';
 
 @freezed
-class Goals with _$Goals {
+abstract class Goals with _$Goals {
   const factory Goals({
     int? id,
     required String name,
