@@ -13,7 +13,12 @@ class COSNavigation extends ConsumerWidget {
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
           indicatorColor: Colors.transparent,
-          iconTheme: WidgetStatePropertyAll(IconThemeData(size: 28)),
+          iconTheme: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return IconThemeData(size: 28.sp, color: context.colorScheme.primary);
+            }
+            return IconThemeData(color: Colors.grey.shade400, size: 28.sp);
+          }),
           backgroundColor: context.colorScheme.surface,
         ),
         child: NavigationBar(
@@ -22,24 +27,24 @@ class COSNavigation extends ConsumerWidget {
           onDestinationSelected: (value) => onDestinationSelected(value, context),
           destinations: [
             NavigationDestination(
-              icon: Icon(SolarIconsOutline.compass, color: Colors.grey.shade400),
-              selectedIcon: Icon(SolarIconsBold.compass, color: context.colorScheme.primary),
+              icon: Icon(SolarIconsOutline.compass),
+              selectedIcon: Icon(SolarIconsBold.compass),
               label: 'Dashboard',
             ),
             NavigationDestination(
-              icon: Icon(SolarIconsOutline.billList, color: Colors.grey.shade400),
-              selectedIcon: Icon(SolarIconsBold.billList, color: context.colorScheme.primary),
+              icon: Icon(SolarIconsOutline.billList),
+              selectedIcon: Icon(SolarIconsBold.billList),
               label: 'Transactions',
             ),
             COSAddTransactionButton(),
             NavigationDestination(
-              icon: Icon(SolarIconsOutline.radar2, color: Colors.grey.shade400),
-              selectedIcon: Icon(SolarIconsBold.radar2, color: context.colorScheme.primary),
+              icon: Icon(SolarIconsOutline.radar2),
+              selectedIcon: Icon(SolarIconsBold.radar2),
               label: 'Goals',
             ),
             NavigationDestination(
-              icon: Icon(SolarIconsOutline.walletMoney, color: Colors.grey.shade400),
-              selectedIcon: Icon(SolarIconsBold.walletMoney, color: context.colorScheme.primary),
+              icon: Icon(SolarIconsOutline.walletMoney),
+              selectedIcon: Icon(SolarIconsBold.walletMoney),
               label: 'Saving',
             ),
           ],
