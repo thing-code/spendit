@@ -1,3 +1,5 @@
+import 'package:spendit/src/features/dashboard/presentation/providers/balance.dart';
+
 import '../../../../common/common.dart';
 import '../providers/budget.dart';
 
@@ -20,11 +22,19 @@ class BudgetForm extends ConsumerWidget {
       title: 'Budget Target',
       onSave: () async {
         final control = fg.control('budget') as FormControl<String>;
-        if (control.value == null || control.value == '') return;
-        context.pop();
-        await ref
-            .read(budgetStateProvider.notifier)
-            .edit(budget.copyWith(target: control.value!.parseThousand));
+        control.markAsTouched();
+        if (fg.valid) {
+          final balance = await ref.read(balanceStateProvider.future);
+          if (context.mounted) {
+            if (balance - control.value!.parseThousand < 0) {
+              COSSnackBar.error(context, message: 'Budget exceeds balance.');
+            }
+            context.pop();
+            await ref
+                .read(budgetStateProvider.notifier)
+                .edit(budget.copyWith(target: control.value!.parseThousand));
+          }
+        }
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
