@@ -13,8 +13,9 @@ class COSTransactionSummary extends ConsumerWidget {
     return Card(
       color: context.colorScheme.primary,
       surfaceTintColor: context.colorScheme.primary,
+      margin: EdgeInsets.all(16.w),
       child: Padding(
-        padding: EdgeInsets.all(20.w),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -44,8 +45,8 @@ class COSTransactionSummary extends ConsumerWidget {
             Wrap(
               spacing: 8,
               children: [
-                COSLegendWidget(color: context.colorScheme.primaryContainer, title: 'Income'),
-                COSLegendWidget(color: context.colorScheme.secondaryContainer, title: 'Expense'),
+                COSLegendWidget(color: TransactionType.income.cDark, title: 'Income'),
+                COSLegendWidget(color: TransactionType.expense.cDark, title: 'Expense'),
               ],
             ),
             16.verticalSpace,
@@ -101,13 +102,13 @@ class COSTransactionSummary extends ConsumerWidget {
                         barRods: [
                           BarChartRodData(
                             toY: e.income.toDouble(),
-                            color: context.colorScheme.primaryContainer,
+                            color: TransactionType.income.cDark,
                             width: 10,
                             borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
                           ),
                           BarChartRodData(
                             toY: -e.expense.toDouble(),
-                            color: context.colorScheme.secondaryContainer,
+                            color: TransactionType.expense.cDark,
                             width: 10,
                             borderRadius: BorderRadius.vertical(bottom: Radius.circular(12.r)),
                           ),

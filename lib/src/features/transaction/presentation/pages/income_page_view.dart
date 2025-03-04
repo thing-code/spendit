@@ -33,7 +33,7 @@ class IncomePageView extends ConsumerWidget {
                   if (i > 0) 8.verticalSpace,
                   Text(
                     income.date.getDate,
-                    style: kSemiBoldTextStyle.copyWith(
+                    style: kMediumTextStyle.copyWith(
                       color: context.colorScheme.primary.withAlpha(100),
                     ),
                   ),
@@ -61,10 +61,8 @@ class COSIncomeListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 2,
-      shadowColor: context.colorScheme.primary,
-      borderRadius: BorderRadius.circular(12.r),
+    return Card(
+      margin: EdgeInsets.zero,
       child: COSListTile.transaction(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,10 +79,7 @@ class COSIncomeListTile extends StatelessWidget {
         ),
         subtitle: Text(
           income.type.label,
-          style: kRegularTextStyle.copyWith(
-            fontSize: 14.sp,
-            color: context.colorScheme.primary.withAlpha(100),
-          ),
+          style: kRegularTextStyle.copyWith(fontSize: 14.sp, color: income.type.color),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

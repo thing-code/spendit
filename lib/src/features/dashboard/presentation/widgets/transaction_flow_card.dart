@@ -1,4 +1,3 @@
-
 import '../../../../common/common.dart';
 
 class TransactionFlowCard extends StatelessWidget {
@@ -36,13 +35,16 @@ class TransactionFlowCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: kMediumTextStyle.copyWith(
-                color: context.colorScheme.primary.withValues(alpha: .6),
+              style: kRegularTextStyle.copyWith(
+                color: context.colorScheme.onSurface.withValues(alpha: .6),
               ),
             ),
             Text(
               v,
-              style: kBoldTextStyle.copyWith(fontSize: 14.sp),
+              style: kBoldTextStyle.copyWith(
+                fontSize: 14.sp,
+                color: context.isDarkMode ? type.cDark : type.cLight,
+              ),
               overflow: TextOverflow.ellipsis,
             ),
           ],

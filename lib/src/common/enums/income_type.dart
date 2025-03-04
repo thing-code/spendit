@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:solar_icons/solar_icons.dart';
 
 enum IncomeType {
-  salary('Salary', SolarIconsOutline.banknote2, Colors.blue),
-  investment('Invesment', SolarIconsOutline.graphUp, Colors.green),
+  salary('Salary', SolarIconsOutline.banknote2, Colors.green),
+  investment('Invesment', SolarIconsOutline.graphUp, Colors.blueAccent),
   bonus('Bonus', SolarIconsOutline.dollar, Colors.amber),
   freelance('Freelance', SolarIconsOutline.billList, Colors.red);
 

@@ -39,12 +39,10 @@ class _SavingListData extends StatelessWidget {
 
             if (i == 0 || !isSameMonth) {
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (i > 0) 8.verticalSpace,
-                  Text(
-                    saving.date.getMonthAndYear,
-                    style: kMediumTextStyle.copyWith(fontSize: 16.sp),
-                  ),
+                  Text(saving.date.getMonthAndYear, style: kRegularTextStyle),
                   8.verticalSpace,
                   SavingItem(saving: saving),
                 ],

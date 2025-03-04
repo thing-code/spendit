@@ -19,7 +19,7 @@ class COSDateTimeInput extends COSTextInput<DateTime> {
          onTap: (ctrl, ctx) async {
            final date = await showModalBottomSheet<DateTime>(
              context: ctx,
-             constraints: BoxConstraints(maxHeight: .4.sh),
+             constraints: BoxConstraints(maxHeight: .42.sh),
              builder: (context) => COSDateTimePicker(maxDate: maxDate),
            );
            ctrl.updateValue(date);
@@ -36,7 +36,7 @@ class COSDateTimePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     ValueNotifier<DateTime?> date = ValueNotifier(now);
     return Container(
-      constraints: BoxConstraints(maxHeight: .4.sh, maxWidth: 1.sw),
+      constraints: BoxConstraints(maxHeight: .42.sh, maxWidth: 1.sw),
       padding: EdgeInsets.all(20.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

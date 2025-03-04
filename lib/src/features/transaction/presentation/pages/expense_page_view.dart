@@ -61,10 +61,8 @@ class COSExpenseListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 2,
-      shadowColor: context.colorScheme.primary,
-      borderRadius: BorderRadius.circular(12.r),
+    return Card(
+      margin: EdgeInsets.zero,
       child: COSListTile.transaction(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

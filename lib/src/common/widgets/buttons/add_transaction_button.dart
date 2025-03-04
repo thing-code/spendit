@@ -106,53 +106,31 @@ class AddTransactionDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           spacing: 8.h,
           children: [
-            _button(
-              'Income',
-              SolarIconsOutline.archiveDownMinimalistic,
-              context.colorScheme.primaryContainer,
-              context.colorScheme.primary,
-              onTap: () {
-                context.pop(TransactionType.income);
-              },
-            ),
-            _button(
-              'Expense',
-              SolarIconsOutline.archiveUpMinimalistic,
-              context.colorScheme.secondaryContainer,
-              context.colorScheme.secondary,
-              onTap: () {
-                context.pop(TransactionType.expense);
-              },
-            ),
+            _button(TransactionType.income, context),
+            _button(TransactionType.expense, context),
           ],
         ),
       ),
     );
   }
 
-  Expanded _button(
-    String title,
-    IconData icon,
-    Color backgroundColor,
-    Color foregroundColor, {
-    VoidCallback? onTap,
-  }) {
+  Expanded _button(TransactionType type, BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTap: onTap,
+        onTap: () => context.pop(type),
         child: Container(
           padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: backgroundColor,
+            color: type.cDark,
             borderRadius: BorderRadius.circular(12.r),
-            border: Border.all(color: foregroundColor),
+            border: Border.all(color: type.cLight),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             spacing: 4.h,
             children: [
-              Icon(icon, color: foregroundColor),
-              Text(title, style: kMediumTextStyle.copyWith(color: foregroundColor)),
+              Icon(type.icon, color: type.cLight),
+              Text(type.label, style: kMediumTextStyle.copyWith(color: type.cLight)),
             ],
           ),
         ),

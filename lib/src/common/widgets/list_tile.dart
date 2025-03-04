@@ -6,7 +6,8 @@ class COSListTile extends StatelessWidget {
     this.selected = false,
     this.leading,
     this.subtitle,
-    this.color, this.borderRadius,
+    this.color,
+    this.borderRadius,
   });
 
   final Widget title;
@@ -42,15 +43,25 @@ class COSListTile extends StatelessWidget {
 
   factory COSListTile.transaction({
     required Widget title,
-    IconData? icon,
+    required IconData icon,
     Widget? subtitle,
     Color? iconColor,
   }) => COSListTile._(
     title: title,
-    leading: icon != null ? Icon(icon, size: 28.sp, color: iconColor) : null,
+    leading: Container(
+      padding: EdgeInsets.all(8.w),
+      decoration: BoxDecoration(
+        color: iconColor?.withValues(alpha: .2),
+        borderRadius: BorderRadius.circular(8.r),
+      ),
+      child: Icon(icon, size: 28.sp, color: iconColor),
+    ),
     selected: false,
     color: (c) => c.colorScheme.onPrimary,
     subtitle: subtitle,
     borderRadius: 12.r,
   );
+
+  factory COSListTile.saving({required Widget title, required Widget subtitle}) =>
+      COSListTile._(title: title, subtitle: subtitle);
 }

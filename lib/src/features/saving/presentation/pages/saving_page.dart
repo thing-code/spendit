@@ -9,14 +9,8 @@ class SavingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: COSAppBar(title: 'Savings', centerTitle: true),
-      body: Column(
-        children: [
-          SavingHeader(),
-          SizedBox(width: .6.sw, height: 1, child: Divider(color: context.colorScheme.primary)),
-          Expanded(child: SavingList()),
-        ],
-      ),
+      appBar: COSAppBar(title: 'Saving', centerTitle: true),
+      body: Column(children: [SavingHeader(), Expanded(child: SavingList())]),
     );
   }
 }

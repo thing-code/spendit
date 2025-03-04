@@ -51,8 +51,8 @@ class SavingForm extends ConsumerWidget {
             children: [
               COSNumberInput(
                 control: fg.amount,
-                label: 'Amount',
-                hint: 'Saving amount',
+                label: 'Saving Amount',
+                hint: 'Amount',
                 prefixIcon: Icon(SolarIconsOutline.walletMoney),
                 validationMessages: {
                   ValidationMessage.required: (_) => "Saving amount is required.",

@@ -18,56 +18,84 @@ class BudgetCard extends StatelessWidget {
           pageBuilder: (dctx) => BudgetForm(budget: budget, dctx: dctx),
         );
       },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: [0.3, 0.96],
-            colors: [context.colorScheme.primaryContainer, context.colorScheme.primary],
-          ),
-        ),
-        child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
-          color: context.colorScheme.onPrimary,
-          margin: EdgeInsets.all(2.w),
-          child: Padding(
-            padding: EdgeInsets.all(16.w),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+        color: context.colorScheme.onPrimary,
+        margin: EdgeInsets.all(2.w),
+        child: Padding(
+          padding: EdgeInsets.all(12.w),
+          child: IntrinsicHeight(
+            child: Row(
+              spacing: 12.w,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Icon(budget.type.icon, color: budget.type.color, size: 28.sp),
-                Column(
-                  spacing: 2.h,
-                  children: [
-                    Text(budget.type.label, style: kSemiBoldTextStyle.copyWith(fontSize: 16.sp)),
-                    if (budget.target > 0)
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  decoration: BoxDecoration(
+                    color: budget.type.color.withValues(alpha: .2),
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Icon(budget.type.icon, color: budget.type.color, size: 28.sp),
+                ),
+                Expanded(
+                  child: Column(
+                    spacing: 2.h,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(budget.type.label, style: kSemiBoldTextStyle.copyWith(fontSize: 16.sp)),
                       Text(
-                        budget.target.currency,
+                        budget.target > 0 ? budget.target.currency : '(Not Set)',
                         style: kMediumTextStyle.copyWith(fontSize: 14.sp),
                       ),
-                  ],
-                ),
-
-                Padding(
-                  padding: EdgeInsets.only(top: 4.h),
-                  child: Column(
-                    spacing: 4.h,
-                    children: [
-                      COSLinearProgress(value: percentage, color: budget.type.color),
-                      Center(
-                        child: Text(
-                          '${(percentage * 100).round()}% ${budget.value > 0 ? '(${budget.value.compactCurrency})' : ''}',
-                          style: kMediumTextStyle.copyWith(
-                            fontSize: 12.sp,
-                            color: budget.type.color,
-                          ),
-                        ),
+                      4.verticalSpace,
+                      COSLinearProgress(value: percentage, color: budget.type.color, height: 10),
+                      2.verticalSpace,
+                      Text(
+                        '${(percentage * 100).round()}% ${budget.value > 0 ? '(${budget.value.currency})' : ''}',
+                        style: kMediumTextStyle.copyWith(fontSize: 12.sp, color: budget.type.color),
                       ),
                     ],
                   ),
                 ),
+                // Column(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: [
+                //     Icon(budget.type.icon, color: budget.type.color, size: 28.sp),
+                //     Column(
+                //       spacing: 2.h,
+                //       children: [
+                //         Text(
+                //           budget.type.label,
+                //           style: kSemiBoldTextStyle.copyWith(fontSize: 16.sp),
+                //         ),
+                //         if (budget.target > 0)
+                //           Text(
+                //             budget.target.currency,
+                //             style: kMediumTextStyle.copyWith(fontSize: 14.sp),
+                //           ),
+                //       ],
+                //     ),
+
+                //     Padding(
+                //       padding: EdgeInsets.only(top: 4.h),
+                //       child: Column(
+                //         spacing: 4.h,
+                //         children: [
+                //           COSLinearProgress(value: percentage, color: budget.type.color),
+                //           Center(
+                //             child: Text(
+                //               '${(percentage * 100).round()}% ${budget.value > 0 ? '(${budget.value.compactCurrency})' : ''}',
+                //               style: kMediumTextStyle.copyWith(
+                //                 fontSize: 12.sp,
+                //                 color: budget.type.color,
+                //               ),
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),

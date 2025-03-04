@@ -9,14 +9,14 @@ class GoalsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDeadline = goals.deadline.compareTo(now) > -7;
+
     return Card(
       margin: EdgeInsets.zero,
-      shadowColor: context.colorScheme.primary,
-      elevation: 2,
       child: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(
-          spacing: 16.h,
+          spacing: 8.h,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -25,14 +25,18 @@ class GoalsCard extends StatelessWidget {
                 Text(
                   'Due to ${goals.deadline.getCompact}',
                   style: kRegularTextStyle.copyWith(
-                    color: context.colorScheme.primary.withAlpha(200),
+                    color:
+                        isDeadline
+                            ? context.colorScheme.error
+                            : context.colorScheme.primary.withAlpha(200),
                   ),
                 ),
               ],
             ),
             Column(
-              spacing: 6.h,
+              spacing: 4.h,
               children: [
+                4.verticalSpace,
                 COSLinearProgress(
                   value: goals.progress == 0 ? 0 : goals.progress / goals.target,
                   height: 16,
@@ -56,6 +60,7 @@ class GoalsCard extends StatelessWidget {
                     style: FilledButton.styleFrom(
                       backgroundColor: context.colorScheme.primaryContainer,
                       foregroundColor: context.colorScheme.primary,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
                     ),
                     onPressed: onAddFunds,
                     label: Text('Add Funds'),
@@ -65,6 +70,9 @@ class GoalsCard extends StatelessWidget {
                 Expanded(
                   child: FilledButton.icon(
                     onPressed: onEdit,
+                    style: FilledButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+                    ),
                     label: Text('Edit Goal'),
                     icon: Icon(SolarIconsOutline.penNewSquare),
                   ),

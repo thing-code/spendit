@@ -1,4 +1,3 @@
-
 import '../../../../common/common.dart';
 import '../providers/budget.dart';
 import 'budget_card.dart';
@@ -25,14 +24,9 @@ class _MonthlyBudgetData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverGrid.builder(
+    return SliverList.separated(
       itemCount: budgets.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-        childAspectRatio: 1,
-      ),
+      separatorBuilder: (context, index) => 8.verticalSpace,
       itemBuilder: (context, index) {
         final budget = budgets[index];
         return BudgetCard(budget: budget);
@@ -50,14 +44,9 @@ class _MonthlyBudgetLoading extends StatelessWidget {
       BudgetType.values.length,
       (index) => Budget(type: BudgetType.values[index]),
     );
-    return SliverGrid.builder(
+    return SliverList.separated(
       itemCount: budgets.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-        childAspectRatio: 1,
-      ),
+      separatorBuilder: (context, index) => 8.verticalSpace,
       itemBuilder: (context, index) {
         final budget = budgets[index];
         return BudgetCard(budget: budget).skeleton();

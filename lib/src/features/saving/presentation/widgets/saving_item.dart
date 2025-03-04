@@ -7,14 +7,15 @@ class SavingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: context.colorScheme.primary),
-        borderRadius: BorderRadius.circular(12.r),
+    return Card(
+      margin: EdgeInsets.zero,
+      child: COSListTile.saving(
+        title: Text(saving.value.currency, style: kMediumTextStyle.copyWith(fontSize: 18.sp)),
+        subtitle: Text(
+          saving.date.getDateTime,
+          style: kLightTextStyle.copyWith(color: context.colorScheme.primary.withValues(alpha: .5)),
+        ),
       ),
-      contentPadding: EdgeInsets.symmetric(horizontal: 20.w),
-      title: Text(saving.value.currency, style: kMediumTextStyle.copyWith(fontSize: 16.sp)),
-      subtitle: Text(saving.date.getDateTime),
     );
   }
 }
