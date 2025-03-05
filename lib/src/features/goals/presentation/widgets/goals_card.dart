@@ -9,10 +9,12 @@ class GoalsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDeadline = goals.deadline.compareTo(now) > -7;
+    final isDeadline = goals.daysToGo > -3;
+    final isCompleted = goals.target == goals.progress && goals.target > 0;
 
     return Card(
       margin: EdgeInsets.zero,
+      color: isCompleted ? Colors.grey.shade200 : null,
       child: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -23,7 +25,7 @@ class GoalsCard extends StatelessWidget {
               children: [
                 Text(goals.name, style: kSemiBoldTextStyle.copyWith(fontSize: 20.sp)),
                 Text(
-                  'Due to ${goals.deadline.getCompact}',
+                  '${goals.daysToGo} days to go',
                   style: kRegularTextStyle.copyWith(
                     color:
                         isDeadline
@@ -52,33 +54,50 @@ class GoalsCard extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              spacing: 12.w,
-              children: [
-                Expanded(
-                  child: FilledButton.tonalIcon(
-                    style: FilledButton.styleFrom(
-                      backgroundColor: context.colorScheme.primaryContainer,
-                      foregroundColor: context.colorScheme.primary,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
-                    ),
-                    onPressed: onAddFunds,
-                    label: Text('Add Funds'),
-                    icon: Icon(Icons.add, color: context.colorScheme.primary),
-                  ),
+            if (isCompleted)
+              Container(
+                padding: EdgeInsets.all(8.w),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.r),
+                  color: Colors.green.shade100,
                 ),
-                Expanded(
-                  child: FilledButton.icon(
-                    onPressed: onEdit,
-                    style: FilledButton.styleFrom(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
-                    ),
-                    label: Text('Edit Goal'),
-                    icon: Icon(SolarIconsOutline.penNewSquare),
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 4.w,
+                  children: [
+                    Icon(SolarIconsBold.verifiedCheck, color: Colors.green, size: 18.sp),
+                    Text('Completed', style: kMediumTextStyle.copyWith(color: Colors.green)),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            if (!isCompleted)
+              Row(
+                spacing: 12.w,
+                children: [
+                  Expanded(
+                    child: FilledButton.tonalIcon(
+                      style: FilledButton.styleFrom(
+                        backgroundColor: context.colorScheme.primaryContainer,
+                        foregroundColor: context.colorScheme.primary,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+                      ),
+                      onPressed: onAddFunds,
+                      label: Text('Add Funds'),
+                      icon: Icon(Icons.add, color: context.colorScheme.primary),
+                    ),
+                  ),
+                  Expanded(
+                    child: FilledButton.icon(
+                      onPressed: onEdit,
+                      style: FilledButton.styleFrom(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+                      ),
+                      label: Text('Edit Goal'),
+                      icon: Icon(SolarIconsOutline.penNewSquare),
+                    ),
+                  ),
+                ],
+              ),
           ],
         ),
       ),
