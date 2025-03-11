@@ -27,7 +27,7 @@ class MainApp extends ConsumerWidget {
           scaffoldMessengerKey: scaffoldMsgKey,
           title: 'Spend It : Atur Pengeluaranmu',
           theme: COSTheme.light,
-          darkTheme: COSTheme.dark,
+          // darkTheme: COSTheme.dark,
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
