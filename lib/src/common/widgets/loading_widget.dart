@@ -1,37 +1,16 @@
 import 'package:spendit/src/common/common.dart';
 
-class COSLoading extends StatelessWidget {
-  const COSLoading({super.key});
+class LoadingWidget extends StatelessWidget {
+  const LoadingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: CircularProgressIndicator.adaptive(strokeCap: StrokeCap.round),
-    );
-  }
-}
-
-class LoadingOverlay extends ConsumerWidget {
-  const LoadingOverlay({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = ref.watch(loadingProvider);
-    return isLoading ? _loading(context) : Container();
-  }
-
-  Widget _loading(BuildContext ctx) {
-    return Scaffold(
-      backgroundColor: Colors.black45,
-      body: LoadingContainer(),
-    );
+    return Center(child: CircularProgressIndicator.adaptive(strokeCap: StrokeCap.round));
   }
 }
 
 class LoadingContainer extends StatelessWidget {
-  const LoadingContainer({
-    super.key,
-  });
+  const LoadingContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +31,25 @@ class LoadingContainer extends StatelessWidget {
             ),
           ],
         ),
-        child: COSLoading(),
+        child: LoadingWidget(),
       ),
     );
   }
+}
+
+class COSLoading {
+  static OverlayEntry? _overlay;
+
+  static void show(BuildContext context) {
+    _overlay = OverlayEntry(builder: (context) => LoadingContainer());
+
+    Overlay.of(context).insert(_overlay!);
+  }
+
+  static void hide() {
+    _overlay?.remove();
+    _overlay = null;
+  }
+
+  static bool get isLoading => _overlay != null;
 }

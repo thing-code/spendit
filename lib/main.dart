@@ -34,16 +34,7 @@ class MainApp extends ConsumerWidget {
           ],
           supportedLocales: const [Locale('en', 'US'), Locale('id', 'ID')],
           locale: const Locale('en'),
-          builder: (context, child) {
-            return Stack(
-              children: [
-                child!,
-                // Loading Widget
-                LoadingOverlay(),
-                // Error Connection Widget
-              ],
-            );
-          },
+          builder: (context, child) => child!,
           debugShowCheckedModeBanner: false,
           routerConfig: router,
         );
