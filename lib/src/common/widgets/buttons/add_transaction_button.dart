@@ -21,6 +21,8 @@ class COSAddTransactionButton extends ConsumerWidget {
         children: [
           FloatingActionButton(
             onPressed: () async {
+              createTransaction(context);
+              return;
               showOptions(context).then((type) async {
                 if (type == null) return;
                 if (context.mounted) {
@@ -46,6 +48,33 @@ class COSAddTransactionButton extends ConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> createTransaction(BuildContext context) async {
+    await showCupertinoSheet(
+      context: context,
+      pageBuilder:
+          (context) => Scaffold(
+            body: Padding(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(width: 48.sp),
+                      Text('Create Transaction', style: kMediumTextStyle.copyWith(fontSize: 16)),
+                      IconButton(
+                        onPressed: () => context.pop(),
+                        icon: Icon(Icons.close, size: 24.sp),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
     );
   }
 
