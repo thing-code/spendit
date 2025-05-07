@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      flutter_gen_runner:
+        options:
+          line_length: 100
+        parse_metadata: true
