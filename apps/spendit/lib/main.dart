@@ -9,18 +9,17 @@ import 'package:spendit_core/spendit_core.dart';
 import 'package:spendit_remake/src/gen/fonts.gen.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  /// Untuk mengatur status bar menjadi transparan
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-  );
-
-  /// Untuk mengatur warna pembatas pada setiap widget saat mode debug
-  // debugRepaintRainbowEnabled = true;
-
   runZonedGuarded(
     () async {
+      WidgetsFlutterBinding.ensureInitialized();
+
+      /// Untuk mengatur status bar menjadi transparan
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+      );
+
+      /// Untuk mengatur warna pembatas pada setiap widget saat mode debug
+      // debugRepaintRainbowEnabled = true;
       // Init Sentry
       await SentryFlutter.init((option) {
         option.dsn = const String.fromEnvironment('SENTRY_DSN');
