@@ -1,4 +1,4 @@
-package app.strdy.spendit.spendit_remake
+package app.strdy.spendit
 
 import io.flutter.embedding.android.FlutterActivity
 

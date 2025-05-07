@@ -34,38 +34,62 @@ class MainApp extends StatelessWidget {
       locale: const Locale('en'),
       home: Scaffold(
         appBar: AppBar(
-          title: Container(
-            padding: const EdgeInsets.all(12),
-            width: double.infinity,
-            decoration: ShapeDecoration(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(1000),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  SpendItColors.primaryColor.shade600,
+                  SpendItColors.primaryColor.shade400,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
             ),
-            child: const Text('Spend It'),
-          ),
-          forceMaterialTransparency: true,
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(16),
-            child: Container(),
           ),
         ),
         body: ListView(
-          children: List.generate(
-            100,
-            (index) => Container(
-              height: 100,
-              color:
-                  index.isEven
-                      ? SpendItColors.primaryColor.shade300
-                      : SpendItColors.primaryColor.shade200,
-              child: Center(child: Text('Item $index')),
+          padding: EdgeInsets.all(16),
+          children: [
+            Row(
+              spacing: 16,
+              children: [
+                Flexible(
+                  child: TextField(
+                    style: TextStyle(
+                      color: SpendItColors.primaryColor.shade900,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: TextField(
+                    style: TextStyle(
+                      color: SpendItColors.primaryColor.shade900,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
+            Row(
+              spacing: 16,
+              children: [
+                Expanded(
+                  child: SpendItButton.primary(
+                    text: 'Button',
+                    onPressed: () {},
+                  ),
+                ),
+                Expanded(
+                  child: SpendItButton.secondary(
+                    text: 'Button',
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+            ),
+            SpendItButton.text(text: 'Button', onPressed: () {}),
+          ],
         ),
       ),
     );

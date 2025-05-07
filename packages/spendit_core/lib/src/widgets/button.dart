@@ -5,10 +5,14 @@ class SpendItButton extends StatelessWidget {
 
   final Widget Function(BuildContext context) builder;
 
-  factory SpendItButton.primary({Key? key, required String text, required VoidCallback onPressed}) {
+  factory SpendItButton.primary({
+    Key? key,
+    required String text,
+    required VoidCallback onPressed,
+  }) {
     return SpendItButton._(
       key: key,
-      builder: (context) => ElevatedButton(onPressed: () {}, child: Text(text)),
+      builder: (context) => FilledButton(onPressed: () {}, child: Text(text)),
     );
   }
 
@@ -23,7 +27,11 @@ class SpendItButton extends StatelessWidget {
     );
   }
 
-  factory SpendItButton.text({Key? key, required String text, required VoidCallback onPressed}) {
+  factory SpendItButton.text({
+    Key? key,
+    required String text,
+    required VoidCallback onPressed,
+  }) {
     return SpendItButton._(
       key: key,
       builder: (context) => TextButton(onPressed: () {}, child: Text(text)),

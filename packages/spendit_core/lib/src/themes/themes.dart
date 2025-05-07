@@ -17,18 +17,18 @@ abstract final class SpendItColors {
     950: Color(0xFF232e3f),
   });
 
-  static const MaterialColor secondaryColor = MaterialColor(0xFFcf9421, {
-    50: Color(0xFFfcf8ea),
-    100: Color(0xFFf7f0ca),
-    200: Color(0xFFf1dd97),
-    300: Color(0xFFe9c45b),
-    400: Color(0xFFe0ac2f),
-    500: Color(0xFFcf9421),
-    600: Color(0xFFb4731a),
-    700: Color(0xFF905418),
-    800: Color(0xFF78431b),
-    900: Color(0xFF66391d),
-    950: Color(0xFF3b1d0d),
+  static const MaterialColor secondaryColor = MaterialColor(0xFFffaa00, {
+    50: Color(0xFFfffdea),
+    100: Color(0xFFfff6c5),
+    200: Color(0xFFffee85),
+    300: Color(0xFFffde46),
+    400: Color(0xFFffcc1b),
+    500: Color(0xFFffaa00),
+    600: Color(0xFFe28100),
+    700: Color(0xFFbb5902),
+    800: Color(0xFF984508),
+    900: Color(0xFF7c380b),
+    950: Color(0xFF481c00),
   });
 
   static const Color errorColor = Color(0xFFFF4D58);
@@ -57,10 +57,45 @@ abstract final class SpendItTheme {
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
       filled: true,
       fillColor: SpendItColors.primaryColor.shade50,
-      
+      border: OutlineInputBorder(
+        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(1000),
+      ),
+    ),
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        fixedSize: Size.fromHeight(48),
+        textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+        backgroundColor: SpendItColors.primaryColor,
+        foregroundColor: SpendItColors.primaryColor.shade50,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(1000),
+        ),
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        fixedSize: Size.fromHeight(48),
+        textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(1000),
+        ),
+        side: BorderSide(color: Colors.white, width: 1.6),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        fixedSize: Size.fromHeight(48),
+        textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+        foregroundColor: SpendItColors.primaryColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(1000),
+        ),
+      ),
     ),
   );
 }
