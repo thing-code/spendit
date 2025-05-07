@@ -1,9 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:spendit_core/spendit_core.dart';
+import 'package:spendit_remake/src/gen/fonts.gen.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Untuk mengatur status bar menjadi transparan
@@ -13,7 +18,19 @@ void main() {
 
   /// Untuk mengatur warna pembatas pada setiap widget saat mode debug
   // debugRepaintRainbowEnabled = true;
-  runApp(const MainApp());
+
+  runZonedGuarded(
+    () async {
+      // Init Sentry
+      await SentryFlutter.init((option) {
+        option.dsn = const String.fromEnvironment('SENTRY_DSN');
+      });
+      runApp(ProviderScope(child: const MainApp()));
+    },
+    (error, stack) async {
+      await Sentry.captureException(error, stackTrace: stack);
+    },
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -24,7 +41,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Spend It : Manage your spending',
-      theme: SpendItTheme.normal(fontFamily: 'Poppins'),
+      theme: SpendItTheme.normal(fontFamily: FontFamily.poppins),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
