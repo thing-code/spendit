@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:spendit_core/spendit_core.dart';
+
+import 'styles.dart';
+
+export 'styles.dart';
 
 abstract final class SpendItColors {
   const SpendItColors._();
