@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:spendit_core/spendit_core.dart';
 import 'package:spendit_remake/src/gen/fonts.gen.dart';
-import 'package:spendit_remake/src/log/talker_logger.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -50,7 +50,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Spend It : Manage your spending',
-      theme: SpendItTheme.normal(fontFamily: FontFamily.poppins),
+      theme: SpendItTheme.light(fontFamily: FontFamily.poppins),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -64,19 +64,34 @@ class MainApp extends StatelessWidget {
         return child!;
       },
       home: Scaffold(
+        backgroundColor: Colors.white,
+        persistentFooterButtons: [
+          IconButton.filled(
+            onPressed: () {},
+            icon: Icon(Icons.notifications_none),
+          ),
+          IconButton.filled(
+            onPressed: () {},
+            icon: Icon(Icons.notifications_none),
+          ),
+        ],
         appBar: AppBar(
-          title: Text('Spend It Remake', style: TextStyle(color: Colors.white)),
+          title: Text('Spend It Remake'),
           centerTitle: true,
-          flexibleSpace: FlexibleSpaceBar(
-            background: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.blue, Colors.purple],
-                  stops: [.2, 1],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
+          actions: [
+            IconButton.filled(
+              onPressed: () {},
+              icon: Icon(Icons.notifications_none),
+            ),
+          ],
+          leading: IconButton.filledTonal(
+            onPressed: () {},
+            icon: Icon(Icons.arrow_back_ios_new),
+          ),
+          flexibleSpace: ClipRRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(color: Colors.transparent),
             ),
           ),
         ),
@@ -94,6 +109,17 @@ class MainApp extends StatelessWidget {
                 ),
               ),
               SpendItButton.primary(text: 'Submit', onPressed: () {}),
+              Expanded(
+                child: ListView(
+                  children: List.generate(
+                    50,
+                    (index) => ListTile(
+                      title: Text('${index + 1}', textAlign: TextAlign.center),
+                      tileColor: SpendItColors.warningColor,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
