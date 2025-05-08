@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:spendit_core/spendit_core.dart';
 import 'package:spendit_remake/src/gen/fonts.gen.dart';
+import 'package:spendit_remake/src/log/talker_logger.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -20,14 +22,21 @@ Future<void> main() async {
 
       /// Untuk mengatur warna pembatas pada setiap widget saat mode debug
       // debugRepaintRainbowEnabled = true;
-      // Init Sentry
-      await SentryFlutter.init((option) {
-        option.dsn = const String.fromEnvironment('SENTRY_DSN');
-      });
+      /// Init Sentry hanya saat release
+      if (kReleaseMode) {
+        await SentryFlutter.init((option) {
+          option.dsn = const String.fromEnvironment('SENTRY_DSN');
+          option.environment = kReleaseMode ? 'production' : 'development';
+        });
+      }
       runApp(ProviderScope(child: const MainApp()));
     },
     (error, stack) async {
-      await Sentry.captureException(error, stackTrace: stack);
+      /// Kirim error ke Sentry hanya saat release
+      if (kReleaseMode) {
+        await Sentry.captureException(error, stackTrace: stack);
+      }
+      logger.error(error);
     },
   );
 }
