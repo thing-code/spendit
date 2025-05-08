@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spendit_core/spendit_core.dart';
 
 abstract final class SpendItColors {
   const SpendItColors._();
@@ -34,7 +35,7 @@ abstract final class SpendItTheme {
       primarySwatch: SpendItColors.primaryColor,
       accentColor: SpendItColors.primaryColor.shade500,
       brightness: Brightness.light,
-      cardColor: SpendItColors.primaryColor.shade200,
+      cardColor: SpendItColors.primaryColor.shade50,
       backgroundColor: SpendItColors.primaryColor.shade50,
       errorColor: SpendItColors.errorColor,
     ),
@@ -45,18 +46,44 @@ abstract final class SpendItTheme {
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       filled: true,
-      fillColor: SpendItColors.primaryColor.shade50,
-      border: OutlineInputBorder(
-        borderSide: BorderSide.none,
+      isDense: true,
+      fillColor: WidgetStateColor.resolveWith((states) {
+        if (states.contains(WidgetState.error)) {
+          return SpendItColors.errorCardColor;
+        }
+        return SpendItColors.primaryColor.shade100;
+      }),
+      labelStyle: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: WidgetStateColor.resolveWith((states) {
+          if (states.contains(WidgetState.error)) {
+            return SpendItColors.errorColor;
+          }
+          return SpendItColors.primaryColor.shade600;
+        }),
+      ),
+      border: SpendItInputBorder(borderRadius: BorderRadius.circular(1000)),
+      focusedBorder: SpendItInputBorder(
+        borderRadius: BorderRadius.circular(1000),
+      ),
+      enabledBorder: SpendItInputBorder(
+        borderRadius: BorderRadius.circular(1000),
+      ),
+      errorBorder: SpendItInputBorder(
+        borderRadius: BorderRadius.circular(1000),
+      ),
+      disabledBorder: SpendItInputBorder(
         borderRadius: BorderRadius.circular(1000),
       ),
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        fixedSize: Size.fromHeight(48),
-        textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+        minimumSize: Size.fromHeight(62),
+        maximumSize: Size(double.infinity, 62),
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         backgroundColor: SpendItColors.primaryColor,
         foregroundColor: SpendItColors.primaryColor.shade50,
         shape: RoundedRectangleBorder(
@@ -66,8 +93,9 @@ abstract final class SpendItTheme {
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        fixedSize: Size.fromHeight(48),
-        textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+        minimumSize: Size.fromHeight(62),
+        maximumSize: Size(double.infinity, 62),
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         foregroundColor: SpendItColors.primaryColor.shade400,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(1000),
@@ -80,8 +108,9 @@ abstract final class SpendItTheme {
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        fixedSize: Size.fromHeight(48),
-        textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+        minimumSize: Size.fromHeight(62),
+        maximumSize: Size(double.infinity, 62),
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         foregroundColor: SpendItColors.primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(1000),

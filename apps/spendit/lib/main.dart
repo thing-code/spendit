@@ -63,7 +63,41 @@ class MainApp extends StatelessWidget {
             (errorDetails) => SpendItErrorWidget(errorDetails: errorDetails);
         return child!;
       },
-      home: Scaffold(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Spend It Remake', style: TextStyle(color: Colors.white)),
+          centerTitle: true,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.blue, Colors.purple],
+                  stops: [.2, 1],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+            ),
+          ),
+        ),
+        body: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            spacing: 20,
+            children: [
+              TextField(
+                cursorHeight: 16,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                decoration: InputDecoration(
+                  labelText: 'Input Nama',
+                  prefixIcon: Icon(Icons.person),
+                ),
+              ),
+              SpendItButton.primary(text: 'Submit', onPressed: () {}),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
