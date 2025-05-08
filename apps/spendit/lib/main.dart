@@ -29,6 +29,7 @@ Future<void> main() async {
           option.environment = kReleaseMode ? 'production' : 'development';
         });
       }
+
       runApp(ProviderScope(child: const MainApp()));
     },
     (error, stack) async {
@@ -57,66 +58,12 @@ class MainApp extends StatelessWidget {
       ],
       supportedLocales: const [Locale('en', 'US'), Locale('id', 'ID')],
       locale: const Locale('en'),
-      home: Scaffold(
-        appBar: AppBar(
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  SpendItColors.primaryColor.shade600,
-                  SpendItColors.primaryColor.shade400,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-          ),
-        ),
-        body: ListView(
-          padding: EdgeInsets.all(16),
-          children: [
-            Row(
-              spacing: 16,
-              children: [
-                Flexible(
-                  child: TextField(
-                    style: TextStyle(
-                      color: SpendItColors.primaryColor.shade900,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-                Flexible(
-                  child: TextField(
-                    style: TextStyle(
-                      color: SpendItColors.primaryColor.shade900,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              spacing: 16,
-              children: [
-                Expanded(
-                  child: SpendItButton.primary(
-                    text: 'Button',
-                    onPressed: () {},
-                  ),
-                ),
-                Expanded(
-                  child: SpendItButton.secondary(
-                    text: 'Button',
-                    onPressed: () {},
-                  ),
-                ),
-              ],
-            ),
-            SpendItButton.text(text: 'Button', onPressed: () {}),
-          ],
-        ),
-      ),
+      builder: (context, child) {
+        ErrorWidget.builder =
+            (errorDetails) => SpendItErrorWidget(errorDetails: errorDetails);
+        return child!;
+      },
+      home: Scaffold(),
     );
   }
 }

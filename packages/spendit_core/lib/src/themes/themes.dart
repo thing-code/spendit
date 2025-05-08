@@ -17,20 +17,8 @@ abstract final class SpendItColors {
     950: Color(0xFF232e3f),
   });
 
-  static const MaterialColor secondaryColor = MaterialColor(0xFFffaa00, {
-    50: Color(0xFFfffdea),
-    100: Color(0xFFfff6c5),
-    200: Color(0xFFffee85),
-    300: Color(0xFFffde46),
-    400: Color(0xFFffcc1b),
-    500: Color(0xFFffaa00),
-    600: Color(0xFFe28100),
-    700: Color(0xFFbb5902),
-    800: Color(0xFF984508),
-    900: Color(0xFF7c380b),
-    950: Color(0xFF481c00),
-  });
-
+  static const Color warningColor = Color(0xFFffaa00);
+  static const Color warningCardColor = Color(0xFFfff6c5);
   static const Color errorColor = Color(0xFFFF4D58);
   static const Color errorCardColor = Color(0xFFFCEDE7);
   static const Color successColor = Color(0xFF40DC60);
@@ -44,7 +32,7 @@ abstract final class SpendItTheme {
     fontFamily: fontFamily,
     colorScheme: ColorScheme.fromSwatch(
       primarySwatch: SpendItColors.primaryColor,
-      accentColor: SpendItColors.secondaryColor,
+      accentColor: SpendItColors.primaryColor.shade500,
       brightness: Brightness.light,
       cardColor: SpendItColors.primaryColor.shade200,
       backgroundColor: SpendItColors.primaryColor.shade50,
@@ -80,11 +68,14 @@ abstract final class SpendItTheme {
       style: OutlinedButton.styleFrom(
         fixedSize: Size.fromHeight(48),
         textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-        foregroundColor: Colors.white,
+        foregroundColor: SpendItColors.primaryColor.shade400,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(1000),
         ),
-        side: BorderSide(color: Colors.white, width: 1.6),
+        side: BorderSide(
+          color: SpendItColors.primaryColor.shade400,
+          width: 1.6,
+        ),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
