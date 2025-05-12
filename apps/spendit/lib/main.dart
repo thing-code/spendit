@@ -63,65 +63,72 @@ class MainApp extends StatelessWidget {
             (errorDetails) => SpendItErrorWidget(errorDetails: errorDetails);
         return child!;
       },
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        persistentFooterButtons: [
+      home: Home(),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text('Spend It Remake'),
+        centerTitle: true,
+        actions: [
           IconButton.filled(
-            onPressed: () {},
-            icon: Icon(Icons.notifications_none),
-          ),
-          IconButton.filled(
-            onPressed: () {},
+            onPressed: () {
+              showDatePicker(
+                context: context,
+                firstDate: DateTime.now(),
+                lastDate: DateTime(2030),
+              );
+            },
             icon: Icon(Icons.notifications_none),
           ),
         ],
-        appBar: AppBar(
-          title: Text('Spend It Remake'),
-          centerTitle: true,
-          actions: [
-            IconButton.filled(
-              onPressed: () {},
-              icon: Icon(Icons.notifications_none),
-            ),
-          ],
-          leading: IconButton.filledTonal(
-            onPressed: () {},
-            icon: Icon(Icons.arrow_back_ios_new),
-          ),
-          flexibleSpace: ClipRRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-              child: Container(color: Colors.transparent),
-            ),
+        leading: IconButton.filledTonal(
+          onPressed: () {},
+          icon: Icon(Icons.arrow_back_ios_new),
+        ),
+        flexibleSpace: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(color: Colors.transparent),
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            spacing: 20,
-            children: [
-              TextField(
-                cursorHeight: 16,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  labelText: 'Input Nama',
-                  prefixIcon: Icon(Icons.person),
-                ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          spacing: 20,
+          children: [
+            TextField(
+              cursorHeight: 16,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              decoration: InputDecoration(
+                labelText: 'Input Nama',
+                prefixIcon: Icon(Icons.person),
               ),
-              SpendItButton.primary(text: 'Submit', onPressed: () {}),
-              Expanded(
-                child: ListView(
-                  children: List.generate(
-                    50,
-                    (index) => ListTile(
+            ),
+            SpendItButton.primary(text: 'Submit', onPressed: () {}),
+            Expanded(
+              child: ListView(
+                children: List.generate(
+                  50,
+                  (index) => Material(
+                    child: ListTile(
                       title: Text('${index + 1}', textAlign: TextAlign.center),
                       tileColor: SpendItColors.warningColor,
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
