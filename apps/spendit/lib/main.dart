@@ -116,16 +116,9 @@ class Home extends StatelessWidget {
             ),
             SpendItButton.primary(text: 'Submit', onPressed: () {}),
             Expanded(
-              child: ListView(
-                children: List.generate(
-                  50,
-                  (index) => Material(
-                    child: ListTile(
-                      title: Text('${index + 1}', textAlign: TextAlign.center),
-                      tileColor: SpendItColors.warningColor,
-                    ),
-                  ),
-                ),
+              child: SpendItCalendar(
+                startDate: DateTime(2025, 4),
+                endDate: DateTime(2025, 12),
               ),
             ),
           ],
