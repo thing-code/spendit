@@ -53,13 +53,6 @@ abstract final class SpendItTheme {
     outlinedButtonTheme: _outlinedButtonTheme(),
     textButtonTheme: _textButtonTheme(),
     appBarTheme: _appBarTheme(),
-    iconButtonTheme: IconButtonThemeData(
-      style: IconButton.styleFrom(
-        padding: EdgeInsets.all(8),
-        iconSize: 20,
-        backgroundColor: SpendItColors.primaryColor.shade200,
-      ),
-    ),
   );
 
   static AppBarTheme _appBarTheme() => AppBarTheme(
@@ -138,7 +131,7 @@ abstract final class SpendItTheme {
           if (states.contains(WidgetState.error)) {
             return SpendItColors.errorColor;
           }
-          return SpendItColors.primaryColor.shade600;
+          return SpendItColors.primaryColor.shade800;
         }),
       ),
       border: SpendItInputBorder(borderRadius: BorderRadius.circular(1000)),

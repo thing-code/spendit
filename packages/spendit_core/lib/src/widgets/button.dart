@@ -12,7 +12,8 @@ class SpendItButton extends StatelessWidget {
   }) {
     return SpendItButton._(
       key: key,
-      builder: (context) => FilledButton(onPressed: () {}, child: Text(text)),
+      builder:
+          (context) => FilledButton(onPressed: onPressed, child: Text(text)),
     );
   }
 
@@ -23,7 +24,8 @@ class SpendItButton extends StatelessWidget {
   }) {
     return SpendItButton._(
       key: key,
-      builder: (context) => OutlinedButton(onPressed: () {}, child: Text(text)),
+      builder:
+          (context) => OutlinedButton(onPressed: onPressed, child: Text(text)),
     );
   }
 
@@ -34,7 +36,7 @@ class SpendItButton extends StatelessWidget {
   }) {
     return SpendItButton._(
       key: key,
-      builder: (context) => TextButton(onPressed: () {}, child: Text(text)),
+      builder: (context) => TextButton(onPressed: onPressed, child: Text(text)),
     );
   }
 
