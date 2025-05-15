@@ -70,8 +70,8 @@ abstract final class SpendItTheme {
   static TextButtonThemeData _textButtonTheme() {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
-        minimumSize: Size.fromHeight(62),
-        maximumSize: Size(double.infinity, 62),
+        minimumSize: Size.fromHeight(48),
+        maximumSize: Size(double.infinity, 56),
         textStyle: SpendItTextStyles.medium.copyWith(fontSize: 16),
         foregroundColor: SpendItColors.primaryColor,
         shape: RoundedRectangleBorder(
@@ -84,8 +84,8 @@ abstract final class SpendItTheme {
   static OutlinedButtonThemeData _outlinedButtonTheme() {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        minimumSize: Size.fromHeight(62),
-        maximumSize: Size(double.infinity, 62),
+        minimumSize: Size.fromHeight(48),
+        maximumSize: Size(double.infinity, 56),
         textStyle: SpendItTextStyles.medium.copyWith(fontSize: 16),
         foregroundColor: SpendItColors.primaryColor.shade400,
         shape: RoundedRectangleBorder(
@@ -102,8 +102,8 @@ abstract final class SpendItTheme {
   static FilledButtonThemeData _filledButtonTheme() {
     return FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        minimumSize: Size.fromHeight(62),
-        maximumSize: Size(double.infinity, 62),
+        minimumSize: Size.fromHeight(48),
+        maximumSize: Size(double.infinity, 56),
         textStyle: SpendItTextStyles.medium.copyWith(fontSize: 16),
         backgroundColor: SpendItColors.primaryColor,
         foregroundColor: SpendItColors.primaryColor.shade50,
