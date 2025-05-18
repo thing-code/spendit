@@ -27,7 +27,6 @@ dependencies:
   reactive_forms: ^17.0.0
   reactive_forms_annotations: ^6.0.0
   riverpod_annotation: ^2.6.1
-  sentry_flutter: ^8.14.2
   skeletonizer: ^1.4.3
   solar_icons: ^0.0.5
   spendit_core: 0.0.1
