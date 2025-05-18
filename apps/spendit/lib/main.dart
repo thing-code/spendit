@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -48,14 +47,14 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Spend It : Manage your spending',
-      theme: SpendItTheme.light(fontFamily: FontFamily.poppins),
+      theme: SpendItTheme.light(fontFamily: FontFamily.geist),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [Locale('en', 'US'), Locale('id', 'ID')],
-      locale: const Locale('en'),
+      locale: const Locale('id'),
       builder: (context, child) {
         ErrorWidget.builder =
             (errorDetails) => SpendItErrorWidget(errorDetails: errorDetails);
@@ -84,32 +83,32 @@ class Home extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: 'Input Nama',
                 prefixIcon: Icon(Icons.person),
-                suffixIcon: Icon(Icons.chevron_right, color: Colors.red),
               ),
             ),
             SpendItButton.primary(
               text: 'Submit',
               onPressed: () {
                 openBottomSheet(
-                  context,  
+                  context,
                   title: 'Pilih Tanggal',
                   showCloseIcon: true,
+                  height: context.deviceHeight * .6,
                   builder: (context) {
                     return Column(
-                      spacing: 16,
                       children: [
-                        SizedBox(
-                          height: context.deviceHeight / 5,
-                          width: context.deviceWidth,
-                          child: CupertinoDatePicker(
-                            initialDateTime: DateTime.now(),
-                            onDateTimeChanged: (value) {},
-                            maximumDate: DateTime.now(),
-                            mode: CupertinoDatePickerMode.date,
-                            dateOrder: DatePickerDateOrder.dmy,
+                        CalendarDatePicker(
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2021),
+                          lastDate: DateTime(2030),
+                          onDateChanged: (value) {},
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: SpendItButton.primary(
+                            text: 'Pilih',
+                            onPressed: () {},
                           ),
                         ),
-                        SpendItButton.primary(text: 'Pilih', onPressed: () {}),
                       ],
                     );
                   },

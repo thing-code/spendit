@@ -7,25 +7,60 @@ export 'styles.dart';
 abstract final class SpendItColors {
   const SpendItColors._();
 
-  static const MaterialColor primaryColor = MaterialColor(0xFF232e3f, {
-    50: Color(0xFFf5f7fa),
-    100: Color(0xFFeaeef4),
-    200: Color(0xFFd0dae7),
-    300: Color(0xFFa6bcd3),
-    400: Color(0xFF7697ba),
-    500: Color(0xFF557aa2),
-    600: Color(0xFF416188),
-    700: Color(0xFF364e6e),
-    800: Color(0xFF30445c),
-    900: Color(0xFF2c3b4e),
-    950: Color(0xFF232e3f),
+  static const _primary = 0xFF232e3f;
+
+  static const _secondary = 0xffffa900;
+
+  static const _accent = 0xffa6bcd3;
+
+  static const MaterialColor primaryColor = MaterialColor(_primary, {
+    100: Color(0xffd3d5d9),
+    200: Color(0xffa7abb2),
+    300: Color(0xff7b828c),
+    400: Color(0xff4f5865),
+    500: Color(0xff232e3f),
+    600: Color(0xff1c2532),
+    700: Color(0xff151c26),
+    800: Color(0xff0e1219),
+    900: Color(0xff07090d),
   });
 
+  static const MaterialColor secondaryColor = MaterialColor(_secondary, {
+    100: Color(0xffffeecc),
+    200: Color(0xffffdd99),
+    300: Color(0xffffcb66),
+    400: Color(0xffffba33),
+    500: Color(0xffffa900),
+    600: Color(0xffcc8700),
+    700: Color(0xff996500),
+    800: Color(0xff664400),
+    900: Color(0xff332200),
+  });
+
+  static const MaterialColor accentColor = MaterialColor(_accent, {
+    100: Color(0xffedf2f6),
+    200: Color(0xffdbe4ed),
+    300: Color(0xffcad7e5),
+    400: Color(0xffb8c9dc),
+    500: Color(0xffa6bcd3),
+    600: Color(0xff8596a9),
+    700: Color(0xff64717f),
+    800: Color(0xff424b54),
+    900: Color(0xff21262a),
+  });
+
+  static const Color neutralColor = Color(0xFFf5f7fa);
+
   static const Color warningColor = Color(0xFFffaa00);
+
   static const Color warningCardColor = Color(0xFFfff6c5);
+
   static const Color errorColor = Color(0xFFFF4D58);
+
   static const Color errorCardColor = Color(0xFFFCEDE7);
+
   static const Color successColor = Color(0xFF40DC60);
+
   static const Color successCardColor = Color(0xFFEFF8F2);
 }
 
@@ -36,12 +71,13 @@ abstract final class SpendItTheme {
     fontFamily: fontFamily,
     colorScheme: ColorScheme.fromSwatch(
       primarySwatch: SpendItColors.primaryColor,
-      accentColor: SpendItColors.primaryColor.shade500,
+      accentColor: SpendItColors.accentColor,
       brightness: Brightness.light,
-      cardColor: SpendItColors.primaryColor.shade50,
-      backgroundColor: SpendItColors.primaryColor.shade50,
+      cardColor: SpendItColors.accentColor.shade200,
+      backgroundColor: Colors.white,
       errorColor: SpendItColors.errorColor,
     ),
+    scaffoldBackgroundColor: SpendItColors.neutralColor,
     pageTransitionsTheme: PageTransitionsTheme(
       builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
         TargetPlatform.values,
@@ -53,6 +89,7 @@ abstract final class SpendItTheme {
     outlinedButtonTheme: _outlinedButtonTheme(),
     textButtonTheme: _textButtonTheme(),
     appBarTheme: _appBarTheme(),
+    datePickerTheme: DatePickerThemeData(),
   );
 
   static AppBarTheme _appBarTheme() => AppBarTheme(
@@ -87,14 +124,11 @@ abstract final class SpendItTheme {
         minimumSize: Size.fromHeight(48),
         maximumSize: Size(double.infinity, 56),
         textStyle: SpendItTextStyles.medium.copyWith(fontSize: 16),
-        foregroundColor: SpendItColors.primaryColor.shade400,
+        foregroundColor: SpendItColors.accentColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(1000),
         ),
-        side: BorderSide(
-          color: SpendItColors.primaryColor.shade400,
-          width: 1.6,
-        ),
+        side: BorderSide(color: SpendItColors.accentColor, width: 1.6),
       ),
     );
   }
@@ -106,7 +140,7 @@ abstract final class SpendItTheme {
         maximumSize: Size(double.infinity, 56),
         textStyle: SpendItTextStyles.medium.copyWith(fontSize: 16),
         backgroundColor: SpendItColors.primaryColor,
-        foregroundColor: SpendItColors.primaryColor.shade50,
+        foregroundColor: SpendItColors.accentColor.shade100,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(1000),
         ),
@@ -123,7 +157,7 @@ abstract final class SpendItTheme {
         if (states.contains(WidgetState.error)) {
           return SpendItColors.errorCardColor;
         }
-        return SpendItColors.primaryColor.shade100;
+        return SpendItColors.accentColor.shade200;
       }),
       labelStyle: SpendItTextStyles.medium.copyWith(
         fontSize: 14,

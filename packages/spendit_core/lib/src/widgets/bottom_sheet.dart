@@ -48,12 +48,8 @@ class DefaultBottomSheet extends StatelessWidget {
                   Positioned(
                     right: 4,
                     top: 4,
-                    child: IconButton(
-                      style: IconButton.styleFrom(
-                        backgroundColor: SpendItColors.primaryColor.shade100,
-                        foregroundColor: SpendItColors.primaryColor,
-                        iconSize: 16,
-                      ),
+                    child: IconButton.filledTonal(
+                      style: IconButton.styleFrom(iconSize: 20),
                       constraints: BoxConstraints(maxWidth: 40, maxHeight: 40),
                       onPressed: () => _popModal(context),
                       icon: Icon(Icons.close),
@@ -61,11 +57,11 @@ class DefaultBottomSheet extends StatelessWidget {
                   ),
                 if (title case final String title)
                   Positioned(
-                    left: 16,
+                    left: 24,
                     top: showCloseIcon ? 16 : 24,
                     child: Text(
                       title,
-                      style: SpendItTextStyles.semibold.copyWith(fontSize: 18),
+                      style: SpendItTextStyles.medium.copyWith(fontSize: 20),
                     ),
                   ),
               ],
