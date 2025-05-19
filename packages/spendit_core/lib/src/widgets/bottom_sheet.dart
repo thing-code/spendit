@@ -46,8 +46,8 @@ class DefaultBottomSheet extends StatelessWidget {
                   ),
                 if (showCloseIcon)
                   Positioned(
-                    right: 4,
-                    top: 4,
+                    right: 8,
+                    top: 8,
                     child: IconButton.filledTonal(
                       style: IconButton.styleFrom(iconSize: 20),
                       constraints: BoxConstraints(maxWidth: 40, maxHeight: 40),

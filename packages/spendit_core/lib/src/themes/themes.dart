@@ -124,11 +124,11 @@ abstract final class SpendItTheme {
         minimumSize: Size.fromHeight(48),
         maximumSize: Size(double.infinity, 56),
         textStyle: SpendItTextStyles.medium.copyWith(fontSize: 16),
-        foregroundColor: SpendItColors.accentColor,
+        foregroundColor: SpendItColors.secondaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(1000),
         ),
-        side: BorderSide(color: SpendItColors.accentColor, width: 1.6),
+        side: BorderSide(color: SpendItColors.secondaryColor, width: 1.6),
       ),
     );
   }
@@ -168,6 +168,18 @@ abstract final class SpendItTheme {
           return SpendItColors.primaryColor.shade800;
         }),
       ),
+      prefixIconColor: WidgetStateColor.resolveWith((states) {
+        if (states.contains(WidgetState.error)) {
+          return SpendItColors.errorColor;
+        }
+        return SpendItColors.primaryColor.shade800;
+      }),
+      suffixIconColor: WidgetStateColor.resolveWith((states) {
+        if (states.contains(WidgetState.error)) {
+          return SpendItColors.errorColor;
+        }
+        return SpendItColors.primaryColor.shade800;
+      }),
       border: SpendItInputBorder(borderRadius: BorderRadius.circular(1000)),
       focusedBorder: SpendItInputBorder(
         borderRadius: BorderRadius.circular(1000),
