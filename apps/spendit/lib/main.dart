@@ -96,14 +96,10 @@ class Home extends StatelessWidget {
                       SpendItButton.secondary(
                         text: 'Check Localization',
                         onPressed: () {
-                          Locale currentLocale = Localizations.localeOf(
+                          Toast.show(
                             context,
-                          );
-                          debugPrint(currentLocale.toString());
-                          final materialLocalizations =
-                              MaterialLocalizations.of(context);
-                          logger.debug(
-                            '${materialLocalizations.narrowWeekdays}-${materialLocalizations.firstDayOfWeekIndex}',
+                            title: 'title',
+                            subtitle: 'message',
                           );
                         },
                       ),
