@@ -121,14 +121,21 @@ class Home extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          Badge(
-                                            label: Text('Rp 700rb dari Rp 1jt'),
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 8,
-                                              vertical: 4,
-                                            ),
-                                            backgroundColor: SpendItColors.accentColor.shade400,
-                                            textColor: SpendItColors.primaryColor,
+                                          Column(
+                                            children: [
+                                              Text('Terpakai'),
+                                              Badge(
+                                                label: Text(
+                                                  '${700000.toDouble().toRupiahCompact} dari ${1200000.toDouble().toRupiahCompact}',
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 8,
+                                                  vertical: 2,
+                                                ),
+                                                backgroundColor: SpendItColors.accentColor.shade400,
+                                                textColor: SpendItColors.primaryColor,
+                                              ),
+                                            ],
                                           ),
                                           Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,13 +189,6 @@ class StatisticCard extends StatelessWidget {
     return SizedBox(
       width: context.deviceWidth,
       child: Card(
-        // width: context.deviceWidth,
-        // padding: EdgeInsets.all(12),
-        // decoration: BoxDecoration(
-        //   color: SpendItColors.neutralColor,
-        //   borderRadius: BorderRadius.circular(16),
-        //   boxShadow: [SpendItStyles.cardShadow],
-        // ),
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Column(
@@ -203,7 +203,10 @@ class StatisticCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('-1.2 jt', style: SpendItTextStyles.bold.copyWith(fontSize: 24)),
+                      Text(
+                        1000000.toDouble().toRupiahCompact,
+                        style: SpendItTextStyles.bold.copyWith(fontSize: 24),
+                      ),
                       Icon(SolarIconsOutline.altArrowRight),
                     ],
                   ),

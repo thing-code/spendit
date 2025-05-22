@@ -91,15 +91,19 @@ abstract final class SpendItTheme {
     outlinedButtonTheme: _outlinedButtonTheme(),
     textButtonTheme: _textButtonTheme(),
     appBarTheme: _appBarTheme(),
-    cardTheme: CardThemeData(
-      shadowColor: SpendItColors.primaryColor.withAlpha(100),
-      elevation: 4,
-      margin: EdgeInsets.zero,
-    ),
+    cardTheme: _cardTheme(),
     datePickerTheme: DatePickerThemeData(),
     progressIndicatorTheme: ProgressIndicatorThemeData(year2023: false),
     sliderTheme: SliderThemeData(year2023: false),
   );
+
+  static CardThemeData _cardTheme() {
+    return CardThemeData(
+    shadowColor: SpendItColors.primaryColor.withAlpha(100),
+    elevation: 3,
+    margin: EdgeInsets.zero,
+  );
+  }
 
   static AppBarTheme _appBarTheme() => AppBarTheme(
     centerTitle: true,
