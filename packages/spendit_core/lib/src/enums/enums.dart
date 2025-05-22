@@ -3,24 +3,35 @@ import 'dart:ui';
 import 'package:spendit_core/spendit_core.dart';
 
 enum ExpenseCategory {
-  food('Food'),
-  health('Health'),
-  sport('Sport'),
-  transport('Transport'),
-  shopping('Shopping'),
-  family('Family'),
-  other('Other');
+  food('Makan'),
+  health('Kesehatan'),
+  sport('Olahraga'),
+  transport('Transportasi'),
+  shopping('Belanja'),
+  family('Keluarga'),
+  other('Lainnya');
 
   final String label;
   const ExpenseCategory(this.label);
 }
 
 enum TransactionType {
-  income('Income', SpendItColors.successColor, SpendItColors.successCardColor),
-  expense('Expense', SpendItColors.errorColor, SpendItColors.errorCardColor);
+  income('Pemasukan', SpendItColors.successColor, SpendItColors.successCardColor),
+  expense('Pengeluaran', SpendItColors.errorColor, SpendItColors.errorCardColor);
 
   final String label;
   final Color fg;
   final Color bg;
   const TransactionType(this.label, this.fg, this.bg);
+
+  static TransactionType fromString(String value) {
+    switch (value) {
+      case 'income':
+        return TransactionType.income;
+      case 'expense':
+        return TransactionType.expense;
+      default:
+        throw ArgumentError('Invalid transaction type: $value');
+    }
+  }
 }

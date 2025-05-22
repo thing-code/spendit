@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 import 'styles.dart';
@@ -73,8 +75,8 @@ abstract final class SpendItTheme {
       primarySwatch: SpendItColors.primaryColor,
       accentColor: SpendItColors.accentColor,
       brightness: Brightness.light,
-      cardColor: SpendItColors.accentColor.shade200,
-      backgroundColor: Colors.white,
+      cardColor: SpendItColors.neutralColor,
+      backgroundColor: SpendItColors.neutralColor,
       errorColor: SpendItColors.errorColor,
     ),
     scaffoldBackgroundColor: SpendItColors.neutralColor,
@@ -89,8 +91,14 @@ abstract final class SpendItTheme {
     outlinedButtonTheme: _outlinedButtonTheme(),
     textButtonTheme: _textButtonTheme(),
     appBarTheme: _appBarTheme(),
+    cardTheme: CardThemeData(
+      shadowColor: SpendItColors.primaryColor.withAlpha(100),
+      elevation: 4,
+      margin: EdgeInsets.zero,
+    ),
     datePickerTheme: DatePickerThemeData(),
     progressIndicatorTheme: ProgressIndicatorThemeData(year2023: false),
+    sliderTheme: SliderThemeData(year2023: false),
   );
 
   static AppBarTheme _appBarTheme() => AppBarTheme(
@@ -99,7 +107,10 @@ abstract final class SpendItTheme {
     foregroundColor: SpendItColors.primaryColor,
     backgroundColor: Colors.white.withAlpha(200),
     actionsPadding: EdgeInsets.symmetric(horizontal: 8),
-    titleTextStyle: SpendItTextStyles.medium.copyWith(fontSize: 16, color: SpendItColors.primaryColor),
+    titleTextStyle: SpendItTextStyles.medium.copyWith(
+      fontSize: 16,
+      color: SpendItColors.primaryColor,
+    ),
   );
 
   static TextButtonThemeData _textButtonTheme() {

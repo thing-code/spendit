@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:spendit_core/spendit_core.dart';
+import 'package:spendit_remake/src/gen/assets.gen.dart';
 import 'package:spendit_remake/src/gen/fonts.gen.dart';
 
 Future<void> main() async {
@@ -15,7 +16,9 @@ Future<void> main() async {
       WidgetsFlutterBinding.ensureInitialized();
 
       /// Untuk mengatur status bar menjadi transparan
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+      );
 
       runApp(ProviderScope(child: const MainApp()));
     },
@@ -56,6 +59,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final balance = 1000000.toDouble().toRupiah;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -68,7 +72,7 @@ class Home extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Saldo Terkini', style: SpendItTextStyles.medium.copyWith(fontSize: 16)),
-                  Text('Rp 1.000.000', style: SpendItTextStyles.bold.copyWith(fontSize: 24)),
+                  Text(balance, style: SpendItTextStyles.bold.copyWith(fontSize: 24)),
                   Gap(24),
                   Row(
                     spacing: 16,
@@ -79,7 +83,10 @@ class Home extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           spacing: 8,
                           children: [
-                            Text('Statistik', style: SpendItTextStyles.medium.copyWith(fontSize: 16)),
+                            Text(
+                              'Statistik',
+                              style: SpendItTextStyles.medium.copyWith(fontSize: 16),
+                            ),
                             StatisticCard(transactionType: TransactionType.income),
                             StatisticCard(transactionType: TransactionType.expense),
                           ],
@@ -90,24 +97,65 @@ class Home extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           spacing: 8,
                           children: [
-                            Text('Anggaran', style: SpendItTextStyles.medium.copyWith(fontSize: 16)),
+                            Text(
+                              'Anggaran',
+                              style: SpendItTextStyles.medium.copyWith(fontSize: 16),
+                            ),
                             AspectRatio(
-                              aspectRatio: 3 / 4,
-                              child: Card(
-                                margin: EdgeInsets.zero,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16),
-                                  child: Column(
-                                    children: [
-                                      CircularProgressIndicator(
-                                        value: .7,
-                                        strokeWidth: 8,
-                                        constraints: BoxConstraints(minHeight: 80, minWidth: 80),
+                              aspectRatio: 3 / 4.1,
+                              child:
+                                  Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 8),
+                                            child: CircularProgressIndicator(
+                                              value: .7,
+                                              strokeWidth: 8,
+                                              constraints: BoxConstraints(
+                                                minHeight: 80,
+                                                minWidth: 80,
+                                              ),
+                                            ),
+                                          ),
+                                          Badge(
+                                            label: Text('Rp 700rb dari Rp 1jt'),
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 8,
+                                              vertical: 4,
+                                            ),
+                                            backgroundColor: SpendItColors.accentColor.shade400,
+                                            textColor: SpendItColors.primaryColor,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text('Anggaran Bulanan'),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    1200000.toDouble().toRupiahCompact,
+                                                    style: SpendItTextStyles.bold.copyWith(
+                                                      fontSize: 24,
+                                                    ),
+                                                  ),
+                                                  Icon(SolarIconsOutline.altArrowRight),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
+                                  ).onTap(
+                                    onTap: () {
+                                      Toast.show(context, title: 'THIS IS A TEST TOAST');
+                                    },
                                   ),
-                                ),
-                              ),
                             ),
                           ],
                         ),
@@ -124,34 +172,6 @@ class Home extends StatelessWidget {
   }
 }
 
-enum TransactionType {
-  income(
-    "Pemasukan",
-    SolarIconsOutline.squareArrowLeftDown,
-    SpendItColors.successColor,
-    SpendItColors.successCardColor,
-  ),
-  expense("Pengeluaran", SolarIconsOutline.squareArrowRightUp, SpendItColors.errorColor, SpendItColors.errorCardColor);
-
-  final String label;
-  final IconData icon;
-  final Color foregroundColor;
-  final Color backgroundColor;
-
-  const TransactionType(this.label, this.icon, this.foregroundColor, this.backgroundColor);
-
-  static TransactionType fromString(String value) {
-    switch (value) {
-      case 'income':
-        return TransactionType.income;
-      case 'expense':
-        return TransactionType.expense;
-      default:
-        throw ArgumentError('Invalid transaction type: $value');
-    }
-  }
-}
-
 class StatisticCard extends StatelessWidget {
   const StatisticCard({super.key, required this.transactionType});
 
@@ -159,29 +179,50 @@ class StatisticCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: context.deviceWidth,
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: SpendItColors.neutralColor,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [SpendItStyles.cardShadow],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 16,
-        children: [
-          Icon(transactionType.icon, color: transactionType.foregroundColor),
-          Column(
+      child: Card(
+        // width: context.deviceWidth,
+        // padding: EdgeInsets.all(12),
+        // decoration: BoxDecoration(
+        //   color: SpendItColors.neutralColor,
+        //   borderRadius: BorderRadius.circular(16),
+        //   boxShadow: [SpendItStyles.cardShadow],
+        // ),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 16,
             children: [
-              Text(transactionType.label),
-              Text('-1.2 jt', style: SpendItTextStyles.bold.copyWith(fontSize: 24)),
+              Icon(icon, color: transactionType.fg),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(transactionType.label),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('-1.2 jt', style: SpendItTextStyles.bold.copyWith(fontSize: 24)),
+                      Icon(SolarIconsOutline.altArrowRight),
+                    ],
+                  ),
+                ],
+              ),
             ],
           ),
-        ],
+        ),
       ),
     );
+  }
+
+  IconData get icon {
+    switch (transactionType) {
+      case TransactionType.income:
+        return SolarIconsOutline.squareArrowLeftDown;
+      case TransactionType.expense:
+        return SolarIconsOutline.squareArrowRightUp;
+    }
   }
 }
 
@@ -230,13 +271,15 @@ class SpendItHeader extends StatelessWidget {
         spacing: 16,
         children: [
           CircleAvatar(
-            backgroundColor: SpendItColors.accentColor.shade200,
-            foregroundColor: SpendItColors.primaryColor,
-            child: Icon(SolarIconsBold.user),
+            backgroundColor: SpendItColors.primaryColor,
+            child: Assets.icon.image(width: 24, height: 24, fit: BoxFit.cover),
           ),
           Text(
             'Selamat Datang Kembali!',
-            style: SpendItTextStyles.medium.copyWith(fontSize: 16, color: SpendItColors.primaryColor),
+            style: SpendItTextStyles.medium.copyWith(
+              fontSize: 16,
+              color: SpendItColors.primaryColor,
+            ),
           ),
           const Spacer(),
           IconButton.filled(

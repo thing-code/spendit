@@ -170,8 +170,7 @@ class ToastWidget extends StatefulWidget {
   State<ToastWidget> createState() => _ToastWidgetState();
 }
 
-class _ToastWidgetState extends State<ToastWidget>
-    with TickerProviderStateMixin {
+class _ToastWidgetState extends State<ToastWidget> with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<Offset> _offsetAnimation;
 
@@ -181,10 +180,7 @@ class _ToastWidgetState extends State<ToastWidget>
   void initState() {
     super.initState();
 
-    _animationController = AnimationController(
-      duration: widget.transitionDuration,
-      vsync: this,
-    );
+    _animationController = AnimationController(duration: widget.transitionDuration, vsync: this);
 
     _offsetAnimation =
         Tween<Offset>(
@@ -205,13 +201,11 @@ class _ToastWidgetState extends State<ToastWidget>
     });
 
     _scrollController.addListener(() {
-      if (_scrollController.offset > 30 &&
-          widget.position == ToastPosition.top) {
+      if (_scrollController.offset > 30 && widget.position == ToastPosition.top) {
         _dismissAlert();
       }
 
-      if (_scrollController.offset < -30 &&
-          widget.position == ToastPosition.bottom) {
+      if (_scrollController.offset < -30 && widget.position == ToastPosition.bottom) {
         _dismissAlert();
       }
     });
@@ -236,15 +230,12 @@ class _ToastWidgetState extends State<ToastWidget>
 
     if (widget.subtitle == null && widget.icon == null) {
       return EdgeInsets.symmetric(
-        vertical: baseVerticalPadding + 3,
-        horizontal: baseHorizontalPadding + 20,
+        vertical: baseVerticalPadding + 4,
+        horizontal: baseHorizontalPadding,
       );
     }
     if (widget.icon == null && widget.subtitle != null) {
-      return EdgeInsets.symmetric(
-        horizontal: baseHorizontalPadding,
-        vertical: baseVerticalPadding,
-      );
+      return EdgeInsets.symmetric(horizontal: baseHorizontalPadding, vertical: baseVerticalPadding);
     }
 
     if (widget.icon != null && widget.subtitle != null) {
@@ -281,18 +272,14 @@ class _ToastWidgetState extends State<ToastWidget>
           clipBehavior: Clip.none,
           controller: _scrollController,
           hitTestBehavior: HitTestBehavior.deferToChild,
-          physics: const AlwaysScrollableScrollPhysics(
-            parent: BouncingScrollPhysics(),
-          ),
+          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           child: SafeArea(
             child: Center(
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 width: double.infinity,
                 decoration: ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   shadows: [
                     BoxShadow(
                       color: Colors.black.withAlpha(30),
@@ -311,16 +298,11 @@ class _ToastWidgetState extends State<ToastWidget>
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         if (widget.icon != null)
-                          Icon(
-                            widget.icon,
-                            color: widget.iconColor ?? Colors.black,
-                          ),
+                          Icon(widget.icon, color: widget.iconColor ?? Colors.black),
                         SizedBox(width: widget.icon != null ? 13 : 0),
                         Flexible(
                           child: Padding(
-                            padding: EdgeInsets.only(
-                              right: widget.icon != null ? iconSize : 0,
-                            ),
+                            padding: EdgeInsets.only(right: widget.icon != null ? iconSize : 0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
