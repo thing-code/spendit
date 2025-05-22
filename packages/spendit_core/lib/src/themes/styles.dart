@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spendit_core/spendit_core.dart';
 
 class SpendItInputBorder extends UnderlineInputBorder {
   const SpendItInputBorder({
@@ -38,7 +39,7 @@ class SpendItInputBorder extends UnderlineInputBorder {
   }
 }
 
-class SpendItTextStyles {
+abstract final class SpendItTextStyles {
   const SpendItTextStyles._();
 
   static TextStyle bold = TextStyle(
@@ -60,5 +61,15 @@ class SpendItTextStyles {
   static TextStyle light = TextStyle(
     fontWeight: FontWeight.bold,
     fontFamily: 'Poppins',
+  );
+}
+
+abstract final class SpendItStyles {
+  const SpendItStyles._();
+
+  static BoxShadow cardShadow = BoxShadow(
+    color: SpendItColors.primaryColor.withValues(alpha: .1),
+    blurRadius: 10,
+    offset: const Offset(0, 4),
   );
 }

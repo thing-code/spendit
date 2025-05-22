@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spendit_core/spendit_core.dart';
 
 enum ToastPosition { top, bottom }
 
@@ -98,30 +99,29 @@ class Toast {
 
     OverlayEntry? currentOverlay;
     currentOverlay = OverlayEntry(
-      builder:
-          (context) => ToastWidget(
-            title: drop.title,
-            backgroundColor: drop.iconColor,
-            duration: drop.duration,
-            transitionDuration: drop.transitionDuration,
-            curve: drop.curve,
-            reverseCurve: drop.reverseCurve,
-            subtitle: drop.subtitle,
-            titleMaxLines: drop.titleMaxLines,
-            subtitleMaxLines: drop.subtitleMaxLines,
-            titleTextStyle: drop.titleTextStyle,
-            subtitleTextStyle: drop.subtitleTextStyle,
-            position: drop.position,
-            padding: drop.padding,
-            iconColor: drop.iconColor,
-            icon: drop.icon,
-            onDismiss: () {
-              currentOverlay?.remove();
-              currentOverlay = null;
+      builder: (context) => ToastWidget(
+        title: drop.title,
+        backgroundColor: drop.iconColor,
+        duration: drop.duration,
+        transitionDuration: drop.transitionDuration,
+        curve: drop.curve,
+        reverseCurve: drop.reverseCurve,
+        subtitle: drop.subtitle,
+        titleMaxLines: drop.titleMaxLines,
+        subtitleMaxLines: drop.subtitleMaxLines,
+        titleTextStyle: drop.titleTextStyle,
+        subtitleTextStyle: drop.subtitleTextStyle,
+        position: drop.position,
+        padding: drop.padding,
+        iconColor: drop.iconColor,
+        icon: drop.icon,
+        onDismiss: () {
+          currentOverlay?.remove();
+          currentOverlay = null;
 
-              _showNextDrop(context);
-            },
-          ),
+          _showNextDrop(context);
+        },
+      ),
     );
 
     Overlay.of(context).insert(currentOverlay!);
@@ -186,16 +186,17 @@ class _ToastWidgetState extends State<ToastWidget>
       vsync: this,
     );
 
-    _offsetAnimation = Tween<Offset>(
-      begin: Offset(0, widget.position == ToastPosition.top ? -1 : 1),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: widget.curve,
-        reverseCurve: widget.reverseCurve ?? widget.curve.flipped,
-      ),
-    );
+    _offsetAnimation =
+        Tween<Offset>(
+          begin: Offset(0, widget.position == ToastPosition.top ? -1 : 1),
+          end: Offset.zero,
+        ).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: widget.curve,
+            reverseCurve: widget.reverseCurve ?? widget.curve.flipped,
+          ),
+        );
 
     _animationController.forward();
 
@@ -230,7 +231,7 @@ class _ToastWidgetState extends State<ToastWidget>
   }
 
   EdgeInsets getPadding() {
-    double baseHorizontalPadding = 20;
+    double baseHorizontalPadding = 24;
     double baseVerticalPadding = widget.subtitle != null ? 12 : 16;
 
     if (widget.subtitle == null && widget.icon == null) {
@@ -248,14 +249,14 @@ class _ToastWidgetState extends State<ToastWidget>
 
     if (widget.icon != null && widget.subtitle != null) {
       return EdgeInsets.symmetric(
-        horizontal: baseHorizontalPadding,
+        horizontal: baseHorizontalPadding - 4,
         vertical: baseVerticalPadding,
       );
     }
 
     if (widget.icon != null && widget.subtitle == null) {
       return EdgeInsets.symmetric(
-        horizontal: baseVerticalPadding,
+        horizontal: baseVerticalPadding - 4,
         vertical: baseVerticalPadding,
       );
     }
@@ -270,10 +271,9 @@ class _ToastWidgetState extends State<ToastWidget>
     return Positioned(
       left: 0,
       top: widget.position == ToastPosition.top ? 0 : null,
-      bottom:
-          widget.position == ToastPosition.bottom
-              ? 0 + MediaQuery.of(context).viewPadding.bottom
-              : null,
+      bottom: widget.position == ToastPosition.bottom
+          ? 0 + MediaQuery.of(context).viewPadding.bottom
+          : null,
       right: 0,
       child: SlideTransition(
         position: _offsetAnimation,
@@ -303,6 +303,8 @@ class _ToastWidgetState extends State<ToastWidget>
                   ],
                 ),
                 child: Material(
+                  color: SpendItColors.accentColor.shade100,
+                  borderRadius: BorderRadius.circular(1000),
                   child: Padding(
                     padding: widget.padding ?? getPadding(),
                     child: Row(

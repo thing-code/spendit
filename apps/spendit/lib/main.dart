@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import 'package:gap/gap.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:spendit_core/spendit_core.dart';
 import 'package:spendit_remake/src/gen/fonts.gen.dart';
@@ -49,8 +49,8 @@ class MainApp extends StatelessWidget {
       ],
       locale: const Locale('id', 'ID'),
       builder: (context, child) {
-        ErrorWidget.builder =
-            (errorDetails) => SpendItErrorWidget(errorDetails: errorDetails);
+        ErrorWidget.builder = (errorDetails) =>
+            SpendItErrorWidget(errorDetails: errorDetails);
         return child!;
       },
       home: Home(),
@@ -63,87 +63,158 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fg = FormGroup({
-      'name': FormControl<String>(validators: [Validators.required]),
-    });
-
     return Scaffold(
       body: SafeArea(
-        child: ReactiveFormBuilder(
-          form: () => fg,
-          builder: (context, formGroup, child) {
-            final nameForm = formGroup.control('name') as FormControl<String>;
-            return Column(
-              children: [
-                SpendItHeader(),
-                Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Column(
-                    spacing: 20,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SpendItHeader(),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Saldo Terkini',
+                    style: SpendItTextStyles.medium.copyWith(fontSize: 16),
+                  ),
+                  Text(
+                    'Rp 1.000.000',
+                    style: SpendItTextStyles.bold.copyWith(fontSize: 24),
+                  ),
+                  Gap(24),
+
+                  Row(
+                    spacing: 16,
                     children: [
-                      SpendItTextInput(
-                        control: nameForm,
-                        placeholder: 'Nama',
-                        validationMessages: {...requiredValidationMsg('Nama')},
-                        prefix: Icon(
-                          SolarIconsOutline.user,
-                          color: SpendItColors.primaryColor,
-                        ),
-                        onSubmitted: (value) {
-                          logger.debug('onSubmitted: $value');
-                        },
-                      ),
-                      SpendItButton.secondary(
-                        text: 'Check Localization',
-                        onPressed: () {
-                          Toast.show(
-                            context,
-                            title: 'title',
-                            subtitle: 'message',
-                          );
-                        },
-                      ),
-                      SpendItButton.primary(
-                        text: 'Submit',
-                        onPressed: () {
-                          openBottomSheet(
-                            context,
-                            title: 'Pilih Tanggal',
-                            showCloseIcon: true,
-                            height: context.deviceHeight * .6,
-                            builder: (context) {
-                              return Column(
-                                children: [
-                                  CalendarDatePicker(
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(2021),
-                                    lastDate: DateTime(2030),
-                                    onDateChanged: (value) {},
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(16),
-                                    child: SpendItButton.primary(
-                                      text: 'Pilih',
-                                      onPressed: () {},
-                                    ),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: 8,
+                          children: [
+                            Text(
+                              'Statistik',
+                              style: SpendItTextStyles.medium.copyWith(
+                                fontSize: 16,
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: SpendItColors.neutralColor,
+                                borderRadius: BorderRadius.circular(16),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: SpendItColors.primaryColor
+                                        .withValues(alpha: .1),
+                                    blurRadius: 10,
+                                    offset: const Offset(0, 4),
                                   ),
                                 ],
-                              );
-                            },
-                          );
-                        },
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                spacing: 16,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Icon(
+                                        SolarIconsOutline.squareArrowLeftDown,
+                                        color: SpendItColors.successColor,
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 2,
+                                          horizontal: 4,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: SpendItColors.successCardColor,
+                                          borderRadius: BorderRadius.circular(
+                                            1000,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          '5%',
+                                          style: SpendItTextStyles.medium
+                                              .copyWith(
+                                                color:
+                                                    SpendItColors.successColor,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text('Pemasukan'),
+                                      Text('Rp 40 jt'),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: 8,
+                          children: [
+                            Text(
+                              'Anggaran',
+                              style: SpendItTextStyles.medium.copyWith(
+                                fontSize: 16,
+                              ),
+                            ),
+                            Container(
+                              color: SpendItColors.accentColor.shade400,
+                              child: AspectRatio(aspectRatio: 3 / 4),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            );
-          },
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+
+// openBottomSheet(
+//   context,
+//   title: 'Pilih Tanggal',
+//   showCloseIcon: true,
+//   height: context.deviceHeight * .6,
+//   builder: (context) {
+//     return Column(
+//       children: [
+//         CalendarDatePicker(
+//           initialDate: DateTime.now(),
+//           firstDate: DateTime(2021),
+//           lastDate: DateTime(2030),
+//           onDateChanged: (value) {},
+//         ),
+//         Padding(
+//           padding: const EdgeInsets.all(16),
+//           child: SpendItButton.primary(
+//             text: 'Pilih',
+//             onPressed: () {},
+//           ),
+//         ),
+//       ],
+//     );
+//   },
+// );
 
 class SpendItHeader extends StatelessWidget {
   const SpendItHeader({super.key});
@@ -153,7 +224,7 @@ class SpendItHeader extends StatelessWidget {
     return Container(
       height: context.deviceHeight * .07,
       width: double.infinity,
-      margin: EdgeInsets.all(16),
+      margin: EdgeInsets.symmetric(horizontal: 16),
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: SpendItColors.neutralColor,
