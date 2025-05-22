@@ -15,9 +15,7 @@ Future<void> main() async {
       WidgetsFlutterBinding.ensureInitialized();
 
       /// Untuk mengatur status bar menjadi transparan
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-      );
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
       runApp(ProviderScope(child: const MainApp()));
     },
@@ -42,15 +40,10 @@ class MainApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [
-        Locale('en', 'US'),
-        Locale('id', 'ID'),
-        Locale('en', 'GB'),
-      ],
+      supportedLocales: const [Locale('en', 'US'), Locale('id', 'ID'), Locale('en', 'GB')],
       locale: const Locale('id', 'ID'),
       builder: (context, child) {
-        ErrorWidget.builder = (errorDetails) =>
-            SpendItErrorWidget(errorDetails: errorDetails);
+        ErrorWidget.builder = (errorDetails) => SpendItErrorWidget(errorDetails: errorDetails);
         return child!;
       },
       home: Home(),
@@ -74,89 +67,21 @@ class Home extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Saldo Terkini',
-                    style: SpendItTextStyles.medium.copyWith(fontSize: 16),
-                  ),
-                  Text(
-                    'Rp 1.000.000',
-                    style: SpendItTextStyles.bold.copyWith(fontSize: 24),
-                  ),
+                  Text('Saldo Terkini', style: SpendItTextStyles.medium.copyWith(fontSize: 16)),
+                  Text('Rp 1.000.000', style: SpendItTextStyles.bold.copyWith(fontSize: 24)),
                   Gap(24),
-
                   Row(
                     spacing: 16,
                     children: [
                       Flexible(
+                        fit: FlexFit.tight,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           spacing: 8,
                           children: [
-                            Text(
-                              'Statistik',
-                              style: SpendItTextStyles.medium.copyWith(
-                                fontSize: 16,
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: SpendItColors.neutralColor,
-                                borderRadius: BorderRadius.circular(16),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: SpendItColors.primaryColor
-                                        .withValues(alpha: .1),
-                                    blurRadius: 10,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                spacing: 16,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Icon(
-                                        SolarIconsOutline.squareArrowLeftDown,
-                                        color: SpendItColors.successColor,
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: 2,
-                                          horizontal: 4,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: SpendItColors.successCardColor,
-                                          borderRadius: BorderRadius.circular(
-                                            1000,
-                                          ),
-                                        ),
-                                        child: Text(
-                                          '5%',
-                                          style: SpendItTextStyles.medium
-                                              .copyWith(
-                                                color:
-                                                    SpendItColors.successColor,
-                                              ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Pemasukan'),
-                                      Text('Rp 40 jt'),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
+                            Text('Statistik', style: SpendItTextStyles.medium.copyWith(fontSize: 16)),
+                            StatisticCard(transactionType: TransactionType.income),
+                            StatisticCard(transactionType: TransactionType.expense),
                           ],
                         ),
                       ),
@@ -165,15 +90,24 @@ class Home extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           spacing: 8,
                           children: [
-                            Text(
-                              'Anggaran',
-                              style: SpendItTextStyles.medium.copyWith(
-                                fontSize: 16,
+                            Text('Anggaran', style: SpendItTextStyles.medium.copyWith(fontSize: 16)),
+                            AspectRatio(
+                              aspectRatio: 3 / 4,
+                              child: Card(
+                                margin: EdgeInsets.zero,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Column(
+                                    children: [
+                                      CircularProgressIndicator(
+                                        value: .7,
+                                        strokeWidth: 8,
+                                        constraints: BoxConstraints(minHeight: 80, minWidth: 80),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                            ),
-                            Container(
-                              color: SpendItColors.accentColor.shade400,
-                              child: AspectRatio(aspectRatio: 3 / 4),
                             ),
                           ],
                         ),
@@ -185,6 +119,67 @@ class Home extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+enum TransactionType {
+  income(
+    "Pemasukan",
+    SolarIconsOutline.squareArrowLeftDown,
+    SpendItColors.successColor,
+    SpendItColors.successCardColor,
+  ),
+  expense("Pengeluaran", SolarIconsOutline.squareArrowRightUp, SpendItColors.errorColor, SpendItColors.errorCardColor);
+
+  final String label;
+  final IconData icon;
+  final Color foregroundColor;
+  final Color backgroundColor;
+
+  const TransactionType(this.label, this.icon, this.foregroundColor, this.backgroundColor);
+
+  static TransactionType fromString(String value) {
+    switch (value) {
+      case 'income':
+        return TransactionType.income;
+      case 'expense':
+        return TransactionType.expense;
+      default:
+        throw ArgumentError('Invalid transaction type: $value');
+    }
+  }
+}
+
+class StatisticCard extends StatelessWidget {
+  const StatisticCard({super.key, required this.transactionType});
+
+  final TransactionType transactionType;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: context.deviceWidth,
+      padding: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: SpendItColors.neutralColor,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [SpendItStyles.cardShadow],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 16,
+        children: [
+          Icon(transactionType.icon, color: transactionType.foregroundColor),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(transactionType.label),
+              Text('-1.2 jt', style: SpendItTextStyles.bold.copyWith(fontSize: 24)),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -229,13 +224,7 @@ class SpendItHeader extends StatelessWidget {
       decoration: BoxDecoration(
         color: SpendItColors.neutralColor,
         borderRadius: BorderRadius.circular(1000),
-        boxShadow: [
-          BoxShadow(
-            color: SpendItColors.primaryColor.withValues(alpha: .1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        boxShadow: [SpendItStyles.cardShadow],
       ),
       child: Row(
         spacing: 16,
@@ -246,11 +235,8 @@ class SpendItHeader extends StatelessWidget {
             child: Icon(SolarIconsBold.user),
           ),
           Text(
-            'Welcome back!',
-            style: SpendItTextStyles.medium.copyWith(
-              fontSize: 16,
-              color: SpendItColors.primaryColor,
-            ),
+            'Selamat Datang Kembali!',
+            style: SpendItTextStyles.medium.copyWith(fontSize: 16, color: SpendItColors.primaryColor),
           ),
           const Spacer(),
           IconButton.filled(

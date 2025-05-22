@@ -90,6 +90,7 @@ abstract final class SpendItTheme {
     textButtonTheme: _textButtonTheme(),
     appBarTheme: _appBarTheme(),
     datePickerTheme: DatePickerThemeData(),
+    progressIndicatorTheme: ProgressIndicatorThemeData(year2023: false),
   );
 
   static AppBarTheme _appBarTheme() => AppBarTheme(
@@ -98,10 +99,7 @@ abstract final class SpendItTheme {
     foregroundColor: SpendItColors.primaryColor,
     backgroundColor: Colors.white.withAlpha(200),
     actionsPadding: EdgeInsets.symmetric(horizontal: 8),
-    titleTextStyle: SpendItTextStyles.medium.copyWith(
-      fontSize: 16,
-      color: SpendItColors.primaryColor,
-    ),
+    titleTextStyle: SpendItTextStyles.medium.copyWith(fontSize: 16, color: SpendItColors.primaryColor),
   );
 
   static TextButtonThemeData _textButtonTheme() {
@@ -111,9 +109,7 @@ abstract final class SpendItTheme {
         maximumSize: Size(double.infinity, 56),
         textStyle: SpendItTextStyles.medium.copyWith(fontSize: 16),
         foregroundColor: SpendItColors.primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(1000),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
       ),
     );
   }
@@ -125,9 +121,7 @@ abstract final class SpendItTheme {
         maximumSize: Size(double.infinity, 56),
         textStyle: SpendItTextStyles.medium.copyWith(fontSize: 16),
         foregroundColor: SpendItColors.secondaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(1000),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
         side: BorderSide(color: SpendItColors.secondaryColor, width: 1.6),
       ),
     );
@@ -141,9 +135,7 @@ abstract final class SpendItTheme {
         textStyle: SpendItTextStyles.medium.copyWith(fontSize: 16),
         backgroundColor: SpendItColors.primaryColor,
         foregroundColor: SpendItColors.accentColor.shade100,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(1000),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
       ),
     );
   }
@@ -181,18 +173,10 @@ abstract final class SpendItTheme {
         return SpendItColors.primaryColor.shade800;
       }),
       border: SpendItInputBorder(borderRadius: BorderRadius.circular(1000)),
-      focusedBorder: SpendItInputBorder(
-        borderRadius: BorderRadius.circular(1000),
-      ),
-      enabledBorder: SpendItInputBorder(
-        borderRadius: BorderRadius.circular(1000),
-      ),
-      errorBorder: SpendItInputBorder(
-        borderRadius: BorderRadius.circular(1000),
-      ),
-      disabledBorder: SpendItInputBorder(
-        borderRadius: BorderRadius.circular(1000),
-      ),
+      focusedBorder: SpendItInputBorder(borderRadius: BorderRadius.circular(1000)),
+      enabledBorder: SpendItInputBorder(borderRadius: BorderRadius.circular(1000)),
+      errorBorder: SpendItInputBorder(borderRadius: BorderRadius.circular(1000)),
+      disabledBorder: SpendItInputBorder(borderRadius: BorderRadius.circular(1000)),
     );
   }
 }
