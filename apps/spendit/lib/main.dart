@@ -229,32 +229,6 @@ class StatisticCard extends StatelessWidget {
   }
 }
 
-// openBottomSheet(
-//   context,
-//   title: 'Pilih Tanggal',
-//   showCloseIcon: true,
-//   height: context.deviceHeight * .6,
-//   builder: (context) {
-//     return Column(
-//       children: [
-//         CalendarDatePicker(
-//           initialDate: DateTime.now(),
-//           firstDate: DateTime(2021),
-//           lastDate: DateTime(2030),
-//           onDateChanged: (value) {},
-//         ),
-//         Padding(
-//           padding: const EdgeInsets.all(16),
-//           child: SpendItButton.primary(
-//             text: 'Pilih',
-//             onPressed: () {},
-//           ),
-//         ),
-//       ],
-//     );
-//   },
-// );
-
 class SpendItHeader extends StatelessWidget {
   const SpendItHeader({super.key});
 
