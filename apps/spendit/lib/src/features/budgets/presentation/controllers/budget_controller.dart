@@ -33,4 +33,28 @@ class BudgetController extends _$BudgetController {
 
     ref.invalidateSelf();
   }
+
+  Future<bool> edit(BudgetModel budget) async {
+    final result = await ref.read(budgetRepositoryProvider).update(budget);
+    ref.invalidateSelf();
+    return result is LocalResponseSuccess;
+  }
+
+  Future<bool> usage(ExpenseCategory category, int amount) async {
+    final budgets = await future;
+    final budget = budgets.firstWhere((element) => element.category == category);
+    final result = await ref
+        .read(budgetRepositoryProvider)
+        .update(budget.copyWith(currentValue: budget.currentValue + amount));
+    ref.invalidateSelf();
+    return result is LocalResponseSuccess;
+  }
+
+  Future<void> reset() async {
+    final budgets = await future;
+    for (var budget in budgets) {
+      await ref.read(budgetRepositoryProvider).update(budget.copyWith(currentValue: 0));
+    }
+    ref.invalidateSelf();
+  }
 }
