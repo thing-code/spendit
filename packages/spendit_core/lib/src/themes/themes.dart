@@ -99,10 +99,11 @@ abstract final class SpendItTheme {
 
   static CardThemeData _cardTheme() {
     return CardThemeData(
-    shadowColor: SpendItColors.primaryColor.withAlpha(100),
-    elevation: 3,
-    margin: EdgeInsets.zero,
-  );
+      shadowColor: SpendItColors.primaryColor.withAlpha(100),
+      elevation: 3,
+      margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    );
   }
 
   static AppBarTheme _appBarTheme() => AppBarTheme(

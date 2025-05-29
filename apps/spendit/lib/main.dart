@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:spendit_core/spendit_core.dart';
 import 'package:spendit_remake/src/gen/assets.gen.dart';
@@ -36,7 +37,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Spend It : Manage your spending',
-      theme: SpendItTheme.light(fontFamily: FontFamily.geist),
+      theme: SpendItTheme.light(fontFamily: FontFamily.figtree),
       localizationsDelegates: const [
         SpendItLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -87,8 +88,8 @@ class Home extends StatelessWidget {
                               'Statistik',
                               style: SpendItTextStyles.medium.copyWith(fontSize: 16),
                             ),
-                            StatisticCard(transactionType: TransactionType.income),
-                            StatisticCard(transactionType: TransactionType.expense),
+                            StatisticCard(TransactionType.income),
+                            StatisticCard(TransactionType.expense),
                           ],
                         ),
                       ),
@@ -101,75 +102,21 @@ class Home extends StatelessWidget {
                               'Anggaran',
                               style: SpendItTextStyles.medium.copyWith(fontSize: 16),
                             ),
-                            AspectRatio(
-                              aspectRatio: 3 / 4.1,
-                              child:
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(top: 8),
-                                            child: CircularProgressIndicator(
-                                              value: .7,
-                                              strokeWidth: 8,
-                                              constraints: BoxConstraints(
-                                                minHeight: 80,
-                                                minWidth: 80,
-                                              ),
-                                            ),
-                                          ),
-                                          Column(
-                                            children: [
-                                              Text('Terpakai'),
-                                              Badge(
-                                                label: Text(
-                                                  '${700000.toDouble().toRupiahCompact} dari ${1200000.toDouble().toRupiahCompact}',
-                                                ),
-                                                padding: EdgeInsets.symmetric(
-                                                  horizontal: 8,
-                                                  vertical: 2,
-                                                ),
-                                                backgroundColor: SpendItColors.accentColor.shade400,
-                                                textColor: SpendItColors.primaryColor,
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Anggaran Bulanan'),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    1200000.toDouble().toRupiahCompact,
-                                                    style: SpendItTextStyles.bold.copyWith(
-                                                      fontSize: 24,
-                                                    ),
-                                                  ),
-                                                  Icon(SolarIconsOutline.altArrowRight),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ).onTap(
-                                    onTap: () {
-                                      Toast.show(context, title: 'THIS IS A TEST TOAST');
-                                    },
-                                  ),
-                            ),
+                            BudgetCard(),
                           ],
                         ),
                       ),
                     ],
                   ),
+                  Gap(24),
+                  Text('Rencana Keuangan', style: SpendItTextStyles.medium.copyWith(fontSize: 16)),
                 ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemBuilder: (context, index) => FinancialGoalCard(),
+                itemCount: 10,
               ),
             ),
           ],
@@ -179,8 +126,128 @@ class Home extends StatelessWidget {
   }
 }
 
+class FinancialGoalCard extends StatelessWidget {
+  const FinancialGoalCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: SizedBox(
+          width: context.deviceWidth,
+          child: Stack(
+            children: [
+              Row(
+                spacing: 12,
+                children: [
+                  CircleAvatar(),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Aerox Alpha', style: SpendItTextStyles.medium.copyWith(fontSize: 16)),
+                        Text(
+                          'Rp 5.000.000 / Rp 35.000.000',
+                          style: SpendItTextStyles.medium.copyWith(fontSize: 14),
+                        ),
+                        Gap(8),
+                        SizedBox(
+                          width: context.deviceWidth * .64,
+                          child: LinearProgressIndicator(
+                            value: 1 / 7,
+                            minHeight: 8,
+                            backgroundColor: SpendItColors.secondaryColor.shade100,
+                            color: SpendItColors.secondaryColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Positioned(
+                top: 0,
+                right: 0,
+                child: HugeIcon(
+                  icon: HugeIcons.strokeRoundedMoreHorizontal,
+                  color: SpendItColors.primaryColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class BudgetCard extends StatelessWidget {
+  const BudgetCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: 3 / 4.1,
+      child:
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: CircularProgressIndicator(
+                      value: .7,
+                      strokeWidth: 8,
+                      constraints: BoxConstraints(minHeight: 80, minWidth: 80),
+                    ),
+                  ),
+                  Column(
+                    spacing: 2,
+                    children: [
+                      Text('Terpakai'),
+                      Badge(
+                        label: Text(
+                          '${700000.toDouble().toRupiahCompact} dari ${1200000.toDouble().toRupiahCompact}',
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        backgroundColor: SpendItColors.accentColor.shade400,
+                        textColor: SpendItColors.primaryColor,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Anggaran Bulanan'),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            1200000.toDouble().toRupiahCompact,
+                            style: SpendItTextStyles.bold.copyWith(fontSize: 24),
+                          ),
+                          Icon(SolarIconsOutline.altArrowRight),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ).onTap(
+            onTap: () {
+              Toast.show(context, title: 'THIS IS A TEST TOAST');
+            },
+          ),
+    );
+  }
+}
+
 class StatisticCard extends StatelessWidget {
-  const StatisticCard({super.key, required this.transactionType});
+  const StatisticCard(this.transactionType, {super.key});
 
   final TransactionType transactionType;
 
@@ -253,10 +320,7 @@ class SpendItHeader extends StatelessWidget {
           ),
           Text(
             'Selamat Datang Kembali!',
-            style: SpendItTextStyles.medium.copyWith(
-              fontSize: 16,
-              color: SpendItColors.primaryColor,
-            ),
+            style: SpendItTextStyles.bold.copyWith(fontSize: 18, color: SpendItColors.primaryColor),
           ),
           const Spacer(),
           IconButton.filled(

@@ -1,41 +1,57 @@
-final String goalsDb = 'goals.db';
-final String fundsDb = 'funds.db';
-final String expenseDb = 'expense.db';
-final String incomeDb = 'income.db';
+const String goalsTable = 'goals';
+const String fundsTable = 'funds';
+const String expenseTable = 'expense';
+const String incomeTable = 'income';
+const String budgetTable = 'budget';
 
-final String executeExpenseTable = '''
-    CREATE TABLE $expenseDb (
+const String executeBudgetTable =
+    '''
+    CREATE TABLE $budgetTable (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      type TEXT NOT NULL,
+      targetValue INTEGER NOT NULL,
+      currentValue INTEGER NOT NULL,
+    )
+    ''';
+
+const String executeExpenseTable =
+    '''
+    CREATE TABLE $expenseTable (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       type TEXT NOT NULL,
       value INTEGER NOT NULL,
       description TEXT,
       date DATE NOT NULL
     )
-''';
+    ''';
 
-final String executeIncomeTable = '''
-    CREATE TABLE $incomeDb (
+const String executeIncomeTable =
+    '''
+    CREATE TABLE $incomeTable (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       value INTEGER NOT NULL,
       date DATE NOT NULL
     )
-''';
+    ''';
 
-final String executeGoalsTable = '''
-    CREATE TABLE $goalsDb (
+const String executeGoalsTable =
+    '''
+    CREATE TABLE $goalsTable (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
       target INTEGER NOT NULL,
       progress INTEGER NOT NULL,
       deadline DATE NOT NULL
     )
-''';
-final String executeFundsTable = '''
-    CREATE TABLE $fundsDb (
+    ''';
+
+const String executeFundsTable =
+    '''
+    CREATE TABLE $fundsTable (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       goals_id INTEGER NOT NULL,
       value INTEGER NOT NULL,
       date DATETIME NOT NULL,
       FOREIGN KEY (goals_id) REFERENCES goals (id) ON DELETE CASCADE
     )
-''';
+    ''';
