@@ -1,36 +1,34 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit_core/spendit_core.dart';
 import 'package:spendit_remake/src/features/budgets/domain/models/budget_model.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-part 'budget_datasource.g.dart';
+part 'budget_data_source.g.dart';
 
-abstract class BudgetDatasource {
-  Future<Database> initDB();
+abstract class BudgetDataSource {
   Future<Database> get database;
   Future<int> create(BudgetModel value);
   Future<List<BudgetModel>> read();
   Future<int> update(BudgetModel value);
 }
 
-class BudgetDatasourceImpl implements BudgetDatasource {
-  BudgetDatasourceImpl() {
-    initDB();
+class BudgetDataSourceImpl implements BudgetDataSource {
+  BudgetDataSourceImpl() {
+    _initDB();
   }
 
   static Database? _database;
 
   @override
   Future<Database> get database async {
-    _database ??= await initDB();
+    _database ??= await _initDB();
     return _database!;
   }
 
-  @override
-  Future<Database> initDB() async {
+  Future<Database> _initDB() async {
     final db = await getDatabasesPath();
     final path = join(db, '$budgetTable.db');
 
@@ -73,6 +71,6 @@ class BudgetDatasourceImpl implements BudgetDatasource {
 }
 
 @riverpod
-BudgetDatasource budgetDatasource(Ref ref) {
-  return BudgetDatasourceImpl();
+BudgetDataSource budgetDataSource(Ref ref) {
+  return BudgetDataSourceImpl();
 }

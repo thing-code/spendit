@@ -1,14 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/features/budgets/data/datasources/budget_datasource.dart';
+import 'package:spendit_remake/src/features/budgets/data/datasources/budget_data_source.dart';
 import 'package:spendit_remake/src/features/budgets/domain/models/budget_model.dart';
 import 'package:spendit_remake/src/features/budgets/domain/repositories/budget_repository.dart';
 
 part 'budget_repository_impl.g.dart';
 
 class BudgetRepositoryImpl implements BudgetRepository {
-  final BudgetDatasource datasource;
+  final BudgetDataSource datasource;
   BudgetRepositoryImpl(this.datasource);
 
   @override
@@ -22,7 +22,7 @@ class BudgetRepositoryImpl implements BudgetRepository {
   }
 
   @override
-  Future<LocalResponseModel<List<BudgetModel>>> read() async  {
+  Future<LocalResponseModel<List<BudgetModel>>> read() async {
     try {
       final result = await datasource.read();
       return LocalResponseSuccess(result);
@@ -32,7 +32,7 @@ class BudgetRepositoryImpl implements BudgetRepository {
   }
 
   @override
-  Future<LocalResponseModel<int>> update(BudgetModel value) async  {
+  Future<LocalResponseModel<int>> update(BudgetModel value) async {
     try {
       final result = await datasource.update(value);
       return LocalResponseSuccess(result);
@@ -44,6 +44,6 @@ class BudgetRepositoryImpl implements BudgetRepository {
 
 @riverpod
 BudgetRepository budgetRepository(Ref ref) {
-  final datasource = ref.watch(budgetDatasourceProvider);
+  final datasource = ref.watch(budgetDataSourceProvider);
   return BudgetRepositoryImpl(datasource);
 }

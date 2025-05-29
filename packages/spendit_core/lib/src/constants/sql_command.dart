@@ -1,7 +1,6 @@
 const String goalsTable = 'goals';
 const String fundsTable = 'funds';
-const String expenseTable = 'expense';
-const String incomeTable = 'income';
+const String transactionTable = 'transaction';
 const String budgetTable = 'budget';
 
 const String executeBudgetTable =
@@ -14,22 +13,13 @@ const String executeBudgetTable =
     )
     ''';
 
-const String executeExpenseTable =
+const String executeTransactionTable =
     '''
-    CREATE TABLE $expenseTable (
+    CREATE TABLE $transactionTable (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      type TEXT NOT NULL,
+      type TEXT,
       value INTEGER NOT NULL,
       description TEXT,
-      date DATE NOT NULL
-    )
-    ''';
-
-const String executeIncomeTable =
-    '''
-    CREATE TABLE $incomeTable (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      value INTEGER NOT NULL,
       date DATE NOT NULL
     )
     ''';

@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 extension DateExt on DateTime {
-  toFormat([String? newPattern, String? locale]) {
+  toFormat([String newPattern = "yyyy-MM-dd", String? locale]) {
     return DateFormat(newPattern, locale).format(this);
   }
 
@@ -12,5 +12,13 @@ extension DateExt on DateTime {
   bool get isToday {
     var today = DateTime.now();
     return year == today.year && month == today.month && day == today.day;
+  }
+
+  DateTime get toStartOfMonth {
+    return DateTime(year, month, 1);
+  }
+
+  DateTime get toEndOfMonth {
+    return DateTime(year, month + 1, 0);
   }
 }

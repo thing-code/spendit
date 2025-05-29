@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:native_storage/native_storage.dart';
 import 'package:spendit_core/spendit_core.dart';
 
-typedef BudgetUtilCallback = Future<void> Function();
+typedef BudgetResetCallback = Future<void> Function();
 
-class BudgetUtil {
-  final BudgetUtilCallback onReset;
+class BudgetReset {
+  final BudgetResetCallback onReset;
 
-  BudgetUtil({required this.onReset});
+  BudgetReset({required this.onReset});
 
   final _storage = NativeStorage();
 
