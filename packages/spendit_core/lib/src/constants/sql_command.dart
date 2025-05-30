@@ -8,8 +8,8 @@ const String executeBudgetTable =
     CREATE TABLE $budgetTable (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       type TEXT NOT NULL,
-      targetValue INTEGER NOT NULL,
-      currentValue INTEGER NOT NULL,
+      targetAmount INTEGER NOT NULL,
+      currentAmount INTEGER NOT NULL,
     )
     ''';
 
@@ -18,7 +18,7 @@ const String executeTransactionTable =
     CREATE TABLE $transactionTable (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       type TEXT,
-      value INTEGER NOT NULL,
+      amount INTEGER NOT NULL,
       description TEXT,
       date DATE NOT NULL
     )

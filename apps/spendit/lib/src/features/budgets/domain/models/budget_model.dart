@@ -22,8 +22,8 @@ part 'budget_model.g.dart';
 abstract class BudgetModel with _$BudgetModel {
   const factory BudgetModel({
     int? id,
-    @Default(0) int targetValue,
-    @Default(0) int currentValue,
+    @Default(0) int targetAmount,
+    @Default(0) int currentAmount,
     required ExpenseCategory category,
   }) = _BudgetModel;
 

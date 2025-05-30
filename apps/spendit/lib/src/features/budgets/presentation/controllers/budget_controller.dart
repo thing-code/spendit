@@ -45,7 +45,7 @@ class BudgetController extends _$BudgetController {
     final budget = budgets.firstWhere((element) => element.category == category);
     final result = await ref
         .read(budgetRepositoryProvider)
-        .update(budget.copyWith(currentValue: budget.currentValue + amount));
+        .update(budget.copyWith(currentAmount: budget.currentAmount + amount));
     ref.invalidateSelf();
     return result is LocalResponseSuccess;
   }
@@ -53,7 +53,7 @@ class BudgetController extends _$BudgetController {
   Future<void> reset() async {
     final budgets = await future;
     for (var budget in budgets) {
-      await ref.read(budgetRepositoryProvider).update(budget.copyWith(currentValue: 0));
+      await ref.read(budgetRepositoryProvider).update(budget.copyWith(currentAmount: 0));
     }
     ref.invalidateSelf();
   }
