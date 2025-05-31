@@ -34,6 +34,16 @@ class TransactionController extends _$TransactionController {
 
   Future<bool> add(TransactionModel value) async {
     final result = await ref.read(transactionRepositoryProvider).create(value);
+    ref.invalidateSelf();
+    return switch (result) {
+      LocalResponseSuccess() => true,
+      LocalResponseFailure() => false,
+    };
+  }
+
+  Future<bool> edit(TransactionModel value) async {
+    final result = await ref.read(transactionRepositoryProvider).update(value);
+    ref.invalidateSelf();
     return switch (result) {
       LocalResponseSuccess() => true,
       LocalResponseFailure() => false,

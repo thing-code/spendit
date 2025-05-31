@@ -2,8 +2,12 @@ import 'package:path/path.dart';
 import 'package:spendit_core/spendit_core.dart';
 import 'package:spendit_remake/src/features/financial_goals/domain/models/financial_goal_model.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-abstract class GoalsDataSource {
+part 'financial_goals_data_source.g.dart';
+
+abstract class FinancialGoalsDataSource {
   Future<List<FinancialGoalModel>> read();
   Future<int> create(FinancialGoalModel goal);
   Future<int> update(FinancialGoalModel goal);
@@ -11,7 +15,7 @@ abstract class GoalsDataSource {
   Future<int> delete(int id);
 }
 
-class GoalsDataSourceImpl implements GoalsDataSource {
+class FinancialGoalsDataSourceImpl implements FinancialGoalsDataSource {
   static Database? _database;
 
   Future<Database> get database async {
@@ -127,4 +131,9 @@ class GoalsDataSourceImpl implements GoalsDataSource {
       return result;
     });
   }
+}
+
+@riverpod
+FinancialGoalsDataSource financialGoalsDataSource(Ref ref) {
+  return FinancialGoalsDataSourceImpl();
 }
