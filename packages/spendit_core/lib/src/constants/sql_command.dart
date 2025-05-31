@@ -1,47 +1,48 @@
-const String goalsTable = 'goals';
-const String fundsTable = 'funds';
-const String transactionTable = 'transaction';
-const String budgetTable = 'budget';
+import 'package:spendit_core/spendit_core.dart';
 
-const String executeBudgetTable =
-    '''
-    CREATE TABLE $budgetTable (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      type TEXT NOT NULL,
-      targetAmount INTEGER NOT NULL,
-      currentAmount INTEGER NOT NULL,
-    )
-    ''';
+abstract class SqlCommand {
+  static String get executeBudgetTable =>
+      '''
+      CREATE TABLE IF NOT EXISTS ${SQLiteTable.budgets.name} (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        type TEXT NOT NULL,
+        targetAmount INTEGER NOT NULL,
+        currentAmount INTEGER NOT NULL,
+      )
+      ''';
 
-const String executeTransactionTable =
-    '''
-    CREATE TABLE $transactionTable (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      type TEXT,
-      amount INTEGER NOT NULL,
-      description TEXT,
-      date DATE NOT NULL
-    )
-    ''';
+  static String get executeTransactionTable =>
+      '''
+      CREATE TABLE IF NOT EXISTS ${SQLiteTable.transactions.name} (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        type TEXT NOT NULL,
+        category TEXT,
+        amount INTEGER NOT NULL,
+        description TEXT,
+        date DATE NOT NULL
+      )
+      ''';
 
-const String executeGoalsTable =
-    '''
-    CREATE TABLE $goalsTable (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL,
-      target INTEGER NOT NULL,
-      progress INTEGER NOT NULL,
-      deadline DATE NOT NULL
-    )
-    ''';
+  static String get executeGoalsTable =>
+      '''
+      CREATE TABLE IF NOT EXISTS ${SQLiteTable.goals.name} (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        description TEXT,
+        targetAmount INTEGER NOT NULL,
+        progressAmount INTEGER NOT NULL,
+        deadline DATE
+      )
+      ''';
 
-const String executeFundsTable =
-    '''
-    CREATE TABLE $fundsTable (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      goals_id INTEGER NOT NULL,
-      value INTEGER NOT NULL,
-      date DATETIME NOT NULL,
-      FOREIGN KEY (goals_id) REFERENCES goals (id) ON DELETE CASCADE
-    )
-    ''';
+  static String get executeGoalsProgressTable =>
+      '''
+      CREATE TABLE IF NOT EXISTS ${SQLiteTable.goalsProgress.name} (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        goalsId INTEGER NOT NULL,
+        amount INTEGER NOT NULL,
+        date DATETIME NOT NULL,
+        FOREIGN KEY (goalsId) REFERENCES goals (id) ON DELETE CASCADE
+      )
+      ''';
+}

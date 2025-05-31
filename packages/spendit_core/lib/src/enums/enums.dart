@@ -23,15 +23,14 @@ enum TransactionType {
   final Color fg;
   final Color bg;
   const TransactionType(this.label, this.fg, this.bg);
+}
 
-  static TransactionType fromString(String value) {
-    switch (value) {
-      case 'income':
-        return TransactionType.income;
-      case 'expense':
-        return TransactionType.expense;
-      default:
-        throw ArgumentError('Invalid transaction type: $value');
-    }
-  }
+enum SQLiteTable {
+  goals('goals_database.db'),
+  goalsProgress('goals_progress_database.db'),
+  budgets('budgets_database.db'),
+  transactions('transactions_database.db');
+
+  final String db;
+  const SQLiteTable(this.db);
 }

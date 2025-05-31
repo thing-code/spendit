@@ -33,9 +33,9 @@ class TransactionRepositoryImpl implements TransactionRepository {
   }
 
   @override
-  Future<LocalResponseModel<List<TransactionModel>>> readAtMonth(DateTime month) async {
+  Future<LocalResponseModel<List<TransactionModel>>> readByMonth(DateTime month) async {
     try {
-      final result = await datasource.readAtMonth(month);
+      final result = await datasource.readByMonth(month);
       return LocalResponseSuccess(result);
     } catch (e) {
       return LocalResponseFailure(e.toString());
@@ -46,6 +46,16 @@ class TransactionRepositoryImpl implements TransactionRepository {
   Future<LocalResponseModel<int>> update(TransactionModel value) async {
     try {
       final result = await datasource.update(value);
+      return LocalResponseSuccess(result);
+    } catch (e) {
+      return LocalResponseFailure(e.toString());
+    }
+  }
+  
+  @override
+  Future<LocalResponseModel<List<TransactionModel>>> readByType(TransactionType type) async {
+    try {
+      final result = await datasource.readByType(type);
       return LocalResponseSuccess(result);
     } catch (e) {
       return LocalResponseFailure(e.toString());

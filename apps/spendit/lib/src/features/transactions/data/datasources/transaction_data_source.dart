@@ -11,7 +11,8 @@ abstract class TransactionDataSource {
   Future<Database> get database;
   Future<int> create(TransactionModel value);
   Future<List<TransactionModel>> read();
-  Future<List<TransactionModel>> readAtMonth(DateTime month);
+  Future<List<TransactionModel>> readByMonth(DateTime month);
+  Future<List<TransactionModel>> readByType(TransactionType type);
   Future<int> update(TransactionModel value);
 }
 
@@ -24,13 +25,13 @@ class TransactionDataSourceImpl implements TransactionDataSource {
 
   Future<Database> _initDB() async {
     final db = await getDatabasesPath();
-    final path = join(db, '$transactionTable.db');
+    final path = join(db, SQLiteTable.transactions.db);
 
     return await openDatabase(
       path,
       version: 1,
       onCreate: (db, version) async {
-        await db.execute(executeTransactionTable);
+        await db.execute(SqlCommand.executeTransactionTable);
       },
     );
   }
@@ -40,7 +41,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
     final db = await database;
     return db.transaction((txn) async {
       return await txn.insert(
-        transactionTable,
+        SQLiteTable.transactions.name,
         value.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
@@ -56,7 +57,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   @override
   Future<List<TransactionModel>> read() async {
     final db = await database;
-    final response = await db.query(transactionTable, orderBy: "date DESC");
+    final response = await db.query(SQLiteTable.transactions.name, orderBy: "date DESC");
     final data = response.map((e) => TransactionModel.fromJson(e)).toList();
     return data;
   }
@@ -66,7 +67,7 @@ class TransactionDataSourceImpl implements TransactionDataSource {
     final db = await database;
     return db.transaction((txn) async {
       return await txn.update(
-        transactionTable,
+        SQLiteTable.transactions.name,
         value.toJson(),
         where: 'id = ?',
         whereArgs: [value.id],
@@ -75,14 +76,27 @@ class TransactionDataSourceImpl implements TransactionDataSource {
   }
 
   @override
-  Future<List<TransactionModel>> readAtMonth(DateTime month) async {
+  Future<List<TransactionModel>> readByMonth(DateTime month) async {
     final db = await database;
     final start = month.toStartOfMonth;
     final end = month.toEndOfMonth;
     final response = await db.query(
-      transactionTable,
+      SQLiteTable.transactions.name,
       where: 'date BETWEEN ? AND ?',
       whereArgs: [start.toFormat(), end.toFormat()],
+      orderBy: "date DESC",
+    );
+    final data = response.map((e) => TransactionModel.fromJson(e)).toList();
+    return data;
+  }
+
+  @override
+  Future<List<TransactionModel>> readByType(TransactionType type) async {
+    final db = await database;
+    final response = await db.query(
+      SQLiteTable.transactions.name,
+      where: 'type =?',
+      whereArgs: [type.name],
       orderBy: "date DESC",
     );
     final data = response.map((e) => TransactionModel.fromJson(e)).toList();

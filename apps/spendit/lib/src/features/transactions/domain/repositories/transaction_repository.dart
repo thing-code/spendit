@@ -4,6 +4,7 @@ import 'package:spendit_remake/src/features/transactions/domain/models/transacti
 abstract class TransactionRepository {
   Future<LocalResponseModel<int>> create(TransactionModel value);
   Future<LocalResponseModel<List<TransactionModel>>> read();
-  Future<LocalResponseModel<List<TransactionModel>>> readAtMonth(DateTime month);
+  Future<LocalResponseModel<List<TransactionModel>>> readByMonth(DateTime month);
+  Future<LocalResponseModel<List<TransactionModel>>> readByType(TransactionType type);
   Future<LocalResponseModel<int>> update(TransactionModel value);
 }

@@ -13,6 +13,7 @@ sealed class TransactionModel with _$TransactionModel {
     required ExpenseCategory category,
     required String description,
     required int amount,
+    @Default(TransactionType.expense) TransactionType type,
     @DateConverter() required DateTime date,
   }) = TransactionExpense;
   
@@ -20,6 +21,7 @@ sealed class TransactionModel with _$TransactionModel {
     int? id,
     required String description,
     required int amount,
+    @Default(TransactionType.income) TransactionType type,
     @DateConverter() required DateTime date,
   }) = TransactionIncome;
 

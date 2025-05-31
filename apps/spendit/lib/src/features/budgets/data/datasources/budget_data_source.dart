@@ -9,7 +9,6 @@ import 'package:sqflite/sqflite.dart';
 part 'budget_data_source.g.dart';
 
 abstract class BudgetDataSource {
-  Future<Database> get database;
   Future<int> create(BudgetModel value);
   Future<List<BudgetModel>> read();
   Future<int> update(BudgetModel value);
@@ -22,7 +21,6 @@ class BudgetDataSourceImpl implements BudgetDataSource {
 
   static Database? _database;
 
-  @override
   Future<Database> get database async {
     _database ??= await _initDB();
     return _database!;
@@ -30,13 +28,13 @@ class BudgetDataSourceImpl implements BudgetDataSource {
 
   Future<Database> _initDB() async {
     final db = await getDatabasesPath();
-    final path = join(db, '$budgetTable.db');
+    final path = join(db, SQLiteTable.budgets.db);
 
     return await openDatabase(
       path,
       version: 1,
       onCreate: (db, version) async {
-        await db.execute(executeBudgetTable);
+        await db.execute(SqlCommand.executeBudgetTable);
       },
     );
   }
@@ -46,7 +44,7 @@ class BudgetDataSourceImpl implements BudgetDataSource {
     final db = await database;
     return db.transaction((txn) async {
       return await txn.insert(
-        budgetTable,
+        SQLiteTable.budgets.name,
         value.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
@@ -56,7 +54,7 @@ class BudgetDataSourceImpl implements BudgetDataSource {
   @override
   Future<List<BudgetModel>> read() async {
     final db = await database;
-    final response = await db.query(budgetTable);
+    final response = await db.query(SQLiteTable.budgets.name);
     final data = response.map((e) => BudgetModel.fromJson(e)).toList();
     return data;
   }
@@ -65,7 +63,7 @@ class BudgetDataSourceImpl implements BudgetDataSource {
   Future<int> update(BudgetModel value) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.update(budgetTable, value.toJson(), where: 'id = ?', whereArgs: [value.id]);
+      return await txn.update(SQLiteTable.budgets.name, value.toJson(), where: 'id = ?', whereArgs: [value.id]);
     });
   }
 }
