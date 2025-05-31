@@ -1,14 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path/path.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit_core/spendit_core.dart';
+import 'package:spendit_remake/src/database/database.dart';
 import 'package:spendit_remake/src/features/transactions/domain/models/transaction_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 part 'transaction_data_source.g.dart';
 
 abstract class TransactionDataSource {
-  Future<Database> get database;
   Future<int> create(TransactionModel value);
   Future<List<TransactionModel>> read();
   Future<List<TransactionModel>> readByMonth(DateTime month);
@@ -17,46 +16,21 @@ abstract class TransactionDataSource {
 }
 
 class TransactionDataSourceImpl implements TransactionDataSource {
-  TransactionDataSourceImpl() {
-    _initDB();
-  }
+  TransactionDataSourceImpl(this.db);
 
-  static Database? _database;
+  final Database db;
 
-  Future<Database> _initDB() async {
-    final db = await getDatabasesPath();
-    final path = join(db, SQLiteTable.transactions.db);
-
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: (db, version) async {
-        await db.execute(SqlCommand.executeTransactionTable);
-      },
+  @override
+  Future<int> create(TransactionModel value) async {
+    return db.insert(
+      SQLiteTable.transactions.name,
+      value.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
   @override
-  Future<int> create(TransactionModel value) async {
-    final db = await database;
-    return db.transaction((txn) async {
-      return await txn.insert(
-        SQLiteTable.transactions.name,
-        value.toJson(),
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
-    });
-  }
-
-  @override
-  Future<Database> get database async {
-    _database ??= await _initDB();
-    return _database!;
-  }
-
-  @override
   Future<List<TransactionModel>> read() async {
-    final db = await database;
     final response = await db.query(SQLiteTable.transactions.name, orderBy: "date DESC");
     final data = response.map((e) => TransactionModel.fromJson(e)).toList();
     return data;
@@ -64,20 +38,16 @@ class TransactionDataSourceImpl implements TransactionDataSource {
 
   @override
   Future<int> update(TransactionModel value) async {
-    final db = await database;
-    return db.transaction((txn) async {
-      return await txn.update(
-        SQLiteTable.transactions.name,
-        value.toJson(),
-        where: 'id = ?',
-        whereArgs: [value.id],
-      );
-    });
+    return db.update(
+      SQLiteTable.transactions.name,
+      value.toJson(),
+      where: 'id = ?',
+      whereArgs: [value.id],
+    );
   }
 
   @override
   Future<List<TransactionModel>> readByMonth(DateTime month) async {
-    final db = await database;
     final start = month.toStartOfMonth;
     final end = month.toEndOfMonth;
     final response = await db.query(
@@ -92,7 +62,6 @@ class TransactionDataSourceImpl implements TransactionDataSource {
 
   @override
   Future<List<TransactionModel>> readByType(TransactionType type) async {
-    final db = await database;
     final response = await db.query(
       SQLiteTable.transactions.name,
       where: 'type =?',
@@ -106,5 +75,6 @@ class TransactionDataSourceImpl implements TransactionDataSource {
 
 @riverpod
 TransactionDataSource transactionDataSource(Ref ref) {
-  return TransactionDataSourceImpl();
+  final db = ref.watch(databaseProvider);
+  return TransactionDataSourceImpl(db);
 }

@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path/path.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit_core/spendit_core.dart';
+import 'package:spendit_remake/src/database/database.dart';
 import 'package:spendit_remake/src/features/budgets/domain/models/budget_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -15,49 +15,21 @@ abstract class BudgetDataSource {
 }
 
 class BudgetDataSourceImpl implements BudgetDataSource {
-  BudgetDataSourceImpl() {
-    _initDB();
-  }
+  final Database db;
 
-  static Database? _database;
+  BudgetDataSourceImpl(this.db);
 
-  Future<Database> get database async {
-    _database ??= await _initDB();
-    return _database!;
-  }
-
-  set setDatabase(Database value) {
-    _database = value;
-  }
-
-  Future<Database> _initDB() async {
-    final db = await getDatabasesPath();
-    final path = join(db, SQLiteTable.budgets.db);
-
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: (db, version) async {
-        await db.execute(SqlCommand.executeBudgetTable);
-      },
+  @override
+  Future<int> create(BudgetModel value) async {
+    return db.insert(
+      SQLiteTable.budgets.name,
+      value.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
   @override
-  Future<int> create(BudgetModel value) async {
-    final db = await database;
-    return db.transaction((txn) async {
-      return await txn.insert(
-        SQLiteTable.budgets.name,
-        value.toJson(),
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
-    });
-  }
-
-  @override
   Future<List<BudgetModel>> read() async {
-    final db = await database;
     final response = await db.query(SQLiteTable.budgets.name);
     final data = response.map((e) => BudgetModel.fromJson(e)).toList();
     return data;
@@ -65,58 +37,17 @@ class BudgetDataSourceImpl implements BudgetDataSource {
 
   @override
   Future<int> update(BudgetModel value) async {
-    final db = await database;
-    return db.transaction((txn) async {
-      return await txn.update(
-        SQLiteTable.budgets.name,
-        value.toJson(),
-        where: 'id = ?',
-        whereArgs: [value.id],
-      );
-    });
+    return db.update(
+      SQLiteTable.budgets.name,
+      value.toJson(),
+      where: 'id = ?',
+      whereArgs: [value.id],
+    );
   }
 }
 
 @riverpod
 BudgetDataSource budgetDataSource(Ref ref) {
-  return BudgetDataSourceImpl();
-}
-
-class BudgetDataSourceForTest implements BudgetDataSource {
-  final Database database;
-
-  BudgetDataSourceForTest(this.database);
-
-  @override
-  Future<int> create(BudgetModel value) async {
-    final db = database;
-    return db.transaction((txn) async {
-      return await txn.insert(
-        SQLiteTable.budgets.name,
-        value.toJson(),
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
-    });
-  }
-
-  @override
-  Future<List<BudgetModel>> read() async {
-    final db = database;
-    final response = await db.query(SQLiteTable.budgets.name);
-    final data = response.map((e) => BudgetModel.fromJson(e)).toList();
-    return data;
-  }
-
-  @override
-  Future<int> update(BudgetModel value) async {
-    final db = database;
-    return db.transaction((txn) async {
-      return await txn.update(
-        SQLiteTable.budgets.name,
-        value.toJson(),
-        where: 'id = ?',
-        whereArgs: [value.id],
-      );
-    });
-  }
+  final database = ref.watch(databaseProvider);
+  return BudgetDataSourceImpl(database);
 }

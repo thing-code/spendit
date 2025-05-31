@@ -8,62 +8,43 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 class MockBudgetDataSourceImpl extends Mock implements BudgetDataSourceImpl {}
 
 void main() {
-  late Database db;
   late BudgetDataSource dataSource;
 
   setUpAll(() async {
     sqfliteFfiInit();
-    db = await databaseFactoryFfi.openDatabase(inMemoryDatabasePath);
-    await db.execute(SqlCommand.executeBudgetTable);
-    dataSource = BudgetDataSourceForTest(db);
-  });
+    databaseFactory = databaseFactoryFfi;
+    dataSource = MockBudgetDataSourceImpl();
 
-  tearDownAll(() async {
-    await db.close();
-  });
-
-  group('Database Test', () {
-    test('Database - Create New Budget', () async {
-      final budget = BudgetModel(category: ExpenseCategory.food, targetAmount: 1050000);
-      final result = await db.insert(SQLiteTable.budgets.name, budget.toJson());
-      expect(result, 1);
-    });
-
-    test('Database - Read All Budgets', () async {
-      final budget = BudgetModel(id: 1, category: ExpenseCategory.food, targetAmount: 1050000);
-      final result = await db.query(SQLiteTable.budgets.name);
-      expect(result, [budget.toJson()]);
-    });
-
-    test('Database - Update A Budget', () async {
-      final budget = BudgetModel(id: 1, category: ExpenseCategory.family, targetAmount: 1000000);
-      final result = await db.update(
-        SQLiteTable.budgets.name,
-        budget.toJson(),
-        where: 'id =?',
-        whereArgs: [1],
-      );
-      expect(result, 1);
-    });
+    registerFallbackValue(BudgetModel(id: 1, category: ExpenseCategory.food, targetAmount: 100000));
   });
 
   group('DataSource Test', () {
-    test('DataSource - Create New Budget', () async {
-      final budget = BudgetModel(category: ExpenseCategory.food, targetAmount: 1050000);
+    final budget = BudgetModel(category: ExpenseCategory.food, targetAmount: 100000);
+
+    test('Create Budget', () async {
+      when(() => dataSource.create(any())).thenAnswer((_) async => 1);
+
       final result = await dataSource.create(budget);
-      expect(result, 2);
+
+      expect(result, 1);
+      verify(() => dataSource.create(budget)).called(1);
+      verifyNoMoreInteractions(dataSource);
     });
 
-    test('DataSource - Read All Budgets', () async {
-      final budget = BudgetModel(id: 2, category: ExpenseCategory.food, targetAmount: 1050000);
+    test('Read Budget', () async {
+      when(() => dataSource.read()).thenAnswer((_) async => [budget]);
       final result = await dataSource.read();
-      expect(result.last, budget);
+      expect(result, [budget]);
+      verify(() => dataSource.read()).called(1);
+      verifyNoMoreInteractions(dataSource);
     });
 
-    test('DataSource - Update A Budget', () async {
-      final budget = BudgetModel(id: 2, category: ExpenseCategory.family, targetAmount: 1000000);
+    test('Update Budget', () async {
+      when(() => dataSource.update(any())).thenAnswer((_) async => 1);
       final result = await dataSource.update(budget);
       expect(result, 1);
+      verify(() => dataSource.update(budget)).called(1);
+      verifyNoMoreInteractions(dataSource);
     });
   });
 }

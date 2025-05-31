@@ -21,6 +21,7 @@ Future<Database> initDatabase() async {
       await db.execute(SqlCommand.executeTransactionTable);
       await db.execute(SqlCommand.executeGoalsTable);
       await db.execute(SqlCommand.executeGoalsProgressTable);
+      // Todo: Tambahkan execute jika ada tabel baru.
     },
   );
 }

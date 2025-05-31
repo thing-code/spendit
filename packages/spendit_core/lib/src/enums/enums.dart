@@ -25,12 +25,4 @@ enum TransactionType {
   const TransactionType(this.label, this.fg, this.bg);
 }
 
-enum SQLiteTable {
-  goals('goals_database.db'),
-  goalsProgress('goals_progress_database.db'),
-  budgets('budgets_database.db'),
-  transactions('transactions_database.db');
-
-  final String db;
-  const SQLiteTable(this.db);
-}
+enum SQLiteTable { goals, goalsProgress, budgets, transactions }
