@@ -26,6 +26,10 @@ class BudgetDataSourceImpl implements BudgetDataSource {
     return _database!;
   }
 
+  set setDatabase(Database value) {
+    _database = value;
+  }
+
   Future<Database> _initDB() async {
     final db = await getDatabasesPath();
     final path = join(db, SQLiteTable.budgets.db);
@@ -63,7 +67,12 @@ class BudgetDataSourceImpl implements BudgetDataSource {
   Future<int> update(BudgetModel value) async {
     final db = await database;
     return db.transaction((txn) async {
-      return await txn.update(SQLiteTable.budgets.name, value.toJson(), where: 'id = ?', whereArgs: [value.id]);
+      return await txn.update(
+        SQLiteTable.budgets.name,
+        value.toJson(),
+        where: 'id = ?',
+        whereArgs: [value.id],
+      );
     });
   }
 }
@@ -71,4 +80,43 @@ class BudgetDataSourceImpl implements BudgetDataSource {
 @riverpod
 BudgetDataSource budgetDataSource(Ref ref) {
   return BudgetDataSourceImpl();
+}
+
+class BudgetDataSourceForTest implements BudgetDataSource {
+  final Database database;
+
+  BudgetDataSourceForTest(this.database);
+
+  @override
+  Future<int> create(BudgetModel value) async {
+    final db = database;
+    return db.transaction((txn) async {
+      return await txn.insert(
+        SQLiteTable.budgets.name,
+        value.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    });
+  }
+
+  @override
+  Future<List<BudgetModel>> read() async {
+    final db = database;
+    final response = await db.query(SQLiteTable.budgets.name);
+    final data = response.map((e) => BudgetModel.fromJson(e)).toList();
+    return data;
+  }
+
+  @override
+  Future<int> update(BudgetModel value) async {
+    final db = database;
+    return db.transaction((txn) async {
+      return await txn.update(
+        SQLiteTable.budgets.name,
+        value.toJson(),
+        where: 'id = ?',
+        whereArgs: [value.id],
+      );
+    });
+  }
 }

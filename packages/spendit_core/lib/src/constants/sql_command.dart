@@ -5,9 +5,9 @@ abstract class SqlCommand {
       '''
       CREATE TABLE IF NOT EXISTS ${SQLiteTable.budgets.name} (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        type TEXT NOT NULL,
+        category TEXT NOT NULL,
         targetAmount INTEGER NOT NULL,
-        currentAmount INTEGER NOT NULL,
+        currentAmount INTEGER NOT NULL
       )
       ''';
 

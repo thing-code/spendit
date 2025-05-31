@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +11,9 @@ import 'package:solar_icons/solar_icons.dart';
 import 'package:spendit_core/spendit_core.dart';
 import 'package:spendit_remake/src/gen/assets.gen.dart';
 import 'package:spendit_remake/src/gen/fonts.gen.dart';
+import 'package:sqflite/sqflite.dart';
+
+import 'src/database/database.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -21,7 +25,12 @@ Future<void> main() async {
         SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       );
 
-      runApp(ProviderScope(child: const MainApp()));
+      // Inisialisasi SQLite Database
+      final db = await initDatabase();
+
+      runApp(
+        ProviderScope(overrides: [databaseProvider.overrideWithValue(db)], child: const MainApp()),
+      );
     },
     (error, stack) async {
       logger.error(error);
@@ -50,8 +59,34 @@ class MainApp extends StatelessWidget {
         ErrorWidget.builder = (errorDetails) => SpendItErrorWidget(errorDetails: errorDetails);
         return child!;
       },
-      home: Home(),
+      home: Dummy(),
     );
+  }
+}
+
+class Dummy extends ConsumerWidget {
+  const Dummy({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final db = ref.watch(databaseProvider);
+    return Scaffold(
+      body: Center(child: Text(db.toString())),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final result = await getTableNames(db);
+          log(result.toString());
+        },
+        child: HugeIcon(icon: HugeIcons.strokeRoundedAiPhone01, color: Colors.white),
+      ),
+    );
+  }
+
+  Future<List<String>> getTableNames(Database db) async {
+    List<Map<String, dynamic>> tables = await db.rawQuery(
+      "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' AND name NOT LIKE 'android_metadata';",
+    );
+    return tables.map((row) => row['name'] as String).toList();
   }
 }
 
