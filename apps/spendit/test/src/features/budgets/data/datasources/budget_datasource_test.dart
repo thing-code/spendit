@@ -18,7 +18,7 @@ void main() {
     registerFallbackValue(BudgetModel(id: 1, category: ExpenseCategory.food, targetAmount: 100000));
   });
 
-  group('DataSource Test', () {
+  group('BudgetDataSource Test', () {
     final budget = BudgetModel(category: ExpenseCategory.food, targetAmount: 100000);
 
     test('Create Budget', () async {

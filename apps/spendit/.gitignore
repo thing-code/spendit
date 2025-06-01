@@ -51,3 +51,6 @@ app.*.map.json
 
 # Enviroment files
 .env
+
+# Test Coverage
+coverage/

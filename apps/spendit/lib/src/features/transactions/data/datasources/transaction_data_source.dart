@@ -68,7 +68,11 @@ class TransactionDataSourceImpl implements TransactionDataSource {
       whereArgs: [type.name],
       orderBy: "date DESC",
     );
-    final data = response.map((e) => TransactionModel.fromJson(e)).toList();
+    if (type == TransactionType.expense) {
+      final data = response.map((e) => TransactionExpense.fromJson(e)).toList();
+      return data;
+    }
+    final data = response.map((e) => TransactionIncome.fromJson(e)).toList();
     return data;
   }
 }

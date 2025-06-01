@@ -24,7 +24,7 @@ void main() {
     await db.close();
   });
 
-  group('Repository Test', () {
+  group('FinancialRepository Test', () {
     final goal = FinancialGoalModel(id: 1, name: 'Test', targetAmount: 100000);
     final progress = FinancialGoalProgressModel(
       id: 1,

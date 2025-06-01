@@ -19,7 +19,8 @@ abstract class SqlCommand {
         category TEXT,
         amount INTEGER NOT NULL,
         description TEXT,
-        date DATE NOT NULL
+        date DATE NOT NULL,
+        runtimeType TEXT
       )
       ''';
 

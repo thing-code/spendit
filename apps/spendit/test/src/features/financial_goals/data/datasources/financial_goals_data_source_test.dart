@@ -17,7 +17,7 @@ void main() {
     registerFallbackValue(FinancialGoalModel(id: 1, name: 'Test', targetAmount: 100000));
   });
 
-  group('DataSource Test', () {
+  group('FinancialDataSource Test', () {
     final financialGoal = FinancialGoalModel(name: 'Test', targetAmount: 100000);
 
     test('Create Financial Goal', () async {

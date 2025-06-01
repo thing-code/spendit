@@ -23,7 +23,7 @@ void main() {
     await db.close();
   });
 
-  group('Repository Test', () {
+  group('BudgetRepository Test', () {
     final budget = BudgetModel(id: 1, category: ExpenseCategory.food, targetAmount: 100000);
     test('Create Budget', () async {
       final result = await repository.create(budget);
