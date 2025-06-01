@@ -1,9 +1,9 @@
-import 'package:path/path.dart';
-import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/features/financial_goals/domain/models/financial_goal_model.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:spendit_core/spendit_core.dart';
+import 'package:spendit_remake/src/database/database.dart';
+import 'package:spendit_remake/src/features/financial_goals/domain/models/financial_goal_model.dart';
+import 'package:sqflite/sqflite.dart';
 
 part 'financial_goals_data_source.g.dart';
 
@@ -16,51 +16,26 @@ abstract class FinancialGoalsDataSource {
 }
 
 class FinancialGoalsDataSourceImpl implements FinancialGoalsDataSource {
-  static Database? _database;
+  final Database db;
 
-  Future<Database> get database async {
-    if (_database != null) return _database!;
-    _database = await _initDB();
-    return _database!;
-  }
+  FinancialGoalsDataSourceImpl(this.db);
 
-  Future<Database> _initDB() async {
-    final db = await getDatabasesPath();
-    final path = join(db, SQLiteTable.goals.name);
-
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: (db, version) async {
-        await db.execute(SqlCommand.executeGoalsTable);
-        await db.execute(SqlCommand.executeGoalsProgressTable);
-      },
+  @override
+  Future<int> create(FinancialGoalModel goal) async {
+    return db.insert(
+      SQLiteTable.goals.name,
+      goal.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
   @override
-  Future<int> create(FinancialGoalModel goal) async {
-    final db = await database;
-    return db.transaction((txn) async {
-      return await txn.insert(
-        SQLiteTable.goals.name,
-        goal.toJson(),
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
-    });
-  }
-
-  @override
   Future<int> delete(int id) async {
-    final db = await database;
-    return await db.transaction((txn) async {
-      return await txn.delete(SQLiteTable.goals.name, where: 'id = ?', whereArgs: [id]);
-    });
+    return await db.delete(SQLiteTable.goals.name, where: 'id = ?', whereArgs: [id]);
   }
 
   @override
   Future<List<FinancialGoalModel>> read() async {
-    final db = await database;
     return await db.transaction((txn) async {
       final response = await txn.query(SQLiteTable.goals.name);
       var result = response.map((e) => FinancialGoalModel.fromJson(e)).toList();
@@ -84,20 +59,11 @@ class FinancialGoalsDataSourceImpl implements FinancialGoalsDataSource {
 
   @override
   Future<int> update(FinancialGoalModel goal) async {
-    final db = await database;
-    return db.transaction((txn) async {
-      return await txn.update(
-        SQLiteTable.goals.name,
-        goal.toJson(),
-        where: 'id =?',
-        whereArgs: [goal.id],
-      );
-    });
+    return db.update(SQLiteTable.goals.name, goal.toJson(), where: 'id =?', whereArgs: [goal.id]);
   }
 
   @override
   Future<int> addProgress(FinancialGoalProgressModel progress) async {
-    final db = await database;
     return db.transaction((txn) async {
       // Insert progress record
       final result = await txn.insert(
@@ -135,5 +101,6 @@ class FinancialGoalsDataSourceImpl implements FinancialGoalsDataSource {
 
 @riverpod
 FinancialGoalsDataSource financialGoalsDataSource(Ref ref) {
-  return FinancialGoalsDataSourceImpl();
+  final db = ref.watch(databaseProvider);
+  return FinancialGoalsDataSourceImpl(db);
 }

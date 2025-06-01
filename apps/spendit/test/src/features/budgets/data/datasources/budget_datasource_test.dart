@@ -10,7 +10,7 @@ class MockBudgetDataSourceImpl extends Mock implements BudgetDataSourceImpl {}
 void main() {
   late BudgetDataSource dataSource;
 
-  setUpAll(() async {
+  setUp(() async {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
     dataSource = MockBudgetDataSourceImpl();
