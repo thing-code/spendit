@@ -1,4 +1,10 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:spendit_remake/src/features/home/presentation/pages/home_page.dart';
+
+part 'routers.g.dart';
 
 enum SpendItRoute {
   home('/'),
@@ -11,4 +17,11 @@ enum SpendItRoute {
 }
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
-final shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
+
+@riverpod
+GoRouter router(Ref ref) {
+  return GoRouter(
+    initialLocation: SpendItRoute.home.path,
+    routes: [GoRoute(path: SpendItRoute.home.path, builder: (context, state) => const HomePage())],
+  );
+}

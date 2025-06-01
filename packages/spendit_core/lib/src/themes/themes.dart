@@ -76,10 +76,10 @@ abstract final class SpendItTheme {
       accentColor: SpendItColors.accentColor,
       brightness: Brightness.light,
       cardColor: SpendItColors.neutralColor,
-      backgroundColor: SpendItColors.neutralColor,
+      backgroundColor: SpendItColors.accentColor.shade200,
       errorColor: SpendItColors.errorColor,
     ),
-    scaffoldBackgroundColor: SpendItColors.neutralColor,
+    scaffoldBackgroundColor: SpendItColors.accentColor.shade200,
     pageTransitionsTheme: PageTransitionsTheme(
       builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
         TargetPlatform.values,
