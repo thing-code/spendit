@@ -1,11 +1,6 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/database/database.dart';
 import 'package:spendit_remake/src/features/transactions/domain/models/transaction_model.dart';
 import 'package:sqflite/sqflite.dart';
-
-part 'transaction_data_source.g.dart';
 
 abstract class TransactionDataSource {
   Future<int> create(TransactionModel value);
@@ -75,10 +70,4 @@ class TransactionDataSourceImpl implements TransactionDataSource {
     final data = response.map((e) => TransactionIncome.fromJson(e)).toList();
     return data;
   }
-}
-
-@riverpod
-TransactionDataSource transactionDataSource(Ref ref) {
-  final db = ref.watch(databaseProvider);
-  return TransactionDataSourceImpl(db);
 }

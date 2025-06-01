@@ -1,11 +1,8 @@
 import 'package:spendit_core/spendit_core.dart';
 import 'package:spendit_remake/src/features/financial_goals/data/datasources/financial_goals_data_source.dart';
 import 'package:spendit_remake/src/features/financial_goals/domain/models/financial_goal_model.dart';
+import 'package:spendit_remake/src/features/financial_goals/domain/models/financial_goal_progress_model.dart';
 import 'package:spendit_remake/src/features/financial_goals/domain/repositories/financial_goals_repository.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'financial_goals_repository_impl.g.dart';
 
 class FinancialGoalsRepositoryImpl implements FinancialGoalsRepository {
   final FinancialGoalsDataSource datasource;
@@ -61,10 +58,4 @@ class FinancialGoalsRepositoryImpl implements FinancialGoalsRepository {
       return LocalResponseFailure(e.toString());
     }
   }
-}
-
-@riverpod
-FinancialGoalsRepository financialGoalsRepository(Ref ref) {
-  final datasource = ref.watch(financialGoalsDataSourceProvider);
-  return FinancialGoalsRepositoryImpl(datasource);
 }

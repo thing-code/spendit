@@ -1,7 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/features/financial_goals/data/repositories/financial_goals_repository_impl.dart';
 import 'package:spendit_remake/src/features/financial_goals/domain/models/financial_goal_model.dart';
+import 'package:spendit_remake/src/features/financial_goals/domain/models/financial_goal_progress_model.dart';
+import 'package:spendit_remake/src/features/financial_goals/presentation/controllers/financial_goals_provider.dart';
 
 part 'financial_goals_controller.g.dart';
 

@@ -1,11 +1,7 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/database/database.dart';
 import 'package:spendit_remake/src/features/financial_goals/domain/models/financial_goal_model.dart';
+import 'package:spendit_remake/src/features/financial_goals/domain/models/financial_goal_progress_model.dart';
 import 'package:sqflite/sqflite.dart';
-
-part 'financial_goals_data_source.g.dart';
 
 abstract class FinancialGoalsDataSource {
   Future<List<FinancialGoalModel>> read();
@@ -97,10 +93,4 @@ class FinancialGoalsDataSourceImpl implements FinancialGoalsDataSource {
       return result;
     });
   }
-}
-
-@riverpod
-FinancialGoalsDataSource financialGoalsDataSource(Ref ref) {
-  final db = ref.watch(databaseProvider);
-  return FinancialGoalsDataSourceImpl(db);
 }

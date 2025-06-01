@@ -1,11 +1,7 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit_core/spendit_core.dart';
 import 'package:spendit_remake/src/features/transactions/data/datasources/transaction_data_source.dart';
 import 'package:spendit_remake/src/features/transactions/domain/models/transaction_model.dart';
 import 'package:spendit_remake/src/features/transactions/domain/repositories/transaction_repository.dart';
-
-part 'transaction_repository_impl.g.dart';
 
 class TransactionRepositoryImpl implements TransactionRepository {
   final TransactionDataSource datasource;
@@ -51,7 +47,7 @@ class TransactionRepositoryImpl implements TransactionRepository {
       return LocalResponseFailure(e.toString());
     }
   }
-  
+
   @override
   Future<LocalResponseModel<List<TransactionModel>>> readByType(TransactionType type) async {
     try {
@@ -61,10 +57,4 @@ class TransactionRepositoryImpl implements TransactionRepository {
       return LocalResponseFailure(e.toString());
     }
   }
-}
-
-@riverpod
-TransactionRepository transactionRepository(Ref ref) {
-  final datasource = ref.watch(transactionDataSourceProvider);
-  return TransactionRepositoryImpl(datasource);
 }

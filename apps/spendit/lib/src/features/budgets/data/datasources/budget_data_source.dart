@@ -1,12 +1,7 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/database/database.dart';
 import 'package:spendit_remake/src/features/budgets/domain/models/budget_model.dart';
 import 'package:sqflite/sqflite.dart';
-
-part 'budget_data_source.g.dart';
 
 abstract class BudgetDataSource {
   Future<int> create(BudgetModel value);
@@ -44,10 +39,4 @@ class BudgetDataSourceImpl implements BudgetDataSource {
       whereArgs: [value.id],
     );
   }
-}
-
-@riverpod
-BudgetDataSource budgetDataSource(Ref ref) {
-  final database = ref.watch(databaseProvider);
-  return BudgetDataSourceImpl(database);
 }

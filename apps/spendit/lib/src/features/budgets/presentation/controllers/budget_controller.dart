@@ -1,7 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/features/budgets/data/repositories/budget_repository_impl.dart';
 import 'package:spendit_remake/src/features/budgets/domain/models/budget_model.dart';
+
+import 'budget_provider.dart';
 
 part 'budget_controller.g.dart';
 

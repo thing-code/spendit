@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'financial_goal_progress_model.dart';
+
 part 'financial_goal_model.freezed.dart';
 part 'financial_goal_model.g.dart';
 
@@ -18,16 +20,4 @@ abstract class FinancialGoalModel with _$FinancialGoalModel {
 
   factory FinancialGoalModel.fromJson(Map<String, dynamic> json) =>
       _$FinancialGoalModelFromJson(json);
-}
-
-@freezed
-abstract class FinancialGoalProgressModel with _$FinancialGoalProgressModel {
-  const factory FinancialGoalProgressModel({
-    int? id,
-    required int amount,
-    required int goalsId,
-    required DateTime date,
-  }) = _FinancialGoalProgressModel;
-  factory FinancialGoalProgressModel.fromJson(Map<String, dynamic> json) =>
-      _$FinancialGoalProgressModelFromJson(json);
 }

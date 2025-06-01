@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:spendit_remake/src/features/financial_goals/data/datasources/financial_goals_data_source.dart';
 import 'package:spendit_remake/src/features/financial_goals/domain/models/financial_goal_model.dart';
+import 'package:spendit_remake/src/features/financial_goals/domain/models/financial_goal_progress_model.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class MockFinancialGoalsDataSource extends Mock implements FinancialGoalsDataSource {}
@@ -15,6 +16,9 @@ void main() {
     dataSource = MockFinancialGoalsDataSource();
 
     registerFallbackValue(FinancialGoalModel(id: 1, name: 'Test', targetAmount: 100000));
+    registerFallbackValue(
+      FinancialGoalProgressModel(id: 1, goalsId: 1, amount: 50000, date: DateTime.now()),
+    );
   });
 
   group('FinancialDataSource Test', () {
@@ -33,6 +37,16 @@ void main() {
       final result = await dataSource.read();
       expect(result, [financialGoal]);
       verify(() => dataSource.read()).called(1);
+      verifyNoMoreInteractions(dataSource);
+    });
+
+    test('Add Progress to Financial Goal', () async {
+      when(() => dataSource.addProgress(any())).thenAnswer((_) async => 1);
+      final result = await dataSource.addProgress(
+        FinancialGoalProgressModel(goalsId: 1, amount: 50000, date: DateTime.now()),
+      );
+      expect(result, 1);
+      verify(() => dataSource.addProgress(any())).called(1);
       verifyNoMoreInteractions(dataSource);
     });
 
