@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/features/financial_goals/data/datasources/financial_goals_data_source.dart';
-import 'package:spendit_remake/src/features/financial_goals/data/repositories/financial_goals_repository_impl.dart';
-import 'package:spendit_remake/src/features/financial_goals/domain/models/financial_goal_model.dart';
-import 'package:spendit_remake/src/features/financial_goals/domain/models/financial_goal_progress_model.dart';
+import 'package:spendit/src/features/financial_goals/data/datasources/financial_goals_data_source.dart';
+import 'package:spendit/src/features/financial_goals/data/repositories/financial_goals_repository_impl.dart';
+import 'package:spendit/src/features/financial_goals/domain/models/financial_goal_model.dart';
+import 'package:spendit/src/features/financial_goals/domain/models/financial_goal_progress_model.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {

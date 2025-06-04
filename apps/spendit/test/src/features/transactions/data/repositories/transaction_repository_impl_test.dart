@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/features/transactions/data/datasources/transaction_data_source.dart';
-import 'package:spendit_remake/src/features/transactions/data/repositories/transaction_repository_impl.dart';
-import 'package:spendit_remake/src/features/transactions/domain/models/transaction_model.dart';
+import 'package:spendit/src/features/transactions/data/datasources/transaction_data_source.dart';
+import 'package:spendit/src/features/transactions/data/repositories/transaction_repository_impl.dart';
+import 'package:spendit/src/features/transactions/domain/models/transaction_model.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
@@ -32,7 +32,12 @@ void main() {
       amount: 200000,
       date: month,
     );
-    final income = TransactionModel.income(id: 2, description: 'income', amount: 200000, date: month);
+    final income = TransactionModel.income(
+      id: 2,
+      description: 'income',
+      amount: 200000,
+      date: month,
+    );
 
     test('Create Expense', () async {
       final result = await repository.create(expense);

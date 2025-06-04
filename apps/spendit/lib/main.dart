@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/gen/fonts.gen.dart';
-import 'package:spendit_remake/src/routers/routers.dart';
+import 'package:spendit/src/gen/fonts.gen.dart';
+import 'package:spendit/src/routers/routers.dart';
 
 import 'src/database/database.dart';
 

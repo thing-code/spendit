@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:spendit_remake/src/features/home/presentation/pages/home_page.dart';
+import 'package:spendit/src/features/home/presentation/pages/home_page.dart';
 
 part 'routers.g.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/features/transactions/data/datasources/transaction_data_source.dart';
-import 'package:spendit_remake/src/features/transactions/domain/models/transaction_model.dart';
+import 'package:spendit/src/features/transactions/data/datasources/transaction_data_source.dart';
+import 'package:spendit/src/features/transactions/domain/models/transaction_model.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class MockTransactionDataSource extends Mock implements TransactionDataSource {}
