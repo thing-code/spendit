@@ -26,14 +26,13 @@ dependencies:
   path: ^1.9.1
   reactive_dropdown_search: ^5.0.6
   reactive_forms: ^17.0.0
-  reactive_forms_annotations: ^6.0.0
+  reactive_forms_annotations: ^7.0.0
   riverpod_annotation: ^2.6.1
-  skeletonizer: ^1.4.3
+  skeletonizer: ^2.0.1
   solar_icons: ^0.0.5
   spendit_core: 0.0.1
   sqflite: ^2.4.2
   sqflite_common_ffi: ^2.3.5
-  talker_logger: ^4.7.6
 
 dev_dependencies:
   flutter_test:
@@ -47,7 +46,7 @@ dev_dependencies:
   riverpod_lint: ^2.6.5
   flutter_gen_runner: ^5.10.0
   flutter_native_splash: ^2.4.6
-  reactive_forms_generator: ^6.2.0
+  reactive_forms_generator: ^7.0.0
   mocktail: ^1.0.4
 
 flutter:

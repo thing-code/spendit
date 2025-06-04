@@ -18,7 +18,20 @@ class FinancialGoalCard extends StatelessWidget {
               Row(
                 spacing: 12,
                 children: [
-                  CircleAvatar(),
+                  IntrinsicHeight(
+                    child: Container(
+                      width: 64,
+                      height: 64,
+                      decoration: BoxDecoration(
+                        color: SpendItColors.primaryColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: HugeIcon(
+                        icon: HugeIcons.strokeRoundedFlag01,
+                        color: SpendItColors.neutralColor,
+                      ),
+                    ),
+                  ),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,17 +39,12 @@ class FinancialGoalCard extends StatelessWidget {
                         Text('Aerox Alpha', style: SpendItTextStyles.medium.copyWith(fontSize: 16)),
                         Text(
                           'Rp 5.000.000 / Rp 35.000.000',
-                          style: SpendItTextStyles.medium.copyWith(fontSize: 14),
+                          style: SpendItTextStyles.medium.copyWith(fontSize: 12),
                         ),
                         Gap(8),
                         SizedBox(
-                          width: context.deviceWidth * .64,
-                          child: LinearProgressIndicator(
-                            value: 1 / 7,
-                            minHeight: 8,
-                            backgroundColor: SpendItColors.secondaryColor.shade100,
-                            color: SpendItColors.secondaryColor,
-                          ),
+                          width: context.deviceWidth * .54,
+                          child: LinearProgressIndicator(value: 1 / 7, minHeight: 8),
                         ),
                       ],
                     ),

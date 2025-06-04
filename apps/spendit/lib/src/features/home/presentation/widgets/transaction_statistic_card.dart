@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:spendit/src/features/transactions/domain/models/transaction_model.dart';
+import 'package:spendit/src/features/transactions/presentation/controllers/transaction_controller.dart';
 import 'package:spendit_core/spendit_core.dart';
 
-class TransactionStatisticCard extends StatelessWidget {
+class TransactionStatisticCard extends ConsumerWidget {
   const TransactionStatisticCard(this.transactionType, {super.key});
 
   final TransactionType transactionType;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
       width: context.deviceWidth,
       child: Card(
@@ -18,7 +21,7 @@ class TransactionStatisticCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 16,
             children: [
-              Icon(icon, color: transactionType.fg),
+              HugeIcon(icon: icon, color: transactionType.fg),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -27,10 +30,13 @@ class TransactionStatisticCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        1000000.toDouble().toRupiahCompact,
-                        style: SpendItTextStyles.bold.copyWith(fontSize: 24),
+                        totalTransactions(ref).toDouble().toRupiahCompact,
+                        style: SpendItTextStyles.bold.copyWith(fontSize: 18),
                       ),
-                      Icon(SolarIconsOutline.altArrowRight),
+                      HugeIcon(
+                        icon: HugeIcons.strokeRoundedArrowRight01,
+                        color: SpendItColors.accentColor,
+                      ),
                     ],
                   ),
                 ],
@@ -45,9 +51,30 @@ class TransactionStatisticCard extends StatelessWidget {
   IconData get icon {
     switch (transactionType) {
       case TransactionType.income:
-        return SolarIconsOutline.squareArrowLeftDown;
+        return HugeIcons.strokeRoundedSquareArrowDownLeft;
       case TransactionType.expense:
-        return SolarIconsOutline.squareArrowRightUp;
+        return HugeIcons.strokeRoundedSquareArrowUpRight;
     }
+  }
+
+  int totalTransactions(WidgetRef ref) {
+    return switch (transactionType) {
+      TransactionType.expense => ref.watch(
+        transactionControllerProvider.select(
+          (value) => (value.value ?? []).whereType<TransactionExpense>().fold(
+            0,
+            (previousValue, element) => previousValue + element.amount,
+          ),
+        ),
+      ),
+      TransactionType.income => ref.watch(
+        transactionControllerProvider.select(
+          (value) => (value.value ?? []).whereType<TransactionIncome>().fold(
+            0,
+            (previousValue, element) => previousValue + element.amount,
+          ),
+        ),
+      ),
+    };
   }
 }

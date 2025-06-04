@@ -93,7 +93,14 @@ abstract final class SpendItTheme {
     appBarTheme: _appBarTheme(),
     cardTheme: _cardTheme(),
     datePickerTheme: DatePickerThemeData(),
-    progressIndicatorTheme: ProgressIndicatorThemeData(year2023: false),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      year2023: false,
+      borderRadius: BorderRadius.circular(1000),
+      color: SpendItColors.secondaryColor,
+      circularTrackColor: SpendItColors.accentColor.withValues(alpha: .15),
+      linearTrackColor: SpendItColors.accentColor.withValues(alpha: .15),
+      stopIndicatorColor: SpendItColors.secondaryColor,
+    ),
     sliderTheme: SliderThemeData(year2023: false),
   );
 

@@ -15,7 +15,7 @@ dependencies:
   intl: ^0.20.2
   json_annotation: ^4.9.0
   reactive_forms: ^17.0.0
-  talker_logger: ^4.7.6
+  talker_logger: ^4.8.2
 
 dev_dependencies:
   flutter_test:

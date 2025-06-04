@@ -44,23 +44,18 @@ abstract final class SpendItTextStyles {
 
   static TextStyle bold = TextStyle(
     fontWeight: FontWeight.bold,
-    fontFamily: 'Poppins',
   );
   static TextStyle semibold = TextStyle(
     fontWeight: FontWeight.w600,
-    fontFamily: 'Poppins',
   );
   static TextStyle medium = TextStyle(
     fontWeight: FontWeight.w500,
-    fontFamily: 'Poppins',
   );
   static TextStyle regular = TextStyle(
     fontWeight: FontWeight.w400,
-    fontFamily: 'Poppins',
   );
   static TextStyle light = TextStyle(
     fontWeight: FontWeight.bold,
-    fontFamily: 'Poppins',
   );
 }
 

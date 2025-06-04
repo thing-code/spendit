@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:spendit_core/spendit_core.dart';
 import 'package:spendit/src/features/transactions/domain/models/transaction_model.dart';
 import 'package:spendit/src/features/transactions/presentation/controllers/transaction_provider.dart';
+import 'package:spendit_core/spendit_core.dart';
 
 part 'balance_controller.g.dart';
 
@@ -17,6 +17,7 @@ class BalanceController extends _$BalanceController {
         .readByType(TransactionType.income);
 
     if (expenses is LocalResponseFailure || incomes is LocalResponseFailure) {
+      logger.error('$expenses / $incomes');
       return 0;
     }
 

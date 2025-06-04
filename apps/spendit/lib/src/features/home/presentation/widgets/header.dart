@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:solar_icons/solar_icons.dart';
-import 'package:spendit_core/spendit_core.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:spendit/src/gen/assets.gen.dart';
+import 'package:spendit_core/spendit_core.dart';
 
-class SpendItHeader extends StatelessWidget {
-  const SpendItHeader({super.key});
+class Header extends StatelessWidget {
+  const Header({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: context.deviceHeight * .07,
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 16),
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: SpendItColors.neutralColor,
@@ -19,7 +19,7 @@ class SpendItHeader extends StatelessWidget {
         boxShadow: [SpendItStyles.cardShadow],
       ),
       child: Row(
-        spacing: 16,
+        spacing: 8,
         children: [
           CircleAvatar(
             backgroundColor: SpendItColors.primaryColor,
@@ -27,16 +27,24 @@ class SpendItHeader extends StatelessWidget {
           ),
           Text(
             'Selamat Datang Kembali!',
-            style: SpendItTextStyles.bold.copyWith(fontSize: 18, color: SpendItColors.primaryColor),
+            style: SpendItTextStyles.semibold.copyWith(
+              fontSize: 16,
+              color: SpendItColors.primaryColor,
+            ),
           ),
           const Spacer(),
           IconButton.filled(
             style: IconButton.styleFrom(
               backgroundColor: SpendItColors.accentColor.shade200,
               foregroundColor: SpendItColors.primaryColor,
+              padding: EdgeInsets.zero,
             ),
             onPressed: () {},
-            icon: Icon(SolarIconsOutline.history),
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedTransactionHistory,
+              color: SpendItColors.primaryColor,
+              size: 20,
+            ),
           ),
         ],
       ),
