@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/features/transactions/domain/models/transaction_model.dart';
-import 'package:spendit_remake/src/features/transactions/presentation/controllers/transaction_filter_state.dart';
-import 'package:spendit_remake/src/features/transactions/presentation/controllers/transaction_provider.dart';
+import 'package:spendit/src/features/transactions/domain/models/transaction_model.dart';
+import 'package:spendit/src/features/transactions/presentation/controllers/transaction_filter_state.dart';
+import 'package:spendit/src/features/transactions/presentation/controllers/transaction_provider.dart';
 
 part 'transaction_controller.g.dart';
 

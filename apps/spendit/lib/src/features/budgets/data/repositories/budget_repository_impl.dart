@@ -1,7 +1,7 @@
+import 'package:spendit/src/features/budgets/data/datasources/budget_data_source.dart';
+import 'package:spendit/src/features/budgets/domain/models/budget_model.dart';
+import 'package:spendit/src/features/budgets/domain/repositories/budget_repository.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/features/budgets/data/datasources/budget_data_source.dart';
-import 'package:spendit_remake/src/features/budgets/domain/models/budget_model.dart';
-import 'package:spendit_remake/src/features/budgets/domain/repositories/budget_repository.dart';
 
 class BudgetRepositoryImpl implements BudgetRepository {
   final BudgetDataSource datasource;

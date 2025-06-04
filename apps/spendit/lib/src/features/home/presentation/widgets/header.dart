@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/gen/assets.gen.dart';
+import 'package:spendit/src/gen/assets.gen.dart';
 
 class SpendItHeader extends StatelessWidget {
   const SpendItHeader({super.key});

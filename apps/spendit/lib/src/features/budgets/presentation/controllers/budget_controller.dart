@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:spendit/src/features/budgets/domain/models/budget_model.dart';
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/features/budgets/domain/models/budget_model.dart';
 
 import 'budget_provider.dart';
 

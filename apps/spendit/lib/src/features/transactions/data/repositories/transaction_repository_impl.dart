@@ -1,7 +1,7 @@
 import 'package:spendit_core/spendit_core.dart';
-import 'package:spendit_remake/src/features/transactions/data/datasources/transaction_data_source.dart';
-import 'package:spendit_remake/src/features/transactions/domain/models/transaction_model.dart';
-import 'package:spendit_remake/src/features/transactions/domain/repositories/transaction_repository.dart';
+import 'package:spendit/src/features/transactions/data/datasources/transaction_data_source.dart';
+import 'package:spendit/src/features/transactions/domain/models/transaction_model.dart';
+import 'package:spendit/src/features/transactions/domain/repositories/transaction_repository.dart';
 
 class TransactionRepositoryImpl implements TransactionRepository {
   final TransactionDataSource datasource;
