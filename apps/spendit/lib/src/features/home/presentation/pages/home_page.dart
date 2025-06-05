@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
+import 'package:spendit/src/features/financial_goals/presentation/widgets/financial_goal_card.dart';
 import 'package:spendit/src/features/home/presentation/controllers/balance_controller.dart';
 import 'package:spendit/src/features/home/presentation/widgets/budget_statistic_card.dart';
 import 'package:spendit/src/features/home/presentation/widgets/header.dart';
@@ -30,6 +32,22 @@ class HomePage extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [BalanceSection(), UsageSection()],
                 ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  'Rencana Keuangan',
+                  style: SpendItTextStyles.medium.copyWith(fontSize: 16),
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: EdgeInsets.all(16),
+              sliver: SliverList.separated(
+                itemBuilder: (context, index) => FinancialGoalCard(),
+                separatorBuilder: (context, index) => Gap(8),
               ),
             ),
           ],
