@@ -16,12 +16,14 @@ class HomePage extends ConsumerWidget {
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
           slivers: [
             SliverAppBar(
               toolbarHeight: 72,
               backgroundColor: Colors.transparent,
               pinned: true,
-
+              elevation: 0,
+              forceMaterialTransparency: true,
               flexibleSpace: FlexibleSpaceBar(background: Header()),
             ),
             SliverToBoxAdapter(
@@ -48,6 +50,7 @@ class HomePage extends ConsumerWidget {
               sliver: SliverList.separated(
                 itemBuilder: (context, index) => FinancialGoalCard(),
                 separatorBuilder: (context, index) => Gap(8),
+                itemCount: 5,
               ),
             ),
           ],
