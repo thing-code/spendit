@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:spendit/src/features/financial_goals/domain/models/financial_goal_model.dart';
 import 'package:spendit_core/spendit_core.dart';
 
 class FinancialGoalCard extends StatelessWidget {
-  const FinancialGoalCard({super.key});
+  const FinancialGoalCard({super.key, required this.goal});
+
+  final FinancialGoalModel goal;
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +39,15 @@ class FinancialGoalCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Aerox Alpha', style: SpendItTextStyles.medium.copyWith(fontSize: 16)),
+                        Text(goal.name, style: SpendItTextStyles.medium.copyWith(fontSize: 16)),
                         Text(
-                          'Rp 5.000.000 / Rp 35.000.000',
+                          '${goal.progressAmount.toDouble().toRupiah} / ${goal.targetAmount.toDouble().toRupiah}',
                           style: SpendItTextStyles.medium.copyWith(fontSize: 12),
                         ),
                         Gap(8),
                         SizedBox(
                           width: context.deviceWidth * .54,
-                          child: LinearProgressIndicator(value: 1 / 7, minHeight: 8),
+                          child: LinearProgressIndicator(value: progress, minHeight: 8),
                         ),
                       ],
                     ),
@@ -64,5 +67,12 @@ class FinancialGoalCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  double get progress {
+    if (goal.progressAmount == 0) {
+      return 0;
+    }
+    return goal.progressAmount / goal.targetAmount;
   }
 }

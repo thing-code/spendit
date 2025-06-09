@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 import 'package:spendit/src/features/financial_goals/domain/models/financial_goal_model.dart';
 import 'package:spendit/src/features/financial_goals/presentation/controllers/financial_goals_controller.dart';
+import 'package:spendit/src/features/financial_goals/presentation/widgets/financial_goal_card.dart';
 
 class FinancialGoalsSection extends ConsumerWidget {
   const FinancialGoalsSection({super.key});
@@ -11,28 +13,43 @@ class FinancialGoalsSection extends ConsumerWidget {
     final financialGoals = ref.watch(financialGoalsControllerProvider);
     return switch (financialGoals) {
       AsyncData(:final value) => _FinancialGoalsData(financialGoals: value),
-      AsyncError(:final error) => Container(),
+      AsyncError(:final error) => _FinancialGoalsError(error: error),
       _ => _FinancialGoalsLoading(),
     };
   }
 }
 
 class _FinancialGoalsLoading extends StatelessWidget {
-  const _FinancialGoalsLoading({super.key});
+  const _FinancialGoalsLoading();
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return SliverToBoxAdapter(child: const Placeholder());
   }
 }
 
 class _FinancialGoalsData extends StatelessWidget {
-  const _FinancialGoalsData({super.key, required this.financialGoals});
+  const _FinancialGoalsData({required this.financialGoals});
 
   final List<FinancialGoalModel> financialGoals;
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return SliverList.separated(
+      itemBuilder: (context, index) => FinancialGoalCard(goal: financialGoals[index]),
+      separatorBuilder: (context, index) => Gap(8),
+      itemCount: 5,
+    );
+  }
+}
+
+class _FinancialGoalsError extends StatelessWidget {
+  const _FinancialGoalsError({required this.error});
+
+  final Object error;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(child: const Placeholder());
   }
 }

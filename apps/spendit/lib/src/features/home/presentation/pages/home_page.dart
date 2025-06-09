@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
-import 'package:spendit/src/features/financial_goals/presentation/widgets/financial_goal_card.dart';
 import 'package:spendit/src/features/home/presentation/controllers/balance_controller.dart';
 import 'package:spendit/src/features/home/presentation/widgets/budget_statistic_card.dart';
+import 'package:spendit/src/features/home/presentation/widgets/financial_goals_section.dart';
 import 'package:spendit/src/features/home/presentation/widgets/header.dart';
 import 'package:spendit/src/features/home/presentation/widgets/transaction_statistic_card.dart';
 import 'package:spendit_core/spendit_core.dart';
@@ -47,11 +46,7 @@ class HomePage extends ConsumerWidget {
             ),
             SliverPadding(
               padding: EdgeInsets.all(16),
-              sliver: SliverList.separated(
-                itemBuilder: (context, index) => FinancialGoalCard(),
-                separatorBuilder: (context, index) => Gap(8),
-                itemCount: 5,
-              ),
+              sliver: FinancialGoalsSection(),
             ),
           ],
         ),

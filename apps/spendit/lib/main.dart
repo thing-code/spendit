@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spendit_core/spendit_core.dart';
 import 'package:spendit/src/gen/fonts.gen.dart';
 import 'package:spendit/src/routers/routers.dart';
+import 'package:spendit_core/spendit_core.dart';
 
 import 'src/database/database.dart';
 
