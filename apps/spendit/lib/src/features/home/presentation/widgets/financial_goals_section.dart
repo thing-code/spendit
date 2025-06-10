@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:spendit/src/features/financial_goals/domain/models/financial_goal_model.dart';
 import 'package:spendit/src/features/financial_goals/presentation/controllers/financial_goals_controller.dart';
 import 'package:spendit/src/features/financial_goals/presentation/widgets/financial_goal_card.dart';
+import 'package:spendit_core/spendit_core.dart';
 
 class FinancialGoalsSection extends ConsumerWidget {
   const FinancialGoalsSection({super.key});
@@ -20,12 +22,16 @@ class FinancialGoalsSection extends ConsumerWidget {
 }
 
 class _FinancialGoalsLoading extends StatelessWidget {
-  const _FinancialGoalsLoading();
+  _FinancialGoalsLoading();
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(child: const Placeholder());
   }
+
+  final card = FinancialGoalCard(
+    goal: FinancialGoalModel(name: 'Aerox Alpha', targetAmount: 32000000),
+  );
 }
 
 class _FinancialGoalsData extends StatelessWidget {
@@ -35,10 +41,34 @@ class _FinancialGoalsData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList.separated(
-      itemBuilder: (context, index) => FinancialGoalCard(goal: financialGoals[index]),
-      separatorBuilder: (context, index) => Gap(8),
-      itemCount: 5,
+    return financialGoals.isEmpty
+        ? buildEmpty()
+        : SliverList.separated(
+            itemBuilder: (context, index) => FinancialGoalCard(goal: financialGoals[index]),
+            separatorBuilder: (context, index) => Gap(8),
+            itemCount: 5,
+          );
+  }
+
+  Widget buildEmpty() {
+    return SliverFillRemaining(
+      hasScrollBody: false,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        spacing: 12,
+        children: [
+          HugeIcon(
+            icon: HugeIcons.strokeRoundedSearchList01,
+            color: SpendItColors.primaryColor.shade300,
+            size: 40,
+          ),
+          Text(
+            'Belum ada rencana keuangan.',
+            style: SpendItTextStyles.regular.copyWith(color: SpendItColors.primaryColor.shade300),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -50,6 +80,6 @@ class _FinancialGoalsError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(child: const Placeholder());
+    return SliverFillRemaining(child: const Placeholder());
   }
 }

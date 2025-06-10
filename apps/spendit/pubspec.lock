@@ -217,6 +217,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  cupertino_icons:
+    dependency: transitive
+    description:
+      name: cupertino_icons
+      sha256: ba631d1c7f7bef6b729a622b7b752645a2d076dba9976925b8f25725a30e1ee6
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.8"
   custom_lint:
     dependency: "direct dev"
     description:
@@ -269,10 +277,10 @@ packages:
     dependency: transitive
     description:
       name: dropdown_search
-      sha256: c29b3e5147a82a06a4a08b3b574c51cb48cc17ad89893d53ee72a6f86643622e
+      sha256: "40070ab0b7a43179e11c5e48c6a5107b546871d4f8c54a6b2a583e90b9d3ee79"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.2"
+    version: "7.0.0-pre4"
   equatable:
     dependency: transitive
     description:
@@ -673,10 +681,10 @@ packages:
     dependency: "direct main"
     description:
       name: native_storage
-      sha256: "7df586dbbaabc8ac5d80c4b1a1c56ecefb9b3e0cda890c9cacf5e8313ca879c7"
+      sha256: "095fe184564bf7b9fd5643aa7b6beb262eaa2fec7eff7542659721d5675f745a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.3"
+    version: "0.3.0"
   package_config:
     dependency: transitive
     description:
@@ -761,34 +769,34 @@ packages:
     dependency: "direct main"
     description:
       name: reactive_dropdown_search
-      sha256: "74ece2087dafb382387d9432b15c3c897f5fbfd59dee7c25c2d928e30858f526"
+      sha256: "2335f7ecb204522036de493316958ea0dfb71b48b2eae02d9fbfb3638ebfebb1"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.6"
+    version: "6.0.0-pre4"
   reactive_forms:
     dependency: "direct main"
     description:
       name: reactive_forms
-      sha256: "9b1fb18e0aae9c50cfa0aaabaaa38bc4d78eefc9b7b95fa9c947b051f6524b8e"
+      sha256: "8394f3bbea59a49820174893739152bbce292e130fc1f3f1fb2a5f83f7e7c43e"
       url: "https://pub.dev"
     source: hosted
-    version: "17.0.1"
+    version: "18.0.0"
   reactive_forms_annotations:
     dependency: "direct main"
     description:
       name: reactive_forms_annotations
-      sha256: "6265f4bd9b498c56b6fe33bd40acd161f42edaca4fc27ba56fa6a5efea774541"
+      sha256: "9649de00a89d69b2d47c773ccb46c51016444df58ea690d83f4c4eaac92d4ade"
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.0"
+    version: "8.0.0"
   reactive_forms_generator:
     dependency: "direct dev"
     description:
       name: reactive_forms_generator
-      sha256: "30524eee96e5bfe8a8b1f7668b9bd2a27fdabdc03a3125092edbc0f5cb41495d"
+      sha256: b19fcfc024c5a9ecc0996d3cd9261f89e4069c7294798238863eacb66f4b9367
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.0"
+    version: "8.0.0"
   recase:
     dependency: transitive
     description:
@@ -874,14 +882,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  solar_icons:
-    dependency: "direct main"
-    description:
-      name: solar_icons
-      sha256: "2865a62fb0a39a7c2403205bfe05453bd3f2fedbaa8e5c3d436cf2a080afe259"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.5"
   source_gen:
     dependency: transitive
     description:

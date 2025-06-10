@@ -22,14 +22,13 @@ dependencies:
   hugeicons: ^0.0.11
   intl: ^0.20.2
   json_annotation: ^4.9.0
-  native_storage: ^0.2.3
+  native_storage: ^0.3.0
   path: ^1.9.1
-  reactive_dropdown_search: ^5.0.6
-  reactive_forms: ^17.0.0
-  reactive_forms_annotations: ^7.0.0
+  reactive_dropdown_search: ^6.0.0-pre4
+  reactive_forms: ^18.0.0
+  reactive_forms_annotations: ^8.0.0
   riverpod_annotation: ^2.6.1
   skeletonizer: ^2.0.1
-  solar_icons: ^0.0.5
   spendit_core: 0.0.1
   sqflite: ^2.4.2
   sqflite_common_ffi: ^2.3.5
@@ -46,7 +45,7 @@ dev_dependencies:
   riverpod_lint: ^2.6.5
   flutter_gen_runner: ^5.10.0
   flutter_native_splash: ^2.4.6
-  reactive_forms_generator: ^7.0.0
+  reactive_forms_generator: ^8.0.0
   mocktail: ^1.0.4
 
 flutter:
