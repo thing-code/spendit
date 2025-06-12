@@ -12,11 +12,54 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final ctrl = TransactionFormController();
+    var type = ValueNotifier(TransactionType.expense);
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO : add transaction option
+          openBottomSheet(
+            context,
+            title: 'Tambah Transaksi Baru',
+            builder: (context) => Column(
+              children: [
+                TextField(
+                  style: SpendItTextStyles.semibold.copyWith(fontSize: 28),
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(borderSide: BorderSide.none),
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
+                    filled: false,
+                    hintText: '0',
+                    prefixText: 'Rp. ',
+                    suffixText: '    ',
+                    prefixStyle: SpendItTextStyles.regular.copyWith(
+                      fontSize: 16,
+                      color: SpendItColors.primaryColor.shade300,
+                    ),
+                    hintStyle: SpendItTextStyles.semibold.copyWith(
+                      fontSize: 28,
+                      color: SpendItColors.primaryColor.shade300,
+                    ),
+                  ),
+                ),
+                Spacer(),
+                ValueListenableBuilder(
+                  valueListenable: type,
+                  builder: (context, value, child) {
+                    return Text(value.label);
+                  },
+                ),
+                SpendItButton.primary(
+                  text: 'Simpan',
+                  onPressed: () {
+                    type.value = TransactionType.income;
+                  },
+                ),
+              ],
+            ),
+          );
         },
         child: HugeIcon(icon: HugeIcons.strokeRoundedAdd01, color: SpendItColors.neutralColor),
       ),
@@ -57,4 +100,8 @@ class HomePage extends ConsumerWidget {
       ),
     );
   }
+}
+
+class TransactionFormController {
+  ValueNotifier<String> amount = ValueNotifier('');
 }
