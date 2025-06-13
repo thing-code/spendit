@@ -17,58 +17,58 @@ class DefaultBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: height ?? context.deviceHeight / 2,
-      width: context.deviceWidth,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 56,
-            child: Stack(
-              children: [
-                if (!showCloseIcon)
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: Center(
-                      child: Container(
-                        margin: EdgeInsets.only(top: 8),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: SpendItColors.primaryColor.shade100,
+    return SafeArea(
+      minimum: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+      child: SizedBox(
+        height: height ?? context.deviceHeight / 2,
+        width: context.deviceWidth,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: title != null ? 56 : 32,
+              child: Stack(
+                children: [
+                  if (!showCloseIcon)
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: Center(
+                        child: Container(
+                          margin: EdgeInsets.only(top: 8),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: SpendItColors.primaryColor.shade100,
+                          ),
+                          height: 6,
+                          width: 48,
                         ),
-                        height: 6,
-                        width: 48,
                       ),
                     ),
-                  ),
-                if (showCloseIcon)
-                  Positioned(
-                    right: 8,
-                    top: 8,
-                    child: IconButton.filledTonal(
-                      style: IconButton.styleFrom(iconSize: 20),
-                      constraints: BoxConstraints(maxWidth: 40, maxHeight: 40),
-                      onPressed: () => _popModal(context),
-                      icon: Icon(Icons.close),
+                  if (showCloseIcon)
+                    Positioned(
+                      right: 8,
+                      top: 8,
+                      child: IconButton.filledTonal(
+                        style: IconButton.styleFrom(iconSize: 20),
+                        constraints: BoxConstraints(maxWidth: 40, maxHeight: 40),
+                        onPressed: () => _popModal(context),
+                        icon: Icon(Icons.close),
+                      ),
                     ),
-                  ),
-                if (title case final String title)
-                  Positioned(
-                    left: 24,
-                    top: showCloseIcon ? 16 : 24,
-                    child: Text(
-                      title,
-                      style: SpendItTextStyles.medium.copyWith(fontSize: 20),
+                  if (title case final String title)
+                    Positioned(
+                      left: 16,
+                      top: showCloseIcon ? 16 : 24,
+                      child: Text(title, style: SpendItTextStyles.medium.copyWith(fontSize: 16)),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Expanded(child: builder(context)),
-        ],
+            Expanded(child: builder(context)),
+          ],
+        ),
       ),
     );
   }

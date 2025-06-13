@@ -4,6 +4,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:spendit/src/features/home/presentation/widgets/balance_section.dart';
 import 'package:spendit/src/features/home/presentation/widgets/financial_goals_section.dart';
 import 'package:spendit/src/features/home/presentation/widgets/header.dart';
+import 'package:spendit/src/features/home/presentation/widgets/transaction_form.dart';
 import 'package:spendit/src/features/home/presentation/widgets/transaction_section.dart';
 import 'package:spendit_core/spendit_core.dart';
 
@@ -12,8 +13,6 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ctrl = TransactionFormController();
-    var type = ValueNotifier(TransactionType.expense);
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
@@ -21,44 +20,8 @@ class HomePage extends ConsumerWidget {
           openBottomSheet(
             context,
             title: 'Tambah Transaksi Baru',
-            builder: (context) => Column(
-              children: [
-                TextField(
-                  style: SpendItTextStyles.semibold.copyWith(fontSize: 28),
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(borderSide: BorderSide.none),
-                    enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
-                    focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
-                    filled: false,
-                    hintText: '0',
-                    prefixText: 'Rp. ',
-                    suffixText: '    ',
-                    prefixStyle: SpendItTextStyles.regular.copyWith(
-                      fontSize: 16,
-                      color: SpendItColors.primaryColor.shade300,
-                    ),
-                    hintStyle: SpendItTextStyles.semibold.copyWith(
-                      fontSize: 28,
-                      color: SpendItColors.primaryColor.shade300,
-                    ),
-                  ),
-                ),
-                Spacer(),
-                ValueListenableBuilder(
-                  valueListenable: type,
-                  builder: (context, value, child) {
-                    return Text(value.label);
-                  },
-                ),
-                SpendItButton.primary(
-                  text: 'Simpan',
-                  onPressed: () {
-                    type.value = TransactionType.income;
-                  },
-                ),
-              ],
-            ),
+            height: context.deviceHeight * .7,
+            builder: (context) => TransactionForm(),
           );
         },
         child: HugeIcon(icon: HugeIcons.strokeRoundedAdd01, color: SpendItColors.neutralColor),
@@ -100,8 +63,4 @@ class HomePage extends ConsumerWidget {
       ),
     );
   }
-}
-
-class TransactionFormController {
-  ValueNotifier<String> amount = ValueNotifier('');
 }

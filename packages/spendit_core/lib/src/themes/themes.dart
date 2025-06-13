@@ -86,11 +86,11 @@ abstract final class SpendItTheme {
         value: (_) => const FadeForwardsPageTransitionsBuilder(),
       ),
     ),
-    inputDecorationTheme: _inputDecoration(),
-    filledButtonTheme: _filledButtonTheme(),
-    outlinedButtonTheme: _outlinedButtonTheme(),
-    textButtonTheme: _textButtonTheme(),
-    appBarTheme: _appBarTheme(),
+    inputDecorationTheme: _inputDecoration(fontFamily: fontFamily),
+    filledButtonTheme: _filledButtonTheme(fontFamily: fontFamily),
+    outlinedButtonTheme: _outlinedButtonTheme(fontFamily: fontFamily),
+    textButtonTheme: _textButtonTheme(fontFamily: fontFamily),
+    appBarTheme: _appBarTheme(fontFamily: fontFamily),
     cardTheme: _cardTheme(),
     datePickerTheme: DatePickerThemeData(),
     progressIndicatorTheme: ProgressIndicatorThemeData(
@@ -113,7 +113,7 @@ abstract final class SpendItTheme {
     );
   }
 
-  static AppBarTheme _appBarTheme() => AppBarTheme(
+  static AppBarTheme _appBarTheme({String? fontFamily}) => AppBarTheme(
     centerTitle: true,
     titleSpacing: 8,
     foregroundColor: SpendItColors.primaryColor,
@@ -122,27 +122,28 @@ abstract final class SpendItTheme {
     titleTextStyle: SpendItTextStyles.medium.copyWith(
       fontSize: 16,
       color: SpendItColors.primaryColor,
+      fontFamily: fontFamily,
     ),
   );
 
-  static TextButtonThemeData _textButtonTheme() {
+  static TextButtonThemeData _textButtonTheme({String? fontFamily}) {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
         minimumSize: Size.fromHeight(48),
         maximumSize: Size(double.infinity, 56),
-        textStyle: SpendItTextStyles.medium.copyWith(fontSize: 16),
+        textStyle: SpendItTextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
         foregroundColor: SpendItColors.primaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
       ),
     );
   }
 
-  static OutlinedButtonThemeData _outlinedButtonTheme() {
+  static OutlinedButtonThemeData _outlinedButtonTheme({String? fontFamily}) {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         minimumSize: Size.fromHeight(48),
         maximumSize: Size(double.infinity, 56),
-        textStyle: SpendItTextStyles.medium.copyWith(fontSize: 16),
+        textStyle: SpendItTextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
         foregroundColor: SpendItColors.secondaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
         side: BorderSide(color: SpendItColors.secondaryColor, width: 1.6),
@@ -150,12 +151,12 @@ abstract final class SpendItTheme {
     );
   }
 
-  static FilledButtonThemeData _filledButtonTheme() {
+  static FilledButtonThemeData _filledButtonTheme({String? fontFamily}) {
     return FilledButtonThemeData(
       style: FilledButton.styleFrom(
         minimumSize: Size.fromHeight(48),
         maximumSize: Size(double.infinity, 56),
-        textStyle: SpendItTextStyles.medium.copyWith(fontSize: 16),
+        textStyle: SpendItTextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
         backgroundColor: SpendItColors.primaryColor,
         foregroundColor: SpendItColors.accentColor.shade100,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
@@ -163,7 +164,7 @@ abstract final class SpendItTheme {
     );
   }
 
-  static InputDecorationTheme _inputDecoration() {
+  static InputDecorationTheme _inputDecoration({String? fontFamily}) {
     return InputDecorationTheme(
       contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       filled: true,
@@ -176,6 +177,7 @@ abstract final class SpendItTheme {
       }),
       labelStyle: SpendItTextStyles.medium.copyWith(
         fontSize: 14,
+        fontFamily: fontFamily,
         color: WidgetStateColor.resolveWith((states) {
           if (states.contains(WidgetState.error)) {
             return SpendItColors.errorColor;

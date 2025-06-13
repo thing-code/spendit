@@ -10,9 +10,11 @@ Future<T?> openBottomSheet<T>(
   String? title,
   double? height,
   bool isDismissable = true,
+  bool isScrollControlled = true,
 }) => showModalBottomSheet(
   context: context,
   isDismissible: isDismissable,
+  isScrollControlled: isScrollControlled,
   builder: (context) => DefaultBottomSheet(
     builder: builder,
     showCloseIcon: showCloseIcon,
@@ -22,7 +24,7 @@ Future<T?> openBottomSheet<T>(
 );
 
 /// Open a date picker based on custom bottom sheet.
-Future<DateTime?> openSpendItDatePicker(
+Future<DateTime?> openDatePicker(
   BuildContext context, {
   required DateTime firstDate,
   required DateTime lastDate,
