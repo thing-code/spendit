@@ -5,7 +5,6 @@ import 'package:spendit/src/features/home/presentation/widgets/financial_goals_s
 import 'package:spendit/src/features/home/presentation/widgets/header.dart';
 import 'package:spendit/src/features/home/presentation/widgets/transaction_form.dart';
 import 'package:spendit/src/features/home/presentation/widgets/transaction_section.dart';
-import 'package:spendit/src/icons/icons.dart';
 import 'package:spendit_core/spendit_core.dart';
 
 class HomePage extends ConsumerWidget {
@@ -24,7 +23,6 @@ class HomePage extends ConsumerWidget {
             builder: (context) => TransactionForm(),
           );
         },
-        child: Icon(SpendItIconLinear.arrowLeft, color: SpendItColors.neutralColor),
       ),
       body: SafeArea(
         child: CustomScrollView(

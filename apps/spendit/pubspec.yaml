@@ -66,9 +66,3 @@ flutter:
           weight: 400
         - asset: fonts/Figtree-Light.ttf
           weight: 300
-    - family: SpendItIconLinear
-      fonts:
-        - asset: fonts/SpendItIconLinear.ttf
-    - family: SpendItIconBold
-      fonts:
-        - asset: fonts/SpendItIconBold.ttf
