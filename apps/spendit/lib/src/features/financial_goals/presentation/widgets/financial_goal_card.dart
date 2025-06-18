@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hugeicons/hugeicons.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:spendit/src/features/financial_goals/domain/models/financial_goal_model.dart';
 import 'package:spendit_core/spendit_core.dart';
 
@@ -29,10 +29,7 @@ class FinancialGoalCard extends StatelessWidget {
                         color: SpendItColors.primaryColor,
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: HugeIcon(
-                        icon: HugeIcons.strokeRoundedFlag01,
-                        color: SpendItColors.neutralColor,
-                      ),
+                      child: Icon(Iconsax.flag, color: SpendItColors.neutralColor),
                     ),
                   ),
                   Expanded(
@@ -57,10 +54,7 @@ class FinancialGoalCard extends StatelessWidget {
               Positioned(
                 top: 0,
                 right: 0,
-                child: HugeIcon(
-                  icon: HugeIcons.strokeRoundedMoreHorizontal,
-                  color: SpendItColors.primaryColor,
-                ),
+                child: Icon(Iconsax.more, color: SpendItColors.primaryColor),
               ),
             ],
           ),

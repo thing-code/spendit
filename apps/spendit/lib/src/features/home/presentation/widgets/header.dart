@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:spendit/src/gen/assets.gen.dart';
 import 'package:spendit_core/spendit_core.dart';
 
@@ -40,11 +40,7 @@ class Header extends StatelessWidget {
               padding: EdgeInsets.zero,
             ),
             onPressed: () {},
-            icon: HugeIcon(
-              icon: HugeIcons.strokeRoundedTransactionHistory,
-              color: SpendItColors.primaryColor,
-              size: 20,
-            ),
+            icon: Icon(Iconsax.clock, color: SpendItColors.primaryColor, size: 20),
           ),
         ],
       ),

@@ -90,6 +90,10 @@ abstract final class SpendItTheme {
     filledButtonTheme: _filledButtonTheme(fontFamily: fontFamily),
     outlinedButtonTheme: _outlinedButtonTheme(fontFamily: fontFamily),
     textButtonTheme: _textButtonTheme(fontFamily: fontFamily),
+    segmentedButtonTheme: SegmentedButtonThemeData(
+      selectedIcon: const SizedBox(),
+      style: SegmentedButton.styleFrom(),
+    ),
     appBarTheme: _appBarTheme(fontFamily: fontFamily),
     cardTheme: _cardTheme(),
     datePickerTheme: DatePickerThemeData(),
