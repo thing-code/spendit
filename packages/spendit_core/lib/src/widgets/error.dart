@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SpendItErrorWidget extends StatelessWidget {
-  const SpendItErrorWidget({super.key, this.errorDetails});
+class SIErrorWidget extends StatelessWidget {
+  const SIErrorWidget({super.key, this.errorDetails});
 
   final FlutterErrorDetails? errorDetails;
 
@@ -9,9 +9,7 @@ class SpendItErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: Text(errorDetails?.toStringShort() ?? 'An Error Occured'),
-        ),
+        child: Center(child: Text(errorDetails?.toStringShort() ?? 'An Error Occured')),
       ),
     );
   }

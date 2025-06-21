@@ -31,11 +31,11 @@ class TransactionStatisticCard extends ConsumerWidget {
                     children: [
                       Text(
                         totalTransactions(ref).toDouble().toRupiahCompact,
-                        style: SpendItTextStyles.bold.copyWith(fontSize: 18),
+                        style: SITextStyles.bold.copyWith(fontSize: 18),
                       ),
                       HugeIcon(
                         icon: HugeIcons.strokeRoundedArrowRight01,
-                        color: SpendItColors.accentColor,
+                        color: SIColors.accentColor,
                       ),
                     ],
                   ),

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:spendit_core/spendit_core.dart';
 
-class SpendItInputBorder extends UnderlineInputBorder {
-  const SpendItInputBorder({
-    super.borderRadius,
-    super.borderSide = BorderSide.none,
-  });
+class SIInputBorder extends UnderlineInputBorder {
+  const SIInputBorder({super.borderRadius, super.borderSide = BorderSide.none});
 
   @override
   void paint(
@@ -24,8 +21,8 @@ class SpendItInputBorder extends UnderlineInputBorder {
 
   @override
   ShapeBorder? lerpTo(ShapeBorder? b, double t) {
-    if (b is SpendItInputBorder) {
-      return SpendItInputBorder(
+    if (b is SIInputBorder) {
+      return SIInputBorder(
         borderRadius: BorderRadius.lerp(borderRadius, b.borderRadius, t)!,
         borderSide: BorderSide.lerp(borderSide, b.borderSide, t),
       );
@@ -39,32 +36,22 @@ class SpendItInputBorder extends UnderlineInputBorder {
   }
 }
 
-abstract final class SpendItTextStyles {
-  const SpendItTextStyles._();
+abstract final class SITextStyles {
+  const SITextStyles._();
 
-  static TextStyle bold = TextStyle(
-    fontWeight: FontWeight.bold,
-  );
-  static TextStyle semibold = TextStyle(
-    fontWeight: FontWeight.w600,
-  );
-  static TextStyle medium = TextStyle(
-    fontWeight: FontWeight.w500,
-  );
-  static TextStyle regular = TextStyle(
-    fontWeight: FontWeight.w400,
-  );
-  static TextStyle light = TextStyle(
-    fontWeight: FontWeight.bold,
-  );
+  static TextStyle bold = TextStyle(fontWeight: FontWeight.bold, height: 1.4);
+  static TextStyle semibold = TextStyle(fontWeight: FontWeight.w600, height: 1.4);
+  static TextStyle medium = TextStyle(fontWeight: FontWeight.w500, height: 1.4);
+  static TextStyle regular = TextStyle(fontWeight: FontWeight.w400, height: 1.4);
+  static TextStyle light = TextStyle(fontWeight: FontWeight.bold, height: 1.4);
 }
 
-abstract final class SpendItStyles {
-  const SpendItStyles._();
+abstract final class SIStyles {
+  const SIStyles._();
 
-  static BoxShadow cardShadow = BoxShadow(
-    color: SpendItColors.primaryColor.withValues(alpha: .1),
+  static List<BoxShadow> cardShadow = [BoxShadow(
+    color: SIColors.primaryColor.withValues(alpha: .1),
     blurRadius: 10,
     offset: const Offset(0, 4),
-  );
+  )];
 }

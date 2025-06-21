@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-class SpendItCalendar extends StatelessWidget {
-  const SpendItCalendar({super.key});
+class SICalendar extends StatelessWidget {
+  const SICalendar({super.key});
 
   @override
   Widget build(BuildContext context) {

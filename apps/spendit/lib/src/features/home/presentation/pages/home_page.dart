@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spendit/src/features/home/presentation/widgets/balance_section.dart';
 import 'package:spendit/src/features/home/presentation/widgets/financial_goals_section.dart';
 import 'package:spendit/src/features/home/presentation/widgets/header.dart';
 import 'package:spendit/src/features/home/presentation/widgets/transaction_form.dart';
 import 'package:spendit/src/features/home/presentation/widgets/transaction_section.dart';
 import 'package:spendit_core/spendit_core.dart';
 
-class HomePage extends ConsumerWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends ConsumerState<HomePage> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
@@ -24,40 +29,26 @@ class HomePage extends ConsumerWidget {
           );
         },
       ),
-      body: SafeArea(
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            SliverAppBar(
-              toolbarHeight: 72,
-              backgroundColor: Colors.transparent,
-              pinned: true,
-              elevation: 0,
-              forceMaterialTransparency: true,
-              flexibleSpace: FlexibleSpaceBar(background: Header()),
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          SliverAppBar(
+            systemOverlayStyle: SystemUiOverlayStyle.light,
+            backgroundColor: Colors.transparent,
+            toolbarHeight: 150,
+            pinned: true,
+            flexibleSpace: Header(),
+          ),
+          // SliverToBoxAdapter(child: Header()),
+          SliverToBoxAdapter(child: TransactionSection()),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Text('Rencana Keuangan', style: SITextStyles.medium.copyWith(fontSize: 16)),
             ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  spacing: 16,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [BalanceSection(), TransactionSection()],
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  'Rencana Keuangan',
-                  style: SpendItTextStyles.medium.copyWith(fontSize: 16),
-                ),
-              ),
-            ),
-            SliverPadding(padding: EdgeInsets.all(16), sliver: FinancialGoalsSection()),
-          ],
-        ),
+          ),
+          SliverPadding(padding: EdgeInsets.all(16), sliver: FinancialGoalsSection()),
+        ],
       ),
     );
   }

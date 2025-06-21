@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
-import 'package:spendit/src/gen/assets.gen.dart';
+import 'package:spendit/src/features/home/presentation/widgets/balance_section.dart';
 import 'package:spendit_core/spendit_core.dart';
 
 class Header extends StatelessWidget {
@@ -8,39 +7,35 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: context.deviceHeight * .07,
-      width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: SpendItColors.neutralColor,
-        borderRadius: BorderRadius.circular(1000),
-        boxShadow: [SpendItStyles.cardShadow],
-      ),
-      child: Row(
-        spacing: 8,
+    final statusBarHeight = MediaQuery.viewPaddingOf(context).top;
+    return SizedBox(
+      height: 150 + statusBarHeight,
+      child: Stack(
         children: [
-          CircleAvatar(
-            backgroundColor: SpendItColors.primaryColor,
-            child: Assets.icon.image(width: 24, height: 24, fit: BoxFit.cover),
-          ),
-          Text(
-            'Selamat Datang Kembali!',
-            style: SpendItTextStyles.semibold.copyWith(
-              fontSize: 16,
-              color: SpendItColors.primaryColor,
+          Container(
+            height: 100 + statusBarHeight,
+            width: context.deviceWidth,
+            decoration: BoxDecoration(color: SIColors.primaryColor),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: statusBarHeight),
+            child: Text(
+              'Selamat Datang',
+              style: SITextStyles.semibold.copyWith(fontSize: 20, color: SIColors.neutralColor),
             ),
           ),
-          const Spacer(),
-          IconButton.filled(
-            style: IconButton.styleFrom(
-              backgroundColor: SpendItColors.accentColor.shade200,
-              foregroundColor: SpendItColors.primaryColor,
-              padding: EdgeInsets.zero,
+          Positioned(
+            bottom: 0,
+            left: 16,
+            right: 16,
+            child: Container(
+              height: 100,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: SIColors.neutralColor,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: SIStyles.cardShadow,
+              ),
+              child: BalanceSection(),
             ),
-            onPressed: () {},
-            icon: Icon(Iconsax.clock, color: SpendItColors.primaryColor, size: 20),
           ),
         ],
       ),

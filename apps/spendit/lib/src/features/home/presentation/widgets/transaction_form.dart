@@ -11,7 +11,7 @@ class TransactionForm extends StatelessWidget {
     return SafeArea(
       minimum: EdgeInsets.only(bottom: 16, right: 16, left: 16),
       child: Scaffold(
-        backgroundColor: SpendItColors.neutralColor,
+        backgroundColor: SIColors.neutralColor,
         body: ListView(
           padding: EdgeInsets.only(bottom: 16),
           children: [
@@ -34,7 +34,7 @@ class TransactionForm extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: SpendItButton.primary(text: 'Simpan', onPressed: () {}),
+        bottomNavigationBar: SIButton.primary(text: 'Simpan', onPressed: () {}),
       ),
     );
   }

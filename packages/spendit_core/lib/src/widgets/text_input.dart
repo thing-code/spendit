@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:spendit_core/spendit_core.dart';
 
-class SpendItTextInput<T> extends StatelessWidget {
-  const SpendItTextInput({
+class SITextInput<T> extends StatelessWidget {
+  const SITextInput({
     super.key,
     required this.control,
     this.placeholder,
@@ -58,23 +58,15 @@ class SpendItTextInput<T> extends StatelessWidget {
       onTap: (value) => onTap?.call(control, context),
       valueAccessor: valueAccessor,
       showCursor: isSelectable,
-      style: SpendItTextStyles.medium.copyWith(
-        fontSize: 16,
-        color: SpendItColors.primaryColor,
-      ),
+      style: SITextStyles.medium.copyWith(fontSize: 16, color: SIColors.primaryColor),
       cursorHeight: 16,
       decoration: InputDecoration(
-        prefixIcon:
-            prefix != null
-                ? Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: prefix,
-                )
-                : null,
-        suffixIcon:
-            suffix != null
-                ? Padding(padding: EdgeInsets.only(right: 8), child: suffix)
-                : null,
+        prefixIcon: prefix != null
+            ? Padding(padding: const EdgeInsets.only(left: 8), child: prefix)
+            : null,
+        suffixIcon: suffix != null
+            ? Padding(padding: EdgeInsets.only(right: 8), child: suffix)
+            : null,
         labelText: placeholder,
       ),
     );

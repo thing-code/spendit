@@ -16,8 +16,8 @@ enum ExpenseCategory {
 }
 
 enum TransactionType {
-  income('Pemasukan', SpendItColors.successColor, SpendItColors.successCardColor),
-  expense('Pengeluaran', SpendItColors.errorColor, SpendItColors.errorCardColor);
+  income('Pemasukan', SIColors.successColor, SIColors.successCardColor),
+  expense('Pengeluaran', SIColors.errorColor, SIColors.errorCardColor);
 
   final String label;
   final Color fg;

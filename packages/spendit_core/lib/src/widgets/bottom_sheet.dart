@@ -39,7 +39,7 @@ class DefaultBottomSheet extends StatelessWidget {
                           margin: EdgeInsets.only(top: 8),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            color: SpendItColors.primaryColor.shade100,
+                            color: SIColors.primaryColor.shade100,
                           ),
                           height: 6,
                           width: 48,
@@ -61,7 +61,7 @@ class DefaultBottomSheet extends StatelessWidget {
                     Positioned(
                       left: 16,
                       top: showCloseIcon ? 16 : 24,
-                      child: Text(title, style: SpendItTextStyles.medium.copyWith(fontSize: 16)),
+                      child: Text(title, style: SITextStyles.medium.copyWith(fontSize: 16)),
                     ),
                 ],
               ),

@@ -49,7 +49,7 @@ Future<DateTime?> openDatePicker(
           ),
           Padding(
             padding: const EdgeInsets.all(16),
-            child: SpendItButton.primary(
+            child: SIButton.primary(
               text: 'Pilih',
               onPressed: () => Navigator.pop(context, selectedDate),
             ),

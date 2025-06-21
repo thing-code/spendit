@@ -42,9 +42,9 @@ class MainApp extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Spend It : Manage your spending',
-      theme: SpendItTheme.light(fontFamily: FontFamily.figtree),
+      theme: SITheme.light(fontFamily: FontFamily.figtree),
       localizationsDelegates: const [
-        SpendItLocalizationsDelegate(),
+        SILocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -52,7 +52,7 @@ class MainApp extends ConsumerWidget {
       supportedLocales: const [Locale('en', 'US'), Locale('id', 'ID'), Locale('en', 'GB')],
       locale: const Locale('id', 'ID'),
       builder: (context, child) {
-        ErrorWidget.builder = (errorDetails) => SpendItErrorWidget(errorDetails: errorDetails);
+        ErrorWidget.builder = (errorDetails) => SIErrorWidget(errorDetails: errorDetails);
         return child!;
       },
       routerConfig: router,

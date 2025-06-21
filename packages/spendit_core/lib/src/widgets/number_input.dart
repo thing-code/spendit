@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:spendit_core/spendit_core.dart';
 
-class SpendItNumberInput extends StatefulWidget {
-  const SpendItNumberInput({super.key, required this.formControl, this.includeDecimal});
+class SINumberInput extends StatefulWidget {
+  const SINumberInput({super.key, required this.formControl, this.includeDecimal});
 
   final FormControl<String> formControl;
   final bool? includeDecimal;
 
   @override
-  State<SpendItNumberInput> createState() => _SpendItNumberInputState();
+  State<SINumberInput> createState() => _SINumberInputState();
 }
 
-class _SpendItNumberInputState extends State<SpendItNumberInput> {
+class _SINumberInputState extends State<SINumberInput> {
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -85,7 +85,7 @@ class _SpendItNumberInputState extends State<SpendItNumberInput> {
       controller: _controller,
       formControl: widget.formControl,
       keyboardType: TextInputType.numberWithOptions(decimal: widget.includeDecimal),
-      style: SpendItTextStyles.semibold.copyWith(fontSize: 28),
+      style: SITextStyles.semibold.copyWith(fontSize: 28),
       textAlign: TextAlign.center,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderSide: BorderSide.none),
@@ -95,13 +95,13 @@ class _SpendItNumberInputState extends State<SpendItNumberInput> {
         hintText: '0',
         prefixText: 'Rp. ',
         suffixText: '    ',
-        prefixStyle: SpendItTextStyles.regular.copyWith(
+        prefixStyle: SITextStyles.regular.copyWith(
           fontSize: 16,
-          color: SpendItColors.primaryColor.shade300,
+          color: SIColors.primaryColor.shade300,
         ),
-        hintStyle: SpendItTextStyles.semibold.copyWith(
+        hintStyle: SITextStyles.semibold.copyWith(
           fontSize: 28,
-          color: SpendItColors.primaryColor.shade300,
+          color: SIColors.primaryColor.shade300,
         ),
       ),
     );

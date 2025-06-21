@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SpendItLocalization extends DefaultMaterialLocalizations {
+class SILocalization extends DefaultMaterialLocalizations {
   @override
   List<String> get narrowWeekdays => ['M', 'S', 'S', 'R', 'K', 'J', 'S'];
 
@@ -8,16 +8,14 @@ class SpendItLocalization extends DefaultMaterialLocalizations {
   int get firstDayOfWeekIndex => 1;
 }
 
-class SpendItLocalizationsDelegate
-    extends LocalizationsDelegate<MaterialLocalizations> {
-  const SpendItLocalizationsDelegate();
+class SILocalizationsDelegate extends LocalizationsDelegate<MaterialLocalizations> {
+  const SILocalizationsDelegate();
 
   @override
   bool isSupported(Locale locale) => locale.languageCode == 'id';
 
   @override
-  Future<SpendItLocalization> load(Locale locale) async =>
-      SpendItLocalization();
+  Future<SILocalization> load(Locale locale) async => SILocalization();
 
   @override
   bool shouldReload(LocalizationsDelegate<MaterialLocalizations> old) => false;

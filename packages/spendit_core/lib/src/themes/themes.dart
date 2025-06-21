@@ -6,8 +6,8 @@ import 'styles.dart';
 
 export 'styles.dart';
 
-abstract final class SpendItColors {
-  const SpendItColors._();
+abstract final class SIColors {
+  const SIColors._();
 
   static const _primary = 0xFF232e3f;
 
@@ -66,20 +66,20 @@ abstract final class SpendItColors {
   static const Color successCardColor = Color(0xFFEFF8F2);
 }
 
-abstract final class SpendItTheme {
-  const SpendItTheme._();
+abstract final class SITheme {
+  const SITheme._();
 
   static ThemeData light({String? fontFamily}) => ThemeData(
     fontFamily: fontFamily,
     colorScheme: ColorScheme.fromSwatch(
-      primarySwatch: SpendItColors.primaryColor,
-      accentColor: SpendItColors.accentColor,
+      primarySwatch: SIColors.primaryColor,
+      accentColor: SIColors.accentColor,
       brightness: Brightness.light,
-      cardColor: SpendItColors.neutralColor,
-      backgroundColor: SpendItColors.accentColor.shade200,
-      errorColor: SpendItColors.errorColor,
+      cardColor: SIColors.neutralColor,
+      backgroundColor: SIColors.accentColor.shade200,
+      errorColor: SIColors.errorColor,
     ),
-    scaffoldBackgroundColor: SpendItColors.accentColor.shade200,
+    scaffoldBackgroundColor: SIColors.accentColor.shade200,
     pageTransitionsTheme: PageTransitionsTheme(
       builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
         TargetPlatform.values,
@@ -100,17 +100,17 @@ abstract final class SpendItTheme {
     progressIndicatorTheme: ProgressIndicatorThemeData(
       year2023: false,
       borderRadius: BorderRadius.circular(1000),
-      color: SpendItColors.secondaryColor,
-      circularTrackColor: SpendItColors.accentColor.withValues(alpha: .15),
-      linearTrackColor: SpendItColors.accentColor.withValues(alpha: .15),
-      stopIndicatorColor: SpendItColors.secondaryColor,
+      color: SIColors.secondaryColor,
+      circularTrackColor: SIColors.accentColor.withValues(alpha: .15),
+      linearTrackColor: SIColors.accentColor.withValues(alpha: .15),
+      stopIndicatorColor: SIColors.secondaryColor,
     ),
     sliderTheme: SliderThemeData(year2023: false),
   );
 
   static CardThemeData _cardTheme() {
     return CardThemeData(
-      shadowColor: SpendItColors.primaryColor.withAlpha(100),
+      shadowColor: SIColors.primaryColor.withAlpha(100),
       elevation: 3,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -120,12 +120,12 @@ abstract final class SpendItTheme {
   static AppBarTheme _appBarTheme({String? fontFamily}) => AppBarTheme(
     centerTitle: true,
     titleSpacing: 8,
-    foregroundColor: SpendItColors.primaryColor,
+    foregroundColor: SIColors.primaryColor,
     backgroundColor: Colors.white.withAlpha(200),
     actionsPadding: EdgeInsets.symmetric(horizontal: 8),
-    titleTextStyle: SpendItTextStyles.medium.copyWith(
+    titleTextStyle: SITextStyles.medium.copyWith(
       fontSize: 16,
-      color: SpendItColors.primaryColor,
+      color: SIColors.primaryColor,
       fontFamily: fontFamily,
     ),
   );
@@ -135,8 +135,8 @@ abstract final class SpendItTheme {
       style: TextButton.styleFrom(
         minimumSize: Size.fromHeight(48),
         maximumSize: Size(double.infinity, 56),
-        textStyle: SpendItTextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
-        foregroundColor: SpendItColors.primaryColor,
+        textStyle: SITextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
+        foregroundColor: SIColors.primaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
       ),
     );
@@ -147,10 +147,10 @@ abstract final class SpendItTheme {
       style: OutlinedButton.styleFrom(
         minimumSize: Size.fromHeight(48),
         maximumSize: Size(double.infinity, 56),
-        textStyle: SpendItTextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
-        foregroundColor: SpendItColors.secondaryColor,
+        textStyle: SITextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
+        foregroundColor: SIColors.secondaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
-        side: BorderSide(color: SpendItColors.secondaryColor, width: 1.6),
+        side: BorderSide(color: SIColors.secondaryColor, width: 1.6),
       ),
     );
   }
@@ -160,9 +160,9 @@ abstract final class SpendItTheme {
       style: FilledButton.styleFrom(
         minimumSize: Size.fromHeight(48),
         maximumSize: Size(double.infinity, 56),
-        textStyle: SpendItTextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
-        backgroundColor: SpendItColors.primaryColor,
-        foregroundColor: SpendItColors.accentColor.shade100,
+        textStyle: SITextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
+        backgroundColor: SIColors.primaryColor,
+        foregroundColor: SIColors.accentColor.shade100,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
       ),
     );
@@ -175,37 +175,37 @@ abstract final class SpendItTheme {
       isDense: true,
       fillColor: WidgetStateColor.resolveWith((states) {
         if (states.contains(WidgetState.error)) {
-          return SpendItColors.errorCardColor;
+          return SIColors.errorCardColor;
         }
-        return SpendItColors.accentColor.shade200;
+        return SIColors.accentColor.shade200;
       }),
-      labelStyle: SpendItTextStyles.medium.copyWith(
+      labelStyle: SITextStyles.medium.copyWith(
         fontSize: 14,
         fontFamily: fontFamily,
         color: WidgetStateColor.resolveWith((states) {
           if (states.contains(WidgetState.error)) {
-            return SpendItColors.errorColor;
+            return SIColors.errorColor;
           }
-          return SpendItColors.primaryColor.shade800;
+          return SIColors.primaryColor.shade800;
         }),
       ),
       prefixIconColor: WidgetStateColor.resolveWith((states) {
         if (states.contains(WidgetState.error)) {
-          return SpendItColors.errorColor;
+          return SIColors.errorColor;
         }
-        return SpendItColors.primaryColor.shade800;
+        return SIColors.primaryColor.shade800;
       }),
       suffixIconColor: WidgetStateColor.resolveWith((states) {
         if (states.contains(WidgetState.error)) {
-          return SpendItColors.errorColor;
+          return SIColors.errorColor;
         }
-        return SpendItColors.primaryColor.shade800;
+        return SIColors.primaryColor.shade800;
       }),
-      border: SpendItInputBorder(borderRadius: BorderRadius.circular(1000)),
-      focusedBorder: SpendItInputBorder(borderRadius: BorderRadius.circular(1000)),
-      enabledBorder: SpendItInputBorder(borderRadius: BorderRadius.circular(1000)),
-      errorBorder: SpendItInputBorder(borderRadius: BorderRadius.circular(1000)),
-      disabledBorder: SpendItInputBorder(borderRadius: BorderRadius.circular(1000)),
+      border: SIInputBorder(borderRadius: BorderRadius.circular(1000)),
+      focusedBorder: SIInputBorder(borderRadius: BorderRadius.circular(1000)),
+      enabledBorder: SIInputBorder(borderRadius: BorderRadius.circular(1000)),
+      errorBorder: SIInputBorder(borderRadius: BorderRadius.circular(1000)),
+      disabledBorder: SIInputBorder(borderRadius: BorderRadius.circular(1000)),
     );
   }
 }
