@@ -9,11 +9,11 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     final statusBarHeight = MediaQuery.viewPaddingOf(context).top;
     return SizedBox(
-      height: 150 + statusBarHeight,
+      height: 120 + statusBarHeight,
       child: Stack(
         children: [
           Container(
-            height: 100 + statusBarHeight,
+            height: 80 + statusBarHeight,
             width: context.deviceWidth,
             decoration: BoxDecoration(color: SIColors.primaryColor),
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: statusBarHeight),
@@ -27,7 +27,7 @@ class Header extends StatelessWidget {
             left: 16,
             right: 16,
             child: Container(
-              height: 100,
+              height: 80,
               padding: EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: SIColors.neutralColor,

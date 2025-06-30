@@ -35,11 +35,14 @@ class _HomePageState extends ConsumerState<HomePage> {
           SliverAppBar(
             systemOverlayStyle: SystemUiOverlayStyle.light,
             backgroundColor: Colors.transparent,
-            toolbarHeight: 150,
+            toolbarHeight: 120,
             pinned: true,
+            floating: true,
+            forceMaterialTransparency: true,
+            // elevation: 0,
+            scrolledUnderElevation: 0,
             flexibleSpace: Header(),
           ),
-          // SliverToBoxAdapter(child: Header()),
           SliverToBoxAdapter(child: TransactionSection()),
           SliverToBoxAdapter(
             child: Padding(

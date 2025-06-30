@@ -47,9 +47,9 @@ class TransactionStatisticCard extends ConsumerWidget {
   IconData get icon {
     switch (transactionType) {
       case TransactionType.income:
-        return IconsaxPlusLinear.import_1;
+        return IconsaxPlusBold.import_1;
       case TransactionType.expense:
-        return IconsaxPlusLinear.export_2;
+        return IconsaxPlusBold.export;
     }
   }
 
