@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hugeicons/hugeicons.dart';
 import 'package:spendit/src/features/transactions/domain/models/transaction_model.dart';
 import 'package:spendit/src/features/transactions/presentation/controllers/transaction_controller.dart';
 import 'package:spendit_core/spendit_core.dart';
@@ -21,7 +20,7 @@ class TransactionStatisticCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 16,
             children: [
-              HugeIcon(icon: icon, color: transactionType.fg),
+              Icon(icon, color: transactionType.fg),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -33,10 +32,7 @@ class TransactionStatisticCard extends ConsumerWidget {
                         totalTransactions(ref).toDouble().toRupiahCompact,
                         style: SITextStyles.bold.copyWith(fontSize: 18),
                       ),
-                      HugeIcon(
-                        icon: HugeIcons.strokeRoundedArrowRight01,
-                        color: SIColors.accentColor,
-                      ),
+                      Icon(IconsaxPlusLinear.arrow_right_3, color: SIColors.accentColor),
                     ],
                   ),
                 ],
@@ -51,9 +47,9 @@ class TransactionStatisticCard extends ConsumerWidget {
   IconData get icon {
     switch (transactionType) {
       case TransactionType.income:
-        return HugeIcons.strokeRoundedSquareArrowDownLeft;
+        return IconsaxPlusLinear.import_1;
       case TransactionType.expense:
-        return HugeIcons.strokeRoundedSquareArrowUpRight;
+        return IconsaxPlusLinear.export_2;
     }
   }
 

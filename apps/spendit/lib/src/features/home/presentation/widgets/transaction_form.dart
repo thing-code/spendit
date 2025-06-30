@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:spendit_core/spendit_core.dart';
 
 class TransactionForm extends StatelessWidget {
@@ -21,11 +20,11 @@ class TransactionForm extends StatelessWidget {
                 segments: [
                   ButtonSegment(
                     value: TransactionType.income,
-                    icon: Icon(Iconsax.import, color: Colors.black),
+                    icon: Icon(IconsaxPlusLinear.import_1),
                   ),
                   ButtonSegment(
                     value: TransactionType.expense,
-                    icon: Icon(Iconsax.export, color: Colors.black),
+                    icon: Icon(IconsaxPlusLinear.export_2),
                   ),
                 ],
                 selected: type.value,

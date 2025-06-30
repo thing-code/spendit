@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:spendit/src/features/budgets/presentation/controllers/budget_controller.dart';
 import 'package:spendit_core/spendit_core.dart';
 
@@ -60,7 +59,7 @@ class BudgetStatisticCard extends ConsumerWidget {
                       budgets.toDouble().toRupiahCompact,
                       style: SITextStyles.bold.copyWith(fontSize: 18),
                     ),
-                    Icon(Iconsax.arrow_right_3_copy, color: SIColors.accentColor),
+                    Icon(IconsaxPlusLinear.arrow_right_3, color: SIColors.accentColor),
                   ],
                 ),
               ],

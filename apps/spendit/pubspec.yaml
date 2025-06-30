@@ -1,5 +1,5 @@
 name: spendit
-description: "A new Flutter project."
+description: "Spend It adalah sebuah aplikasi pengelola keuangan pribadi yang dirancang khusus untuk membantu Anda mengelola keuangan Anda dengan lebih baik. Dengan Spend It, Anda dapat dengan mudah mengelola keuangan Anda, termasuk pemasukan dan pengeluaran, serta melihat laporan keuangan Anda secara detail."
 publish_to: "none"
 version: 2.0.0
 
@@ -19,8 +19,6 @@ dependencies:
   freezed_annotation: ^3.0.0
   gap: ^3.0.1
   go_router: ^15.1.2
-  hugeicons: ^0.0.11
-  iconsax_flutter: ^1.0.1
   intl: ^0.20.2
   json_annotation: ^4.9.0
   native_storage: ^0.3.0

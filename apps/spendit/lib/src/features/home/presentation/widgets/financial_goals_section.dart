@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:spendit/src/features/financial_goals/domain/models/financial_goal_model.dart';
 import 'package:spendit/src/features/financial_goals/presentation/controllers/financial_goals_controller.dart';
 import 'package:spendit/src/features/financial_goals/presentation/widgets/financial_goal_card.dart';
@@ -58,7 +57,7 @@ class _FinancialGoalsData extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         spacing: 12,
         children: [
-          Icon(Iconsax.element_2_copy, color: SIColors.primaryColor.shade300, size: 40),
+          Icon(Icons.menu, color: SIColors.primaryColor.shade300, size: 40),
           Text(
             'Belum ada rencana keuangan.',
             style: SITextStyles.regular.copyWith(color: SIColors.primaryColor.shade300),

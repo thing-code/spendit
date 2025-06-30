@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:spendit/src/features/home/presentation/controllers/balance_controller.dart';
 import 'package:spendit_core/spendit_core.dart';
 
@@ -28,7 +27,6 @@ class BalanceSection extends ConsumerWidget {
                 style: SITextStyles.medium.copyWith(fontSize: 24, overflow: TextOverflow.ellipsis),
               ),
             ),
-            Icon(Iconsax.eye),
           ],
         ),
       ],
