@@ -1,33 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:spendit_core/spendit_core.dart';
 
 class SIButton extends StatelessWidget {
-  const SIButton._({super.key, required this.builder});
+  SIButton._({super.key, required this.builder});
 
-  final Widget Function(BuildContext context) builder;
+  final Widget Function(BuildContext context, bool isLoading) builder;
 
-  factory SIButton.primary({Key? key, required String text, required VoidCallback onPressed}) {
+  factory SIButton.primary({Key? key, required String text, VoidCallback? onPressed}) {
+    Widget title(String text) => Text(text, style: SITextStyles.semibold.copyWith(fontSize: 14));
+    Widget loading() => const SizedBox(width: 16, height: 16, child: CircularProgressIndicator());
     return SIButton._(
       key: key,
-      builder: (context) => FilledButton(onPressed: onPressed, child: Text(text)),
+      builder: (context, isLoading) => FilledButton(
+        onPressed: isLoading ? null : onPressed,
+        child: isLoading ? loading() : title(text),
+      ),
     );
   }
 
-  factory SIButton.secondary({Key? key, required String text, required VoidCallback onPressed}) {
+  factory SIButton.secondary({Key? key, required String text, VoidCallback? onPressed}) {
+    Widget title(String text) => Text(text, style: SITextStyles.semibold.copyWith(fontSize: 14));
+    Widget loading() => const SizedBox(width: 16, height: 16, child: CircularProgressIndicator());
     return SIButton._(
       key: key,
-      builder: (context) => OutlinedButton(onPressed: onPressed, child: Text(text)),
+      builder: (context, isLoading) => OutlinedButton(
+        onPressed: isLoading ? null : onPressed,
+        child: isLoading ? loading() : title(text),
+      ),
     );
   }
 
-  factory SIButton.text({Key? key, required String text, required VoidCallback onPressed}) {
+  factory SIButton.text({Key? key, required String text, VoidCallback? onPressed}) {
+    Widget title(String text) => Text(text, style: SITextStyles.semibold.copyWith(fontSize: 14));
+    Widget loading() => const SizedBox(width: 16, height: 16, child: CircularProgressIndicator());
     return SIButton._(
       key: key,
-      builder: (context) => TextButton(onPressed: onPressed, child: Text(text)),
+      builder: (context, isLoading) => TextButton(
+        onPressed: isLoading ? null : onPressed,
+        child: isLoading ? loading() : title(text),
+      ),
     );
   }
+
+  final loading = ValueNotifier(false);
 
   @override
   Widget build(BuildContext context) {
-    return builder(context);
+    return ValueListenableBuilder(
+      valueListenable: loading,
+      builder: (context, value, child) => builder(context, value),
+    );
   }
 }

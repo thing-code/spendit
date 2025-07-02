@@ -97,11 +97,11 @@ class _SINumberInputState extends State<SINumberInput> {
         suffixText: '    ',
         prefixStyle: SITextStyles.regular.copyWith(
           fontSize: 16,
-          color: SIColors.primaryColor.shade300,
+          color: SIColors.primary.withAlpha(100),
         ),
         hintStyle: SITextStyles.semibold.copyWith(
           fontSize: 28,
-          color: SIColors.primaryColor.shade300,
+          color: SIColors.primary.withAlpha(100),
         ),
       ),
     );

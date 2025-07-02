@@ -18,7 +18,7 @@ class DefaultBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+      minimum: EdgeInsets.only(bottom: MediaQuery.viewPaddingOf(context).bottom),
       child: SizedBox(
         height: height ?? context.deviceHeight / 2,
         width: context.deviceWidth,
@@ -39,7 +39,7 @@ class DefaultBottomSheet extends StatelessWidget {
                           margin: EdgeInsets.only(top: 8),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            color: SIColors.primaryColor.shade100,
+                            color: SIColors.backgroundLightGrey,
                           ),
                           height: 4,
                           width: 72,

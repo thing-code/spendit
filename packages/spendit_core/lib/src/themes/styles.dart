@@ -39,19 +39,37 @@ class SIInputBorder extends UnderlineInputBorder {
 abstract final class SITextStyles {
   const SITextStyles._();
 
-  static TextStyle bold = TextStyle(fontWeight: FontWeight.bold, height: 1.4);
-  static TextStyle semibold = TextStyle(fontWeight: FontWeight.w600, height: 1.4);
-  static TextStyle medium = TextStyle(fontWeight: FontWeight.w500, height: 1.4);
-  static TextStyle regular = TextStyle(fontWeight: FontWeight.w400, height: 1.4);
-  static TextStyle light = TextStyle(fontWeight: FontWeight.bold, height: 1.4);
+  static TextStyle bold = TextStyle(fontWeight: FontWeight.bold, height: 1.4, color: SIColors.text);
+  static TextStyle semibold = TextStyle(
+    fontWeight: FontWeight.w600,
+    height: 1.4,
+    color: SIColors.text,
+  );
+  static TextStyle medium = TextStyle(
+    fontWeight: FontWeight.w500,
+    height: 1.4,
+    color: SIColors.text,
+  );
+  static TextStyle regular = TextStyle(
+    fontWeight: FontWeight.w400,
+    height: 1.4,
+    color: SIColors.text,
+  );
+  static TextStyle light = TextStyle(
+    fontWeight: FontWeight.bold,
+    height: 1.4,
+    color: SIColors.text,
+  );
 }
 
 abstract final class SIStyles {
   const SIStyles._();
 
-  static List<BoxShadow> cardShadow = [BoxShadow(
-    color: SIColors.primaryColor.withValues(alpha: .1),
-    blurRadius: 10,
-    offset: const Offset(0, 4),
-  )];
+  static List<BoxShadow> cardShadow = [
+    BoxShadow(
+      color: SIColors.primary.withValues(alpha: .1),
+      blurRadius: 10,
+      offset: const Offset(0, 4),
+    ),
+  ];
 }

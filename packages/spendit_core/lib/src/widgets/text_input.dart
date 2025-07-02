@@ -58,7 +58,7 @@ class SITextInput<T> extends StatelessWidget {
       onTap: (value) => onTap?.call(control, context),
       valueAccessor: valueAccessor,
       showCursor: isSelectable,
-      style: SITextStyles.medium.copyWith(fontSize: 16, color: SIColors.primaryColor),
+      style: SITextStyles.medium.copyWith(fontSize: 16, color: SIColors.primary),
       cursorHeight: 16,
       decoration: InputDecoration(
         prefixIcon: prefix != null

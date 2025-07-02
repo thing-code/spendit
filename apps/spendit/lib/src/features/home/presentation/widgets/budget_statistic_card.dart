@@ -43,7 +43,7 @@ class BudgetStatisticCard extends ConsumerWidget {
                   usages.toDouble().toRupiahCompact,
                   style: SITextStyles.medium.copyWith(
                     fontSize: 10,
-                    color: SIColors.primaryColor.shade200,
+                    color: SIColors.primary.withAlpha(200),
                   ),
                 ),
               ],
@@ -59,7 +59,7 @@ class BudgetStatisticCard extends ConsumerWidget {
                       budgets.toDouble().toRupiahCompact,
                       style: SITextStyles.bold.copyWith(fontSize: 18),
                     ),
-                    Icon(IconsaxPlusLinear.arrow_right_3, color: SIColors.accentColor),
+                    Icon(IconsaxPlusLinear.arrow_right_3, color: SIColors.backgroundGrey),
                   ],
                 ),
               ],

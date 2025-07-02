@@ -32,7 +32,7 @@ class TransactionStatisticCard extends ConsumerWidget {
                         totalTransactions(ref).toDouble().toRupiahCompact,
                         style: SITextStyles.bold.copyWith(fontSize: 18),
                       ),
-                      Icon(IconsaxPlusLinear.arrow_right_3, color: SIColors.accentColor),
+                      Icon(IconsaxPlusLinear.arrow_right_3, color: SIColors.backgroundGrey),
                     ],
                   ),
                 ],

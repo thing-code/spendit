@@ -10,7 +10,7 @@ class TransactionForm extends StatelessWidget {
     return SafeArea(
       minimum: EdgeInsets.only(bottom: 16, right: 16, left: 16),
       child: Scaffold(
-        backgroundColor: SIColors.neutralColor,
+        backgroundColor: SIColors.backgroundWhite,
         body: ListView(
           padding: EdgeInsets.only(bottom: 16),
           children: [

@@ -15,7 +15,7 @@ class BalanceSection extends ConsumerWidget {
       children: [
         Text(
           'Saldo Terkini',
-          style: SITextStyles.regular.copyWith(fontSize: 16, color: SIColors.primaryColor.shade300),
+          style: SITextStyles.regular.copyWith(fontSize: 16, color: SIColors.text),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

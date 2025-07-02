@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spendit/src/gen/fonts.gen.dart';
 import 'package:spendit/src/routers/routers.dart';
 import 'package:spendit_core/spendit_core.dart';
 
@@ -42,7 +41,7 @@ class MainApp extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Spend It : Manage your spending',
-      theme: SITheme.light(fontFamily: FontFamily.figtree),
+      theme: SITheme.light,
       localizationsDelegates: const [
         SILocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,

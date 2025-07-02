@@ -25,10 +25,10 @@ class FinancialGoalCard extends StatelessWidget {
                       width: 64,
                       height: 64,
                       decoration: BoxDecoration(
-                        color: SIColors.primaryColor,
+                        color: SIColors.primary,
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Icon(IconsaxPlusLinear.flag, color: SIColors.neutralColor),
+                      child: Icon(IconsaxPlusLinear.flag, color: SIColors.backgroundWhite),
                     ),
                   ),
                   Expanded(
@@ -53,7 +53,7 @@ class FinancialGoalCard extends StatelessWidget {
               Positioned(
                 top: 0,
                 right: 0,
-                child: Icon(IconsaxPlusLinear.more, color: SIColors.primaryColor),
+                child: Icon(IconsaxPlusLinear.more, color: SIColors.primary),
               ),
             ],
           ),

@@ -9,108 +9,68 @@ export 'styles.dart';
 abstract final class SIColors {
   const SIColors._();
 
-  static const _primary = 0xFF232e3f;
-
-  static const _secondary = 0xffffa900;
-
-  static const _accent = 0xffa6bcd3;
-
-  static const MaterialColor primaryColor = MaterialColor(_primary, {
-    100: Color(0xffd3d5d9),
-    200: Color(0xffa7abb2),
-    300: Color(0xff7b828c),
-    400: Color(0xff4f5865),
-    500: Color(0xff232e3f),
-    600: Color(0xff1c2532),
-    700: Color(0xff151c26),
-    800: Color(0xff0e1219),
-    900: Color(0xff07090d),
-  });
-
-  static const MaterialColor secondaryColor = MaterialColor(_secondary, {
-    100: Color(0xffffeecc),
-    200: Color(0xffffdd99),
-    300: Color(0xffffcb66),
-    400: Color(0xffffba33),
-    500: Color(0xffffa900),
-    600: Color(0xffcc8700),
-    700: Color(0xff996500),
-    800: Color(0xff664400),
-    900: Color(0xff332200),
-  });
-
-  static const MaterialColor accentColor = MaterialColor(_accent, {
-    100: Color(0xffedf2f6),
-    200: Color(0xffdbe4ed),
-    300: Color(0xffcad7e5),
-    400: Color(0xffb8c9dc),
-    500: Color(0xffa6bcd3),
-    600: Color(0xff8596a9),
-    700: Color(0xff64717f),
-    800: Color(0xff424b54),
-    900: Color(0xff21262a),
-  });
-
-  static const Color neutralColor = Color(0xFFf5f7fa);
-
-  static const Color warningColor = Color(0xFFffaa00);
-
-  static const Color warningCardColor = Color(0xFFfff6c5);
-
-  static const Color errorColor = Color(0xFFFF4D58);
-
-  static const Color errorCardColor = Color(0xFFFCEDE7);
-
-  static const Color successColor = Color(0xFF40DC60);
-
-  static const Color successCardColor = Color(0xFFEFF8F2);
+  static const Color primary = Color(0xff7678ed);
+  static const Color secondary = Color(0xfff35b04);
+  static const Color backgroundWhite = Color(0xFFf5f7fa);
+  static const Color backgroundLightGrey = Color(0xffdbe4ed);
+  static const Color backgroundGrey = Color(0xffa6bcd3);
+  static const Color warning = Color(0xFFf9ae67);
+  static const Color warningSurface = Color(0xFFfff6c5);
+  static const Color error = Color(0xFFf97367);
+  static const Color errorSurface = Color(0xFFFCEDE7);
+  static const Color success = Color(0xFF67f9a1);
+  static const Color successSurface = Color(0xFFEFF8F2);
+  static const Color text = Color(0xFF101720);
 }
 
 abstract final class SITheme {
   const SITheme._();
 
-  static ThemeData light({String? fontFamily}) => ThemeData(
-    fontFamily: fontFamily,
-    colorScheme: ColorScheme.fromSwatch(
-      primarySwatch: SIColors.primaryColor,
-      accentColor: SIColors.accentColor,
-      brightness: Brightness.light,
-      cardColor: SIColors.neutralColor,
-      backgroundColor: SIColors.accentColor.shade200,
-      errorColor: SIColors.errorColor,
-    ),
-    scaffoldBackgroundColor: SIColors.accentColor.shade200,
-    pageTransitionsTheme: PageTransitionsTheme(
-      builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
-        TargetPlatform.values,
-        value: (_) => const FadeForwardsPageTransitionsBuilder(),
+  static ThemeData get light {
+    final fontFamily = 'Figtree';
+    return ThemeData(
+      fontFamily: fontFamily,
+      colorScheme: ColorScheme.fromSwatch(
+        primarySwatch: colorToMaterial(SIColors.primary),
+        accentColor: SIColors.secondary,
+        brightness: Brightness.light,
+        cardColor: SIColors.backgroundWhite,
+        backgroundColor: SIColors.backgroundLightGrey,
+        errorColor: SIColors.error,
       ),
-    ),
-    inputDecorationTheme: _inputDecoration(fontFamily: fontFamily),
-    filledButtonTheme: _filledButtonTheme(fontFamily: fontFamily),
-    outlinedButtonTheme: _outlinedButtonTheme(fontFamily: fontFamily),
-    textButtonTheme: _textButtonTheme(fontFamily: fontFamily),
-    segmentedButtonTheme: SegmentedButtonThemeData(
-      selectedIcon: const SizedBox(),
-      style: SegmentedButton.styleFrom(),
-    ),
-    appBarTheme: _appBarTheme(fontFamily: fontFamily),
-    cardTheme: _cardTheme(),
-    datePickerTheme: DatePickerThemeData(),
-    progressIndicatorTheme: ProgressIndicatorThemeData(
-      year2023: false,
-      borderRadius: BorderRadius.circular(1000),
-      color: SIColors.secondaryColor,
-      circularTrackColor: SIColors.accentColor.withValues(alpha: .15),
-      linearTrackColor: SIColors.accentColor.withValues(alpha: .15),
-      stopIndicatorColor: SIColors.secondaryColor,
-    ),
-    sliderTheme: SliderThemeData(year2023: false),
-  );
+      scaffoldBackgroundColor: SIColors.backgroundLightGrey,
+      pageTransitionsTheme: PageTransitionsTheme(
+        builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
+          TargetPlatform.values,
+          value: (_) => const FadeForwardsPageTransitionsBuilder(),
+        ),
+      ),
+      inputDecorationTheme: _inputDecoration(fontFamily: fontFamily),
+      filledButtonTheme: _filledButtonTheme(fontFamily: fontFamily),
+      outlinedButtonTheme: _outlinedButtonTheme(fontFamily: fontFamily),
+      textButtonTheme: _textButtonTheme(fontFamily: fontFamily),
+      segmentedButtonTheme: SegmentedButtonThemeData(
+        selectedIcon: const SizedBox(),
+        style: SegmentedButton.styleFrom(),
+      ),
+      appBarTheme: _appBarTheme(fontFamily: fontFamily),
+      cardTheme: _cardTheme(),
+      datePickerTheme: DatePickerThemeData(),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        year2023: false,
+        borderRadius: BorderRadius.circular(1000),
+        color: SIColors.secondary,
+        circularTrackColor: SIColors.backgroundGrey.withValues(alpha: .15),
+        linearTrackColor: SIColors.backgroundGrey.withValues(alpha: .15),
+        stopIndicatorColor: SIColors.secondary,
+      ),
+      sliderTheme: SliderThemeData(year2023: false),
+    );
+  }
 
   static CardThemeData _cardTheme() {
     return CardThemeData(
-      shadowColor: SIColors.primaryColor.withAlpha(100),
+      shadowColor: SIColors.primary.withAlpha(100),
       elevation: 3,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -120,12 +80,12 @@ abstract final class SITheme {
   static AppBarTheme _appBarTheme({String? fontFamily}) => AppBarTheme(
     centerTitle: true,
     titleSpacing: 8,
-    foregroundColor: SIColors.primaryColor,
+    foregroundColor: SIColors.primary,
     backgroundColor: Colors.white.withAlpha(200),
     actionsPadding: EdgeInsets.symmetric(horizontal: 8),
     titleTextStyle: SITextStyles.medium.copyWith(
       fontSize: 16,
-      color: SIColors.primaryColor,
+      color: SIColors.primary,
       fontFamily: fontFamily,
     ),
   );
@@ -136,7 +96,7 @@ abstract final class SITheme {
         minimumSize: Size.fromHeight(48),
         maximumSize: Size(double.infinity, 56),
         textStyle: SITextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
-        foregroundColor: SIColors.primaryColor,
+        foregroundColor: SIColors.primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
       ),
     );
@@ -148,9 +108,9 @@ abstract final class SITheme {
         minimumSize: Size.fromHeight(48),
         maximumSize: Size(double.infinity, 56),
         textStyle: SITextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
-        foregroundColor: SIColors.secondaryColor,
+        foregroundColor: SIColors.secondary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
-        side: BorderSide(color: SIColors.secondaryColor, width: 1.6),
+        side: BorderSide(color: SIColors.secondary, width: 1.6),
       ),
     );
   }
@@ -161,8 +121,8 @@ abstract final class SITheme {
         minimumSize: Size.fromHeight(48),
         maximumSize: Size(double.infinity, 56),
         textStyle: SITextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
-        backgroundColor: SIColors.primaryColor,
-        foregroundColor: SIColors.accentColor.shade100,
+        backgroundColor: SIColors.primary,
+        foregroundColor: SIColors.backgroundLightGrey,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
       ),
     );
@@ -175,31 +135,31 @@ abstract final class SITheme {
       isDense: true,
       fillColor: WidgetStateColor.resolveWith((states) {
         if (states.contains(WidgetState.error)) {
-          return SIColors.errorCardColor;
+          return SIColors.errorSurface;
         }
-        return SIColors.accentColor.shade200;
+        return SIColors.backgroundLightGrey;
       }),
       labelStyle: SITextStyles.medium.copyWith(
         fontSize: 14,
         fontFamily: fontFamily,
         color: WidgetStateColor.resolveWith((states) {
           if (states.contains(WidgetState.error)) {
-            return SIColors.errorColor;
+            return SIColors.error;
           }
-          return SIColors.primaryColor.shade800;
+          return SIColors.primary;
         }),
       ),
       prefixIconColor: WidgetStateColor.resolveWith((states) {
         if (states.contains(WidgetState.error)) {
-          return SIColors.errorColor;
+          return SIColors.error;
         }
-        return SIColors.primaryColor.shade800;
+        return SIColors.primary;
       }),
       suffixIconColor: WidgetStateColor.resolveWith((states) {
         if (states.contains(WidgetState.error)) {
-          return SIColors.errorColor;
+          return SIColors.error;
         }
-        return SIColors.primaryColor.shade800;
+        return SIColors.primary;
       }),
       border: SIInputBorder(borderRadius: BorderRadius.circular(1000)),
       focusedBorder: SIInputBorder(borderRadius: BorderRadius.circular(1000)),
@@ -208,4 +168,25 @@ abstract final class SITheme {
       disabledBorder: SIInputBorder(borderRadius: BorderRadius.circular(1000)),
     );
   }
+}
+
+MaterialColor colorToMaterial(Color color) {
+  final int red = (color.r * 255).round() & 0xff;
+  final int green = (color.g * 255).round() & 0xff;
+  final int blue = (color.b * 255).round() & 0xff;
+
+  final Map<int, Color> shades = {
+    50: Color.fromRGBO(red, green, blue, .1),
+    100: Color.fromRGBO(red, green, blue, .2),
+    200: Color.fromRGBO(red, green, blue, .3),
+    300: Color.fromRGBO(red, green, blue, .4),
+    400: Color.fromRGBO(red, green, blue, .5),
+    500: Color.fromRGBO(red, green, blue, .6),
+    600: Color.fromRGBO(red, green, blue, .7),
+    700: Color.fromRGBO(red, green, blue, .8),
+    800: Color.fromRGBO(red, green, blue, .9),
+    900: Color.fromRGBO(red, green, blue, 1),
+  };
+
+  return MaterialColor(color.toARGB32(), shades);
 }
