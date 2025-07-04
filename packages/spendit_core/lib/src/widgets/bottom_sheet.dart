@@ -31,12 +31,11 @@ class DefaultBottomSheet extends StatelessWidget {
                 children: [
                   if (!showCloseIcon)
                     Positioned(
-                      top: 0,
+                      top: 8,
                       left: 0,
                       right: 0,
                       child: Center(
                         child: Container(
-                          margin: EdgeInsets.only(top: 8),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
                             color: SIColors.backgroundLightGrey,
@@ -59,9 +58,14 @@ class DefaultBottomSheet extends StatelessWidget {
                     ),
                   if (title case final String title)
                     Positioned(
-                      left: 16,
-                      top: showCloseIcon ? 16 : 24,
-                      child: Text(title, style: SITextStyles.medium.copyWith(fontSize: 16)),
+                      left: 0,
+                      right: 0,
+                      top: showCloseIcon ? 16 : 28,
+                      child: Text(
+                        title,
+                        style: SITextStyles.semibold.copyWith(fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                 ],
               ),

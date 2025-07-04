@@ -9,7 +9,7 @@ export 'styles.dart';
 abstract final class SIColors {
   const SIColors._();
 
-  static const Color primary = Color(0xff7678ed);
+  static const Color primary = Colors.deepPurpleAccent;
   static const Color secondary = Color(0xfff35b04);
   static const Color backgroundWhite = Color(0xFFf5f7fa);
   static const Color backgroundLightGrey = Color(0xffdbe4ed);
