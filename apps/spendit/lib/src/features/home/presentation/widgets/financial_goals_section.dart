@@ -57,10 +57,10 @@ class _FinancialGoalsData extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         spacing: 12,
         children: [
-          Icon(IconsaxPlusBold.note_remove, color: SIColors.text, size: 48),
+          Icon(IconsaxPlusBold.note_remove, color: SIColors.backgroundGrey, size: 48),
           Text(
             'Belum ada rencana keuangan.',
-            style: SITextStyles.regular.copyWith(color: SIColors.text),
+            style: SITextStyles.regular.copyWith(color: SIColors.backgroundGrey),
           ),
         ],
       ),

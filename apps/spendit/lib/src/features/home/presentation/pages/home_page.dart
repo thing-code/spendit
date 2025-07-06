@@ -19,12 +19,14 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(IconsaxPlusLinear.add, size: 32),
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text('Transaksi Baru'),
+        icon: Icon(IconsaxPlusLinear.add, size: 32),
         onPressed: () {
           openBottomSheet(
             context,
             title: 'Tambah Transaksi Baru',
+            // showCloseIcon: true,
             height: context.deviceHeight * .5,
             builder: (context) => TransactionForm(),
           );

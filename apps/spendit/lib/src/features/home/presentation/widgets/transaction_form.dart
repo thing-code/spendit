@@ -16,24 +16,45 @@ class TransactionForm extends StatelessWidget {
           children: [
             ValueListenableBuilder(
               valueListenable: type,
-              builder: (context, value, child) => SegmentedButton<TransactionType>(
-                segments: [
-                  ButtonSegment(
-                    value: TransactionType.income,
-                    icon: Icon(IconsaxPlusLinear.import_1),
-                  ),
-                  ButtonSegment(
-                    value: TransactionType.expense,
-                    icon: Icon(IconsaxPlusLinear.export_2),
-                  ),
-                ],
-                selected: type.value,
-                onSelectionChanged: (v) => type.value = v,
-              ),
+              builder: (context, value, child) {
+                return Row(
+                  spacing: 16,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: value.contains(TransactionType.income)
+                              ? SIColors.secondary.withAlpha(50)
+                              : Colors.white,
+                        ),
+                        child: Column(
+                          children: [Icon(IconsaxPlusBold.export), Text('Pengaluaran')],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: value.contains(TransactionType.income)
+                              ? SIColors.secondary.withAlpha(50)
+                              : Colors.white,
+                        ),
+                        child: Column(
+                          children: [Icon(IconsaxPlusBold.export), Text('Pengaluaran')],
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ],
         ),
-        bottomNavigationBar: SIButton.primary(text: 'Simpan', onPressed: () {}),
+        bottomNavigationBar: SIButton.secondary(text: 'Simpan', onPressed: () {}),
       ),
     );
   }

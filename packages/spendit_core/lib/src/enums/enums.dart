@@ -16,13 +16,12 @@ enum ExpenseCategory {
 }
 
 enum TransactionType {
-  income('Pemasukan', SIColors.success, SIColors.successSurface),
-  expense('Pengeluaran', SIColors.error, SIColors.errorSurface);
+  income('Pemasukan', SIColors.success),
+  expense('Pengeluaran', SIColors.error);
 
   final String label;
-  final Color fg;
-  final Color bg;
-  const TransactionType(this.label, this.fg, this.bg);
+  final Color color;
+  const TransactionType(this.label, this.color);
 }
 
 enum SQLiteTable { goals, goalsProgress, budgets, transactions }

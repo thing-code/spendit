@@ -9,17 +9,14 @@ export 'styles.dart';
 abstract final class SIColors {
   const SIColors._();
 
-  static const Color primary = Colors.deepPurpleAccent;
-  static const Color secondary = Color(0xfff35b04);
+  static const Color primary = Color(0xff180048);
+  static const Color secondary = Color.fromARGB(255, 69, 173, 161);
   static const Color backgroundWhite = Color(0xFFf5f7fa);
   static const Color backgroundLightGrey = Color(0xffdbe4ed);
   static const Color backgroundGrey = Color(0xffa6bcd3);
-  static const Color warning = Color(0xFFf9ae67);
-  static const Color warningSurface = Color(0xFFfff6c5);
-  static const Color error = Color(0xFFf97367);
-  static const Color errorSurface = Color(0xFFFCEDE7);
-  static const Color success = Color(0xFF67f9a1);
-  static const Color successSurface = Color(0xFFEFF8F2);
+  static const Color warning = Color(0xFFfcb226);
+  static const Color error = Color(0xFFf65454);
+  static const Color success = Color(0xFF1bc760);
   static const Color text = Color(0xFF101720);
 }
 
@@ -135,7 +132,7 @@ abstract final class SITheme {
       isDense: true,
       fillColor: WidgetStateColor.resolveWith((states) {
         if (states.contains(WidgetState.error)) {
-          return SIColors.errorSurface;
+          return SIColors.error.withValues(alpha: .1);
         }
         return SIColors.backgroundLightGrey;
       }),

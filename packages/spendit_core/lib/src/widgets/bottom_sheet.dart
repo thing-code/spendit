@@ -24,6 +24,7 @@ class DefaultBottomSheet extends StatelessWidget {
         width: context.deviceWidth,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 16,
           children: [
             SizedBox(
               height: title != null ? 56 : 32,
@@ -52,7 +53,7 @@ class DefaultBottomSheet extends StatelessWidget {
                       child: IconButton.filledTonal(
                         style: IconButton.styleFrom(iconSize: 20),
                         constraints: BoxConstraints(maxWidth: 40, maxHeight: 40),
-                        onPressed: () => _popModal(context),
+                        onPressed: () => Navigator.pop(context),
                         icon: Icon(Icons.close),
                       ),
                     ),
@@ -63,7 +64,7 @@ class DefaultBottomSheet extends StatelessWidget {
                       top: showCloseIcon ? 16 : 28,
                       child: Text(
                         title,
-                        style: SITextStyles.semibold.copyWith(fontSize: 16),
+                        style: SITextStyles.semibold.copyWith(fontSize: 18),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -75,9 +76,5 @@ class DefaultBottomSheet extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _popModal(BuildContext context) {
-    Navigator.pop(context);
   }
 }

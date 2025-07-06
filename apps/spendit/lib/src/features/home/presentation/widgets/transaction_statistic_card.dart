@@ -20,7 +20,7 @@ class TransactionStatisticCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 16,
             children: [
-              Icon(icon, color: transactionType.fg),
+              Icon(icon, color: transactionType.color),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
