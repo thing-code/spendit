@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spendit/src/features/home/presentation/widgets/balance_section.dart';
 import 'package:spendit/src/features/home/presentation/widgets/financial_goals_section.dart';
-import 'package:spendit/src/features/home/presentation/widgets/header.dart';
 import 'package:spendit/src/features/home/presentation/widgets/transaction_form.dart';
 import 'package:spendit/src/features/home/presentation/widgets/transaction_section.dart';
 import 'package:spendit_core/spendit_core.dart';
@@ -36,15 +36,62 @@ class _HomePageState extends ConsumerState<HomePage> {
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
-            systemOverlayStyle: SystemUiOverlayStyle.light,
-            backgroundColor: Colors.transparent,
-            toolbarHeight: 120,
-            pinned: true,
+            systemOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
+            expandedHeight: 100 + context.statusBarHeight,
+            centerTitle: false,
+            titleSpacing: 16,
+            title: Text(
+              'Selamat Datang',
+              style: SITextStyles.semibold.copyWith(fontSize: 20, color: SIColors.backgroundWhite),
+            ),
             floating: true,
-            forceMaterialTransparency: true,
-            scrolledUnderElevation: 0,
-            flexibleSpace: Header(),
+            pinned: true,
+            flexibleSpace: DecoratedBox(
+              decoration: BoxDecoration(
+                // borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+                gradient: RadialGradient(
+                  colors: [SIColors.secondary, SIColors.primary],
+                  center: Alignment.bottomRight,
+                  radius: 1.5,
+                ),
+              ),
+              child: FlexibleSpaceBar(
+                background: Padding(
+                  padding: EdgeInsets.fromLTRB(16, context.statusBarHeight * 2, 16, 16),
+                  child: BalanceSection(),
+                ),
+              ),
+            ),
           ),
+          // SliverToBoxAdapter(
+          //   child: Container(
+          //     height: 120 + context.statusBarHeight,
+          //     padding: EdgeInsets.fromLTRB(16, context.statusBarHeight, 16, 16),
+          //     width: context.deviceWidth,
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+          //       gradient: RadialGradient(
+          //         colors: [SIColors.secondary, SIColors.primary],
+          //         center: Alignment.bottomRight,
+          //         radius: 1.5,
+          //       ),
+          //     ),
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       spacing: 16,
+          //       children: [
+          //         Text(
+          //           'Selamat Datang',
+          //           style: SITextStyles.semibold.copyWith(
+          //             fontSize: 20,
+          //             color: SIColors.backgroundWhite,
+          //           ),
+          //         ),
+          //         BalanceSection(),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           SliverToBoxAdapter(child: TransactionSection()),
           SliverToBoxAdapter(
             child: Padding(

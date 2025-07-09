@@ -9,25 +9,41 @@ class BalanceSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final balance = ref.watch(balanceControllerProvider.select((value) => value.value ?? 0));
+    var showBalance = ValueNotifier(true);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Saldo Terkini',
-          style: SITextStyles.regular.copyWith(fontSize: 16, color: SIColors.text),
+          'Saldo Anda',
+          style: SITextStyles.regular.copyWith(fontSize: 16, color: SIColors.backgroundWhite),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          spacing: 8,
-          children: [
-            Flexible(
-              child: Text(
-                balance.toDouble().toRupiah,
-                style: SITextStyles.medium.copyWith(fontSize: 24, overflow: TextOverflow.ellipsis),
-              ),
-            ),
-          ],
+        ValueListenableBuilder(
+          valueListenable: showBalance,
+          builder: (context, value, child) {
+            return Row(
+              spacing: 16,
+              children: [
+                Flexible(
+                  child: Text(
+                    value ? 'Rp ******' : balance.toDouble().toRupiah,
+                    style: SITextStyles.medium.copyWith(
+                      fontSize: 24,
+                      color: SIColors.backgroundWhite,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                InkResponse(
+                  onTap: () => showBalance.value = !showBalance.value,
+                  child: Icon(
+                    value ? IconsaxPlusLinear.eye_slash : IconsaxPlusLinear.eye,
+                    color: SIColors.backgroundWhite,
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ],
     );
