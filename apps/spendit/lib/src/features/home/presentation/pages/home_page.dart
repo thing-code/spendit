@@ -15,6 +15,33 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+  final _controller = ScrollController();
+  bool _isCollapsed = false;
+
+  void _onScroll() {
+    if (_controller.hasClients) {
+      final isCollapsed = _controller.offset > 100;
+      if (_isCollapsed != isCollapsed) {
+        setState(() {
+          _isCollapsed = isCollapsed;
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _controller.removeListener(_onScroll);
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,65 +60,10 @@ class _HomePageState extends ConsumerState<HomePage> {
         },
       ),
       body: CustomScrollView(
+        controller: _controller,
         physics: const BouncingScrollPhysics(),
         slivers: [
-          SliverAppBar(
-            systemOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
-            expandedHeight: 100 + context.statusBarHeight,
-            centerTitle: false,
-            titleSpacing: 16,
-            title: Text(
-              'Selamat Datang',
-              style: SITextStyles.semibold.copyWith(fontSize: 20, color: SIColors.backgroundWhite),
-            ),
-            floating: true,
-            pinned: true,
-            flexibleSpace: DecoratedBox(
-              decoration: BoxDecoration(
-                // borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-                gradient: RadialGradient(
-                  colors: [SIColors.secondary, SIColors.primary],
-                  center: Alignment.bottomRight,
-                  radius: 1.5,
-                ),
-              ),
-              child: FlexibleSpaceBar(
-                background: Padding(
-                  padding: EdgeInsets.fromLTRB(16, context.statusBarHeight * 2, 16, 16),
-                  child: BalanceSection(),
-                ),
-              ),
-            ),
-          ),
-          // SliverToBoxAdapter(
-          //   child: Container(
-          //     height: 120 + context.statusBarHeight,
-          //     padding: EdgeInsets.fromLTRB(16, context.statusBarHeight, 16, 16),
-          //     width: context.deviceWidth,
-          //     decoration: BoxDecoration(
-          //       borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-          //       gradient: RadialGradient(
-          //         colors: [SIColors.secondary, SIColors.primary],
-          //         center: Alignment.bottomRight,
-          //         radius: 1.5,
-          //       ),
-          //     ),
-          //     child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       spacing: 16,
-          //       children: [
-          //         Text(
-          //           'Selamat Datang',
-          //           style: SITextStyles.semibold.copyWith(
-          //             fontSize: 20,
-          //             color: SIColors.backgroundWhite,
-          //           ),
-          //         ),
-          //         BalanceSection(),
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          _appBar(context),
           SliverToBoxAdapter(child: TransactionSection()),
           SliverToBoxAdapter(
             child: Padding(
@@ -101,6 +73,36 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
           SliverPadding(padding: EdgeInsets.all(16), sliver: FinancialGoalsSection()),
         ],
+      ),
+    );
+  }
+
+  SliverAppBar _appBar(BuildContext context) {
+    return SliverAppBar(
+      systemOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
+      expandedHeight: 100 + context.statusBarHeight,
+      centerTitle: false,
+      titleSpacing: 16,
+      title: Text(
+        _isCollapsed ? 'Spend It' : 'Selamat Datang',
+        style: SITextStyles.semibold.copyWith(fontSize: 20, color: SIColors.backgroundWhite),
+      ),
+      floating: true,
+      pinned: true,
+      flexibleSpace: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: RadialGradient(
+            colors: [SIColors.secondary, SIColors.primary],
+            center: Alignment.bottomRight,
+            radius: 1.5,
+          ),
+        ),
+        child: FlexibleSpaceBar(
+          background: Padding(
+            padding: EdgeInsets.fromLTRB(16, context.statusBarHeight * 2, 16, 16),
+            child: BalanceSection(),
+          ),
+        ),
       ),
     );
   }

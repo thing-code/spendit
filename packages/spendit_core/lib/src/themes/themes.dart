@@ -39,7 +39,7 @@ abstract final class SITheme {
       pageTransitionsTheme: PageTransitionsTheme(
         builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
           TargetPlatform.values,
-          value: (_) => const FadeForwardsPageTransitionsBuilder(),
+          value: (_) => const PredictiveBackPageTransitionsBuilder(),
         ),
       ),
       inputDecorationTheme: _inputDecoration(fontFamily: fontFamily),
