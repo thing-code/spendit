@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 extension DateExt on DateTime {
-  toFormat([String newPattern = "yyyy-MM-dd", String? locale]) {
+  String toFormat([String newPattern = "yyyy-MM-dd", String? locale]) {
     return DateFormat(newPattern, locale).format(this);
   }
 

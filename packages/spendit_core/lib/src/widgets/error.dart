@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spendit_core/spendit_core.dart';
 
 class SIErrorWidget extends StatelessWidget {
   const SIErrorWidget({super.key, this.errorDetails});
@@ -9,7 +10,16 @@ class SIErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(child: Text(errorDetails?.toStringShort() ?? 'An Error Occured')),
+        child: SizedBox.expand(
+          child: Column(
+            spacing: 12,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(IconsaxPlusBold.danger, color: SIColors.error),
+              Text(errorDetails?.toStringShort() ?? 'An Error Occured'),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:spendit/src/routers/routers.dart';
 import 'package:spendit_core/spendit_core.dart';
 
@@ -21,6 +22,10 @@ Future<void> main() async {
 
       // Inisialisasi SQLite Database
       final db = await SQLiteDatabaseUtils.initDatabase();
+
+      await initializeDateFormatting('id_ID');
+
+      ErrorWidget.builder = (errorDetails) => SIErrorWidget(errorDetails: errorDetails);
 
       runApp(
         ProviderScope(overrides: [databaseProvider.overrideWithValue(db)], child: const MainApp()),
@@ -48,10 +53,9 @@ class MainApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [Locale('en', 'US'), Locale('id', 'ID'), Locale('en', 'GB')],
+      supportedLocales: const [Locale('en', 'US'), Locale('id', 'ID')],
       locale: const Locale('id', 'ID'),
       builder: (context, child) {
-        ErrorWidget.builder = (errorDetails) => SIErrorWidget(errorDetails: errorDetails);
         return child!;
       },
       routerConfig: router,
