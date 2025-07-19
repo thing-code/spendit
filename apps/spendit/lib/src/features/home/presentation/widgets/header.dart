@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spendit/src/features/home/presentation/widgets/balance_section.dart';
+import 'package:spendit/src/gen/assets.gen.dart';
 import 'package:spendit_core/spendit_core.dart';
 
 class Header extends StatelessWidget {
@@ -7,37 +8,46 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final statusBarHeight = MediaQuery.viewPaddingOf(context).top;
     return SizedBox(
-      height: 120 + statusBarHeight,
-      child: Stack(
-        children: [
-          Container(
-            height: 80 + statusBarHeight,
-            width: context.deviceWidth,
-            decoration: BoxDecoration(color: SiColors.primary),
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: statusBarHeight),
-            child: Text(
-              'Selamat Datang',
-              style: SiTextStyles.semibold.copyWith(fontSize: 20, color: SiColors.text),
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 16,
-            right: 16,
-            child: Container(
-              height: 80,
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                color: SiColors.text,
-                borderRadius: BorderRadius.circular(16),
+              height: context.statusBarHeight + context.deviceHeight * .2,
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      height: context.statusBarHeight + context.deviceHeight * .15,
+                      padding: EdgeInsets.fromLTRB(16, context.statusBarHeight + 16, 16, 0),
+                      decoration: BoxDecoration(
+                        gradient: SiGradients.fancyRainbow,
+                        borderRadius: BorderRadius.vertical(bottom: Radius.circular(16)),
+                      ),
+                      child: Column(
+                        spacing: 4,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Assets.icon.image(height: 40),
+                          Text('Selamat Datang!', style: SiTextStyles.bold.copyWith(fontSize: 24)),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 16,
+                    right: 16,
+                    bottom: 0,
+                    child: Container(
+                      height: context.deviceHeight * .094,
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: SiColors.surface,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: BalanceSection(),
+                    ),
+                  ),
+                ],
               ),
-              child: BalanceSection(),
-            ),
-          ),
-        ],
-      ),
-    );
+            );
   }
 }

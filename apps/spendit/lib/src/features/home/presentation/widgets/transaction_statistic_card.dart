@@ -32,11 +32,15 @@ class TransactionStatisticCard extends ConsumerWidget {
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 2,
                   children: [
-                    Text(transactionType.label),
+                    Text(
+                      transactionType.label,
+                      style: SiTextStyles.regular.copyWith(fontSize: 16, color: SiColors.mutedText),
+                    ),
                     Text(
                       totalTransactions(ref).toDouble().toRupiahCompact,
-                      style: SiTextStyles.bold.copyWith(fontSize: 18),
+                      style: SiTextStyles.bold.copyWith(fontSize: 20),
                     ),
                   ],
                 ),

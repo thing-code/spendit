@@ -11,23 +11,24 @@ class BalanceSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final balance = ref.watch(balanceControllerProvider.select((value) => value.value ?? 0));
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      spacing: 2,
-      children: [
-        Text(
-          'Saldo Anda',
-          style: SiTextStyles.regular.copyWith(fontSize: 16, color: SiColors.text),
-        ),
-        ValueListenableBuilder(
-          valueListenable: showBalance,
-          builder: (context, value, child) {
-            return Row(
-              spacing: 16,
-              children: [
-                Flexible(
-                  child: Text(
+    return ValueListenableBuilder(
+      valueListenable: showBalance,
+      builder: (context, value, child) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          spacing: 16,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 2,
+                children: [
+                  Text(
+                    'Saldo Anda',
+                    style: SiTextStyles.regular.copyWith(fontSize: 16, color: SiColors.mutedText),
+                  ),
+                  Text(
                     value ? 'Rp ∙∙∙∙∙∙∙∙∙∙' : balance.toDouble().toRupiah,
                     style: SiTextStyles.bold.copyWith(
                       fontSize: 24,
@@ -35,23 +36,19 @@ class BalanceSection extends ConsumerWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                ),
-                IconButton(
-                  visualDensity: VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity,
-                  ),
-                  onPressed: () => showBalance.value = !showBalance.value,
-                  icon: Icon(
-                    value ? IconsaxPlusLinear.eye_slash : IconsaxPlusLinear.eye,
-                    color: SiColors.text,
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
-      ],
+                ],
+              ),
+            ),
+            IconButton(
+              onPressed: () => showBalance.value = !showBalance.value,
+              icon: Icon(
+                value ? IconsaxPlusLinear.eye_slash : IconsaxPlusLinear.eye,
+                color: SiColors.text,
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
