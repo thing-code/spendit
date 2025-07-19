@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 import 'package:spendit/src/features/home/presentation/widgets/balance_section.dart';
+import 'package:spendit/src/features/home/presentation/widgets/budget_section.dart';
+import 'package:spendit/src/features/home/presentation/widgets/financial_goals_section.dart';
 import 'package:spendit/src/features/home/presentation/widgets/transaction_form.dart';
 import 'package:spendit/src/features/home/presentation/widgets/transaction_section.dart';
+import 'package:spendit/src/gen/assets.gen.dart';
 import 'package:spendit_core/spendit_core.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -62,68 +65,80 @@ class _HomePageState extends ConsumerState<HomePage> {
         controller: _controller,
         physics: const BouncingScrollPhysics(),
         slivers: [
-          _appBar(context),
+          // SliverAppBar(
+          //   centerTitle: true,
+          //   titleSpacing: 16,
+          //   title: Row(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     spacing: 8,
+          //     children: [
+          //       Assets.icon.image(height: 32),
+          //       Text(
+          //         'Spend It',
+          //         style: SiTextStyles.semibold.copyWith(fontSize: 20, color: SiColors.text),
+          //       ),
+          //     ],
+          //   ),
+          //   flexibleSpace: Container(decoration: BoxDecoration(gradient: SiGradients.darkSurface)),
+          // ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: context.statusBarHeight + context.deviceHeight * .2,
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      height: context.statusBarHeight + context.deviceHeight * .15,
+                      padding: EdgeInsets.fromLTRB(16, context.statusBarHeight + 16, 16, 0),
+                      decoration: BoxDecoration(
+                        gradient: SiGradients.fancyRainbow,
+                        borderRadius: BorderRadius.vertical(bottom: Radius.circular(16)),
+                      ),
+                      child: Column(
+                        spacing: 4,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Assets.icon.image(height: 40),
+                          Text('Selamat Datang!', style: SiTextStyles.bold.copyWith(fontSize: 24)),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 16,
+                    right: 16,
+                    bottom: 0,
+                    child: Container(
+                      height: context.deviceHeight * .094,
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: SiColors.surface,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: BalanceSection(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SliverGap(16),
           SliverToBoxAdapter(child: TransactionSection()),
+          SliverGap(16),
+          SliverToBoxAdapter(child: BudgetSection()),
+          SliverGap(16),
+          SliverToBoxAdapter(child: Assets.icon.image()),
+          SliverGap(16),
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Text('Rencana Keuangan', style: SiTextStyles.medium.copyWith(fontSize: 16)),
             ),
           ),
-          // SliverPadding(padding: EdgeInsets.all(16), sliver: FinancialGoalsSection()),
-          SliverToBoxAdapter(
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Scaffold(appBar: AppBar(title: Text('Hoem Page')));
-                    },
-                  ),
-                );
-              },
-              child: Text('Elevated'),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: TextField(
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              textAlignVertical: TextAlignVertical.center,
-              decoration: InputDecoration(hintText: 'Cari Transaksi'),
-            ),
-          ),
+          SliverPadding(padding: EdgeInsets.all(16), sliver: FinancialGoalsSection()),
         ],
-      ),
-    );
-  }
-
-  SliverAppBar _appBar(BuildContext context) {
-    return SliverAppBar(
-      systemOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
-      expandedHeight: 100 + context.statusBarHeight,
-      centerTitle: false,
-      titleSpacing: 16,
-      title: Text(
-        _isCollapsed ? 'Spend It' : 'Selamat Datang',
-        style: SiTextStyles.semibold.copyWith(fontSize: 20, color: SiColors.text),
-      ),
-      floating: true,
-      pinned: true,
-      flexibleSpace: DecoratedBox(
-        decoration: BoxDecoration(
-          // gradient: RadialGradient(
-          //   colors: [SIColors.secondary, SIColors.primary],
-          //   center: Alignment.bottomRight,
-          //   radius: 1.5,
-          // ),
-        ),
-        child: FlexibleSpaceBar(
-          background: Padding(
-            padding: EdgeInsets.fromLTRB(16, context.statusBarHeight * 2, 16, 16),
-            child: BalanceSection(),
-          ),
-        ),
       ),
     );
   }

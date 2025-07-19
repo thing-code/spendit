@@ -3,16 +3,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spendit/src/features/home/presentation/controllers/balance_controller.dart';
 import 'package:spendit_core/spendit_core.dart';
 
+final showBalance = ValueNotifier(true);
+
 class BalanceSection extends ConsumerWidget {
   const BalanceSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final balance = ref.watch(balanceControllerProvider.select((value) => value.value ?? 0));
-    var showBalance = ValueNotifier(true);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 2,
       children: [
         Text(
           'Saldo Anda',
@@ -26,17 +28,21 @@ class BalanceSection extends ConsumerWidget {
               children: [
                 Flexible(
                   child: Text(
-                    value ? 'Rp ******' : balance.toDouble().toRupiah,
-                    style: SiTextStyles.medium.copyWith(
+                    value ? 'Rp ∙∙∙∙∙∙∙∙∙∙' : balance.toDouble().toRupiah,
+                    style: SiTextStyles.bold.copyWith(
                       fontSize: 24,
                       color: SiColors.text,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ),
-                InkResponse(
-                  onTap: () => showBalance.value = !showBalance.value,
-                  child: Icon(
+                IconButton(
+                  visualDensity: VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity,
+                  ),
+                  onPressed: () => showBalance.value = !showBalance.value,
+                  icon: Icon(
                     value ? IconsaxPlusLinear.eye_slash : IconsaxPlusLinear.eye,
                     color: SiColors.text,
                   ),

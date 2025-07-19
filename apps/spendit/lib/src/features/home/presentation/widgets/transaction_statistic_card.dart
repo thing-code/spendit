@@ -23,20 +23,20 @@ class TransactionStatisticCard extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 16,
               children: [
-                Icon(icon, color: transactionType.color),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(icon, color: transactionType.color),
+                    Icon(IconsaxPlusLinear.arrow_right_3, color: SiColors.mutedText),
+                  ],
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(transactionType.label),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          totalTransactions(ref).toDouble().toRupiahCompact,
-                          style: SiTextStyles.bold.copyWith(fontSize: 18),
-                        ),
-                        Icon(IconsaxPlusLinear.arrow_right_3, color: SiColors.mutedText),
-                      ],
+                    Text(
+                      totalTransactions(ref).toDouble().toRupiahCompact,
+                      style: SiTextStyles.bold.copyWith(fontSize: 18),
                     ),
                   ],
                 ),
@@ -49,12 +49,10 @@ class TransactionStatisticCard extends ConsumerWidget {
   }
 
   IconData get icon {
-    switch (transactionType) {
-      case TransactionType.income:
-        return IconsaxPlusBold.import_1;
-      case TransactionType.expense:
-        return IconsaxPlusBold.export;
-    }
+    return switch (transactionType) {
+      TransactionType.income => IconsaxPlusLinear.import_1,
+      TransactionType.expense => IconsaxPlusLinear.export_2,
+    };
   }
 
   int totalTransactions(WidgetRef ref) {

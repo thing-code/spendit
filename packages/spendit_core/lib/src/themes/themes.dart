@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:spendit_core/spendit_core.dart';
 
+export 'gradients.dart';
 export 'styles.dart';
 
 abstract final class SiColors {
@@ -37,6 +38,7 @@ abstract final class SiTheme {
     inputDecorationTheme: _inputDecorationTheme,
     progressIndicatorTheme: _progressTheme,
     actionIconTheme: _actionIconTheme,
+    cardTheme: CardThemeData(margin: EdgeInsets.zero),
     sliderTheme: SliderThemeData(year2023: false),
   );
 
