@@ -16,7 +16,7 @@ class BalanceSection extends ConsumerWidget {
       children: [
         Text(
           'Saldo Anda',
-          style: SITextStyles.regular.copyWith(fontSize: 16, color: SIColors.backgroundWhite),
+          style: SiTextStyles.regular.copyWith(fontSize: 16, color: SiColors.text),
         ),
         ValueListenableBuilder(
           valueListenable: showBalance,
@@ -27,9 +27,9 @@ class BalanceSection extends ConsumerWidget {
                 Flexible(
                   child: Text(
                     value ? 'Rp ******' : balance.toDouble().toRupiah,
-                    style: SITextStyles.medium.copyWith(
+                    style: SiTextStyles.medium.copyWith(
                       fontSize: 24,
-                      color: SIColors.backgroundWhite,
+                      color: SiColors.text,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -38,7 +38,7 @@ class BalanceSection extends ConsumerWidget {
                   onTap: () => showBalance.value = !showBalance.value,
                   child: Icon(
                     value ? IconsaxPlusLinear.eye_slash : IconsaxPlusLinear.eye,
-                    color: SIColors.backgroundWhite,
+                    color: SiColors.text,
                   ),
                 ),
               ],

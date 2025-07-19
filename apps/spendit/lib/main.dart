@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:spendit/src/routers/routers.dart';
@@ -46,15 +45,7 @@ class MainApp extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Spend It : Manage your spending',
-      theme: SITheme.light,
-      localizationsDelegates: const [
-        SILocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [Locale('en', 'US'), Locale('id', 'ID')],
-      locale: const Locale('id', 'ID'),
+      theme: SiTheme.dark,
       builder: (context, child) {
         return child!;
       },

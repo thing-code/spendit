@@ -39,7 +39,7 @@ class DefaultBottomSheet extends StatelessWidget {
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            color: SIColors.backgroundLightGrey,
+                            color: SiColors.mutedText,
                           ),
                           height: 4,
                           width: 72,
@@ -64,7 +64,7 @@ class DefaultBottomSheet extends StatelessWidget {
                       top: showCloseIcon ? 16 : 28,
                       child: Text(
                         title,
-                        style: SITextStyles.semibold.copyWith(fontSize: 18),
+                        style: SiTextStyles.semibold.copyWith(fontSize: 18),
                         textAlign: TextAlign.center,
                       ),
                     ),

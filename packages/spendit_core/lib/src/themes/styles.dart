@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spendit_core/spendit_core.dart';
 
 class SIInputBorder extends UnderlineInputBorder {
   const SIInputBorder({super.borderRadius, super.borderSide = BorderSide.none});
@@ -36,40 +35,12 @@ class SIInputBorder extends UnderlineInputBorder {
   }
 }
 
-abstract final class SITextStyles {
-  const SITextStyles._();
+abstract final class SiTextStyles {
+  const SiTextStyles._();
 
-  static TextStyle bold = TextStyle(fontWeight: FontWeight.bold, height: 1.4, color: SIColors.text);
-  static TextStyle semibold = TextStyle(
-    fontWeight: FontWeight.w600,
-    height: 1.4,
-    color: SIColors.text,
-  );
-  static TextStyle medium = TextStyle(
-    fontWeight: FontWeight.w500,
-    height: 1.4,
-    color: SIColors.text,
-  );
-  static TextStyle regular = TextStyle(
-    fontWeight: FontWeight.w400,
-    height: 1.4,
-    color: SIColors.text,
-  );
-  static TextStyle light = TextStyle(
-    fontWeight: FontWeight.bold,
-    height: 1.4,
-    color: SIColors.text,
-  );
-}
-
-abstract final class SIStyles {
-  const SIStyles._();
-
-  static List<BoxShadow> cardShadow = [
-    BoxShadow(
-      color: SIColors.primary.withValues(alpha: .1),
-      blurRadius: 10,
-      offset: const Offset(0, 4),
-    ),
-  ];
+  static TextStyle bold = TextStyle(fontWeight: FontWeight.bold);
+  static TextStyle semibold = TextStyle(fontWeight: FontWeight.w600);
+  static TextStyle medium = TextStyle(fontWeight: FontWeight.w500);
+  static TextStyle regular = TextStyle(fontWeight: FontWeight.w400);
+  static TextStyle light = TextStyle(fontWeight: FontWeight.bold);
 }

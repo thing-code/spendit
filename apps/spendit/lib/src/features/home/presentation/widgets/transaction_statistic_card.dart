@@ -33,9 +33,9 @@ class TransactionStatisticCard extends ConsumerWidget {
                       children: [
                         Text(
                           totalTransactions(ref).toDouble().toRupiahCompact,
-                          style: SITextStyles.bold.copyWith(fontSize: 18),
+                          style: SiTextStyles.bold.copyWith(fontSize: 18),
                         ),
-                        Icon(IconsaxPlusLinear.arrow_right_3, color: SIColors.backgroundGrey),
+                        Icon(IconsaxPlusLinear.arrow_right_3, color: SiColors.mutedText),
                       ],
                     ),
                   ],

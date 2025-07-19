@@ -15,7 +15,7 @@ class SIErrorWidget extends StatelessWidget {
             spacing: 12,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(IconsaxPlusBold.danger, color: SIColors.error),
+              Icon(IconsaxPlusBold.danger, color: SiColors.danger),
               Text(errorDetails?.toStringShort() ?? 'An Error Occured'),
             ],
           ),

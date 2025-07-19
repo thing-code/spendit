@@ -1,189 +1,152 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-
-import 'styles.dart';
+import 'package:spendit_core/spendit_core.dart';
 
 export 'styles.dart';
 
-abstract final class SIColors {
-  const SIColors._();
+abstract final class SiColors {
+  const SiColors._();
 
-  static const Color primary = Color(0xff180048);
-  static const Color secondary = Color.fromARGB(255, 69, 173, 161);
-  static const Color backgroundWhite = Color(0xFFf5f7fa);
-  static const Color backgroundLightGrey = Color(0xffdbe4ed);
-  static const Color backgroundGrey = Color(0xffa6bcd3);
-  static const Color warning = Color(0xFFfcb226);
-  static const Color error = Color(0xFFf65454);
-  static const Color success = Color(0xFF1bc760);
-  static const Color text = Color(0xFF101720);
+  static const Color primary = Color(0xFF6C4FF6);
+  static const Color accent = Color(0xFF00CFFF);
+  static const Color success = Color(0xFF4FFFB0);
+  static const Color warning = Color(0xFFFFB547);
+  static const Color danger = Color(0xFFFF4F7B);
+  static const Color background = Color(0xFF1C1B29);
+  static const Color surface = Color(0xFF2A2B3C);
+  static const Color text = Color(0xFFFFFFFF);
+  static const Color mutedText = Color(0xFFA9A7C1);
 }
 
-abstract final class SITheme {
-  const SITheme._();
+abstract final class SiTheme {
+  const SiTheme._();
 
-  static ThemeData get light {
-    final fontFamily = 'Figtree';
-    return ThemeData(
-      fontFamily: fontFamily,
-      colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: colorToMaterial(SIColors.primary),
-        accentColor: SIColors.secondary,
-        brightness: Brightness.light,
-        cardColor: SIColors.backgroundWhite,
-        backgroundColor: SIColors.backgroundLightGrey,
-        errorColor: SIColors.error,
-      ),
-      scaffoldBackgroundColor: SIColors.backgroundLightGrey,
-      pageTransitionsTheme: PageTransitionsTheme(
-        builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
-          TargetPlatform.values,
-          value: (_) => const PredictiveBackPageTransitionsBuilder(),
-        ),
-      ),
-      inputDecorationTheme: _inputDecoration(fontFamily: fontFamily),
-      filledButtonTheme: _filledButtonTheme(fontFamily: fontFamily),
-      outlinedButtonTheme: _outlinedButtonTheme(fontFamily: fontFamily),
-      textButtonTheme: _textButtonTheme(fontFamily: fontFamily),
-      segmentedButtonTheme: SegmentedButtonThemeData(
-        selectedIcon: const SizedBox(),
-        style: SegmentedButton.styleFrom(),
-      ),
-      appBarTheme: _appBarTheme(fontFamily: fontFamily),
-      cardTheme: _cardTheme(),
-      datePickerTheme: DatePickerThemeData(),
-      progressIndicatorTheme: ProgressIndicatorThemeData(
-        year2023: false,
-        borderRadius: BorderRadius.circular(1000),
-        color: SIColors.secondary,
-        circularTrackColor: SIColors.backgroundGrey.withValues(alpha: .15),
-        linearTrackColor: SIColors.backgroundGrey.withValues(alpha: .15),
-        stopIndicatorColor: SIColors.secondary,
-      ),
-      sliderTheme: SliderThemeData(year2023: false),
-    );
-  }
-
-  static CardThemeData _cardTheme() {
-    return CardThemeData(
-      shadowColor: SIColors.primary.withAlpha(100),
-      elevation: 3,
-      margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-    );
-  }
-
-  static AppBarTheme _appBarTheme({String? fontFamily}) => AppBarTheme(
-    centerTitle: true,
-    titleSpacing: 8,
-    foregroundColor: SIColors.primary,
-    backgroundColor: Colors.white.withAlpha(200),
-    actionsPadding: EdgeInsets.symmetric(horizontal: 8),
-    titleTextStyle: SITextStyles.medium.copyWith(
-      fontSize: 16,
-      color: SIColors.primary,
-      fontFamily: fontFamily,
-    ),
+  static ThemeData get dark => ThemeData(
+    fontFamily: 'Figtree',
+    brightness: Brightness.dark,
+    scaffoldBackgroundColor: SiColors.background,
+    primaryColor: SiColors.primary,
+    colorScheme: _colorScheme,
+    cardColor: SiColors.surface,
+    pageTransitionsTheme: _pageTransitionTheme,
+    appBarTheme: _appBarTheme,
+    elevatedButtonTheme: _elevatedButtonTheme,
+    textButtonTheme: _textButtonTheme,
+    outlinedButtonTheme: _outlinedButtonTheme,
+    inputDecorationTheme: _inputDecorationTheme,
+    progressIndicatorTheme: _progressTheme,
+    actionIconTheme: _actionIconTheme,
+    sliderTheme: SliderThemeData(year2023: false),
   );
 
-  static TextButtonThemeData _textButtonTheme({String? fontFamily}) {
+  static ActionIconThemeData get _actionIconTheme {
+    return ActionIconThemeData(
+      backButtonIconBuilder: (context) {
+        return Icon(IconsaxPlusLinear.arrow_left_1);
+      },
+    );
+  }
+
+  static AppBarTheme get _appBarTheme {
+    return AppBarTheme(
+      backgroundColor: SiColors.surface,
+      foregroundColor: SiColors.text,
+      surfaceTintColor: Colors.transparent,
+      centerTitle: true,
+    );
+  }
+
+  static InputDecorationTheme get _inputDecorationTheme {
+    return InputDecorationTheme(
+      filled: true,
+      fillColor: SiColors.surface,
+      contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+      constraints: BoxConstraints(minHeight: 48),
+      isDense: true,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide.none,
+      ),
+      helperStyle: TextStyle(fontSize: 12, color: SiColors.mutedText),
+      hintStyle: TextStyle(color: SiColors.mutedText),
+    );
+  }
+
+  static PageTransitionsTheme get _pageTransitionTheme {
+    return PageTransitionsTheme(
+      builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
+        TargetPlatform.values,
+        value: (_) => const PredictiveBackPageTransitionsBuilder(),
+      ),
+    );
+  }
+
+  static ColorScheme get _colorScheme {
+    return ColorScheme.dark(
+      primary: SiColors.primary,
+      secondary: SiColors.accent,
+      background: SiColors.background,
+      surface: SiColors.surface,
+      error: SiColors.danger,
+      onPrimary: SiColors.text,
+      onSecondary: SiColors.text,
+      onSurface: SiColors.text,
+      onBackground: SiColors.text,
+      onError: SiColors.text,
+    );
+  }
+
+  static ProgressIndicatorThemeData get _progressTheme {
+    return ProgressIndicatorThemeData(
+      year2023: false,
+      borderRadius: BorderRadius.circular(1000),
+      color: SiColors.accent,
+      circularTrackColor: SiColors.text.withValues(alpha: .2),
+      linearTrackColor: SiColors.text.withValues(alpha: .2),
+      stopIndicatorColor: SiColors.primary,
+    );
+  }
+
+  static ElevatedButtonThemeData get _elevatedButtonTheme {
+    return ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        foregroundColor: SiColors.text,
+        backgroundColor: SiColors.primary,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        minimumSize: Size.fromHeight(48),
+        maximumSize: Size.fromHeight(56),
+        textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+
+  static TextButtonThemeData get _textButtonTheme {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
         minimumSize: Size.fromHeight(48),
-        maximumSize: Size(double.infinity, 56),
-        textStyle: SITextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
-        foregroundColor: SIColors.primary,
+        maximumSize: Size.fromHeight(56),
+        textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+        foregroundColor: SiColors.primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
       ),
     );
   }
 
-  static OutlinedButtonThemeData _outlinedButtonTheme({String? fontFamily}) {
+  static OutlinedButtonThemeData get _outlinedButtonTheme {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         minimumSize: Size.fromHeight(48),
-        maximumSize: Size(double.infinity, 56),
-        textStyle: SITextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
-        foregroundColor: SIColors.secondary,
+        maximumSize: Size.fromHeight(56),
+        textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+        foregroundColor: SiColors.accent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
-        side: BorderSide(color: SIColors.secondary, width: 1.6),
+        side: BorderSide(
+          color: SiColors.accent,
+          width: 1.5,
+          strokeAlign: BorderSide.strokeAlignInside,
+        ),
       ),
     );
   }
-
-  static FilledButtonThemeData _filledButtonTheme({String? fontFamily}) {
-    return FilledButtonThemeData(
-      style: FilledButton.styleFrom(
-        minimumSize: Size.fromHeight(48),
-        maximumSize: Size(double.infinity, 56),
-        textStyle: SITextStyles.medium.copyWith(fontSize: 14, fontFamily: fontFamily),
-        backgroundColor: SIColors.primary,
-        foregroundColor: SIColors.backgroundLightGrey,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
-      ),
-    );
-  }
-
-  static InputDecorationTheme _inputDecoration({String? fontFamily}) {
-    return InputDecorationTheme(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      filled: true,
-      isDense: true,
-      fillColor: WidgetStateColor.resolveWith((states) {
-        if (states.contains(WidgetState.error)) {
-          return SIColors.error.withValues(alpha: .1);
-        }
-        return SIColors.backgroundLightGrey;
-      }),
-      labelStyle: SITextStyles.medium.copyWith(
-        fontSize: 14,
-        fontFamily: fontFamily,
-        color: WidgetStateColor.resolveWith((states) {
-          if (states.contains(WidgetState.error)) {
-            return SIColors.error;
-          }
-          return SIColors.primary;
-        }),
-      ),
-      prefixIconColor: WidgetStateColor.resolveWith((states) {
-        if (states.contains(WidgetState.error)) {
-          return SIColors.error;
-        }
-        return SIColors.primary;
-      }),
-      suffixIconColor: WidgetStateColor.resolveWith((states) {
-        if (states.contains(WidgetState.error)) {
-          return SIColors.error;
-        }
-        return SIColors.primary;
-      }),
-      border: SIInputBorder(borderRadius: BorderRadius.circular(1000)),
-      focusedBorder: SIInputBorder(borderRadius: BorderRadius.circular(1000)),
-      enabledBorder: SIInputBorder(borderRadius: BorderRadius.circular(1000)),
-      errorBorder: SIInputBorder(borderRadius: BorderRadius.circular(1000)),
-      disabledBorder: SIInputBorder(borderRadius: BorderRadius.circular(1000)),
-    );
-  }
-}
-
-MaterialColor colorToMaterial(Color color) {
-  final int red = (color.r * 255).round() & 0xff;
-  final int green = (color.g * 255).round() & 0xff;
-  final int blue = (color.b * 255).round() & 0xff;
-
-  final Map<int, Color> shades = {
-    50: Color.fromRGBO(red, green, blue, .1),
-    100: Color.fromRGBO(red, green, blue, .2),
-    200: Color.fromRGBO(red, green, blue, .3),
-    300: Color.fromRGBO(red, green, blue, .4),
-    400: Color.fromRGBO(red, green, blue, .5),
-    500: Color.fromRGBO(red, green, blue, .6),
-    600: Color.fromRGBO(red, green, blue, .7),
-    700: Color.fromRGBO(red, green, blue, .8),
-    800: Color.fromRGBO(red, green, blue, .9),
-    900: Color.fromRGBO(red, green, blue, 1),
-  };
-
-  return MaterialColor(color.toARGB32(), shades);
 }

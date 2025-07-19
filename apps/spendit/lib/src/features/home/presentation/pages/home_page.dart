@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spendit/src/features/home/presentation/widgets/balance_section.dart';
-import 'package:spendit/src/features/home/presentation/widgets/financial_goals_section.dart';
 import 'package:spendit/src/features/home/presentation/widgets/transaction_form.dart';
 import 'package:spendit/src/features/home/presentation/widgets/transaction_section.dart';
 import 'package:spendit_core/spendit_core.dart';
@@ -68,10 +67,32 @@ class _HomePageState extends ConsumerState<HomePage> {
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text('Rencana Keuangan', style: SITextStyles.medium.copyWith(fontSize: 16)),
+              child: Text('Rencana Keuangan', style: SiTextStyles.medium.copyWith(fontSize: 16)),
             ),
           ),
-          SliverPadding(padding: EdgeInsets.all(16), sliver: FinancialGoalsSection()),
+          // SliverPadding(padding: EdgeInsets.all(16), sliver: FinancialGoalsSection()),
+          SliverToBoxAdapter(
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Scaffold(appBar: AppBar(title: Text('Hoem Page')));
+                    },
+                  ),
+                );
+              },
+              child: Text('Elevated'),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: TextField(
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              textAlignVertical: TextAlignVertical.center,
+              decoration: InputDecoration(hintText: 'Cari Transaksi'),
+            ),
+          ),
         ],
       ),
     );
@@ -85,17 +106,17 @@ class _HomePageState extends ConsumerState<HomePage> {
       titleSpacing: 16,
       title: Text(
         _isCollapsed ? 'Spend It' : 'Selamat Datang',
-        style: SITextStyles.semibold.copyWith(fontSize: 20, color: SIColors.backgroundWhite),
+        style: SiTextStyles.semibold.copyWith(fontSize: 20, color: SiColors.text),
       ),
       floating: true,
       pinned: true,
       flexibleSpace: DecoratedBox(
         decoration: BoxDecoration(
-          gradient: RadialGradient(
-            colors: [SIColors.secondary, SIColors.primary],
-            center: Alignment.bottomRight,
-            radius: 1.5,
-          ),
+          // gradient: RadialGradient(
+          //   colors: [SIColors.secondary, SIColors.primary],
+          //   center: Alignment.bottomRight,
+          //   radius: 1.5,
+          // ),
         ),
         child: FlexibleSpaceBar(
           background: Padding(

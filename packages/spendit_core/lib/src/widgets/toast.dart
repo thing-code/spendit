@@ -290,7 +290,7 @@ class _ToastWidgetState extends State<ToastWidget> with TickerProviderStateMixin
                   ],
                 ),
                 child: Material(
-                  color: SIColors.backgroundLightGrey,
+                  color: SiColors.surface,
                   borderRadius: BorderRadius.circular(1000),
                   child: Padding(
                     padding: widget.padding ?? getPadding(),

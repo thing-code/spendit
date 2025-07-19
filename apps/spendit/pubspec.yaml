@@ -25,7 +25,6 @@ dependencies:
   path: ^1.9.1
   reactive_dropdown_search: ^6.0.0-pre4
   reactive_forms: ^18.1.1
-  reactive_forms_annotations: ^8.0.1
   riverpod_annotation: ^2.6.1
   skeletonizer: ^2.1.0
   spendit_core: 0.0.1
@@ -44,7 +43,6 @@ dev_dependencies:
   riverpod_lint: ^2.6.5
   flutter_gen_runner: ^5.10.0
   flutter_native_splash: ^2.4.6
-  reactive_forms_generator: ^8.0.1
   mocktail: ^1.0.4
   go_router_builder: ^3.0.0
   build_verify: ^3.1.1

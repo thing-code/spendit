@@ -21,7 +21,7 @@ class TransactionSection extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 8,
               children: [
-                Text('Statistik', style: SITextStyles.regular.copyWith(fontSize: 16)),
+                Text('Statistik', style: SiTextStyles.regular.copyWith(fontSize: 16)),
                 TransactionStatisticCard(TransactionType.income),
                 TransactionStatisticCard(TransactionType.expense),
               ],
@@ -32,7 +32,7 @@ class TransactionSection extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 8,
               children: [
-                Text('Anggaran', style: SITextStyles.regular.copyWith(fontSize: 16)),
+                Text('Anggaran', style: SiTextStyles.regular.copyWith(fontSize: 16)),
                 BudgetStatisticCard(),
               ],
             ),

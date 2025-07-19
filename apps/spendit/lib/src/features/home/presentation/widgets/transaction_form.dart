@@ -10,7 +10,6 @@ class TransactionForm extends StatelessWidget {
     return SafeArea(
       minimum: EdgeInsets.only(bottom: 16, right: 16, left: 16),
       child: Scaffold(
-        backgroundColor: SIColors.backgroundWhite,
         body: ListView(
           padding: EdgeInsets.only(bottom: 16),
           children: [
@@ -26,27 +25,27 @@ class TransactionForm extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           color: value.contains(TransactionType.income)
-                              ? SIColors.secondary.withAlpha(50)
+                              ? SiColors.accent.withAlpha(50)
                               : Colors.white,
                         ),
                         child: Column(
                           children: [Icon(IconsaxPlusBold.export), Text('Pengaluaran')],
                         ),
-                      ),
+                      ).onTap(onTap: () => type.value = {TransactionType.income}),
                     ),
                     Expanded(
                       child: Container(
                         padding: EdgeInsets.all(16),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          color: value.contains(TransactionType.income)
-                              ? SIColors.secondary.withAlpha(50)
+                          color: value.contains(TransactionType.expense)
+                              ? SiColors.accent.withAlpha(50)
                               : Colors.white,
                         ),
                         child: Column(
                           children: [Icon(IconsaxPlusBold.export), Text('Pengaluaran')],
                         ),
-                      ),
+                      ).onTap(onTap: () => type.value = {TransactionType.expense}),
                     ),
                   ],
                 );

@@ -85,7 +85,7 @@ class _SINumberInputState extends State<SINumberInput> {
       controller: _controller,
       formControl: widget.formControl,
       keyboardType: TextInputType.numberWithOptions(decimal: widget.includeDecimal),
-      style: SITextStyles.semibold.copyWith(fontSize: 28),
+      style: SiTextStyles.semibold.copyWith(fontSize: 28),
       textAlign: TextAlign.center,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderSide: BorderSide.none),
@@ -95,14 +95,8 @@ class _SINumberInputState extends State<SINumberInput> {
         hintText: '0',
         prefixText: 'Rp. ',
         suffixText: '    ',
-        prefixStyle: SITextStyles.regular.copyWith(
-          fontSize: 16,
-          color: SIColors.primary.withAlpha(100),
-        ),
-        hintStyle: SITextStyles.semibold.copyWith(
-          fontSize: 28,
-          color: SIColors.primary.withAlpha(100),
-        ),
+        prefixStyle: SiTextStyles.regular.copyWith(fontSize: 16),
+        hintStyle: SiTextStyles.semibold.copyWith(fontSize: 28),
       ),
     );
   }

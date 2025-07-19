@@ -15,11 +15,11 @@ class Header extends StatelessWidget {
           Container(
             height: 80 + statusBarHeight,
             width: context.deviceWidth,
-            decoration: BoxDecoration(color: SIColors.primary),
+            decoration: BoxDecoration(color: SiColors.primary),
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: statusBarHeight),
             child: Text(
               'Selamat Datang',
-              style: SITextStyles.semibold.copyWith(fontSize: 20, color: SIColors.backgroundWhite),
+              style: SiTextStyles.semibold.copyWith(fontSize: 20, color: SiColors.text),
             ),
           ),
           Positioned(
@@ -30,9 +30,8 @@ class Header extends StatelessWidget {
               height: 80,
               padding: EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
-                color: SIColors.backgroundWhite,
+                color: SiColors.text,
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: SIStyles.cardShadow,
               ),
               child: BalanceSection(),
             ),

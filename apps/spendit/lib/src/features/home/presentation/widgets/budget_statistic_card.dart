@@ -41,9 +41,9 @@ class BudgetStatisticCard extends ConsumerWidget {
                 Gap(2),
                 Text(
                   usages.toDouble().toRupiahCompact,
-                  style: SITextStyles.medium.copyWith(
+                  style: SiTextStyles.medium.copyWith(
                     fontSize: 10,
-                    color: SIColors.primary.withAlpha(200),
+                    color: SiColors.primary.withAlpha(200),
                   ),
                 ),
               ],
@@ -57,9 +57,9 @@ class BudgetStatisticCard extends ConsumerWidget {
                   children: [
                     Text(
                       budgets.toDouble().toRupiahCompact,
-                      style: SITextStyles.bold.copyWith(fontSize: 18),
+                      style: SiTextStyles.bold.copyWith(fontSize: 18),
                     ),
-                    Icon(IconsaxPlusLinear.arrow_right_3, color: SIColors.backgroundGrey),
+                    Icon(IconsaxPlusLinear.arrow_right_3, color: SiColors.mutedText),
                   ],
                 ),
               ],

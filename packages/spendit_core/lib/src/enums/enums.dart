@@ -16,8 +16,8 @@ enum ExpenseCategory {
 }
 
 enum TransactionType {
-  income('Pemasukan', SIColors.success),
-  expense('Pengeluaran', SIColors.error);
+  income('Pemasukan', SiColors.success),
+  expense('Pengeluaran', SiColors.danger);
 
   final String label;
   final Color color;

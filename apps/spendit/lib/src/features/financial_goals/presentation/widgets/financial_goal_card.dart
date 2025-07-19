@@ -25,20 +25,20 @@ class FinancialGoalCard extends StatelessWidget {
                       width: 64,
                       height: 64,
                       decoration: BoxDecoration(
-                        color: SIColors.primary,
+                        color: SiColors.primary,
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Icon(IconsaxPlusLinear.flag, color: SIColors.backgroundWhite),
+                      child: Icon(IconsaxPlusLinear.flag),
                     ),
                   ),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(goal.name, style: SITextStyles.medium.copyWith(fontSize: 16)),
+                        Text(goal.name, style: SiTextStyles.medium.copyWith(fontSize: 16)),
                         Text(
                           '${goal.progressAmount.toDouble().toRupiah} / ${goal.targetAmount.toDouble().toRupiah}',
-                          style: SITextStyles.medium.copyWith(fontSize: 12),
+                          style: SiTextStyles.medium.copyWith(fontSize: 12),
                         ),
                         Gap(8),
                         SizedBox(
@@ -50,11 +50,7 @@ class FinancialGoalCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Positioned(
-                top: 0,
-                right: 0,
-                child: Icon(IconsaxPlusLinear.more, color: SIColors.primary),
-              ),
+              Positioned(top: 0, right: 0, child: Icon(IconsaxPlusLinear.more)),
             ],
           ),
         ),
