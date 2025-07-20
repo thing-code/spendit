@@ -13,7 +13,7 @@ class BudgetSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 8,
         children: [
-          Text('Anggaran Bulan Ini', style: SiTextStyles.regular.copyWith(fontSize: 16)),
+          Text('Anggaran Bulanan', style: SiTextStyles.regular.copyWith(fontSize: 16)),
           BudgetStatisticCard(),
         ],
       ),

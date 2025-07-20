@@ -18,7 +18,7 @@ class TransactionStatisticCard extends ConsumerWidget {
         width: context.deviceWidth,
         child: Card(
           child: Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 16,

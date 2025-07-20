@@ -60,23 +60,32 @@ class _HomePageState extends ConsumerState<HomePage> {
           );
         },
       ),
-      body: CustomScrollView(
-        controller: _controller,
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          SliverToBoxAdapter(child: Header()),
-          SliverGap(16),
-          SliverToBoxAdapter(child: TransactionSection()),
-          SliverGap(16),
-          SliverToBoxAdapter(child: BudgetSection()),
-          SliverGap(16),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text('Rencana Keuangan', style: SiTextStyles.medium.copyWith(fontSize: 16)),
+      body: Column(
+        spacing: 16,
+        children: [
+          Header(),
+          Expanded(
+            child: CustomScrollView(
+              controller: _controller,
+              physics: const BouncingScrollPhysics(),
+              slivers: [
+                SliverToBoxAdapter(child: TransactionSection()),
+                SliverGap(16),
+                SliverToBoxAdapter(child: BudgetSection()),
+                SliverGap(16),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      'Rencana Keuangan',
+                      style: SiTextStyles.medium.copyWith(fontSize: 16),
+                    ),
+                  ),
+                ),
+                SliverPadding(padding: EdgeInsets.all(16), sliver: FinancialGoalsSection()),
+              ],
             ),
           ),
-          SliverPadding(padding: EdgeInsets.all(16), sliver: FinancialGoalsSection()),
         ],
       ),
     );

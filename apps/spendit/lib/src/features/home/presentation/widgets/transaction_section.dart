@@ -10,18 +10,11 @@ class TransactionSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 8,
+      child: Row(
+        spacing: 16,
         children: [
-          Text('Statistik', style: SiTextStyles.regular.copyWith(fontSize: 16)),
-          Row(
-            spacing: 12,
-            children: [
-              Expanded(child: TransactionStatisticCard(TransactionType.income)),
-              Expanded(child: TransactionStatisticCard(TransactionType.expense)),
-            ],
-          ),
+          Expanded(child: TransactionStatisticCard(TransactionType.income)),
+          Expanded(child: TransactionStatisticCard(TransactionType.expense)),
         ],
       ),
     );

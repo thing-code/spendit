@@ -3,28 +3,15 @@ import 'package:flutter/material.dart';
 abstract final class SiGradients {
   const SiGradients._();
 
-  static const LinearGradient vibrantIndigoToSkyBlue = LinearGradient(
+  static const LinearGradient indigoToSkyBlue = LinearGradient(
     colors: [Color(0xFF6C4FF6), Color(0xFF00CFFF)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
-
-  static const LinearGradient mintToSkyBlue = LinearGradient(
-    colors: [Color(0xFF4FFFB0), Color(0xFF00CFFF)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-  );
-
-  static const LinearGradient amberToPink = LinearGradient(
-    colors: [Color(0xFFFFB547), Color(0xFFFF4F7B)],
-    begin: Alignment.centerLeft,
-    end: Alignment.centerRight,
-  );
-
-  static const LinearGradient indigoToMint = LinearGradient(
-    colors: [Color(0xFF6C4FF6), Color(0xFF4FFFB0)],
-    begin: Alignment.topRight,
-    end: Alignment.bottomLeft,
+  static const RadialGradient indigoToSkyBlue2 = RadialGradient(
+    colors: [Color(0xFF6C4FF6), Color(0xFF00CFFF)],
+    center: Alignment(0, 0),
+    radius: 2,
   );
 
   static const LinearGradient darkSurface = LinearGradient(

@@ -9,45 +9,45 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-              height: context.statusBarHeight + context.deviceHeight * .2,
-              child: Stack(
+      height: context.statusBarHeight + context.deviceHeight * .2,
+      child: Stack(
+        children: [
+          Positioned(
+            left: 0,
+            right: 0,
+            child: Container(
+              height: context.statusBarHeight + context.deviceHeight * .15,
+              padding: EdgeInsets.fromLTRB(16, context.statusBarHeight, 16, 0),
+              decoration: BoxDecoration(
+                gradient: SiGradients.indigoToSkyBlue,
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(16)),
+              ),
+              child: Column(
+                spacing: 4,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      height: context.statusBarHeight + context.deviceHeight * .15,
-                      padding: EdgeInsets.fromLTRB(16, context.statusBarHeight + 16, 16, 0),
-                      decoration: BoxDecoration(
-                        gradient: SiGradients.fancyRainbow,
-                        borderRadius: BorderRadius.vertical(bottom: Radius.circular(16)),
-                      ),
-                      child: Column(
-                        spacing: 4,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Assets.icon.image(height: 40),
-                          Text('Selamat Datang!', style: SiTextStyles.bold.copyWith(fontSize: 24)),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 16,
-                    right: 16,
-                    bottom: 0,
-                    child: Container(
-                      height: context.deviceHeight * .094,
-                      padding: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: SiColors.surface,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: BalanceSection(),
-                    ),
-                  ),
+                  Assets.icon.image(height: 40),
+                  Text('Selamat Datang!', style: SiTextStyles.bold.copyWith(fontSize: 24)),
                 ],
               ),
-            );
+            ),
+          ),
+          Positioned(
+            left: 16,
+            right: 16,
+            bottom: 0,
+            child: Container(
+              height: context.deviceHeight * .1,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: SiColors.surface,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: BalanceSection(),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
