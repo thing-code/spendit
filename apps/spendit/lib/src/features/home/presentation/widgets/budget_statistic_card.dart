@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
 import 'package:spendit/src/features/budgets/presentation/controllers/budget_controller.dart';
+import 'package:spendit/src/features/transactions/domain/models/transaction_model.dart';
+import 'package:spendit/src/features/transactions/presentation/controllers/transaction_controller.dart';
+import 'package:spendit/src/features/transactions/utils/top_transactions.dart';
 import 'package:spendit_core/spendit_core.dart';
 
 class BudgetStatisticCard extends ConsumerWidget {
@@ -62,33 +64,7 @@ class BudgetStatisticCard extends ConsumerWidget {
                         usages.toDouble().toRupiahCompact,
                         style: SiTextStyles.medium.copyWith(fontSize: 16, color: SiColors.text),
                       ),
-                      Gap(2),
-                      Text(
-                        'Pengeluaran Teratas',
-                        style: SiTextStyles.medium.copyWith(
-                          fontSize: 14,
-                          color: SiColors.mutedText,
-                        ),
-                      ),
-                      Row(
-                        spacing: 8,
-                        children: [
-                          Container(
-                            width: 12,
-                            height: 12,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: ExpenseCategory.food.color,
-                              border: Border.all(
-                                width: 2,
-                                strokeAlign: BorderSide.strokeAlignInside,
-                                color: SiColors.text.withValues(alpha: .5),
-                              ),
-                            ),
-                          ),
-                          Text(ExpenseCategory.food.label),
-                        ],
-                      ),
+                      _TopTransactions(),
                     ],
                   ),
                 ),
@@ -120,6 +96,62 @@ class BudgetStatisticCard extends ConsumerWidget {
       onTap: () {
         Toast.show(context, title: 'THIS IS A TEST TOAST');
       },
+    );
+  }
+}
+
+class _TopTransactions extends ConsumerWidget {
+  const _TopTransactions();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final expenses = ref.watch(expensesProvider);
+    return switch (expenses) {
+      AsyncData(:final value) => _buildListOfTransactions(
+        value.whereType<TransactionExpense>().toList(),
+      ),
+      AsyncError() => SizedBox.shrink(),
+      _ => SizedBox.shrink(),
+    };
+  }
+
+  Widget _buildListOfTransactions(List<TransactionExpense> data) {
+    if (data.isEmpty) return SizedBox.shrink();
+    final topTransactions = getTopTransactions(data);
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Column(
+        spacing: 2,
+        children: [
+          Text(
+            'Pengeluaran Teratas',
+            style: SiTextStyles.medium.copyWith(fontSize: 14, color: SiColors.mutedText),
+          ),
+          ...topTransactions.map(_buildItem),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildItem(TransactionExpense item) {
+    return Row(
+      spacing: 8,
+      children: [
+        Container(
+          width: 12,
+          height: 12,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: item.category.color,
+            border: Border.all(
+              width: 2,
+              strokeAlign: BorderSide.strokeAlignInside,
+              color: SiColors.text.withValues(alpha: .5),
+            ),
+          ),
+        ),
+        Text(item.category.label),
+      ],
     );
   }
 }
