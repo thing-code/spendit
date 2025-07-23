@@ -6,7 +6,7 @@ class SIButton extends StatelessWidget {
 
   final Widget Function(BuildContext context, bool isLoading) builder;
 
-  factory SIButton.primary({Key? key, required String text, VoidCallback? onPressed}) {
+  factory SIButton.primary({Key? key, required String text, required VoidCallback? onPressed}) {
     Widget title(String text) => Text(text, style: SiTextStyles.semibold.copyWith(fontSize: 14));
     Widget loading() => const SizedBox(width: 16, height: 16, child: CircularProgressIndicator());
     return SIButton._(
@@ -18,7 +18,7 @@ class SIButton extends StatelessWidget {
     );
   }
 
-  factory SIButton.secondary({Key? key, required String text, VoidCallback? onPressed}) {
+  factory SIButton.secondary({Key? key, required String text, required VoidCallback? onPressed}) {
     Widget title(String text) => Text(text, style: SiTextStyles.semibold.copyWith(fontSize: 14));
     Widget loading() => const SizedBox(width: 16, height: 16, child: CircularProgressIndicator());
     return SIButton._(
@@ -31,7 +31,7 @@ class SIButton extends StatelessWidget {
     );
   }
 
-  factory SIButton.text({Key? key, required String text, VoidCallback? onPressed}) {
+  factory SIButton.text({Key? key, required String text, required VoidCallback? onPressed}) {
     Widget title(String text) => Text(text, style: SiTextStyles.semibold.copyWith(fontSize: 14));
     Widget loading() => const SizedBox(width: 16, height: 16, child: CircularProgressIndicator());
     return SIButton._(

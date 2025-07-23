@@ -52,9 +52,10 @@ abstract final class SiTheme {
 
   static AppBarTheme get _appBarTheme {
     return AppBarTheme(
-      backgroundColor: SiColors.surface,
+      backgroundColor: SiColors.background,
       foregroundColor: SiColors.text,
       surfaceTintColor: Colors.transparent,
+      titleTextStyle: SiTextStyles.semibold.copyWith(fontSize: 16),
       centerTitle: true,
     );
   }

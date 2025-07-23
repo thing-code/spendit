@@ -4,47 +4,14 @@ import 'package:gap/gap.dart';
 import 'package:spendit/src/features/home/presentation/widgets/budget_section.dart';
 import 'package:spendit/src/features/home/presentation/widgets/financial_goals_section.dart';
 import 'package:spendit/src/features/home/presentation/widgets/header.dart';
-import 'package:spendit/src/features/home/presentation/widgets/transaction_form.dart';
 import 'package:spendit/src/features/home/presentation/widgets/transaction_section.dart';
 import 'package:spendit_core/spendit_core.dart';
 
-class HomePage extends ConsumerStatefulWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  ConsumerState<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends ConsumerState<HomePage> {
-  final _controller = ScrollController();
-  bool _isCollapsed = false;
-
-  void _onScroll() {
-    if (_controller.hasClients) {
-      final isCollapsed = _controller.offset > 100;
-      if (_isCollapsed != isCollapsed) {
-        setState(() {
-          _isCollapsed = isCollapsed;
-        });
-      }
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _controller.addListener(_onScroll);
-  }
-
-  @override
-  void dispose() {
-    _controller.removeListener(_onScroll);
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
@@ -53,10 +20,10 @@ class _HomePageState extends ConsumerState<HomePage> {
         onPressed: () {
           openBottomSheet(
             context,
-            title: 'Tambah Transaksi Baru',
-            // showCloseIcon: true,
-            height: context.deviceHeight * .5,
-            builder: (context) => TransactionForm(),
+            title: 'Tambah Transaksi',
+            builder: (close) {
+              return Column(children: [Text('siudshdhsjdsnjdnsjncakcjansdnfskajdnksndsnkjsn')]);
+            },
           );
         },
       ),
@@ -66,7 +33,6 @@ class _HomePageState extends ConsumerState<HomePage> {
           Header(),
           Expanded(
             child: CustomScrollView(
-              controller: _controller,
               physics: const BouncingScrollPhysics(),
               slivers: [
                 SliverToBoxAdapter(child: TransactionSection()),
