@@ -22,7 +22,7 @@ class HomePage extends ConsumerWidget {
             context,
             title: 'Tambah Transaksi',
             builder: (close) {
-              return Column(children: [Text('siudshdhsjdsnjdnsjncakcjansdnfskajdnksndsnkjsn')]);
+              return Column(children: [Text('Judul')]);
             },
           );
         },
