@@ -24,7 +24,7 @@ Future<void> main() async {
 
       await initializeDateFormatting('id_ID');
 
-      ErrorWidget.builder = (errorDetails) => SIErrorWidget(errorDetails: errorDetails);
+      ErrorWidget.builder = (errorDetails) => SiErrorWidget(errorDetails: errorDetails);
 
       runApp(
         ProviderScope(overrides: [databaseProvider.overrideWithValue(db)], child: const MainApp()),

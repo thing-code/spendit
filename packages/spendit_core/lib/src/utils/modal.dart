@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:spendit_core/spendit_core.dart';
 import 'package:spendit_core/src/widgets/bottom_sheet.dart';
 
 /// Custom modal bottom sheet with default settings.
@@ -7,10 +8,11 @@ Future<T?> openBottomSheet<T>(
   required Widget Function(ValueChanged<T> close) builder,
   String? title,
   bool isDismissable = true,
-}) => showCupertinoSheet<T>(
+}) => showModalBottomSheet<T>(
   context: context,
   enableDrag: isDismissable,
-  pageBuilder: (context) => CupertinoBottomSheet<T>(
+  backgroundColor: SiColors.background,
+  builder: (context) => SiBottomSheet<T>(
     close: (value) => Navigator.pop(context, value),
     builder: builder,
     title: title,

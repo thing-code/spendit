@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:spendit_core/spendit_core.dart';
 
-class SIErrorWidget extends StatelessWidget {
-  const SIErrorWidget({super.key, this.errorDetails});
+class SiErrorWidget extends StatelessWidget {
+  const SiErrorWidget({super.key, this.errorDetails});
 
   final FlutterErrorDetails? errorDetails;
 

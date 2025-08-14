@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:spendit_core/spendit_core.dart';
 
-class SITextInput<T> extends StatelessWidget {
-  const SITextInput({
+class SiTextInput<T> extends StatelessWidget {
+  const SiTextInput({
     super.key,
     required this.control,
     this.placeholder,

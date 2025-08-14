@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+import 'package:spendit/src/features/home/domain/transaction.form.dart';
 import 'package:spendit/src/features/home/presentation/widgets/budget_section.dart';
 import 'package:spendit/src/features/home/presentation/widgets/financial_goals_section.dart';
 import 'package:spendit/src/features/home/presentation/widgets/header.dart';
@@ -12,6 +14,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final form = ref.watch(expenseFormProvider);
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
@@ -22,7 +25,15 @@ class HomePage extends ConsumerWidget {
             context,
             title: 'Tambah Transaksi',
             builder: (close) {
-              return Column(children: [Text('Judul')]);
+              return ReactiveForm(
+                formGroup: form,
+                child: Column(
+                  children: [
+                    Text('Judul'),
+                    SiCurrencyField(formControl: form.amount),
+                  ],
+                ),
+              );
             },
           );
         },

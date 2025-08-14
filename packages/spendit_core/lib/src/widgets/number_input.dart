@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:spendit_core/spendit_core.dart';
 
-class SINumberInput extends StatefulWidget {
-  const SINumberInput({super.key, required this.formControl, this.includeDecimal});
+class SiNumberInput extends StatefulWidget {
+  const SiNumberInput({super.key, required this.formControl, this.includeDecimal});
 
   final FormControl<String> formControl;
   final bool? includeDecimal;
 
   @override
-  State<SINumberInput> createState() => _SINumberInputState();
+  State<SiNumberInput> createState() => _SiNumberInputState();
 }
 
-class _SINumberInputState extends State<SINumberInput> {
+class _SiNumberInputState extends State<SiNumberInput> {
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -88,9 +88,9 @@ class _SINumberInputState extends State<SINumberInput> {
       style: SiTextStyles.semibold.copyWith(fontSize: 28),
       textAlign: TextAlign.center,
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderSide: BorderSide.none),
-        enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
-        focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
+        border: UnderlineInputBorder(borderSide: BorderSide.none),
+        enabledBorder: UnderlineInputBorder(borderSide: BorderSide.none),
+        focusedBorder: UnderlineInputBorder(borderSide: BorderSide.none),
         filled: false,
         hintText: '0',
         prefixText: 'Rp. ',

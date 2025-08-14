@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spendit/src/features/home/domain/transaction.form.dart';
 import 'package:spendit_core/spendit_core.dart';
 
-class TransactionForm extends StatelessWidget {
+class TransactionForm extends ConsumerWidget {
   const TransactionForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    
     var type = ValueNotifier({TransactionType.expense});
     return SafeArea(
       minimum: EdgeInsets.only(bottom: 16, right: 16, left: 16),
@@ -53,7 +56,7 @@ class TransactionForm extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: SIButton.secondary(text: 'Simpan', onPressed: () {}),
+        bottomNavigationBar: SiButton.secondary(text: 'Simpan', onPressed: () {}),
       ),
     );
   }
