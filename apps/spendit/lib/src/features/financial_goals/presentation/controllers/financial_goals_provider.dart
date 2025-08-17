@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit/src/database/database.dart';
 import 'package:spendit/src/features/financial_goals/data/datasources/financial_goals_data_source.dart';

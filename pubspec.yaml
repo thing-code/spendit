@@ -1,5 +1,9 @@
 name: spendit_remake
 environment:
-  sdk: ">=3.7.2 <4.0.0"
+  sdk: ">=3.9.0 <4.0.0"
 dev_dependencies:
-  melos: ^6.3.2
+  melos: ^7.0.0
+workspace:
+  - apps/spendit
+  - packages/spendit_core
+melos: 

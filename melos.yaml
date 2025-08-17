@@ -1,4 +1,0 @@
-name: spendit_remake
-packages:
-  - apps/*
-  - packages/*
