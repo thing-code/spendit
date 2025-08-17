@@ -6,11 +6,12 @@ import 'budget_provider.dart';
 
 part 'budget_controller.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 class BudgetController extends _$BudgetController {
   @override
   FutureOr<List<BudgetModel>> build() async {
     final result = await ref.read(budgetRepositoryProvider).read();
+    ref.keepAlive();
     return switch (result) {
       LocalResponseSuccess(:final data) => data,
       LocalResponseFailure() => [],
@@ -43,7 +44,9 @@ class BudgetController extends _$BudgetController {
 
   Future<bool> usage(ExpenseCategory category, int amount) async {
     final budgets = await future;
-    final budget = budgets.firstWhere((element) => element.category == category);
+    final budget = budgets.firstWhere(
+      (element) => element.category == category,
+    );
     final result = await ref
         .read(budgetRepositoryProvider)
         .update(budget.copyWith(currentAmount: budget.currentAmount + amount));
@@ -54,7 +57,9 @@ class BudgetController extends _$BudgetController {
   Future<void> reset() async {
     final budgets = await future;
     for (var budget in budgets) {
-      await ref.read(budgetRepositoryProvider).update(budget.copyWith(currentAmount: 0));
+      await ref
+          .read(budgetRepositoryProvider)
+          .update(budget.copyWith(currentAmount: 0));
     }
     ref.invalidateSelf();
   }
