@@ -11,6 +11,6 @@
 class FontFamily {
   FontFamily._();
 
-  /// Font family: SF Pro Display
-  static const String sFProDisplay = 'SF Pro Display';
+  /// Font family: Manrope
+  static const String manrope = 'Manrope';
 }

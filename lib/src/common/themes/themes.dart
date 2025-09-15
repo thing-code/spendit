@@ -17,7 +17,7 @@ abstract final class SiThemes {
       onTertiary: SiColors.primary,
       error: SiColors.danger,
       onError: Colors.white,
-      surface: Colors.white,
+      surface: SiColors.background,
       onSurface: SiColors.primary,
     ),
     disabledColor: SiColors.grayscale3,
