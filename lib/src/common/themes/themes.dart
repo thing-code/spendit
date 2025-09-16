@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:spendit/src/common/themes/colors.dart';
+import 'package:spendit/src/gen/fonts.gen.dart';
+
+export 'colors.dart';
 
 abstract final class SiThemes {
   const SiThemes._();
 
   static ThemeData light = ThemeData(
-    fontFamily: 'SF Pro Display',
+    fontFamily: FontFamily.manrope,
     colorScheme: ColorScheme(
       brightness: Brightness.light,
       primary: SiColors.primary,
       onPrimary: Colors.white,
       secondary: SiColors.secondary,
       onSecondary: SiColors.primary,
-      tertiary: SiColors.accent,
-      onTertiary: SiColors.primary,
       error: SiColors.danger,
       onError: Colors.white,
       surface: SiColors.background,
@@ -39,6 +40,23 @@ abstract final class SiThemes {
     ),
     actionIconTheme: ActionIconThemeData(
       backButtonIconBuilder: (context) => Icon(IconsaxPlusLinear.arrow_left_1),
+    ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      // ignore: deprecated_member_use
+      year2023: false,
+      linearTrackColor: SiColors.grayscale2,
+      circularTrackColor: SiColors.grayscale2,
+      color: SiColors.secondary,
+      stopIndicatorColor: SiColors.secondary,
+    ),
+    cardTheme: CardThemeData(
+      color: Colors.white,
+      clipBehavior: Clip.antiAlias,
+      margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: SiColors.grayscale2),
+      ),
     ),
   );
 }
