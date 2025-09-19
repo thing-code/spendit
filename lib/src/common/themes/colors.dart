@@ -6,9 +6,6 @@ abstract final class SiColors {
   static const Color primary = Color(0xFF050E4C);
   static const Color secondary = Color(0xFFFF8803);
 
-  static const Color primarySurface = Color(0xFFE5E7F3);
-  static const Color secondarySurface = Color(0xFFFFF1E0);
-
   static const Color background = Color(0xFFF5F6FF);
 
   static const Color grayscale1 = Color(0xFFF7F7F7);

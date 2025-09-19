@@ -53,10 +53,19 @@ abstract final class SiThemes {
       color: Colors.white,
       clipBehavior: Clip.antiAlias,
       margin: EdgeInsets.zero,
+      elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(24),
         side: BorderSide(color: SiColors.grayscale2),
       ),
+    ),
+    textTheme: TextTheme(
+      titleLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+      titleMedium: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+      titleSmall: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+      bodyLarge: TextStyle(fontSize: 16),
+      bodyMedium: TextStyle(fontSize: 14),
+      bodySmall: TextStyle(fontSize: 12),
     ),
   );
 }

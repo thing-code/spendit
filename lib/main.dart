@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/date_symbol_data_local.dart' show initializeDateFormatting;
 import 'package:spendit/src/common/common.dart';
@@ -56,96 +57,35 @@ class MainApp extends StatelessWidget {
           children: [
             // * Balance
             BalanceSection(),
-            SizedBox(height: 12),
-            // * Income and Expense
-            TransactionTypeSection(),
-            SizedBox(height: 16),
-            Text('Goals', style: Theme.of(context).textTheme.titleMedium),
-            SizedBox(height: 16),
-            Container(
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: SiColors.grayscale2),
-                color: Colors.white,
-              ),
-              child: Row(
-                spacing: 12,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: SiColors.secondarySurface,
-                    ),
-                    child: HugeIcon(
-                      icon: HugeIcons.strokeRoundedTarget02,
-                      color: SiColors.secondary,
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: 4,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Vespa Matic',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ),
-                            HugeIcon(
-                              icon:
-                                  HugeIcons.strokeRoundedMoreHorizontalCircle01,
-                              color: SiColors.textPrimary,
-                            ),
-                          ],
-                        ),
-                        LinearProgressIndicator(value: .5),
-                        Row(
-                          spacing: 8,
-                          children: [
-                            Text.rich(
-                              style: TextStyle(),
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: 'Rp 16.000.000',
-                                    style: TextStyle(
-                                      color: SiColors.textSecondary,
-                                    ),
-                                  ),
-                                  TextSpan(text: ' / '),
-                                  TextSpan(text: 'Rp 32.000.000'),
-                                ],
-                              ),
-                            ),
-                            Spacer(),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 2,
-                                horizontal: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: SiColors.grayscale1,
-                              ),
-                              child: Text(
-                                '50%',
-                                style: TextStyle(fontSize: 12),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+            Gap(24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Goals',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  'See All',
+                  style: TextStyle(fontSize: 12, color: SiColors.textSecondary),
+                ),
+              ],
+            ),
+            Gap(16),
+            GoalCard(),
+            Gap(16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Recent Transactions',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  'See All',
+                  style: TextStyle(fontSize: 12, color: SiColors.textSecondary),
+                ),
+              ],
             ),
           ],
         ),
@@ -154,17 +94,86 @@ class MainApp extends StatelessWidget {
   }
 }
 
-class TransactionTypeSection extends StatelessWidget {
-  const TransactionTypeSection({super.key});
+class GoalCard extends StatelessWidget {
+  const GoalCard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      spacing: 12,
-      children: [
-        Expanded(child: TransactionTypeCard(TransactionType.income)),
-        Expanded(child: TransactionTypeCard(TransactionType.expense)),
-      ],
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: IntrinsicHeight(
+          child: Row(
+            spacing: 12,
+            children: [
+              Expanded(
+                child: Container(
+                  height: double.infinity,
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: SiColors.secondary.withValues(alpha: .1),
+                  ),
+                  child: HugeIcon(
+                    icon: HugeIcons.strokeRoundedTarget02,
+                    color: SiColors.secondary,
+                    size: 20,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 4,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 8,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Vespa Matic',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 2,
+                            horizontal: 8,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: SiColors.grayscale1,
+                            border: Border.all(color: SiColors.grayscale2),
+                          ),
+                          child: Text('50%', style: TextStyle(fontSize: 12)),
+                        ),
+                      ],
+                    ),
+                    LinearProgressIndicator(value: .5),
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '16.000.000',
+                            style: TextStyle(color: SiColors.textSecondary),
+                          ),
+                          TextSpan(text: ' / '),
+                          TextSpan(
+                            text: '32.000.000',
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -179,7 +188,7 @@ class TransactionTypeCard extends StatelessWidget {
     final background = switch (type) {
       TransactionType.income => SiColors.successSurface,
       TransactionType.expense => SiColors.dangerSurface,
-      _ => SiColors.primarySurface,
+      _ => SiColors.background,
     };
 
     final icon = switch (type) {
@@ -203,40 +212,32 @@ class TransactionTypeCard extends StatelessWidget {
       _ => 'Transfers',
     };
 
-    return Card(
-      child: InkResponse(
-        onTap: () {},
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Row(
-            spacing: 12,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: background,
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 4,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: background,
-                ),
-                child: icon,
+              Text(
+                'Rp 500 rb',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(name, style: TextStyle(color: SiColors.textSecondary)),
-                    Text(
-                      'Rp 1,5 jt',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              icon,
             ],
           ),
-        ),
+          Text(
+            name,
+            style: TextStyle(fontSize: 12, color: SiColors.textSecondary),
+          ),
+          Gap(4),
+        ],
       ),
     );
   }
@@ -248,34 +249,45 @@ class BalanceSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 4,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Available Balance',
-                  style: TextStyle(color: SiColors.textSecondary),
-                ),
-                HugeIcon(
+      child: InkResponse(
+        onTap: () {},
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            spacing: 4,
+            children: [
+              Align(
+                alignment: AlignmentGeometry.topRight,
+                child: HugeIcon(
                   icon: HugeIcons.strokeRoundedArrowUpRight03,
                   color: SiColors.textSecondary,
                 ),
-              ],
-            ),
-            Text(
-              'Rp 1.000.000',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: SiColors.primary,
               ),
-            ),
-          ],
+              Text(
+                'Rp 1.000.000',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: SiColors.primary,
+                ),
+              ),
+              Text('Balance', style: TextStyle(color: SiColors.textSecondary)),
+              Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: Row(
+                  spacing: 12,
+                  children: [
+                    Expanded(
+                      child: TransactionTypeCard(TransactionType.income),
+                    ),
+                    Expanded(
+                      child: TransactionTypeCard(TransactionType.expense),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
