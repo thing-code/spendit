@@ -4,7 +4,9 @@ abstract final class SiColors {
   const SiColors._();
 
   static const Color primary = Color(0xFF050E4C);
+  static const Color primaryContainer = Color(0xFFEDEFFF);
   static const Color secondary = Color(0xFFFF8803);
+  static const Color secondaryContainer = Color(0xFFFFF1E0);
 
   static const Color background = Color(0xFFF5F6FF);
 
@@ -20,8 +22,8 @@ abstract final class SiColors {
   static const Color danger = Color(0xFFFF4D58);
   static const Color warning = Color(0xFFFEB51A);
 
-  static const Color successSurface = Color(0xFFF0F9F3);
-  static const Color infoSurface = Color(0xFFE1EDFA);
-  static const Color dangerSurface = Color(0xFFFCEDE7);
-  static const Color warningSurface = Color(0xFFFEF6E7);
+  static const Color successContainer = Color(0xFFF0F9F3);
+  static const Color infoContainer = Color(0xFFE1EDFA);
+  static const Color dangerContainer = Color(0xFFFCEDE7);
+  static const Color warningContainer = Color(0xFFFEF6E7);
 }

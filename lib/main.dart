@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,58 +38,231 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: SiThemes.light,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Welcome Back!', style: TextStyle(fontSize: 20)),
-              CircleAvatar(
-                child: HugeIcon(
-                  icon: HugeIcons.strokeRoundedUser,
-                  color: Colors.white,
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: SafeArea(
+            child: ClipRRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: .05),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Welcome Back!',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      CircleAvatar(
+                        child: Text(
+                          'A',
+                          style: TextStyle(color: SiColors.background),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+              ),
+            ),
+          ),
+        ),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: NavigationBar(
+            maintainBottomViewPadding: true,
+            destinations: [
+              IconButton(
+                icon: HugeIcon(
+                  icon: HugeIcons.strokeRoundedHome01,
+                  color: SiColors.grayscale3,
+                ),
+                isSelected: true,
+                selectedIcon: HugeIcon(
+                  icon: HugeIcons.strokeRoundedHome01,
+                  color: SiColors.primary,
+                ),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: HugeIcon(
+                  icon: HugeIcons.strokeRoundedArrowLeftRight,
+                  color: SiColors.grayscale3,
+                ),
+                onPressed: () {},
+              ),
+              IconButton.filled(
+                onPressed: () {
+                  showCupertinoSheet(
+                    context: context,
+                    builder: (context) => Scaffold(
+                      appBar: AppBar(title: Text('Add Transaction')),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.add),
+              ),
+              IconButton(
+                icon: HugeIcon(
+                  icon: HugeIcons.strokeRoundedSavings,
+                  color: SiColors.grayscale3,
+                ),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: HugeIcon(
+                  icon: HugeIcons.strokeRoundedTarget02,
+                  color: SiColors.grayscale3,
+                ),
+                onPressed: () {},
               ),
             ],
           ),
-          centerTitle: false,
         ),
-        body: ListView(
-          padding: EdgeInsets.all(16),
-          children: [
-            // * Balance
-            BalanceSection(),
-            Gap(24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics(),
+          ),
+          child: Column(
+            children: [
+              // * Balance
+              BalanceSection(),
+              Gap(24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Goals',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'See All',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: SiColors.textSecondary,
+                    ),
+                  ),
+                ],
+              ),
+              16.space,
+              SizedBox(
+                height: 88,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(spacing: 8, children: [GoalCard(), GoalCard()]),
+                ),
+              ),
+              16.space,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Recent Transactions',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'See All',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: SiColors.textSecondary,
+                    ),
+                  ),
+                ],
+              ),
+              16.space,
+              Column(
+                spacing: 8,
+                children: [
+                  TransactionCard(),
+                  TransactionCard(),
+                  TransactionCard(),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class TransactionCard extends StatelessWidget {
+  const TransactionCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: InkResponse(
+        onTap: () {},
+        child: Padding(
+          padding: EdgeInsets.all(12),
+          child: IntrinsicHeight(
+            child: Row(
+              spacing: 12,
               children: [
-                Text(
-                  'Goals',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                Container(
+                  height: 64,
+                  width: 64,
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: SiColors.primaryContainer,
+                  ),
+                  child: HugeIcon(
+                    icon: HugeIcons.strokeRoundedTarget02,
+                    color: SiColors.primary,
+                  ),
                 ),
-                Text(
-                  'See All',
-                  style: TextStyle(fontSize: 12, color: SiColors.textSecondary),
+                Expanded(
+                  child: Column(
+                    spacing: 2,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '12 September 2025',
+                        style: TextStyle(color: SiColors.textSecondary),
+                      ),
+                      Text(
+                        'Goals',
+                        style: TextStyle(
+                          color: SiColors.primary,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Vespa Matic',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: SiColors.textSecondary,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                Text('- Rp. 300.000'),
               ],
             ),
-            Gap(16),
-            GoalCard(),
-            Gap(16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Recent Transactions',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                ),
-                Text(
-                  'See All',
-                  style: TextStyle(fontSize: 12, color: SiColors.textSecondary),
-                ),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -100,77 +275,78 @@ class GoalCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: IntrinsicHeight(
-          child: Row(
-            spacing: 12,
-            children: [
-              Expanded(
-                child: Container(
-                  height: double.infinity,
+      child: InkResponse(
+        onTap: () {},
+        child: Container(
+          width: context.screenSize.width * .7,
+          padding: const EdgeInsets.all(12.0),
+          child: IntrinsicHeight(
+            child: Row(
+              spacing: 12,
+              children: [
+                Container(
+                  height: 64,
+                  width: 64,
                   padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: SiColors.secondary.withValues(alpha: .1),
+                    color: SiColors.secondaryContainer,
                   ),
                   child: HugeIcon(
                     icon: HugeIcons.strokeRoundedTarget02,
                     color: SiColors.secondary,
-                    size: 20,
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 4,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 8,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Vespa Matic',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 2,
-                            horizontal: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: SiColors.grayscale1,
-                            border: Border.all(color: SiColors.grayscale2),
-                          ),
-                          child: Text('50%', style: TextStyle(fontSize: 12)),
-                        ),
-                      ],
-                    ),
-                    LinearProgressIndicator(value: .5),
-                    Text.rich(
-                      TextSpan(
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 8,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          TextSpan(
-                            text: '16.000.000',
-                            style: TextStyle(color: SiColors.textSecondary),
+                          Text(
+                            'Vespa Matic',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
                           ),
-                          TextSpan(text: ' / '),
-                          TextSpan(
-                            text: '32.000.000',
-                            style: TextStyle(fontWeight: FontWeight.w600),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 2,
+                              horizontal: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: SiColors.grayscale1,
+                              border: Border.all(color: SiColors.grayscale2),
+                            ),
+                            child: Text('50%', style: TextStyle(fontSize: 12)),
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                      LinearProgressIndicator(value: .5),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: '16.000.000',
+                              style: TextStyle(color: SiColors.textSecondary),
+                            ),
+                            TextSpan(text: ' / '),
+                            TextSpan(
+                              text: '32.000.000',
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -186,23 +362,29 @@ class TransactionTypeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final background = switch (type) {
-      TransactionType.income => SiColors.successSurface,
-      TransactionType.expense => SiColors.dangerSurface,
+      TransactionType.income => SiColors.primaryContainer,
+      TransactionType.expense => SiColors.secondaryContainer,
       _ => SiColors.background,
+    };
+
+    final foreground = switch (type) {
+      TransactionType.income => SiColors.primary,
+      TransactionType.expense => SiColors.secondary,
+      _ => SiColors.primary,
     };
 
     final icon = switch (type) {
       TransactionType.income => HugeIcon(
         icon: HugeIcons.strokeRoundedAdd01,
-        color: SiColors.success,
+        color: foreground,
       ),
       TransactionType.expense => HugeIcon(
         icon: HugeIcons.strokeRoundedMinusSign,
-        color: SiColors.danger,
+        color: foreground,
       ),
       _ => HugeIcon(
         icon: HugeIcons.strokeRoundedArrowDataTransferHorizontal,
-        color: SiColors.primary,
+        color: foreground,
       ),
     };
 
@@ -227,7 +409,11 @@ class TransactionTypeCard extends StatelessWidget {
             children: [
               Text(
                 'Rp 500 rb',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: foreground,
+                ),
               ),
               icon,
             ],
@@ -252,7 +438,7 @@ class BalanceSection extends StatelessWidget {
       child: InkResponse(
         onTap: () {},
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             spacing: 4,
             children: [

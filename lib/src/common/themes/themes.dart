@@ -59,13 +59,5 @@ abstract final class SiThemes {
         side: BorderSide(color: SiColors.grayscale2),
       ),
     ),
-    textTheme: TextTheme(
-      titleLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-      titleMedium: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-      titleSmall: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-      bodyLarge: TextStyle(fontSize: 16),
-      bodyMedium: TextStyle(fontSize: 14),
-      bodySmall: TextStyle(fontSize: 12),
-    ),
   );
 }
