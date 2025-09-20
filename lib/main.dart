@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +10,7 @@ import 'package:gap/gap.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/date_symbol_data_local.dart' show initializeDateFormatting;
 import 'package:spendit/src/common/common.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -21,6 +23,12 @@ Future<void> main() async {
       );
 
       await initializeDateFormatting('id_ID');
+
+      await Supabase.initialize(
+        url: const String.fromEnvironment('SUPABASE_PROJECT_URL'),
+        anonKey: const String.fromEnvironment('SUPABASE_PUBLIC_KEY'),
+        debug: kDebugMode,
+      );
 
       runApp(ProviderScope(child: const MainApp()));
     },
