@@ -71,12 +71,13 @@ abstract final class SiThemes {
     listTileTheme: ListTileThemeData(),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
+      fillColor: Colors.white,
       hintStyle: TextStyle(
         fontSize: 14,
         color: SiColors.textSecondary,
         height: 1,
       ),
-      contentPadding: EdgeInsets.symmetric(horizontal: 20),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16),
       enabledBorder: _border(SiColors.grayscale2),
       focusedBorder: _border(SiColors.primary),
       disabledBorder: _border(SiColors.textSecondary),
@@ -101,7 +102,7 @@ abstract final class SiThemes {
   );
 
   static OutlineInputBorder _border(Color color) => OutlineInputBorder(
-    borderRadius: BorderRadius.circular(100),
+    borderRadius: BorderRadius.circular(16),
     borderSide: BorderSide(color: color, width: 1.2),
   );
 }

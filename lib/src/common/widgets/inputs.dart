@@ -11,6 +11,13 @@ class SiBaseInput<T> extends StatelessWidget {
     this.maxLines,
     this.inputType,
     this.obsecureText = false,
+    this.onChanged,
+    this.onSubmitted,
+    this.onTap,
+    this.readOnly = false,
+    this.validationMessages,
+    this.suffixIcon,
+    this.prefixIcon,
   });
 
   final FormControl<T> control;
@@ -20,17 +27,25 @@ class SiBaseInput<T> extends StatelessWidget {
   final int? maxLines;
   final TextInputType? inputType;
   final bool obsecureText;
+  final ValueChanged<FormControl<T>>? onChanged;
+  final ValueChanged<FormControl<T>>? onSubmitted;
+  final ValueChanged<FormControl<T>>? onTap;
+  final bool readOnly;
+  final Map<String, String Function(Object)>? validationMessages;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       spacing: 4,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ?_label,
         ReactiveTextField<T>(
           style: TextStyle(
             fontSize: 14,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
             height: 1,
           ),
           formControl: control,
@@ -39,6 +54,21 @@ class SiBaseInput<T> extends StatelessWidget {
           maxLines: maxLines,
           keyboardType: inputType,
           obscureText: obsecureText,
+          onChanged: onChanged,
+          onSubmitted: onSubmitted,
+          onTap: onTap,
+          onTapOutside: (event) => control.unfocus(),
+          readOnly: readOnly,
+          validationMessages: validationMessages,
+          decoration: InputDecoration(
+            prefixIcon: prefixIcon != null
+                ? Padding(padding: EdgeInsets.only(left: 8), child: prefixIcon)
+                : null,
+            suffixIcon: suffixIcon != null
+                ? Padding(padding: EdgeInsets.only(left: 8), child: suffixIcon)
+                : null,
+            hintText: placeholder,
+          ),
         ),
       ],
     );
@@ -51,4 +81,20 @@ class SiBaseInput<T> extends StatelessWidget {
       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
     );
   }
+}
+
+class SiTextInput extends SiBaseInput<String> {
+  const SiTextInput({
+    super.key,
+    required super.control,
+    super.maxLines,
+    super.readOnly,
+    super.label,
+    super.placeholder,
+    super.onChanged,
+    super.prefixIcon,
+    super.suffixIcon,
+    super.obsecureText,
+    super.validationMessages,
+  });
 }
