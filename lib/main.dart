@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart' show initializeDateFormatting;
 import 'package:spendit/src/common/common.dart';
-import 'package:spendit/src/features/auth/presentation/pages/auth_page.dart';
+import 'package:spendit/src/routes/routes.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
@@ -35,15 +35,17 @@ Future<void> main() async {
   );
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(goRouterProvider);
+
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: SiThemes.light,
-      home: AuthPage(),
+      routerConfig: router,
     );
   }
 }

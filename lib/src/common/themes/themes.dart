@@ -2,8 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:spendit/src/common/themes/colors.dart';
-import 'package:spendit/src/gen/fonts.gen.dart';
+import 'package:spendit/src/common/common.dart';
 
 export 'colors.dart';
 

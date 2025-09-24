@@ -2,6 +2,8 @@ export 'configs/configs.dart';
 export 'constants/constants.dart';
 export 'enums/enums.dart';
 export 'extensions/extensions.dart';
+export 'gen/assets.gen.dart';
+export 'gen/fonts.gen.dart';
 export 'helpers/helpers.dart';
 export 'themes/themes.dart';
 export 'widgets/widgets.dart';

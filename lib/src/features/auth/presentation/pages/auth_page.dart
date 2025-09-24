@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:spendit/src/common/common.dart';
 import 'package:spendit/src/common/widgets/inputs.dart';
 import 'package:spendit/src/features/auth/domain/forms/forms.dart';
-import 'package:spendit/src/gen/assets.gen.dart';
+import 'package:spendit/src/features/auth/presentation/controllers/controllers.dart';
 
 class AuthPage extends ConsumerWidget {
   const AuthPage({super.key});
@@ -12,6 +13,7 @@ class AuthPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final form = ref.watch(loginFormProvider);
+    final showPassword = ref.watch(showPasswordProvider);
     return Scaffold(
       body: SafeArea(
         maintainBottomViewPadding: true,
@@ -58,11 +60,27 @@ class AuthPage extends ConsumerWidget {
                         control: form.email,
                         label: 'Email',
                         placeholder: 'Enter your email',
+                        prefixIcon: HugeIcon(
+                          icon: HugeIcons.strokeRoundedMail01,
+                          color: SiColors.primary,
+                        ),
                       ),
                       SiTextInput(
                         control: form.password,
                         label: 'Password',
                         placeholder: 'Enter your password',
+                        obsecureText: !showPassword,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            ref.read(showPasswordProvider.notifier).toggle();
+                          },
+                          icon: HugeIcon(
+                            icon: !showPassword
+                                ? HugeIcons.strokeRoundedViewOff
+                                : HugeIcons.strokeRoundedView,
+                            color: SiColors.primary,
+                          ),
+                        ),
                       ),
                     ],
                   ),

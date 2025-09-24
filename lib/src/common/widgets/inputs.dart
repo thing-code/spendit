@@ -8,7 +8,7 @@ class SiBaseInput<T> extends StatelessWidget {
     this.placeholder,
     this.label,
     this.valueAccessor,
-    this.maxLines,
+    this.maxLines = 1,
     this.inputType,
     this.obsecureText = false,
     this.onChanged,
@@ -24,7 +24,7 @@ class SiBaseInput<T> extends StatelessWidget {
   final String? placeholder;
   final String? label;
   final ControlValueAccessor<T, String>? valueAccessor;
-  final int? maxLines;
+  final int maxLines;
   final TextInputType? inputType;
   final bool obsecureText;
   final ValueChanged<FormControl<T>>? onChanged;
@@ -62,10 +62,16 @@ class SiBaseInput<T> extends StatelessWidget {
           validationMessages: validationMessages,
           decoration: InputDecoration(
             prefixIcon: prefixIcon != null
-                ? Padding(padding: EdgeInsets.only(left: 8), child: prefixIcon)
+                ? Padding(
+                    padding: EdgeInsets.only(left: 8),
+                    child: SizedBox.shrink(child: prefixIcon),
+                  )
                 : null,
             suffixIcon: suffixIcon != null
-                ? Padding(padding: EdgeInsets.only(left: 8), child: suffixIcon)
+                ? Padding(
+                    padding: EdgeInsets.only(right: 8),
+                    child: SizedBox.shrink(child: suffixIcon),
+                  )
                 : null,
             hintText: placeholder,
           ),

@@ -70,3 +70,7 @@ flutter_native_splash:
     color: "#E5E7F3"
     image: assets/icons/splash-android12.png
   ios_content_mode: center
+
+flutter_gen:
+  output: lib/src/common/gen
+  parse_metadata: true
