@@ -63,15 +63,12 @@ class SiBaseInput<T> extends StatelessWidget {
           decoration: InputDecoration(
             prefixIcon: prefixIcon != null
                 ? Padding(
-                    padding: EdgeInsets.only(left: 8),
-                    child: SizedBox.shrink(child: prefixIcon),
+                    padding: EdgeInsets.fromLTRB(8, 10, 0, 10),
+                    child: prefixIcon,
                   )
                 : null,
             suffixIcon: suffixIcon != null
-                ? Padding(
-                    padding: EdgeInsets.only(right: 8),
-                    child: SizedBox.shrink(child: suffixIcon),
-                  )
+                ? Padding(padding: EdgeInsets.only(right: 8), child: suffixIcon)
                 : null,
             hintText: placeholder,
           ),

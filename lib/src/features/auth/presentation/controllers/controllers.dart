@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit/src/features/auth/data/repositories/repositories.dart';
+import 'package:spendit/src/features/auth/domain/enums/enums.dart';
 import 'package:spendit/src/features/auth/domain/forms/forms.dart';
 
 part 'controllers.g.dart';
@@ -43,4 +44,14 @@ class ShowPassword extends _$ShowPassword {
   void toggle() {
     state = !state;
   }
+}
+
+@riverpod
+class AuthSwitch extends _$AuthSwitch {
+  @override
+  AuthType build() => AuthType.login;
+
+  void switchToLogin() => state = AuthType.login;
+
+  void switchToRegister() => state = AuthType.register;
 }

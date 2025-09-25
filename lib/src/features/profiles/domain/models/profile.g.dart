@@ -10,6 +10,7 @@ _Profile _$ProfileFromJson(Map<String, dynamic> json) => _Profile(
   id: (json['id'] as num?)?.toInt(),
   userId: json['user_id'] as String?,
   name: json['name'] as String,
+  email: json['email'] as String,
   profileImage: json['profile_image'] as String?,
   createdAt: json['created_at'] == null
       ? null
@@ -20,9 +21,9 @@ _Profile _$ProfileFromJson(Map<String, dynamic> json) => _Profile(
 );
 
 Map<String, dynamic> _$ProfileToJson(_Profile instance) => <String, dynamic>{
-  'id': instance.id,
   'user_id': instance.userId,
   'name': instance.name,
+  'email': instance.email,
   'profile_image': instance.profileImage,
   'created_at': instance.createdAt?.toIso8601String(),
   'updated_at': instance.updatedAt?.toIso8601String(),

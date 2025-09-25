@@ -126,3 +126,55 @@ abstract class _$ShowPassword extends $Notifier<bool> {
     element.handleValue(ref, created);
   }
 }
+
+@ProviderFor(AuthSwitch)
+const authSwitchProvider = AuthSwitchProvider._();
+
+final class AuthSwitchProvider extends $NotifierProvider<AuthSwitch, AuthType> {
+  const AuthSwitchProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'authSwitchProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$authSwitchHash();
+
+  @$internal
+  @override
+  AuthSwitch create() => AuthSwitch();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AuthType value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AuthType>(value),
+    );
+  }
+}
+
+String _$authSwitchHash() => r'43cbe87eaeb73dd6dc8be7bf243395c54460e590';
+
+abstract class _$AuthSwitch extends $Notifier<AuthType> {
+  AuthType build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AuthType, AuthType>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AuthType, AuthType>,
+              AuthType,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

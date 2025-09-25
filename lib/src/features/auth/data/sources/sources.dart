@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spendit/src/common/common.dart';
 import 'package:spendit/src/features/profiles/domain/models/models.dart';
@@ -36,10 +37,13 @@ class AuthSource {
         data: {'display_name': name},
       );
 
+      debugPrint(response.toString());
+
       if (response.user == null) return false;
 
       final profile = Profile(
         name: name,
+        email: email,
         createdAt: DateTime.now(),
         userId: response.user!.id,
       );
@@ -47,6 +51,7 @@ class AuthSource {
       await client.from('profiles').upsert(profile.toJson());
       return true;
     } catch (e) {
+      debugPrint(e.toString());
       return false;
     }
   }
