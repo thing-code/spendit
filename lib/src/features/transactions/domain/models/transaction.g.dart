@@ -1,0 +1,127 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'transaction.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Income _$IncomeFromJson(Map<String, dynamic> json) => Income(
+  id: json['id'] as String?,
+  userId: json['user_id'] as String,
+  type:
+      $enumDecodeNullable(_$TransactionTypeEnumMap, json['type']) ??
+      TransactionType.income,
+  amount: (json['amount'] as num).toInt(),
+  category: $enumDecode(_$IncomeCategoryEnumMap, json['category']),
+  notes: json['notes'] as String?,
+  createdAt: json['created_at'] == null
+      ? null
+      : DateTime.parse(json['created_at'] as String),
+  updatedAt: json['updated_at'] == null
+      ? null
+      : DateTime.parse(json['updated_at'] as String),
+  $type: json['runtimeType'] as String?,
+);
+
+Map<String, dynamic> _$IncomeToJson(Income instance) => <String, dynamic>{
+  'id': ?instance.id,
+  'user_id': instance.userId,
+  'type': _$TransactionTypeEnumMap[instance.type]!,
+  'amount': instance.amount,
+  'category': _$IncomeCategoryEnumMap[instance.category]!,
+  'notes': instance.notes,
+  'created_at': instance.createdAt?.toIso8601String(),
+  'updated_at': instance.updatedAt?.toIso8601String(),
+  'runtimeType': instance.$type,
+};
+
+const _$TransactionTypeEnumMap = {
+  TransactionType.income: 'income',
+  TransactionType.expense: 'expense',
+  TransactionType.transfer: 'transfer',
+};
+
+const _$IncomeCategoryEnumMap = {
+  IncomeCategory.sallary: 'sallary',
+  IncomeCategory.investment: 'investment',
+  IncomeCategory.freelance: 'freelance',
+};
+
+Expense _$ExpenseFromJson(Map<String, dynamic> json) => Expense(
+  id: json['id'] as String?,
+  userId: json['user_id'] as String,
+  type:
+      $enumDecodeNullable(_$TransactionTypeEnumMap, json['type']) ??
+      TransactionType.expense,
+  amount: (json['amount'] as num).toInt(),
+  category: $enumDecode(_$ExpenseCategoryEnumMap, json['category']),
+  notes: json['notes'] as String?,
+  createdAt: json['created_at'] == null
+      ? null
+      : DateTime.parse(json['created_at'] as String),
+  updatedAt: json['updated_at'] == null
+      ? null
+      : DateTime.parse(json['updated_at'] as String),
+  $type: json['runtimeType'] as String?,
+);
+
+Map<String, dynamic> _$ExpenseToJson(Expense instance) => <String, dynamic>{
+  'id': ?instance.id,
+  'user_id': instance.userId,
+  'type': _$TransactionTypeEnumMap[instance.type]!,
+  'amount': instance.amount,
+  'category': _$ExpenseCategoryEnumMap[instance.category]!,
+  'notes': instance.notes,
+  'created_at': instance.createdAt?.toIso8601String(),
+  'updated_at': instance.updatedAt?.toIso8601String(),
+  'runtimeType': instance.$type,
+};
+
+const _$ExpenseCategoryEnumMap = {
+  ExpenseCategory.family: 'family',
+  ExpenseCategory.shopping: 'shopping',
+  ExpenseCategory.reward: 'reward',
+  ExpenseCategory.health: 'health',
+  ExpenseCategory.billing: 'billing',
+  ExpenseCategory.transportation: 'transportation',
+  ExpenseCategory.investment: 'investment',
+  ExpenseCategory.food: 'food',
+  ExpenseCategory.other: 'other',
+};
+
+Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
+  id: json['id'] as String?,
+  userId: json['user_id'] as String,
+  type:
+      $enumDecodeNullable(_$TransactionTypeEnumMap, json['type']) ??
+      TransactionType.transfer,
+  amount: (json['amount'] as num).toInt(),
+  category: $enumDecode(_$TransferCategoryEnumMap, json['category']),
+  notes: json['notes'] as String?,
+  createdAt: json['created_at'] == null
+      ? null
+      : DateTime.parse(json['created_at'] as String),
+  updatedAt: json['updated_at'] == null
+      ? null
+      : DateTime.parse(json['updated_at'] as String),
+  $type: json['runtimeType'] as String?,
+);
+
+Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
+  'id': ?instance.id,
+  'user_id': instance.userId,
+  'type': _$TransactionTypeEnumMap[instance.type]!,
+  'amount': instance.amount,
+  'category': _$TransferCategoryEnumMap[instance.category]!,
+  'notes': instance.notes,
+  'created_at': instance.createdAt?.toIso8601String(),
+  'updated_at': instance.updatedAt?.toIso8601String(),
+  'runtimeType': instance.$type,
+};
+
+const _$TransferCategoryEnumMap = {
+  TransferCategory.saving: 'saving',
+  TransferCategory.goal: 'goal',
+  TransferCategory.payment: 'payment',
+};
