@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:spendit/src/routes/main_routes.dart';
+import 'package:thing_toast/thing_toast.dart';
 
 import '../../../../common/common.dart';
 import '../../domain/forms/forms.dart';
@@ -70,8 +72,13 @@ class LoginWidget extends ConsumerWidget {
             ],
           ),
           SiButton.primary(
-            onPressed: () {
+            onPressed: () async {
               if (form.invalid) return;
+              final isLoggedIn = await ref.read(loginProvider.future);
+              if (isLoggedIn && context.mounted) {
+                HomeRoute().go(context);
+                ThingToast(context).success(title: 'Login Success');
+              }
             },
             text: 'Login',
           ),

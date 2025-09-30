@@ -86,9 +86,8 @@ class RegisterWidget extends ConsumerWidget {
         SiButton.primary(
           onPressed: () async {
             if (form.invalid) return;
-            final registered = await ref.read(registerProvider.future);
-            if (registered && context.mounted) {
-              switchToLogin();
+            final isRegistered = await ref.read(registerProvider.future);
+            if (isRegistered && context.mounted) {
               ThingToast(context).success(
                 title: 'Register Success',
                 subtitle: 'Your account have been registered successfully',
