@@ -5,5 +5,6 @@ export 'extensions/extensions.dart';
 export 'gen/assets.gen.dart';
 export 'gen/fonts.gen.dart';
 export 'helpers/helpers.dart';
+export 'routes/routes.dart';
 export 'themes/themes.dart';
 export 'widgets/widgets.dart';
