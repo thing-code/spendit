@@ -1,13 +1,13 @@
 import '../../domain/models/models.dart';
 
-abstract class BaseTransactionSource {
+abstract class TransactionDataSource {
   Future<bool> create(Transaction req);
   Future<bool> update(Transaction req);
   Future<bool> delete(String id);
   Future<List<Transaction>> read();
 }
 
-class TransactionSource extends BaseTransactionSource {
+class TransactionDataSourceImpl extends TransactionDataSource {
   @override
   Future<bool> create(Transaction req) {
     // TODO: implement create
