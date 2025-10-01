@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart' show initializeDateFormatting;
-import 'package:spendit/src/common/common.dart';
+import 'package:spendit/src/core/common.dart';
 import 'package:spendit/src/routes/routes.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

@@ -6,7 +6,7 @@ import 'package:spendit/src/features/auth/domain/forms/forms.dart';
 import 'package:spendit/src/features/auth/presentation/controllers/controllers.dart';
 import 'package:thing_toast/thing_toast.dart';
 
-import '../../../../common/common.dart';
+import '../../../../core/common.dart';
 
 class RegisterWidget extends ConsumerWidget {
   const RegisterWidget({super.key});
