@@ -74,5 +74,5 @@ flutter_native_splash:
   ios_content_mode: center
 
 flutter_gen:
-  output: lib/src/common/gen
+  output: lib/src/core/gen
   parse_metadata: true
