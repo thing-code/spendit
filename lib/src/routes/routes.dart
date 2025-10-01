@@ -1,18 +1,26 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'auth_routes.dart' as auth;
-import 'main_routes.dart' as main;
-
-export 'auth_routes.dart';
+import '../features/home/presentation/pages/home_page.dart';
 
 part 'routes.g.dart';
 
+@TypedGoRoute<HomeRoute>(path: '/')
+class HomeRoute extends GoRouteData with $HomeRoute {
+  HomeRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return HomePage();
+  }
+}
+
 @riverpod
-GoRouter goRouter(Ref ref) {
+GoRouter router(Ref ref) {
   return GoRouter(
-    initialLocation: auth.AuthRoute().location,
+    initialLocation: HomeRoute().location,
     debugLogDiagnostics: true,
-    routes: [...auth.$appRoutes, ...main.$appRoutes],
+    routes: $appRoutes,
   );
 }

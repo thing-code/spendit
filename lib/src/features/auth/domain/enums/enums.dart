@@ -1,1 +1,0 @@
-enum AuthType { login, register }

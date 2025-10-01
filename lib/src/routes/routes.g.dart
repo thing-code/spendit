@@ -3,31 +3,60 @@
 part of 'routes.dart';
 
 // **************************************************************************
+// GoRouterGenerator
+// **************************************************************************
+
+List<RouteBase> get $appRoutes => [$homeRoute];
+
+RouteBase get $homeRoute =>
+    GoRouteData.$route(path: '/', factory: $HomeRoute._fromState);
+
+mixin $HomeRoute on GoRouteData {
+  static HomeRoute _fromState(GoRouterState state) => HomeRoute();
+
+  @override
+  String get location => GoRouteData.$location('/');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+// **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(goRouter)
-const goRouterProvider = GoRouterProvider._();
+@ProviderFor(router)
+const routerProvider = RouterProvider._();
 
-final class GoRouterProvider
+final class RouterProvider
     extends $FunctionalProvider<GoRouter, GoRouter, GoRouter>
     with $Provider<GoRouter> {
-  const GoRouterProvider._()
+  const RouterProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'goRouterProvider',
+        name: r'routerProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$goRouterHash();
+  String debugGetCreateSourceHash() => _$routerHash();
 
   @$internal
   @override
@@ -36,7 +65,7 @@ final class GoRouterProvider
 
   @override
   GoRouter create(Ref ref) {
-    return goRouter(ref);
+    return router(ref);
   }
 
   /// {@macro riverpod.override_with_value}
@@ -48,4 +77,4 @@ final class GoRouterProvider
   }
 }
 
-String _$goRouterHash() => r'07966fba362288dc65de6127e8781e7a5cda2e33';
+String _$routerHash() => r'2ec22a1e29ca2698e1508e95412225ee1a7f6b44';
