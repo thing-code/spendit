@@ -7,8 +7,7 @@ part of 'transaction.dart';
 // **************************************************************************
 
 Income _$IncomeFromJson(Map<String, dynamic> json) => Income(
-  id: json['id'] as String?,
-  userId: json['user_id'] as String,
+  id: (json['id'] as num?)?.toInt(),
   type:
       $enumDecodeNullable(_$TransactionTypeEnumMap, json['type']) ??
       TransactionType.income,
@@ -26,7 +25,6 @@ Income _$IncomeFromJson(Map<String, dynamic> json) => Income(
 
 Map<String, dynamic> _$IncomeToJson(Income instance) => <String, dynamic>{
   'id': ?instance.id,
-  'user_id': instance.userId,
   'type': _$TransactionTypeEnumMap[instance.type]!,
   'amount': instance.amount,
   'category': _$IncomeCategoryEnumMap[instance.category]!,
@@ -49,8 +47,7 @@ const _$IncomeCategoryEnumMap = {
 };
 
 Expense _$ExpenseFromJson(Map<String, dynamic> json) => Expense(
-  id: json['id'] as String?,
-  userId: json['user_id'] as String,
+  id: (json['id'] as num?)?.toInt(),
   type:
       $enumDecodeNullable(_$TransactionTypeEnumMap, json['type']) ??
       TransactionType.expense,
@@ -68,7 +65,6 @@ Expense _$ExpenseFromJson(Map<String, dynamic> json) => Expense(
 
 Map<String, dynamic> _$ExpenseToJson(Expense instance) => <String, dynamic>{
   'id': ?instance.id,
-  'user_id': instance.userId,
   'type': _$TransactionTypeEnumMap[instance.type]!,
   'amount': instance.amount,
   'category': _$ExpenseCategoryEnumMap[instance.category]!,
@@ -91,8 +87,7 @@ const _$ExpenseCategoryEnumMap = {
 };
 
 Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
-  id: json['id'] as String?,
-  userId: json['user_id'] as String,
+  id: (json['id'] as num?)?.toInt(),
   type:
       $enumDecodeNullable(_$TransactionTypeEnumMap, json['type']) ??
       TransactionType.transfer,
@@ -110,7 +105,6 @@ Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
 
 Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
   'id': ?instance.id,
-  'user_id': instance.userId,
   'type': _$TransactionTypeEnumMap[instance.type]!,
   'amount': instance.amount,
   'category': _$TransferCategoryEnumMap[instance.category]!,

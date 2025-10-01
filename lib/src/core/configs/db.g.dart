@@ -32,7 +32,7 @@ final class DbProvider extends $AsyncNotifierProvider<Db, Database> {
   Db create() => Db();
 }
 
-String _$dbHash() => r'c5f30097239c8ddc644a1447a1d7c7a648c4f2a6';
+String _$dbHash() => r'deb3079ff8fc9f4778de3f967bb1fcec760ce113';
 
 abstract class _$Db extends $AsyncNotifier<Database> {
   FutureOr<Database> build();

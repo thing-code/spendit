@@ -42,7 +42,7 @@ Transaction _$TransactionFromJson(
 /// @nodoc
 mixin _$Transaction {
 
-@JsonKey(includeIfNull: false) String? get id;@JsonKey(name: 'user_id') String get userId; TransactionType get type; int get amount; Enum get category; String? get notes;@JsonKey(name: 'created_at') DateTime? get createdAt;@JsonKey(name: 'updated_at') DateTime? get updatedAt;
+@JsonKey(includeIfNull: false) int? get id; TransactionType get type; int get amount; Enum get category; String? get notes;@JsonKey(name: 'created_at') DateTime? get createdAt;@JsonKey(name: 'updated_at') DateTime? get updatedAt;
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -55,16 +55,16 @@ $TransactionCopyWith<Transaction> get copyWith => _$TransactionCopyWithImpl<Tran
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Transaction&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.type, type) || other.type == type)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.category, category) || other.category == category)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Transaction&&(identical(other.id, id) || other.id == id)&&(identical(other.type, type) || other.type == type)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.category, category) || other.category == category)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,userId,type,amount,category,notes,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,type,amount,category,notes,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'Transaction(id: $id, userId: $userId, type: $type, amount: $amount, category: $category, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Transaction(id: $id, type: $type, amount: $amount, category: $category, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -75,7 +75,7 @@ abstract mixin class $TransactionCopyWith<$Res>  {
   factory $TransactionCopyWith(Transaction value, $Res Function(Transaction) _then) = _$TransactionCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(includeIfNull: false) String? id,@JsonKey(name: 'user_id') String userId, TransactionType type, int amount, String? notes,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'updated_at') DateTime? updatedAt
+@JsonKey(includeIfNull: false) int? id, TransactionType type, int amount, String? notes,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'updated_at') DateTime? updatedAt
 });
 
 
@@ -92,11 +92,10 @@ class _$TransactionCopyWithImpl<$Res>
 
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? userId = null,Object? type = null,Object? amount = null,Object? notes = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? type = null,Object? amount = null,Object? notes = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as int?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as TransactionType,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as int,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
@@ -189,12 +188,12 @@ return transfer(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function(@JsonKey(includeIfNull: false)  String? id, @JsonKey(name: 'user_id')  String userId,  TransactionType type,  int amount,  IncomeCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)?  income,TResult Function(@JsonKey(includeIfNull: false)  String? id, @JsonKey(name: 'user_id')  String userId,  TransactionType type,  int amount,  ExpenseCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)?  expense,TResult Function(@JsonKey(includeIfNull: false)  String? id, @JsonKey(name: 'user_id')  String userId,  TransactionType type,  int amount,  TransferCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)?  transfer,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function(@JsonKey(includeIfNull: false)  int? id,  TransactionType type,  int amount,  IncomeCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)?  income,TResult Function(@JsonKey(includeIfNull: false)  int? id,  TransactionType type,  int amount,  ExpenseCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)?  expense,TResult Function(@JsonKey(includeIfNull: false)  int? id,  TransactionType type,  int amount,  TransferCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)?  transfer,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case Income() when income != null:
-return income(_that.id,_that.userId,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case Expense() when expense != null:
-return expense(_that.id,_that.userId,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case Transfer() when transfer != null:
-return transfer(_that.id,_that.userId,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case _:
+return income(_that.id,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case Expense() when expense != null:
+return expense(_that.id,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case Transfer() when transfer != null:
+return transfer(_that.id,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -212,12 +211,12 @@ return transfer(_that.id,_that.userId,_that.type,_that.amount,_that.category,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function(@JsonKey(includeIfNull: false)  String? id, @JsonKey(name: 'user_id')  String userId,  TransactionType type,  int amount,  IncomeCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)  income,required TResult Function(@JsonKey(includeIfNull: false)  String? id, @JsonKey(name: 'user_id')  String userId,  TransactionType type,  int amount,  ExpenseCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)  expense,required TResult Function(@JsonKey(includeIfNull: false)  String? id, @JsonKey(name: 'user_id')  String userId,  TransactionType type,  int amount,  TransferCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)  transfer,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function(@JsonKey(includeIfNull: false)  int? id,  TransactionType type,  int amount,  IncomeCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)  income,required TResult Function(@JsonKey(includeIfNull: false)  int? id,  TransactionType type,  int amount,  ExpenseCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)  expense,required TResult Function(@JsonKey(includeIfNull: false)  int? id,  TransactionType type,  int amount,  TransferCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)  transfer,}) {final _that = this;
 switch (_that) {
 case Income():
-return income(_that.id,_that.userId,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case Expense():
-return expense(_that.id,_that.userId,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case Transfer():
-return transfer(_that.id,_that.userId,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);}
+return income(_that.id,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case Expense():
+return expense(_that.id,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case Transfer():
+return transfer(_that.id,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -231,12 +230,12 @@ return transfer(_that.id,_that.userId,_that.type,_that.amount,_that.category,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function(@JsonKey(includeIfNull: false)  String? id, @JsonKey(name: 'user_id')  String userId,  TransactionType type,  int amount,  IncomeCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)?  income,TResult? Function(@JsonKey(includeIfNull: false)  String? id, @JsonKey(name: 'user_id')  String userId,  TransactionType type,  int amount,  ExpenseCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)?  expense,TResult? Function(@JsonKey(includeIfNull: false)  String? id, @JsonKey(name: 'user_id')  String userId,  TransactionType type,  int amount,  TransferCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)?  transfer,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function(@JsonKey(includeIfNull: false)  int? id,  TransactionType type,  int amount,  IncomeCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)?  income,TResult? Function(@JsonKey(includeIfNull: false)  int? id,  TransactionType type,  int amount,  ExpenseCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)?  expense,TResult? Function(@JsonKey(includeIfNull: false)  int? id,  TransactionType type,  int amount,  TransferCategory category,  String? notes, @JsonKey(name: 'created_at')  DateTime? createdAt, @JsonKey(name: 'updated_at')  DateTime? updatedAt)?  transfer,}) {final _that = this;
 switch (_that) {
 case Income() when income != null:
-return income(_that.id,_that.userId,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case Expense() when expense != null:
-return expense(_that.id,_that.userId,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case Transfer() when transfer != null:
-return transfer(_that.id,_that.userId,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case _:
+return income(_that.id,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case Expense() when expense != null:
+return expense(_that.id,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case Transfer() when transfer != null:
+return transfer(_that.id,_that.type,_that.amount,_that.category,_that.notes,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -248,11 +247,10 @@ return transfer(_that.id,_that.userId,_that.type,_that.amount,_that.category,_th
 @JsonSerializable()
 
 class Income implements Transaction {
-  const Income({@JsonKey(includeIfNull: false) this.id, @JsonKey(name: 'user_id') required this.userId, this.type = TransactionType.income, required this.amount, required this.category, this.notes, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'updated_at') this.updatedAt, final  String? $type}): $type = $type ?? 'income';
+  const Income({@JsonKey(includeIfNull: false) this.id, this.type = TransactionType.income, required this.amount, required this.category, this.notes, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'updated_at') this.updatedAt, final  String? $type}): $type = $type ?? 'income';
   factory Income.fromJson(Map<String, dynamic> json) => _$IncomeFromJson(json);
 
-@override@JsonKey(includeIfNull: false) final  String? id;
-@override@JsonKey(name: 'user_id') final  String userId;
+@override@JsonKey(includeIfNull: false) final  int? id;
 @override@JsonKey() final  TransactionType type;
 @override final  int amount;
 @override final  IncomeCategory category;
@@ -277,16 +275,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Income&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.type, type) || other.type == type)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.category, category) || other.category == category)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Income&&(identical(other.id, id) || other.id == id)&&(identical(other.type, type) || other.type == type)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.category, category) || other.category == category)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,userId,type,amount,category,notes,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,type,amount,category,notes,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'Transaction.income(id: $id, userId: $userId, type: $type, amount: $amount, category: $category, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Transaction.income(id: $id, type: $type, amount: $amount, category: $category, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -297,7 +295,7 @@ abstract mixin class $IncomeCopyWith<$Res> implements $TransactionCopyWith<$Res>
   factory $IncomeCopyWith(Income value, $Res Function(Income) _then) = _$IncomeCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(includeIfNull: false) String? id,@JsonKey(name: 'user_id') String userId, TransactionType type, int amount, IncomeCategory category, String? notes,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'updated_at') DateTime? updatedAt
+@JsonKey(includeIfNull: false) int? id, TransactionType type, int amount, IncomeCategory category, String? notes,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'updated_at') DateTime? updatedAt
 });
 
 
@@ -314,11 +312,10 @@ class _$IncomeCopyWithImpl<$Res>
 
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? userId = null,Object? type = null,Object? amount = null,Object? category = null,Object? notes = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? type = null,Object? amount = null,Object? category = null,Object? notes = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
   return _then(Income(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as int?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as TransactionType,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as int,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as IncomeCategory,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
@@ -335,11 +332,10 @@ as DateTime?,
 @JsonSerializable()
 
 class Expense implements Transaction {
-  const Expense({@JsonKey(includeIfNull: false) this.id, @JsonKey(name: 'user_id') required this.userId, this.type = TransactionType.expense, required this.amount, required this.category, this.notes, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'updated_at') this.updatedAt, final  String? $type}): $type = $type ?? 'expense';
+  const Expense({@JsonKey(includeIfNull: false) this.id, this.type = TransactionType.expense, required this.amount, required this.category, this.notes, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'updated_at') this.updatedAt, final  String? $type}): $type = $type ?? 'expense';
   factory Expense.fromJson(Map<String, dynamic> json) => _$ExpenseFromJson(json);
 
-@override@JsonKey(includeIfNull: false) final  String? id;
-@override@JsonKey(name: 'user_id') final  String userId;
+@override@JsonKey(includeIfNull: false) final  int? id;
 @override@JsonKey() final  TransactionType type;
 @override final  int amount;
 @override final  ExpenseCategory category;
@@ -364,16 +360,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Expense&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.type, type) || other.type == type)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.category, category) || other.category == category)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Expense&&(identical(other.id, id) || other.id == id)&&(identical(other.type, type) || other.type == type)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.category, category) || other.category == category)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,userId,type,amount,category,notes,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,type,amount,category,notes,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'Transaction.expense(id: $id, userId: $userId, type: $type, amount: $amount, category: $category, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Transaction.expense(id: $id, type: $type, amount: $amount, category: $category, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -384,7 +380,7 @@ abstract mixin class $ExpenseCopyWith<$Res> implements $TransactionCopyWith<$Res
   factory $ExpenseCopyWith(Expense value, $Res Function(Expense) _then) = _$ExpenseCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(includeIfNull: false) String? id,@JsonKey(name: 'user_id') String userId, TransactionType type, int amount, ExpenseCategory category, String? notes,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'updated_at') DateTime? updatedAt
+@JsonKey(includeIfNull: false) int? id, TransactionType type, int amount, ExpenseCategory category, String? notes,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'updated_at') DateTime? updatedAt
 });
 
 
@@ -401,11 +397,10 @@ class _$ExpenseCopyWithImpl<$Res>
 
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? userId = null,Object? type = null,Object? amount = null,Object? category = null,Object? notes = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? type = null,Object? amount = null,Object? category = null,Object? notes = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
   return _then(Expense(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as int?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as TransactionType,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as int,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as ExpenseCategory,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
@@ -422,11 +417,10 @@ as DateTime?,
 @JsonSerializable()
 
 class Transfer implements Transaction {
-  const Transfer({@JsonKey(includeIfNull: false) this.id, @JsonKey(name: 'user_id') required this.userId, this.type = TransactionType.transfer, required this.amount, required this.category, this.notes, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'updated_at') this.updatedAt, final  String? $type}): $type = $type ?? 'transfer';
+  const Transfer({@JsonKey(includeIfNull: false) this.id, this.type = TransactionType.transfer, required this.amount, required this.category, this.notes, @JsonKey(name: 'created_at') this.createdAt, @JsonKey(name: 'updated_at') this.updatedAt, final  String? $type}): $type = $type ?? 'transfer';
   factory Transfer.fromJson(Map<String, dynamic> json) => _$TransferFromJson(json);
 
-@override@JsonKey(includeIfNull: false) final  String? id;
-@override@JsonKey(name: 'user_id') final  String userId;
+@override@JsonKey(includeIfNull: false) final  int? id;
 @override@JsonKey() final  TransactionType type;
 @override final  int amount;
 @override final  TransferCategory category;
@@ -451,16 +445,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Transfer&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.type, type) || other.type == type)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.category, category) || other.category == category)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Transfer&&(identical(other.id, id) || other.id == id)&&(identical(other.type, type) || other.type == type)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.category, category) || other.category == category)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,userId,type,amount,category,notes,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,type,amount,category,notes,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'Transaction.transfer(id: $id, userId: $userId, type: $type, amount: $amount, category: $category, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Transaction.transfer(id: $id, type: $type, amount: $amount, category: $category, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -471,7 +465,7 @@ abstract mixin class $TransferCopyWith<$Res> implements $TransactionCopyWith<$Re
   factory $TransferCopyWith(Transfer value, $Res Function(Transfer) _then) = _$TransferCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(includeIfNull: false) String? id,@JsonKey(name: 'user_id') String userId, TransactionType type, int amount, TransferCategory category, String? notes,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'updated_at') DateTime? updatedAt
+@JsonKey(includeIfNull: false) int? id, TransactionType type, int amount, TransferCategory category, String? notes,@JsonKey(name: 'created_at') DateTime? createdAt,@JsonKey(name: 'updated_at') DateTime? updatedAt
 });
 
 
@@ -488,11 +482,10 @@ class _$TransferCopyWithImpl<$Res>
 
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? userId = null,Object? type = null,Object? amount = null,Object? category = null,Object? notes = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? type = null,Object? amount = null,Object? category = null,Object? notes = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
   return _then(Transfer(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as int?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as TransactionType,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as int,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as TransferCategory,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable

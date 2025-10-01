@@ -7,8 +7,7 @@ part 'transaction.g.dart';
 @freezed
 sealed class Transaction with _$Transaction {
   const factory Transaction.income({
-    @JsonKey(includeIfNull: false) String? id,
-    @JsonKey(name: 'user_id') required String userId,
+    @JsonKey(includeIfNull: false) int? id,
     @Default(TransactionType.income) TransactionType type,
     required int amount,
     required IncomeCategory category,
@@ -18,8 +17,7 @@ sealed class Transaction with _$Transaction {
   }) = Income;
 
   const factory Transaction.expense({
-    @JsonKey(includeIfNull: false) String? id,
-    @JsonKey(name: 'user_id') required String userId,
+    @JsonKey(includeIfNull: false) int? id,
     @Default(TransactionType.expense) TransactionType type,
     required int amount,
     required ExpenseCategory category,
@@ -29,8 +27,7 @@ sealed class Transaction with _$Transaction {
   }) = Expense;
 
   const factory Transaction.transfer({
-    @JsonKey(includeIfNull: false) String? id,
-    @JsonKey(name: 'user_id') required String userId,
+    @JsonKey(includeIfNull: false) int? id,
     @Default(TransactionType.transfer) TransactionType type,
     required int amount,
     required TransferCategory category,
