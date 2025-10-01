@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../common/common.dart';
+import '../../../../core/common.dart';
 
 class TransactionCard extends StatelessWidget {
   const TransactionCard({super.key});

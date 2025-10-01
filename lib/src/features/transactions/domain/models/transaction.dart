@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:spendit/src/common/common.dart';
+import 'package:spendit/src/core/common.dart';
 
 part 'transaction.freezed.dart';
 part 'transaction.g.dart';

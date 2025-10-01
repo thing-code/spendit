@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spendit/src/common/common.dart';
+import 'package:spendit/src/core/common.dart';
 import 'package:spendit/src/features/auth/domain/enums/enums.dart';
 import 'package:spendit/src/features/auth/presentation/controllers/controllers.dart';
 import 'package:spendit/src/features/auth/presentation/widgets/widgets.dart';

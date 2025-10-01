@@ -6,7 +6,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:spendit/src/routes/main_routes.dart';
 import 'package:thing_toast/thing_toast.dart';
 
-import '../../../../common/common.dart';
+import '../../../../core/common.dart';
 import '../../domain/forms/forms.dart';
 import '../controllers/controllers.dart';
 

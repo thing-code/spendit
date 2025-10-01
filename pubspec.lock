@@ -402,26 +402,26 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_gen
-      sha256: "102471a3c6ee7d9175ac8f1989e1bd0e1b4f0d23615da4f961cf9e82752550fe"
+      sha256: eac4863b65813aacbf16ecc07e7c271ab82fb2d95181825348f1fb7b03fd52da
       url: "https://pub.dev"
     source: hosted
-    version: "5.11.0"
+    version: "5.12.0"
   flutter_gen_core:
     dependency: transitive
     description:
       name: flutter_gen_core
-      sha256: eda54fdc5de08e7eeea663eb8442aafc8660b5a13fda4e0c9e572c64e50195fb
+      sha256: b6bafbbd981da2f964eb45bcb8b8a7676a281084f8922c0c75de4cfbaa849311
       url: "https://pub.dev"
     source: hosted
-    version: "5.11.0"
+    version: "5.12.0"
   flutter_gen_runner:
     dependency: "direct dev"
     description:
       name: flutter_gen_runner
-      sha256: "669bf8b7a9b4acbdcb7fcc5e12bf638aca19acedf43341714cbca3bf3a219521"
+      sha256: c99b10af9d404e3f46fd1927e7d90099779e935e86022674c4c2a9e6c2a93b29
       url: "https://pub.dev"
     source: hosted
-    version: "5.11.0"
+    version: "5.12.0"
   flutter_launcher_icons:
     dependency: "direct main"
     description:
@@ -455,10 +455,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_riverpod
-      sha256: ca2480512a8e840291325249f4857e363ffa5d1b77b132e189c9313a9d9fb9e0
+      sha256: "71a420767ae786f9402e4efb74e1119fa95b53e6a3781ab8ab21c121ac1349c6"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.1"
   flutter_svg:
     dependency: transitive
     description:
@@ -529,18 +529,18 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: eb059dfe59f08546e9787f895bd01652076f996bcbf485a8609ef990419ad227
+      sha256: c752e2d08d088bf83742cb05bf83003f3e9d276ff1519b5c92f9d5e60e5ddd23
       url: "https://pub.dev"
     source: hosted
-    version: "16.2.1"
+    version: "16.2.4"
   go_router_builder:
     dependency: "direct dev"
     description:
       name: go_router_builder
-      sha256: ecdf8d54af3b8576c81600d9ba247e3a3e90b38236080fe39e06db9f907b1fbb
+      sha256: "43a109ccf4f804c486f7f7c0e2e11345142ecf456b4cc265f75b33c7e6fe4684"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.1"
+    version: "4.1.0"
   gotrue:
     dependency: transitive
     description:
@@ -609,10 +609,10 @@ packages:
     dependency: "direct main"
     description:
       name: hugeicons
-      sha256: f5f2ed21f90895c5bc5baaab215ff733390e5d327fceb24a84508ef7def85606
+      sha256: b4a695c2100217a0b4d2378f0102d948925c97e37417baa6e2d9cb62ba8fb2f7
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "1.1.0"
   image:
     dependency: transitive
     description:
@@ -905,10 +905,10 @@ packages:
     dependency: transitive
     description:
       name: postgrest
-      sha256: "10b81a23b1c829ccadf68c626b4d66666453a1474d24c563f313f5ca7851d575"
+      sha256: "57637e331af3863fa1f555907ff24c30d69c3ad3ff127d89320e70e8d5e585f5"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.2"
+    version: "2.5.0"
   pub_semver:
     dependency: transitive
     description:
@@ -937,10 +937,10 @@ packages:
     dependency: transitive
     description:
       name: realtime_client
-      sha256: "025b7e690e8dcf27844f37d140cca47da5ab31d6fe8d78347fb16763f0a4beb6"
+      sha256: c0938faca85ff2bdcb8e97ebfca4ab1428661b441c1a414fb09c113e00cee2c6
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.2"
+    version: "2.5.3"
   retry:
     dependency: transitive
     description:
@@ -953,42 +953,42 @@ packages:
     dependency: transitive
     description:
       name: riverpod
-      sha256: "135723ec44dfba141bc4696224048a408336e794228a0117439e7ad0a8be6d05"
+      sha256: b21446f04474040479b19004c5b729605cde221bbd14cf16ad0db8804dce4810
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.1"
   riverpod_analyzer_utils:
     dependency: transitive
     description:
       name: riverpod_analyzer_utils
-      sha256: c971e50f678d55c87d9e3b5015df7fcaadb2302a84ea101247cf99387b4554fe
+      sha256: a0f68adb078b790faa3c655110a017f9a7b7b079a57bbd40f540e80dce5fcd29
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0-dev.6"
+    version: "1.0.0-dev.7"
   riverpod_annotation:
     dependency: "direct main"
     description:
       name: riverpod_annotation
-      sha256: "1f9c1bc10b13f68ebc83ab391e77a865ff796880461d2a60c5ce301e1fb65f51"
+      sha256: d8154e04008b98015ee3e0514a5d929e3d15605790d28bcd74e63e2d415632a1
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.1"
   riverpod_generator:
     dependency: "direct dev"
     description:
       name: riverpod_generator
-      sha256: "178d6bfa6de66d7db97db2466e5fad2da91a678ab376a7309235eec731755046"
+      sha256: af92fa4051568071f7e12bd44b8b4f3adc7470e3676bd5ac953582a9cce4a1c0
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.1"
   riverpod_sqflite:
     dependency: "direct main"
     description:
       name: riverpod_sqflite
-      sha256: b9288f39ec230a7e5bf0e9ca1434e7d5f34ab57a9f4db5470206541c352b11ef
+      sha256: "5f8b20f23d1c9cd79843d858ceedea23e4867602d1c6f457b06123f804234b27"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.0"
+    version: "0.3.1"
   rxdart:
     dependency: transitive
     description:
@@ -1246,18 +1246,18 @@ packages:
     dependency: transitive
     description:
       name: supabase
-      sha256: "9c960828e1e92ce4a97c33b7b52d80ca643a11161d46c71deedf9def50797fc6"
+      sha256: b8991524ff1f4fcb50475847f100a399b96a7d347655bbbd1c7b51eea065f892
       url: "https://pub.dev"
     source: hosted
-    version: "2.9.1"
+    version: "2.9.2"
   supabase_flutter:
     dependency: "direct main"
     description:
       name: supabase_flutter
-      sha256: b45bf6dc109c65356022ceb81d0781c1ee2383cce2da17df3ed0deb77094088e
+      sha256: "389eeb18d2a0773da61a157df6f35761e1855567271df12665bb7ddeb2dda0f7"
       url: "https://pub.dev"
     source: hosted
-    version: "2.10.1"
+    version: "2.10.2"
   synchronized:
     dependency: transitive
     description:
@@ -1270,10 +1270,10 @@ packages:
     dependency: "direct main"
     description:
       name: talker_logger
-      sha256: "4f06d46db664c11cf4d629378da661f2c75aee629e3ef898dbc3cf44a0c41cd7"
+      sha256: "8c63990d33e779a24368e0c191e6c9a54639088b6fe3a5b763a6f37fe00ff20b"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0"
+    version: "5.0.1"
   term_glyph:
     dependency: transitive
     description:

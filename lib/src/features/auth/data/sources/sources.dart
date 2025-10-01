@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:spendit/src/common/common.dart';
+import 'package:spendit/src/core/common.dart';
 import 'package:spendit/src/features/profiles/domain/models/models.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

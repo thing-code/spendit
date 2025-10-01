@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:spendit/src/common/common.dart';
+import 'package:spendit/src/core/common.dart';
 import 'package:spendit/src/features/auth/presentation/pages/auth_page.dart';
 
 import 'main_routes.dart';
