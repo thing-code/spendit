@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 
 extension ContextX on BuildContext {
   Size get screenSize => MediaQuery.sizeOf(this);
@@ -34,4 +35,15 @@ extension WidgetX on Widget {
     ),
     child: this,
   );
+}
+
+extension DateTimeX on DateTime {
+  String get toRequest => DateFormat('yyyy-MM-dd').format(this);
+
+  (DateTime start, DateTime end) get range {
+    final startDate = DateTime(year, month, 1);
+    final endDate = DateTime(year, month + 1, 0);
+
+    return (startDate, endDate);
+  }
 }

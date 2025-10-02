@@ -1,4 +1,4 @@
-enum TransactionType { income, expense, transfer }
+enum TransactionType { income, expense, goals }
 
 enum IncomeCategory { sallary, investment, freelance }
 
@@ -13,5 +13,3 @@ enum ExpenseCategory {
   food,
   other,
 }
-
-enum TransferCategory { saving, goal, payment }
