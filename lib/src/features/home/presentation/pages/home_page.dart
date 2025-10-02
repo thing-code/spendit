@@ -80,7 +80,17 @@ class HomePage extends ConsumerWidget {
                   showCupertinoSheet(
                     context: context,
                     builder: (context) => Scaffold(
-                      appBar: AppBar(title: Text('Add Transaction')),
+                      appBar: AppBar(title: Text('New Transaction')),
+                      bottomNavigationBar:
+                          SiButton.primary(
+                            onPressed: () {
+                              SiLogger.print('Save');
+                            },
+                            text: 'Save',
+                          ).paddingSymmetric(
+                            v: context.viewPadding.bottom + 8,
+                            h: 16,
+                          ),
                     ),
                   );
                 },
