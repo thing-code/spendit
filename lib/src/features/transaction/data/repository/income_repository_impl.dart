@@ -1,0 +1,71 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../domain/model/income.dart';
+import '../../domain/repository/income_repository.dart';
+import '../datasource/income_datasource.dart';
+
+part 'income_repository_impl.g.dart';
+
+@riverpod
+IncomeRepository incomeRepository(Ref ref) {
+  final datasource = ref.watch(incomeDatasourceProvider);
+  return IncomeRepositoryImpl(datasource);
+}
+
+class IncomeRepositoryImpl implements IncomeRepository {
+  final IncomeDatasource datasource;
+
+  IncomeRepositoryImpl(this.datasource);
+
+  @override
+  Future<Either<String, int>> create(Income value) async {
+    try {
+      final result = await datasource.create(value);
+      return Right(result);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, int>> delete(Income value) async {
+    try {
+      final result = await datasource.delete(value);
+      return Right(result);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, List<Income>>> read() async {
+    try {
+      final result = await datasource.read();
+      return Right(result);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, int>> update(Income value) async {
+    try {
+      final result = await datasource.update(value);
+      return Right(result);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+  
+  @override
+  Future<Either<String, List<Income>>> readByMonth(DateTime date) async {
+    try {
+      final result = await datasource.readByMonth(date);
+      return Right(result);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+}

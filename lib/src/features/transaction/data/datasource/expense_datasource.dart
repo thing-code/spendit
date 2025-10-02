@@ -1,0 +1,102 @@
+import 'package:path/path.dart';
+import 'package:spendit/src/common/common.dart';
+import 'package:sqflite/sqflite.dart';
+
+part 'expense_datasource.g.dart';
+
+@riverpod
+ExpenseDatasource expenseDatasource(Ref ref) {
+  return ExpenseDatasource();
+}
+
+class ExpenseDatasource {
+  static final ExpenseDatasource _instance = ExpenseDatasource._();
+
+  factory ExpenseDatasource() => _instance;
+
+  ExpenseDatasource._() {
+    _init();
+  }
+
+  static Database? _database;
+
+  final table = 'expense';
+
+  Future<Database> get database async {
+    _database ??= await _init();
+    return _database!;
+  }
+
+  Future<Database> _init() async {
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath, '$table.db');
+
+    return await openDatabase(path, version: 1, onCreate: _onCreate);
+  }
+
+  void _onCreate(Database db, int version) async {
+    await db.execute('''
+      CREATE TABLE $table (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        type TEXT NOT NULL,
+        value INTEGER NOT NULL,
+        description TEXT,
+        date DATE NOT NULL
+      )
+    ''');
+  }
+
+  Future<int> create(Expense value) async {
+    final db = await database;
+    return db.transaction((txn) async {
+      return await txn.insert(table, value.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
+    });
+  }
+
+  Future<List<Expense>> read() async {
+    final db = await database;
+    final response = await db.query(table, orderBy: "date DESC");
+    final data = response.map((e) => Expense.fromJson(e)).toList();
+    return data;
+  }
+
+  Future<List<Expense>> readByMonth(DateTime date) async {
+    final db = await database;
+    final start = DateTime(date.year, date.month, 1);
+    final end = DateTime(date.year, date.month + 1, 0);
+    final response = await db.query(
+      table,
+      where: 'date BETWEEN ? AND ?',
+      whereArgs: [start.getPeriod, end.getPeriod],
+      orderBy: "date DESC",
+    );
+    final data = response.map((e) => Expense.fromJson(e)).toList();
+    return data;
+  }
+
+  Future<List<Expense>> saving() async {
+    final db = await database;
+    final response = await db.query(
+      table,
+      where: 'type = ?',
+      whereArgs: [BudgetType.health.name],
+      orderBy: "date DESC",
+    );
+    final data = response.map((e) => Expense.fromJson(e)).toList();
+    return data;
+  }
+
+  Future<int> update(Expense value) async {
+    final db = await database;
+    return db.transaction((txn) async {
+      return await txn.update(table, value.toJson(), where: 'id = ?', whereArgs: [value.id]);
+    });
+  }
+
+  Future<int> delete(Expense value) async {
+    final db = await database;
+    return db.transaction((txn) async {
+      return await txn.delete(table, where: 'id = ?', whereArgs: [value.id]);
+    });
+  }
+}
