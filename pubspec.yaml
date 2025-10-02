@@ -1,7 +1,7 @@
 name: spendit
 description: "Spend It adalah sebuah aplikasi pengelola keuangan pribadi yang dirancang khusus untuk membantu Anda mengelola keuangan Anda dengan lebih baik. Dengan Spend It, Anda dapat dengan mudah mengelola keuangan Anda, termasuk pemasukan dan pengeluaran, serta melihat laporan keuangan Anda secara detail."
 publish_to: "none"
-version: 2.0.2
+version: 2.0.0
 
 environment:
   sdk: ^3.9.2
