@@ -30,7 +30,7 @@ sealed class Transactions with _$Transactions {
     @JsonKey(includeIfNull: false) int? id,
     @Default(TransactionType.goals) TransactionType type,
     required int amount,
-    String? notes,
+    @JsonKey(name: 'goal_id') required int goalId,
     @JsonKey(name: 'created_at') DateTime? createdAt,
   }) = Transfer;
 

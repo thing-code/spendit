@@ -92,7 +92,7 @@ Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
       $enumDecodeNullable(_$TransactionTypeEnumMap, json['type']) ??
       TransactionType.goals,
   amount: (json['amount'] as num).toInt(),
-  notes: json['notes'] as String?,
+  goalId: (json['goal_id'] as num).toInt(),
   createdAt: json['created_at'] == null
       ? null
       : DateTime.parse(json['created_at'] as String),
@@ -103,7 +103,7 @@ Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
   'id': ?instance.id,
   'type': _$TransactionTypeEnumMap[instance.type]!,
   'amount': instance.amount,
-  'notes': instance.notes,
+  'goal_id': instance.goalId,
   'created_at': instance.createdAt?.toIso8601String(),
   'runtimeType': instance.$type,
 };
