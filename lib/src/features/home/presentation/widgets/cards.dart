@@ -18,26 +18,20 @@ class TransactionCard extends StatelessWidget {
               spacing: 12,
               children: [
                 Container(
-                  height: 64,
-                  width: 64,
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(8),
                     color: SiColors.primaryContainer,
                   ),
-                  child: HugeIcon(
-                    icon: HugeIcons.strokeRoundedTarget02,
-                    color: SiColors.primary,
-                  ),
+                  child: HugeIcon(icon: HugeIcons.strokeRoundedTarget02),
                 ),
                 Expanded(
                   child: Column(
-                    spacing: 2,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '12 September 2025',
+                        '12 Sep 2025',
                         style: TextStyle(color: SiColors.textSecondary),
                       ),
                       Text(
@@ -46,19 +40,21 @@ class TransactionCard extends StatelessWidget {
                           color: SiColors.primary,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
+                          height: 1.2,
                         ),
                       ),
-                      Text(
-                        'Vespa Matic',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: SiColors.textSecondary,
-                        ),
-                      ),
+                      Spacer(),
                     ],
                   ),
                 ),
-                Text('- Rp. 300.000'),
+                Text(
+                  '- Rp. 300.000',
+                  style: TextStyle(
+                    color: SiColors.primary,
+                    fontWeight: FontWeight.w600,
+                    height: 1,
+                  ),
+                ),
               ],
             ),
           ),
@@ -77,18 +73,16 @@ class GoalCard extends StatelessWidget {
       child: InkResponse(
         onTap: () {},
         child: Container(
-          width: context.screenSize.width * .7,
+          width: context.screenSize.width * .85,
           padding: const EdgeInsets.all(12.0),
           child: IntrinsicHeight(
             child: Row(
               spacing: 12,
               children: [
                 Container(
-                  height: 64,
-                  width: 64,
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(8),
                     color: SiColors.secondaryContainer,
                   ),
                   child: HugeIcon(
@@ -99,7 +93,7 @@ class GoalCard extends StatelessWidget {
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 8,
+                    spacing: 4,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -125,18 +119,20 @@ class GoalCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      LinearProgressIndicator(value: .5),
                       Text.rich(
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: '16.000.000',
+                              text: 'Rp. 16.000.000',
                               style: TextStyle(color: SiColors.textSecondary),
                             ),
                             TextSpan(text: ' / '),
                             TextSpan(
-                              text: '32.000.000',
-                              style: TextStyle(fontWeight: FontWeight.w600),
+                              text: 'Rp. 32.000.000',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: SiColors.secondary,
+                              ),
                             ),
                           ],
                         ),
@@ -164,6 +160,20 @@ class TransactionTypeCard extends StatelessWidget {
       TransactionType.income => SiColors.primaryContainer,
       TransactionType.expense => SiColors.secondaryContainer,
       _ => SiColors.background,
+    };
+
+    final gradient = switch (type) {
+      TransactionType.income => LinearGradient(
+        colors: [SiColors.primaryContainer, Colors.white],
+        begin: AlignmentGeometry.centerLeft,
+        end: AlignmentGeometry.centerRight,
+      ),
+      TransactionType.expense => LinearGradient(
+        colors: [SiColors.secondaryContainer, Colors.white],
+        begin: AlignmentGeometry.centerLeft,
+        end: AlignmentGeometry.centerRight,
+      ),
+      _ => null,
     };
 
     final foreground = switch (type) {
@@ -194,34 +204,43 @@ class TransactionTypeCard extends StatelessWidget {
     };
 
     return Container(
+      width: context.screenSize.width * .7,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: background,
+        border: Border.all(color: background, width: 1.2),
+        gradient: gradient,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 4,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        spacing: 8,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Rp 500 rb',
+                name,
+                style: TextStyle(fontSize: 12, color: SiColors.textSecondary),
+              ),
+              Text(
+                'Rp. 50.000.000',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: foreground,
                 ),
               ),
-              icon,
             ],
           ),
-          Text(
-            name,
-            style: TextStyle(fontSize: 12, color: SiColors.textSecondary),
+          Container(
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: background,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: icon,
           ),
-          4.space,
         ],
       ),
     );

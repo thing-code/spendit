@@ -40,10 +40,8 @@ abstract final class SiThemes {
       centerTitle: true,
     ),
     actionIconTheme: ActionIconThemeData(
-      backButtonIconBuilder: (context) => HugeIcon(
-        icon: HugeIcons.strokeRoundedArrowLeft01,
-        color: SiColors.textPrimary,
-      ),
+      backButtonIconBuilder: (context) =>
+          HugeIcon(icon: HugeIcons.strokeRoundedArrowLeft01),
     ),
     progressIndicatorTheme: ProgressIndicatorThemeData(
       year2023: false,
@@ -58,7 +56,7 @@ abstract final class SiThemes {
       margin: EdgeInsets.zero,
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(16),
         side: BorderSide(color: SiColors.grayscale2),
       ),
     ),

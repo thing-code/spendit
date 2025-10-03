@@ -28,23 +28,9 @@ class HomePage extends ConsumerWidget {
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: .05),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Welcome Back!',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      CircleAvatar(
-                        child: Text(
-                          'A',
-                          style: TextStyle(color: SiColors.background),
-                        ),
-                      ),
-                    ],
+                  child: Text(
+                    'Welcome Back!',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -62,10 +48,7 @@ class HomePage extends ConsumerWidget {
                   color: SiColors.grayscale3,
                 ),
                 isSelected: true,
-                selectedIcon: HugeIcon(
-                  icon: HugeIcons.strokeRoundedHome01,
-                  color: SiColors.primary,
-                ),
+                selectedIcon: HugeIcon(icon: HugeIcons.strokeRoundedHome01),
                 onPressed: () {},
               ),
               IconButton(
@@ -113,69 +96,97 @@ class HomePage extends ConsumerWidget {
             ],
           ),
         ),
-        body: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(
-            parent: BouncingScrollPhysics(),
-          ),
-          child: Column(
-            children: [
-              // * Balance
-              BalanceSection().paddingSymmetric(h: 16),
-              24.space,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Recent Transactions',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    'See All',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: SiColors.textSecondary,
+        body: SizedBox.expand(
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics(),
+            ),
+            child: Column(
+              spacing: 16,
+              children: [
+                // * Balance
+                Column(
+                  children: [
+                    BalanceSection().paddingSymmetric(h: 16, v: 12),
+                    SizedBox(
+                      height: 72,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          spacing: 8,
+                          children: [
+                            TransactionTypeCard(TransactionType.income),
+                            TransactionTypeCard(TransactionType.expense),
+                          ],
+                        ).paddingSymmetric(h: 16),
+                      ),
                     ),
-                  ),
-                ],
-              ).paddingSymmetric(h: 16),
-              16.space,
-              Column(
-                spacing: 8,
-                children: [
-                  TransactionCard(),
-                  TransactionCard(),
-                  TransactionCard(),
-                ],
-              ).paddingSymmetric(h: 16),
-              24.space,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Goals',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    'See All',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: SiColors.textSecondary,
-                    ),
-                  ),
-                ],
-              ).paddingSymmetric(h: 16),
-              16.space,
-              SizedBox(
-                height: 88,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    spacing: 8,
-                    children: [GoalCard(), GoalCard()],
-                  ).paddingSymmetric(h: 16),
+                  ],
                 ),
-              ).paddingOnly(bottom: 16),
-            ],
+                Column(
+                  spacing: 12,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Recent Transactions',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'See All',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: SiColors.textSecondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      spacing: 8,
+                      children: List.generate(3, (index) => TransactionCard()),
+                    ),
+                  ],
+                ).paddingSymmetric(h: 16),
+                Column(
+                  spacing: 12,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Goals',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'See All',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: SiColors.textSecondary,
+                          ),
+                        ),
+                      ],
+                    ).paddingSymmetric(h: 16),
+                    SizedBox(
+                      height: 72,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          spacing: 8,
+                          children: [GoalCard(), GoalCard()],
+                        ).paddingSymmetric(h: 16),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -188,48 +199,33 @@ class BalanceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: InkResponse(
-        onTap: () {},
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            spacing: 4,
-            children: [
-              Align(
-                alignment: AlignmentGeometry.topRight,
-                child: HugeIcon(
-                  icon: HugeIcons.strokeRoundedArrowUpRight03,
-                  color: SiColors.textSecondary,
-                ),
-              ),
-              Text(
-                'Rp 1.000.000',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: SiColors.primary,
-                ),
-              ),
-              Text('Balance', style: TextStyle(color: SiColors.textSecondary)),
-              Padding(
-                padding: const EdgeInsets.only(top: 12),
-                child: Row(
-                  spacing: 12,
-                  children: [
-                    Expanded(
-                      child: TransactionTypeCard(TransactionType.income),
-                    ),
-                    Expanded(
-                      child: TransactionTypeCard(TransactionType.expense),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 4,
+      children: [
+        Text(
+          'Balance',
+          style: TextStyle(fontSize: 16, color: SiColors.textSecondary),
         ),
-      ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Rp 1.000.000',
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: SiColors.primary,
+                height: 1,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: HugeIcon(icon: HugeIcons.strokeRoundedView),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
