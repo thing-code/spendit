@@ -1,6 +1,6 @@
 enum TransactionType { income, expense, goals }
 
-enum IncomeCategory { sallary, investment, freelance }
+enum IncomeCategory { salary, investment, freelance }
 
 enum ExpenseCategory {
   family,

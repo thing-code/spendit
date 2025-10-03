@@ -14,9 +14,7 @@ Income _$IncomeFromJson(Map<String, dynamic> json) => Income(
   amount: (json['amount'] as num).toInt(),
   category: $enumDecode(_$IncomeCategoryEnumMap, json['category']),
   notes: json['notes'] as String?,
-  createdAt: json['created_at'] == null
-      ? null
-      : DateTime.parse(json['created_at'] as String),
+  createdAt: DateTime.parse(json['created_at'] as String),
   updatedAt: json['updated_at'] == null
       ? null
       : DateTime.parse(json['updated_at'] as String),
@@ -29,7 +27,7 @@ Map<String, dynamic> _$IncomeToJson(Income instance) => <String, dynamic>{
   'amount': instance.amount,
   'category': _$IncomeCategoryEnumMap[instance.category]!,
   'notes': instance.notes,
-  'created_at': instance.createdAt?.toIso8601String(),
+  'created_at': instance.createdAt.toIso8601String(),
   'updated_at': instance.updatedAt?.toIso8601String(),
   'runtimeType': instance.$type,
 };
@@ -41,7 +39,7 @@ const _$TransactionTypeEnumMap = {
 };
 
 const _$IncomeCategoryEnumMap = {
-  IncomeCategory.sallary: 'sallary',
+  IncomeCategory.salary: 'salary',
   IncomeCategory.investment: 'investment',
   IncomeCategory.freelance: 'freelance',
 };
@@ -54,9 +52,7 @@ Expense _$ExpenseFromJson(Map<String, dynamic> json) => Expense(
   amount: (json['amount'] as num).toInt(),
   category: $enumDecode(_$ExpenseCategoryEnumMap, json['category']),
   notes: json['notes'] as String?,
-  createdAt: json['created_at'] == null
-      ? null
-      : DateTime.parse(json['created_at'] as String),
+  createdAt: DateTime.parse(json['created_at'] as String),
   updatedAt: json['updated_at'] == null
       ? null
       : DateTime.parse(json['updated_at'] as String),
@@ -69,7 +65,7 @@ Map<String, dynamic> _$ExpenseToJson(Expense instance) => <String, dynamic>{
   'amount': instance.amount,
   'category': _$ExpenseCategoryEnumMap[instance.category]!,
   'notes': instance.notes,
-  'created_at': instance.createdAt?.toIso8601String(),
+  'created_at': instance.createdAt.toIso8601String(),
   'updated_at': instance.updatedAt?.toIso8601String(),
   'runtimeType': instance.$type,
 };
@@ -93,9 +89,7 @@ Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
       TransactionType.goals,
   amount: (json['amount'] as num).toInt(),
   goalId: (json['goal_id'] as num).toInt(),
-  createdAt: json['created_at'] == null
-      ? null
-      : DateTime.parse(json['created_at'] as String),
+  createdAt: DateTime.parse(json['created_at'] as String),
   $type: json['runtimeType'] as String?,
 );
 
@@ -104,6 +98,6 @@ Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
   'type': _$TransactionTypeEnumMap[instance.type]!,
   'amount': instance.amount,
   'goal_id': instance.goalId,
-  'created_at': instance.createdAt?.toIso8601String(),
+  'created_at': instance.createdAt.toIso8601String(),
   'runtimeType': instance.$type,
 };

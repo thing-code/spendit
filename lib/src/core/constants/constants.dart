@@ -7,7 +7,9 @@ abstract class SqlCommand {
         category TEXT,
         amount INTEGER NOT NULL,
         notes TEXT,
-        created_at DATETIME NOT NULL
+        runtimeType TEXT,
+        created_at DATETIME NOT NULL,
+        updated_at DATETIME
       )
       ''';
 
@@ -19,8 +21,8 @@ abstract class SqlCommand {
         description TEXT,
         target INTEGER NOT NULL,
         current INTEGER NOT NULL,
-        target_date DATE,
-        created_at DATETIME NOT NULL,
+        target_done_at DATE,
+        created_at DATETIME NOT NULL
       )
       ''';
 

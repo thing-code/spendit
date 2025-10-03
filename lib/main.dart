@@ -18,7 +18,15 @@ Future<void> main() async {
 
       await initializeDateFormatting('id_ID');
 
-      runApp(ProviderScope(child: const MainApp()));
+      runApp(
+        ProviderScope(
+          retry: (retryCount, error) {
+            if (retryCount > 5) return null;
+            return Duration(seconds: 3);
+          },
+          child: const MainApp(),
+        ),
+      );
     },
     (error, stack) {
       SiLogger.error('AppError : ${error.toString()}');
