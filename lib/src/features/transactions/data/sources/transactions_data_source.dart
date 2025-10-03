@@ -1,7 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:spendit/src/core/core.dart';
-import 'package:spendit/src/features/transactions/domain/models/models.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../../../../core/core.dart';
+import '../../domain/models/models.dart';
 
 part 'transactions_data_source.g.dart';
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart' show initializeDateFormatting;
-import 'package:spendit/src/core/core.dart';
+import 'src/core/core.dart';
 
 Future<void> main() async {
   runZonedGuarded(

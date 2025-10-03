@@ -1,6 +1,7 @@
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:spendit/src/core/core.dart';
+
+import '../../../../core/core.dart';
 
 part 'forms.g.dart';
 

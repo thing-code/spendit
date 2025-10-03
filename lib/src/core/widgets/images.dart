@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:spendit/src/core/core.dart';
+
+import '../core.dart';
 
 class SiImages extends StatefulWidget {
   const SiImages({super.key, required this.imageUrl, this.fit = BoxFit.cover});
