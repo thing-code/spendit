@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart' show initializeDateFormatting;
+
 import 'src/core/core.dart';
 
 Future<void> main() async {
@@ -43,7 +44,7 @@ class MainApp extends ConsumerWidget {
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      theme: SiThemes.light,
+      theme: SiTheme.dark,
       routerConfig: router,
     );
   }

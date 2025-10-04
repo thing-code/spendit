@@ -37,23 +37,24 @@ class TransactionCard extends StatelessWidget {
                       Text(
                         'Goals',
                         style: TextStyle(
-                          color: SiColors.primary,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
-                          height: 1.2,
                         ),
                       ),
                       Spacer(),
                     ],
                   ),
                 ),
-                Text(
-                  '- Rp. 300.000',
-                  style: TextStyle(
-                    color: SiColors.primary,
-                    fontWeight: FontWeight.w600,
-                    height: 1,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  spacing: 6,
+                  children: [
+                    HugeIcon(icon: HugeIcons.strokeRoundedMinusSign, size: 12),
+                    Text(
+                      'Rp. 300.000',
+                      style: TextStyle(fontWeight: FontWeight.w600, height: 1),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -159,21 +160,7 @@ class TransactionTypeCard extends StatelessWidget {
     final background = switch (type) {
       TransactionType.income => SiColors.primaryContainer,
       TransactionType.expense => SiColors.secondaryContainer,
-      _ => SiColors.background,
-    };
-
-    final gradient = switch (type) {
-      TransactionType.income => LinearGradient(
-        colors: [SiColors.primaryContainer, Colors.white],
-        begin: AlignmentGeometry.centerLeft,
-        end: AlignmentGeometry.centerRight,
-      ),
-      TransactionType.expense => LinearGradient(
-        colors: [SiColors.secondaryContainer, Colors.white],
-        begin: AlignmentGeometry.centerLeft,
-        end: AlignmentGeometry.centerRight,
-      ),
-      _ => null,
+      _ => SiColors.surface,
     };
 
     final foreground = switch (type) {
@@ -184,16 +171,19 @@ class TransactionTypeCard extends StatelessWidget {
 
     final icon = switch (type) {
       TransactionType.income => HugeIcon(
-        icon: HugeIcons.strokeRoundedAdd01,
+        icon: HugeIcons.strokeRoundedArrowDownLeft01,
         color: foreground,
+        size: 12,
       ),
       TransactionType.expense => HugeIcon(
-        icon: HugeIcons.strokeRoundedMinusSign,
+        icon: HugeIcons.strokeRoundedArrowUpRight01,
         color: foreground,
+        size: 12,
       ),
       _ => HugeIcon(
         icon: HugeIcons.strokeRoundedArrowDataTransferHorizontal,
         color: foreground,
+        size: 12,
       ),
     };
 
@@ -204,42 +194,35 @@ class TransactionTypeCard extends StatelessWidget {
     };
 
     return Container(
-      width: context.screenSize.width * .7,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: background, width: 1.2),
-        gradient: gradient,
+        color: foreground,
+        border: Border.all(color: SiColors.grayscale1),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        spacing: 8,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      padding: const EdgeInsets.all(12),
+      child: Column(
+        spacing: 4,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+          Row(
+            spacing: 16,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                name,
-                style: TextStyle(fontSize: 12, color: SiColors.textSecondary),
-              ),
-              Text(
-                'Rp. 50.000.000',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: foreground,
+              Text(name, style: context.textTheme.bodySmall),
+              Container(
+                padding: EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: background,
+                  borderRadius: BorderRadius.circular(8),
                 ),
+                child: icon,
               ),
             ],
           ),
-          Container(
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: background,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: icon,
+          Text(
+            'Rp. 50jt',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ],
       ),

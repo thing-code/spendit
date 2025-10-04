@@ -62,10 +62,10 @@ flutter:
 flutter_native_splash:
   android: true
   ios: false
-  color: "#E5E7F3"
+  color: "#1E1E2E"
   image: assets/icons/splash.png
   android_12:
-    color: "#E5E7F3"
+    color: "#1E1E2E"
     image: assets/icons/splash-android12.png
 
 flutter_gen:

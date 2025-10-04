@@ -1,85 +1,61 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
+import 'package:flutter/services.dart';
 import 'package:spendit/src/core/core.dart';
 
 export 'colors.dart';
 
-abstract final class SiThemes {
-  const SiThemes._();
+abstract final class SiTheme {
+  const SiTheme._();
 
-  static ThemeData light = ThemeData(
+  // Dark Theme
+  static final ThemeData dark = ThemeData(
     fontFamily: FontFamily.manrope,
-    colorScheme: ColorScheme(
-      brightness: Brightness.light,
+    brightness: Brightness.dark,
+    primaryColor: SiColors.primary,
+    colorScheme: ColorScheme.dark(
       primary: SiColors.primary,
       onPrimary: Colors.white,
+      primaryContainer: SiColors.primaryContainer,
       secondary: SiColors.secondary,
-      onSecondary: SiColors.primary,
+      onSecondary: Colors.black,
+      secondaryContainer: SiColors.secondaryContainer,
+      surface: SiColors.surface,
       error: SiColors.danger,
       onError: Colors.white,
-      surface: SiColors.background,
-      onSurface: SiColors.primary,
+      onSurface: SiColors.textPrimary,
     ),
-    disabledColor: SiColors.grayscale3,
     pageTransitionsTheme: PageTransitionsTheme(
       builders: Map<TargetPlatform, PageTransitionsBuilder>.fromIterable(
         TargetPlatform.values,
         value: (_) => const FadeForwardsPageTransitionsBuilder(),
       ),
     ),
-    appBarTheme: AppBarTheme(
-      foregroundColor: SiColors.primary,
+    disabledColor: SiColors.disabled,
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(color: SiColors.textPrimary, height: 1),
+      bodyMedium: TextStyle(color: SiColors.textPrimary, height: 1.2),
+      bodySmall: TextStyle(color: SiColors.textPrimary, height: 1.4),
+      labelLarge: TextStyle(color: SiColors.textPrimary, height: 1),
+      labelMedium: TextStyle(color: SiColors.textPrimary, height: 1.2),
+      labelSmall: TextStyle(color: SiColors.textPrimary, height: 1.4),
+      titleLarge: TextStyle(color: SiColors.textPrimary, height: 1),
+      titleMedium: TextStyle(color: SiColors.textPrimary, height: 1.2),
+      titleSmall: TextStyle(color: SiColors.textPrimary, height: 1.4),
+    ),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: SiColors.surface,
+      foregroundColor: Colors.white,
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.light,
+        statusBarColor: Colors.transparent,
+      ),
       surfaceTintColor: Colors.transparent,
-      titleTextStyle: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-        color: SiColors.textPrimary,
-      ),
-      centerTitle: true,
-    ),
-    actionIconTheme: ActionIconThemeData(
-      backButtonIconBuilder: (context) =>
-          HugeIcon(icon: HugeIcons.strokeRoundedArrowLeft01),
-    ),
-    progressIndicatorTheme: ProgressIndicatorThemeData(
-      year2023: false,
-      linearTrackColor: SiColors.grayscale2,
-      circularTrackColor: SiColors.grayscale2,
-      color: SiColors.secondary,
-      stopIndicatorColor: SiColors.secondary,
-    ),
-    cardTheme: CardThemeData(
-      color: Colors.white,
-      clipBehavior: Clip.antiAlias,
-      margin: EdgeInsets.zero,
+      scrolledUnderElevation: 0,
       elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: SiColors.grayscale2),
-      ),
-    ),
-    dividerTheme: DividerThemeData(color: SiColors.grayscale2),
-    checkboxTheme: CheckboxThemeData(),
-    radioTheme: RadioThemeData(),
-    switchTheme: SwitchThemeData(),
-    sliderTheme: SliderThemeData(year2023: false),
-    listTileTheme: ListTileThemeData(),
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: Colors.white,
-      hintStyle: TextStyle(
-        fontSize: 14,
-        color: SiColors.textSecondary,
-        height: 1,
-      ),
-      contentPadding: EdgeInsets.symmetric(horizontal: 16),
-      enabledBorder: _border(SiColors.grayscale2),
-      focusedBorder: _border(SiColors.primary),
-      disabledBorder: _border(SiColors.textSecondary),
-      errorBorder: _border(SiColors.danger),
-      focusedErrorBorder: _border(SiColors.danger),
+      actionsPadding: EdgeInsets.only(right: 8),
+      centerTitle: true,
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
@@ -95,6 +71,38 @@ abstract final class SiThemes {
       style: OutlinedButton.styleFrom(
         textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
       ),
+    ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(year2023: false),
+    cardTheme: CardThemeData(
+      clipBehavior: Clip.antiAlias,
+      margin: EdgeInsets.zero,
+      elevation: 0,
+      color: SiColors.card,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: SiColors.grayscale1),
+      ),
+    ),
+    dividerTheme: DividerThemeData(color: SiColors.grayscale1),
+    checkboxTheme: CheckboxThemeData(),
+    radioTheme: RadioThemeData(),
+    switchTheme: SwitchThemeData(),
+    sliderTheme: SliderThemeData(year2023: false),
+    listTileTheme: ListTileThemeData(),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: SiColors.primaryContainer,
+      hintStyle: TextStyle(
+        fontSize: 14,
+        color: SiColors.textSecondary,
+        height: 1,
+      ),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16),
+      enabledBorder: _border(SiColors.grayscale2),
+      focusedBorder: _border(SiColors.primary),
+      disabledBorder: _border(SiColors.disabled),
+      errorBorder: _border(SiColors.danger),
+      focusedErrorBorder: _border(SiColors.danger),
     ),
   );
 
