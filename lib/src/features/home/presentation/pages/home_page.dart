@@ -121,7 +121,7 @@ class HomePage extends ConsumerWidget {
                     bottomNavigationBar:
                         SiButton.primary(
                           onPressed: () {
-                            SiLogger.print('Save');
+                            SiLogger.data('Save');
                           },
                           text: 'Save',
                         ).paddingSymmetric(

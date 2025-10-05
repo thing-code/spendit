@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
 
 abstract final class SiLogger {
@@ -15,12 +17,15 @@ abstract final class SiLogger {
     debugPrint(_green(msg));
   }
 
-  static void print(dynamic msg) {
+  static void data(dynamic msg) {
     debugPrint(_cyan(msg));
   }
 
-  static void info(dynamic msg) {
-    debugPrint(_magenta(msg));
+  static void json(dynamic msg) {
+    const encoder = JsonEncoder.withIndent('  ');
+    final String prettyJson = encoder.convert(msg);
+
+    prettyJson.split('\n').forEach((e) => debugPrint(_white(e)));
   }
 
   static String _green(dynamic msg) {
@@ -35,8 +40,8 @@ abstract final class SiLogger {
     return '\x1B[31m$msg\x1B[0m';
   }
 
-  static String _magenta(dynamic msg) {
-    return '\x1B[35m$msg\x1B[0m';
+  static String _white(dynamic msg) {
+    return '\x1B[97m$msg\x1B[0m';
   }
 
   static String _cyan(dynamic msg) {

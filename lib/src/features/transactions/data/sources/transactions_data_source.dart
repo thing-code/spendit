@@ -14,11 +14,11 @@ TransactionsDataSource transactionsDataSource(Ref ref) {
 
 abstract class TransactionsDataSource {
   Future<int> create(Transactions req);
-  Future<int> update(Transactions req);
+  Future<int> update(int id, Transactions req);
   Future<int> delete(int id);
-  Future<List<Transactions>> readAll();
-  Future<Transactions?> readById(int id);
-  Future<List<Transactions>> readByFilter({
+  Future<List<Transactions>> getAll();
+  Future<Transactions?> getById(int id);
+  Future<List<Transactions>> getByFilter({
     required TransactionType type,
     DateTime? month,
   });
@@ -56,12 +56,19 @@ class TransactionsDataSourceImpl extends TransactionsDataSource {
   }
 
   @override
-  Future<int> update(Transactions req) async {
+  Future<int> update(int id, Transactions req) async {
     final db = await database;
+
+    final data = switch (req) {
+      Expense() => req.copyWith(updatedAt: DateTime.now()),
+      Income() => req.copyWith(updatedAt: DateTime.now()),
+      _ => req,
+    };
+
     final query = db.transaction((txn) async {
       return await txn.update(
         kTransactionTable,
-        req.toJson(),
+        data.toJson(),
         where: 'id = ?',
         whereArgs: [req.id],
       );
@@ -70,7 +77,7 @@ class TransactionsDataSourceImpl extends TransactionsDataSource {
   }
 
   @override
-  Future<List<Transactions>> readAll() async {
+  Future<List<Transactions>> getAll() async {
     final db = await database;
     final query = await db.query(kTransactionTable, orderBy: "created_at DESC");
     final data = query.map((e) => Transactions.fromJson(e)).toList();
@@ -78,7 +85,7 @@ class TransactionsDataSourceImpl extends TransactionsDataSource {
   }
 
   @override
-  Future<List<Transactions>> readByFilter({
+  Future<List<Transactions>> getByFilter({
     required TransactionType type,
     DateTime? month,
   }) async {
@@ -86,8 +93,8 @@ class TransactionsDataSourceImpl extends TransactionsDataSource {
     final (start, end) = (month ?? DateTime.now()).range;
     final query = await db.query(
       kTransactionTable,
-      where: 'date BETWEEN ? AND ?',
-      whereArgs: [start.toRequest, end.toRequest],
+      where: 'type = ? AND created_at BETWEEN ? AND ?',
+      whereArgs: [type.name, start.toRequest, end.toRequest],
       orderBy: "created_at DESC",
     );
     final data = query.map((e) => Transactions.fromJson(e)).toList();
@@ -95,7 +102,7 @@ class TransactionsDataSourceImpl extends TransactionsDataSource {
   }
 
   @override
-  Future<Transactions?> readById(int id) async {
+  Future<Transactions?> getById(int id) async {
     final db = await database;
     final query = await db.query(
       kTransactionTable,

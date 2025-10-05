@@ -14,11 +14,11 @@ TransactionsRepository transactionsRepository(Ref ref) {
 
 abstract class TransactionsRepository {
   Future<int> create(Transactions req);
-  Future<int> update(Transactions req);
+  Future<int> update(int id, Transactions req);
   Future<int> delete(int id);
-  Future<List<Transactions>> readAll();
-  Future<Transactions?> readById(int id);
-  Future<List<Transactions>> readByFilter({
+  Future<List<Transactions>> getAll();
+  Future<Transactions?> getById(int id);
+  Future<List<Transactions>> getByFilter({
     required TransactionType type,
     DateTime? month,
   });
@@ -36,19 +36,19 @@ class TransactionsRepositoryImpl implements TransactionsRepository {
   Future<int> delete(int id) => datasource.delete(id);
 
   @override
-  Future<List<Transactions>> readAll() => datasource.readAll();
+  Future<List<Transactions>> getAll() => datasource.getAll();
 
   @override
-  Future<List<Transactions>> readByFilter({
+  Future<List<Transactions>> getByFilter({
     required TransactionType type,
     DateTime? month,
   }) {
-    return datasource.readByFilter(type: type, month: month);
+    return datasource.getByFilter(type: type, month: month);
   }
 
   @override
-  Future<Transactions?> readById(int id) => datasource.readById(id);
+  Future<Transactions?> getById(int id) => datasource.getById(id);
 
   @override
-  Future<int> update(Transactions req) => datasource.update(req);
+  Future<int> update(int id, Transactions req) => datasource.update(id, req);
 }
