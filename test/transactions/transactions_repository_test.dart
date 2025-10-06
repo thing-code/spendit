@@ -59,142 +59,72 @@ void main() {
         verify(() => mockDataSource.create(any())).called(1);
       });
     });
+
+    group('Get Transactions', () {
+      test('Should return transaction with spesific id', () async {
+        final income = Income(
+          id: 1,
+          amount: 5000000,
+          category: IncomeCategory.salary,
+          notes: 'Gajian Bulan Oktober',
+          createdAt: DateTime.now(),
+        );
+
+        when(() => mockDataSource.getById(1)).thenAnswer((_) async => income);
+
+        final result = await repository.getById(1);
+
+        expect(result, isA<Transactions>());
+        expect(result, isA<Income>());
+        expect(result?.id, 1);
+
+        verify(() => mockDataSource.getById(1)).called(1);
+      });
+
+      test('Should return null when transaction not found', () async {
+        when(
+          () => mockDataSource.getById(100),
+        ).thenAnswer((invocation) async => null);
+
+        final result = await repository.getById(100);
+
+        expect(result, isNull);
+
+        verify(() => mockDataSource.getById(100)).called(1);
+      });
+
+      test('Should get all transactions', () async {
+        final transactions = [
+          Income(
+            id: 1,
+            amount: 5000000,
+            category: IncomeCategory.salary,
+            notes: 'Gajian Bulan Oktober',
+            createdAt: DateTime.now(),
+          ),
+          Expense(
+            id: 2,
+            amount: 25000,
+            category: ExpenseCategory.food,
+            notes: 'Beli Nasi Padang',
+            createdAt: DateTime.now(),
+          ),
+        ];
+
+        when(
+          () => mockDataSource.getAll(),
+        ).thenAnswer((invocation) async => transactions);
+
+        final result = await repository.getAll();
+
+        expect(result, isA<List<Transactions>>());
+        expect(result.length, 2);
+
+        verify(() => mockDataSource.getAll()).called(1);
+      });
+    });
   });
 }
-
-//     group('Get Users - Mapping', () {
-//       test('should map data source response to domain model', () async {
-//         // Arrange
-//         final userMap = {
-//           'id': 1,
-//           'name': 'John Doe',
-//           'email': 'john@example.com',
-//           'age': 25,
-//           'created_at': DateTime.now().toIso8601String(),
-//         };
-
-//         when(() => mockDataSource.getUserById(1))
-//             .thenAnswer((_) async => userMap);
-
-//         // Act
-//         final result = await repository.getUserById(1);
-
-//         // Assert
-//         expect(result, isA<User>());
-//         expect(result?.name, 'John Doe');
-//         expect(result?.email, 'john@example.com');
-//         expect(result?.age, 25);
-
-//         verify(() => mockDataSource.getUserById(1)).called(1);
-//       });
-
-//       test('should return null when user not found', () async {
-//         // Arrange
-//         when(() => mockDataSource.getUserById(999))
-//             .thenAnswer((_) async => null);
-
-//         // Act
-//         final result = await repository.getUserById(999);
-
-//         // Assert
-//         expect(result, isNull);
-//         verify(() => mockDataSource.getUserById(999)).called(1);
-//       });
-
-//       test('should get all users as domain models', () async {
-//         // Arrange
-//         final userMaps = [
-//           {
-//             'id': 1,
-//             'name': 'User 1',
-//             'email': 'user1@example.com',
-//             'age': 20,
-//             'created_at': DateTime.now().toIso8601String(),
-//           },
-//           {
-//             'id': 2,
-//             'name': 'User 2',
-//             'email': 'user2@example.com',
-//             'age': 30,
-//             'created_at': DateTime.now().toIso8601String(),
-//           },
-//         ];
-
-//         when(() => mockDataSource.getAllUsers())
-//             .thenAnswer((_) async => userMaps);
-
-//         // Act
-//         final users = await repository.getAllUsers();
-
-//         // Assert
-//         expect(users, isA<List<User>>());
-//         expect(users.length, 2);
-//         expect(users[0].name, 'User 1');
-//         expect(users[1].name, 'User 2');
-
-//         verify(() => mockDataSource.getAllUsers()).called(1);
-//       });
-
-//       test('should handle empty list from data source', () async {
-//         // Arrange
-//         when(() => mockDataSource.getAllUsers())
-//             .thenAnswer((_) async => []);
-
-//         // Act
-//         final users = await repository.getAllUsers();
-
-//         // Assert
-//         expect(users, isEmpty);
-//         verify(() => mockDataSource.getAllUsers()).called(1);
-//       });
-//     });
-
-//     group('Business Logic - Adult Users', () {
-//       test('should get only adult users (18+)', () async {
-//         // Arrange
-//         final userMaps = [
-//           {
-//             'id': 1,
-//             'name': 'Adult 1',
-//             'email': 'adult1@example.com',
-//             'age': 25,
-//             'created_at': DateTime.now().toIso8601String(),
-//           },
-//           {
-//             'id': 2,
-//             'name': 'Adult 2',
-//             'email': 'adult2@example.com',
-//             'age': 30,
-//             'created_at': DateTime.now().toIso8601String(),
-//           },
-//         ];
-
-//         when(() => mockDataSource.getUsersByAgeRange(18, 150))
-//             .thenAnswer((_) async => userMaps);
-
-//         // Act
-//         final adults = await repository.getAdultUsers();
-
-//         // Assert
-//         expect(adults.length, 2);
-//         expect(adults.every((u) => u.isAdult()), true);
-
-//         verify(() => mockDataSource.getUsersByAgeRange(18, 150)).called(1);
-//       });
-
-//       test('should return empty list when no adults found', () async {
-//         // Arrange
-//         when(() => mockDataSource.getUsersByAgeRange(18, 150))
-//             .thenAnswer((_) async => []);
-
-//         // Act
-//         final adults = await repository.getAdultUsers();
-
-//         // Assert
-//         expect(adults, isEmpty);
-//         verify(() => mockDataSource.getUsersByAgeRange(18, 150)).called(1);
-//       });
-//     });
 
 //     group('Update User - Validation', () {
 //       test('should update user with valid data', () async {
