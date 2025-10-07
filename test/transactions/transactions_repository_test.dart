@@ -123,51 +123,29 @@ void main() {
         verify(() => mockDataSource.getAll()).called(1);
       });
     });
+
+    group('Update Transactions', () {
+      test('Should update transaction with valid data', () async {
+        final income = Income(
+          id: 1,
+          amount: 5000000,
+          category: IncomeCategory.salary,
+          notes: 'Gajian Bulan Oktober',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        );
+
+        when(
+          () => mockDataSource.update(1, any()),
+        ).thenAnswer((invocation) async => 1);
+
+        await expectLater(repository.update(1, income), completes);
+
+        verify(() => mockDataSource.update(1, any())).called(1);
+      });
+    });
   });
 }
-
-//     group('Update User - Validation', () {
-//       test('should update user with valid data', () async {
-//         // Arrange
-//         final user = User(
-//           id: 1,
-//           name: 'John Updated',
-//           email: 'john.updated@example.com',
-//           age: 30,
-//         );
-
-//         when(() => mockDataSource.updateUser(1, any()))
-//             .thenAnswer((_) async => 1);
-
-//         // Act & Assert
-//         await expectLater(
-//           repository.updateUser(user),
-//           completes,
-//         );
-
-//         verify(() => mockDataSource.updateUser(1, any())).called(1);
-//       });
-
-//       test('should throw error when updating without id', () async {
-//         // Arrange
-//         final user = User(
-//           name: 'John',
-//           email: 'john@example.com',
-//           age: 25,
-//         );
-
-//         // Act & Assert
-//         expect(
-//           () => repository.updateUser(user),
-//           throwsA(isA<Exception>().having(
-//             (e) => e.toString(),
-//             'message',
-//             contains('User ID is required'),
-//           )),
-//         );
-
-//         verifyNever(() => mockDataSource.updateUser(any(), any()));
-//       });
 
 //       test('should throw error when updating with invalid email', () async {
 //         // Arrange
