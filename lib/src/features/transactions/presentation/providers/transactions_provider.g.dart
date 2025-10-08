@@ -34,7 +34,7 @@ final class TransactionsControllerProvider
 }
 
 String _$transactionsControllerHash() =>
-    r'06e95d2c836664e32b1b9164c02d299a86c93928';
+    r'3f97bb9fe1903072d2cbef9b59a0839baba0feaf';
 
 abstract class _$TransactionsController
     extends $AsyncNotifier<List<Transactions>> {
@@ -81,7 +81,7 @@ final class ExpenseControllerProvider
   ExpenseController create() => ExpenseController();
 }
 
-String _$expenseControllerHash() => r'2b31905b9803f35e031a7298a4b0422655b6b862';
+String _$expenseControllerHash() => r'3f370a3ba36aba05629a092119297f753608c0e5';
 
 abstract class _$ExpenseController extends $AsyncNotifier<List<Transactions>> {
   FutureOr<List<Transactions>> build();
@@ -127,7 +127,7 @@ final class IncomeControllerProvider
   IncomeController create() => IncomeController();
 }
 
-String _$incomeControllerHash() => r'45224ebedcdf141ea0473d8470b4a813e948bbde';
+String _$incomeControllerHash() => r'd7b29866163bf8ba131170acc620a0c678bfacce';
 
 abstract class _$IncomeController extends $AsyncNotifier<List<Transactions>> {
   FutureOr<List<Transactions>> build();

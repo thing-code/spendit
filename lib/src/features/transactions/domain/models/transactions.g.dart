@@ -22,7 +22,6 @@ Income _$IncomeFromJson(Map<String, dynamic> json) => Income(
 );
 
 Map<String, dynamic> _$IncomeToJson(Income instance) => <String, dynamic>{
-  'id': ?instance.id,
   'type': _$TransactionTypeEnumMap[instance.type]!,
   'amount': instance.amount,
   'category': _$IncomeCategoryEnumMap[instance.category]!,
@@ -60,7 +59,6 @@ Expense _$ExpenseFromJson(Map<String, dynamic> json) => Expense(
 );
 
 Map<String, dynamic> _$ExpenseToJson(Expense instance) => <String, dynamic>{
-  'id': ?instance.id,
   'type': _$TransactionTypeEnumMap[instance.type]!,
   'amount': instance.amount,
   'category': _$ExpenseCategoryEnumMap[instance.category]!,
@@ -94,7 +92,6 @@ Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
 );
 
 Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
-  'id': ?instance.id,
   'type': _$TransactionTypeEnumMap[instance.type]!,
   'amount': instance.amount,
   'goal_id': instance.goalId,

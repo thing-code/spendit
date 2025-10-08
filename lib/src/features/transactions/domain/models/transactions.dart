@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../../../core/core.dart';
 
 part 'transactions.freezed.dart';
@@ -7,7 +8,7 @@ part 'transactions.g.dart';
 @freezed
 sealed class Transactions with _$Transactions {
   const factory Transactions.income({
-    @JsonKey(includeIfNull: false) int? id,
+    @JsonKey(includeToJson: false) int? id,
     @Default(TransactionType.income) TransactionType type,
     required int amount,
     required IncomeCategory category,
@@ -17,7 +18,7 @@ sealed class Transactions with _$Transactions {
   }) = Income;
 
   const factory Transactions.expense({
-    @JsonKey(includeIfNull: false) int? id,
+    @JsonKey(includeToJson: false) int? id,
     @Default(TransactionType.expense) TransactionType type,
     required int amount,
     required ExpenseCategory category,
@@ -27,7 +28,7 @@ sealed class Transactions with _$Transactions {
   }) = Expense;
 
   const factory Transactions.transfer({
-    @JsonKey(includeIfNull: false) int? id,
+    @JsonKey(includeToJson: false) int? id,
     @Default(TransactionType.goals) TransactionType type,
     required int amount,
     @JsonKey(name: 'goal_id') required int goalId,
