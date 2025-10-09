@@ -9,34 +9,34 @@ part of 'transactions_provider.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(TransactionsController)
-const transactionsControllerProvider = TransactionsControllerProvider._();
+@ProviderFor(TransactionNotifier)
+const transactionProvider = TransactionNotifierProvider._();
 
-final class TransactionsControllerProvider
-    extends $AsyncNotifierProvider<TransactionsController, List<Transactions>> {
-  const TransactionsControllerProvider._()
+final class TransactionNotifierProvider
+    extends $AsyncNotifierProvider<TransactionNotifier, List<Transactions>> {
+  const TransactionNotifierProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'transactionsControllerProvider',
+        name: r'transactionProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$transactionsControllerHash();
+  String debugGetCreateSourceHash() => _$transactionNotifierHash();
 
   @$internal
   @override
-  TransactionsController create() => TransactionsController();
+  TransactionNotifier create() => TransactionNotifier();
 }
 
-String _$transactionsControllerHash() =>
-    r'3f97bb9fe1903072d2cbef9b59a0839baba0feaf';
+String _$transactionNotifierHash() =>
+    r'73216b6ad85f2b4307cf304282c181ad6d36516a';
 
-abstract class _$TransactionsController
+abstract class _$TransactionNotifier
     extends $AsyncNotifier<List<Transactions>> {
   FutureOr<List<Transactions>> build();
   @$mustCallSuper
@@ -57,33 +57,33 @@ abstract class _$TransactionsController
   }
 }
 
-@ProviderFor(ExpenseController)
-const expenseControllerProvider = ExpenseControllerProvider._();
+@ProviderFor(ExpenseNotifier)
+const expenseProvider = ExpenseNotifierProvider._();
 
-final class ExpenseControllerProvider
-    extends $AsyncNotifierProvider<ExpenseController, List<Transactions>> {
-  const ExpenseControllerProvider._()
+final class ExpenseNotifierProvider
+    extends $AsyncNotifierProvider<ExpenseNotifier, List<Transactions>> {
+  const ExpenseNotifierProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'expenseControllerProvider',
+        name: r'expenseProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$expenseControllerHash();
+  String debugGetCreateSourceHash() => _$expenseNotifierHash();
 
   @$internal
   @override
-  ExpenseController create() => ExpenseController();
+  ExpenseNotifier create() => ExpenseNotifier();
 }
 
-String _$expenseControllerHash() => r'3f370a3ba36aba05629a092119297f753608c0e5';
+String _$expenseNotifierHash() => r'88410cf2cca9c1b171eedfcd38ccc343941a0bff';
 
-abstract class _$ExpenseController extends $AsyncNotifier<List<Transactions>> {
+abstract class _$ExpenseNotifier extends $AsyncNotifier<List<Transactions>> {
   FutureOr<List<Transactions>> build();
   @$mustCallSuper
   @override
@@ -103,33 +103,33 @@ abstract class _$ExpenseController extends $AsyncNotifier<List<Transactions>> {
   }
 }
 
-@ProviderFor(IncomeController)
-const incomeControllerProvider = IncomeControllerProvider._();
+@ProviderFor(IncomeNotifier)
+const incomeProvider = IncomeNotifierProvider._();
 
-final class IncomeControllerProvider
-    extends $AsyncNotifierProvider<IncomeController, List<Transactions>> {
-  const IncomeControllerProvider._()
+final class IncomeNotifierProvider
+    extends $AsyncNotifierProvider<IncomeNotifier, List<Transactions>> {
+  const IncomeNotifierProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'incomeControllerProvider',
+        name: r'incomeProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$incomeControllerHash();
+  String debugGetCreateSourceHash() => _$incomeNotifierHash();
 
   @$internal
   @override
-  IncomeController create() => IncomeController();
+  IncomeNotifier create() => IncomeNotifier();
 }
 
-String _$incomeControllerHash() => r'd7b29866163bf8ba131170acc620a0c678bfacce';
+String _$incomeNotifierHash() => r'6fc39f636f99adf2d7c781d6485be0feb3b34955';
 
-abstract class _$IncomeController extends $AsyncNotifier<List<Transactions>> {
+abstract class _$IncomeNotifier extends $AsyncNotifier<List<Transactions>> {
   FutureOr<List<Transactions>> build();
   @$mustCallSuper
   @override

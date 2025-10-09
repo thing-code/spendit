@@ -7,15 +7,42 @@ import '../../domain/models/models.dart';
 part 'transactions_provider.g.dart';
 
 @riverpod
-class TransactionsController extends _$TransactionsController {
+class TransactionNotifier extends _$TransactionNotifier {
   @override
   FutureOr<List<Transactions>> build() async {
     return ref.read(transactionsRepositoryProvider).getAll();
   }
+
+  Future<int> createTransaction(Transactions req) async {
+    final id = await ref.read(transactionsRepositoryProvider).create(req);
+    if (id != 0) _invalidate();
+    return id;
+  }
+
+  Future<int> updateTransaction(Transactions req) async {
+    if (req.id == null) return 0;
+    final id = await ref
+        .read(transactionsRepositoryProvider)
+        .update(req.id!, req);
+    if (id != 0) _invalidate();
+    return id;
+  }
+
+  Future<int> deleteTransaction(int id) async {
+    final deleted = await ref.read(transactionsRepositoryProvider).delete(id);
+    if (deleted != 0) _invalidate();
+    return deleted;
+  }
+
+  void _invalidate() {
+    ref.invalidateSelf();
+    ref.invalidate(expenseProvider);
+    ref.invalidate(incomeProvider);
+  }
 }
 
 @riverpod
-class ExpenseController extends _$ExpenseController {
+class ExpenseNotifier extends _$ExpenseNotifier {
   @override
   FutureOr<List<Transactions>> build() async {
     return ref
@@ -25,7 +52,7 @@ class ExpenseController extends _$ExpenseController {
 }
 
 @riverpod
-class IncomeController extends _$IncomeController {
+class IncomeNotifier extends _$IncomeNotifier {
   @override
   FutureOr<List<Transactions>> build() async {
     return ref

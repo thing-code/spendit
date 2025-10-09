@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../core/core.dart';
@@ -117,7 +118,27 @@ class HomePage extends ConsumerWidget {
                 showCupertinoSheet(
                   context: context,
                   builder: (context) => Scaffold(
-                    appBar: AppBar(title: Text('New Transaction')),
+                    appBar: AppBar(
+                      title: Text(
+                        'New Transaction',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      automaticallyImplyLeading: false,
+                      leading: IconButton(
+                        style: IconButton.styleFrom(
+                          backgroundColor: SiColors.card,
+                          foregroundColor:
+                              context.colorScheme.onPrimaryContainer,
+                        ),
+                        onPressed: () {
+                          if (context.canPop()) context.pop();
+                        },
+                        icon: Icon(Icons.arrow_back, size: 20),
+                      ),
+                    ),
                     bottomNavigationBar:
                         SiButton.primary(
                           onPressed: () {
