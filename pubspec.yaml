@@ -49,6 +49,7 @@ flutter:
   assets:
     - assets/
     - assets/icons/
+    - shorebird.yaml
   fonts:
     - family: Manrope
       fonts:
