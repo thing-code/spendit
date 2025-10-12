@@ -163,7 +163,7 @@ class TransactionTypeCard extends StatelessWidget {
       _ => SiColors.surface,
     };
 
-    final foreground = switch (type) {
+    final color = switch (type) {
       TransactionType.income => SiColors.primary,
       TransactionType.expense => SiColors.secondary,
       _ => SiColors.primary,
@@ -172,17 +172,17 @@ class TransactionTypeCard extends StatelessWidget {
     final icon = switch (type) {
       TransactionType.income => HugeIcon(
         icon: HugeIcons.strokeRoundedArrowDownLeft01,
-        color: foreground,
+        color: context.colorScheme.onPrimary,
         size: 12,
       ),
       TransactionType.expense => HugeIcon(
         icon: HugeIcons.strokeRoundedArrowUpRight01,
-        color: foreground,
+        color: context.colorScheme.onSecondary,
         size: 12,
       ),
       _ => HugeIcon(
         icon: HugeIcons.strokeRoundedArrowDataTransferHorizontal,
-        color: foreground,
+        color: context.colorScheme.onPrimary,
         size: 12,
       ),
     };
@@ -196,7 +196,7 @@ class TransactionTypeCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: foreground,
+        color: color,
         border: Border.all(color: SiColors.grayscale1),
       ),
       padding: const EdgeInsets.all(12),

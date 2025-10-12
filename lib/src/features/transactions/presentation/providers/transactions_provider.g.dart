@@ -34,7 +34,7 @@ final class TransactionNotifierProvider
 }
 
 String _$transactionNotifierHash() =>
-    r'73216b6ad85f2b4307cf304282c181ad6d36516a';
+    r'f16897ebe13108c9ced7b27e157e7e99038ecb09';
 
 abstract class _$TransactionNotifier
     extends $AsyncNotifier<List<Transactions>> {

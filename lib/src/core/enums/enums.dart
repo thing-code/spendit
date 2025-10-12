@@ -1,15 +1,34 @@
-enum TransactionType { income, expense, goals }
+enum TransactionType {
+  income('Income'),
+  expense('Expense'),
+  goals('Goals');
 
-enum IncomeCategory { salary, investment, freelance }
+  final String title;
+
+  const TransactionType(this.title);
+}
+
+enum IncomeCategory {
+  salary('Salary'),
+  investment('Investment'),
+  freelance('Freelance');
+
+  final String title;
+
+  const IncomeCategory(this.title);
+}
 
 enum ExpenseCategory {
-  family,
-  shopping,
-  reward,
-  health,
-  billing,
-  transportation,
-  investment,
-  food,
-  other,
+  family('Family'),
+  shopping('Shopping'),
+  reward('Reward'),
+  health('Health'),
+  bill('Bill'),
+  transport('Transport'),
+  food('Food'),
+  other('Other');
+
+  final String title;
+
+  const ExpenseCategory(this.title);
 }

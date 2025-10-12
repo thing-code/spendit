@@ -19,7 +19,7 @@ abstract final class SiTheme {
       onPrimary: Colors.white,
       primaryContainer: SiColors.primaryContainer,
       secondary: SiColors.secondary,
-      onSecondary: Colors.black,
+      onSecondary: Colors.white,
       secondaryContainer: SiColors.secondaryContainer,
       surface: SiColors.surface,
       error: SiColors.danger,
@@ -89,6 +89,15 @@ abstract final class SiTheme {
     switchTheme: SwitchThemeData(),
     sliderTheme: SliderThemeData(year2023: false),
     listTileTheme: ListTileThemeData(),
+    tabBarTheme: TabBarThemeData(
+      dividerColor: Colors.transparent,
+      indicatorSize: TabBarIndicatorSize.tab,
+      indicator: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: SiColors.card,
+      ),
+      splashBorderRadius: BorderRadius.circular(12),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: SiColors.primaryContainer,
