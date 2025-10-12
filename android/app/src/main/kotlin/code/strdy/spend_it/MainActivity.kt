@@ -1,4 +1,4 @@
-package code.strdy.spend_it
+package app.strdy.spendit
 
 import io.flutter.embedding.android.FlutterActivity
 
