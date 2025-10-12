@@ -34,15 +34,51 @@ abstract final class SiTheme {
     ),
     disabledColor: SiColors.disabled,
     textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: SiColors.textPrimary, height: 1),
-      bodyMedium: TextStyle(color: SiColors.textPrimary, height: 1.2),
-      bodySmall: TextStyle(color: SiColors.textPrimary, height: 1.4),
-      labelLarge: TextStyle(color: SiColors.textPrimary, height: 1),
-      labelMedium: TextStyle(color: SiColors.textPrimary, height: 1.2),
-      labelSmall: TextStyle(color: SiColors.textPrimary, height: 1.4),
-      titleLarge: TextStyle(color: SiColors.textPrimary, height: 1),
-      titleMedium: TextStyle(color: SiColors.textPrimary, height: 1.2),
-      titleSmall: TextStyle(color: SiColors.textPrimary, height: 1.4),
+      bodyLarge: TextStyle(
+        color: SiColors.textPrimary,
+        height: 1,
+        fontSize: 14,
+      ),
+      bodyMedium: TextStyle(
+        color: SiColors.textPrimary,
+        height: 1.2,
+        fontSize: 12,
+      ),
+      bodySmall: TextStyle(
+        color: SiColors.textPrimary,
+        height: 1.4,
+        fontSize: 10,
+      ),
+      labelLarge: TextStyle(
+        color: SiColors.textPrimary,
+        height: 1,
+        fontSize: 18,
+      ),
+      labelMedium: TextStyle(
+        color: SiColors.textPrimary,
+        height: 1.2,
+        fontSize: 16,
+      ),
+      labelSmall: TextStyle(
+        color: SiColors.textPrimary,
+        height: 1.4,
+        fontSize: 14,
+      ),
+      titleLarge: TextStyle(
+        color: SiColors.textPrimary,
+        height: 1,
+        fontSize: 22,
+      ),
+      titleMedium: TextStyle(
+        color: SiColors.textPrimary,
+        height: 1.2,
+        fontSize: 20,
+      ),
+      titleSmall: TextStyle(
+        color: SiColors.textPrimary,
+        height: 1.4,
+        fontSize: 18,
+      ),
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: SiColors.surface,

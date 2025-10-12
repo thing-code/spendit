@@ -6,16 +6,91 @@ part of 'routes.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$homeRoute];
+List<RouteBase> get $appRoutes => [$navigationRoute];
 
-RouteBase get $homeRoute =>
-    GoRouteData.$route(path: '/', factory: $HomeRoute._fromState);
+RouteBase get $navigationRoute => ShellRouteData.$route(
+  navigatorKey: NavigationRoute.$navigatorKey,
+  factory: $NavigationRouteExtension._fromState,
+  routes: [
+    GoRouteData.$route(path: '/', factory: $HomeRoute._fromState),
+    GoRouteData.$route(
+      path: '/transactions',
+      factory: $TransactionRoute._fromState,
+    ),
+    GoRouteData.$route(path: '/goals', factory: $GoalsRoute._fromState),
+    GoRouteData.$route(path: '/budgeting', factory: $BudgetingRoute._fromState),
+  ],
+);
+
+extension $NavigationRouteExtension on NavigationRoute {
+  static NavigationRoute _fromState(GoRouterState state) => NavigationRoute();
+}
 
 mixin $HomeRoute on GoRouteData {
   static HomeRoute _fromState(GoRouterState state) => HomeRoute();
 
   @override
   String get location => GoRouteData.$location('/');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin $TransactionRoute on GoRouteData {
+  static TransactionRoute _fromState(GoRouterState state) => TransactionRoute();
+
+  @override
+  String get location => GoRouteData.$location('/transactions');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin $GoalsRoute on GoRouteData {
+  static GoalsRoute _fromState(GoRouterState state) => GoalsRoute();
+
+  @override
+  String get location => GoRouteData.$location('/goals');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin $BudgetingRoute on GoRouteData {
+  static BudgetingRoute _fromState(GoRouterState state) => BudgetingRoute();
+
+  @override
+  String get location => GoRouteData.$location('/budgeting');
 
   @override
   void go(BuildContext context) => context.go(location);

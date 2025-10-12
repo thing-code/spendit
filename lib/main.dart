@@ -22,8 +22,8 @@ Future<void> main() async {
       runApp(
         ProviderScope(
           retry: (retryCount, error) {
-            if (retryCount > 5) return null;
-            return Duration(seconds: 3);
+            if (retryCount > 4) return null;
+            return Durations.medium1;
           },
           child: const MainApp(),
         ),
@@ -43,6 +43,9 @@ class MainApp extends ConsumerWidget {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
+      scrollBehavior: MaterialScrollBehavior().copyWith(
+        physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+      ),
       debugShowCheckedModeBanner: false,
       theme: SiTheme.dark,
       routerConfig: router,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 extension ContextX on BuildContext {
@@ -47,5 +48,24 @@ extension DateTimeX on DateTime {
     final endDate = DateTime(year, month + 1, 0);
 
     return (startDate, endDate);
+  }
+}
+
+extension GoRouterExt on BuildContext {
+  Future<void> popUntil(String location) async {
+    final delegate = GoRouter.of(this).routerDelegate;
+    var config = delegate.currentConfiguration;
+    var routes = config.routes.whereType<GoRoute>();
+
+    bool predicate(GoRoute route) {
+      return route.path == location;
+    }
+
+    while (routes.length > 1 && !predicate(config.last.route)) {
+      config = config.remove(config.last);
+      routes = config.routes.whereType<GoRoute>();
+    }
+
+    await delegate.setNewRoutePath(config);
   }
 }

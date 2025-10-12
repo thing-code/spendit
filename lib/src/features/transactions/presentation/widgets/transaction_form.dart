@@ -1,6 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:spendit/src/core/core.dart';
+
+Future<bool?> showTransactionForm(BuildContext context) =>
+    showCupertinoSheet<bool>(
+      context: context,
+      builder: (context) => TransactionFormWidget(),
+    );
 
 /// Main Transaction Form
 class TransactionFormWidget extends StatelessWidget {

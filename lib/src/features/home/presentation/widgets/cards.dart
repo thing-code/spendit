@@ -41,7 +41,6 @@ class TransactionCard extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                      Spacer(),
                     ],
                   ),
                 ),
@@ -209,7 +208,7 @@ class TransactionTypeCard extends StatelessWidget {
             spacing: 16,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(name, style: context.textTheme.bodySmall),
+              Text(name, style: context.textTheme.bodyMedium),
               Container(
                 padding: EdgeInsets.all(4),
                 decoration: BoxDecoration(
@@ -221,8 +220,10 @@ class TransactionTypeCard extends StatelessWidget {
             ],
           ),
           Text(
-            'Rp. 50jt',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            'Rp. 50.000.000',
+            style: context.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),
