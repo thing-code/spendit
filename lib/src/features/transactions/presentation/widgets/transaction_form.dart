@@ -23,6 +23,7 @@ class TransactionFormWidget extends StatelessWidget {
           spacing: 16,
           children: [
             TabBar(
+              labelStyle: context.textTheme.labelSmall,
               tabs: TransactionType.values.map((type) {
                 final icon = switch (type) {
                   TransactionType.expense => HugeIcon(

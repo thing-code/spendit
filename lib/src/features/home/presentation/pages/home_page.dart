@@ -42,21 +42,24 @@ class HomePage extends ConsumerWidget {
                       'Recent Transactions',
                       style: context.textTheme.labelMedium,
                     ),
-                    Row(
-                      spacing: 4,
-                      children: [
-                        Text(
-                          'See All',
-                          style: context.textTheme.bodyMedium?.copyWith(
+                    InkWell(
+                      onTap: () => TransactionRoute().push(context),
+                      child: Row(
+                        spacing: 4,
+                        children: [
+                          Text(
+                            'See All',
+                            style: context.textTheme.bodyMedium?.copyWith(
+                              color: context.colorScheme.primary,
+                            ),
+                          ),
+                          HugeIcon(
+                            icon: HugeIcons.strokeRoundedArrowRight01,
+                            size: 16,
                             color: context.colorScheme.primary,
                           ),
-                        ),
-                        HugeIcon(
-                          icon: HugeIcons.strokeRoundedArrowRight01,
-                          size: 16,
-                          color: context.colorScheme.primary,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),

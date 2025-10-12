@@ -61,12 +61,14 @@ class _SiNavigationBar extends StatelessWidget {
             ),
             IconButton(
               icon: HugeIcon(
-                icon: HugeIcons.strokeRoundedArrowUpDown,
+                icon: HugeIcons.strokeRoundedArrowLeftRight,
                 color: SiColors.grayscale3,
               ),
               padding: EdgeInsets.symmetric(horizontal: 24),
               isSelected: isTransactionActive,
-              selectedIcon: HugeIcon(icon: HugeIcons.strokeRoundedArrowUpDown),
+              selectedIcon: HugeIcon(
+                icon: HugeIcons.strokeRoundedArrowLeftRight,
+              ),
               onPressed: () => _navigate(
                 isTransactionActive,
                 () => TransactionRoute().push(context),
