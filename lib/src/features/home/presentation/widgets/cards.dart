@@ -173,17 +173,17 @@ class TransactionTypeCard extends StatelessWidget {
       TransactionType.income => HugeIcon(
         icon: HugeIcons.strokeRoundedArrowDownLeft01,
         color: context.colorScheme.onPrimary,
-        size: 12,
+        size: 16,
       ),
       TransactionType.expense => HugeIcon(
         icon: HugeIcons.strokeRoundedArrowUpRight01,
         color: context.colorScheme.onSecondary,
-        size: 12,
+        size: 16,
       ),
       _ => HugeIcon(
         icon: HugeIcons.strokeRoundedArrowDataTransferHorizontal,
         color: context.colorScheme.onPrimary,
-        size: 12,
+        size: 16,
       ),
     };
 
@@ -214,7 +214,7 @@ class TransactionTypeCard extends StatelessWidget {
                 padding: EdgeInsets.all(4),
                 decoration: BoxDecoration(
                   color: background,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(6),
                 ),
                 child: icon,
               ),
