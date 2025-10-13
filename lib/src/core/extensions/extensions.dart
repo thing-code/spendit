@@ -15,6 +15,20 @@ extension DoubleX on num {
   Widget get space => Gap(toDouble());
 }
 
+extension CurrencyX on num {
+  String get currency => NumberFormat.currency(
+    locale: 'id_ID',
+    symbol: 'Rp. ',
+    decimalDigits: 0,
+  ).format(this);
+
+  String get compactCurrency => NumberFormat.compactCurrency(
+    locale: 'id_ID',
+    symbol: 'Rp. ',
+    decimalDigits: 0,
+  ).format(this);
+}
+
 extension WidgetX on Widget {
   Padding paddingAll(double padding) =>
       Padding(padding: EdgeInsets.all(padding), child: this);
@@ -49,6 +63,8 @@ extension DateTimeX on DateTime {
 
     return (startDate, endDate);
   }
+
+  String get cardDate => DateFormat('dd MMM yyyy').format(this);
 }
 
 extension GoRouterExt on BuildContext {

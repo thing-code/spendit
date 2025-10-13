@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../core/core.dart';
+import '../../../transactions/domain/models/models.dart';
 
 class TransactionCard extends StatelessWidget {
-  const TransactionCard({super.key});
+  const TransactionCard({super.key, required this.transaction});
+
+  final Transactions transaction;
 
   @override
   Widget build(BuildContext context) {
+    final name = switch (transaction) {
+      Expense(:var notes, :var category) => notes ?? category.title,
+      Income(:var notes, :var category) => notes ?? category.title,
+      Transfer(:var type) => type.title,
+    };
+
     return Card(
       child: InkResponse(
         onTap: () {},
@@ -31,11 +40,11 @@ class TransactionCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '12 Sep 2025',
+                        transaction.createdAt.cardDate,
                         style: TextStyle(color: SiColors.textSecondary),
                       ),
                       Text(
-                        'Goals',
+                        name,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
@@ -50,7 +59,7 @@ class TransactionCard extends StatelessWidget {
                   children: [
                     HugeIcon(icon: HugeIcons.strokeRoundedMinusSign, size: 12),
                     Text(
-                      'Rp. 300.000',
+                      transaction.amount.currency,
                       style: TextStyle(fontWeight: FontWeight.w600, height: 1),
                     ),
                   ],
