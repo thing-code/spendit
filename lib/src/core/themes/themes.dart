@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:spendit/src/core/core.dart';
 
 export 'colors.dart';
+export 'shadows.dart';
 
 abstract final class SiTheme {
   const SiTheme._();
@@ -130,20 +131,20 @@ abstract final class SiTheme {
       indicatorSize: TabBarIndicatorSize.tab,
       indicator: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: SiColors.card,
+        color: SiColors.primary,
       ),
       splashBorderRadius: BorderRadius.circular(12),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: SiColors.primaryContainer,
+      fillColor: SiColors.card,
       hintStyle: TextStyle(
         fontSize: 14,
         color: SiColors.textSecondary,
         height: 1,
       ),
       contentPadding: EdgeInsets.symmetric(horizontal: 16),
-      enabledBorder: _border(SiColors.grayscale2),
+      enabledBorder: _border(SiColors.card),
       focusedBorder: _border(SiColors.primary),
       disabledBorder: _border(SiColors.disabled),
       errorBorder: _border(SiColors.danger),
@@ -152,7 +153,7 @@ abstract final class SiTheme {
   );
 
   static OutlineInputBorder _border(Color color) => OutlineInputBorder(
-    borderRadius: BorderRadius.circular(16),
-    borderSide: BorderSide(color: color, width: 1.2),
+    borderRadius: BorderRadius.circular(12),
+    borderSide: BorderSide(color: color),
   );
 }

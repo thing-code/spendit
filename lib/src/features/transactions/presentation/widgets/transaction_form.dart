@@ -29,10 +29,6 @@ class TransactionFormWidget extends ConsumerWidget {
             Container(
               width: double.infinity,
               padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: SiColors.card,
-              ),
               child: Column(
                 spacing: 4,
                 children: [
@@ -70,6 +66,7 @@ class TransactionFormWidget extends ConsumerWidget {
             ),
             Expanded(
               child: TabBarView(
+                physics: NeverScrollableScrollPhysics(),
                 children: [
                   TransactionIncomeForm(),
                   TransactionExpenseForm(),
@@ -79,12 +76,6 @@ class TransactionFormWidget extends ConsumerWidget {
             ),
           ],
         ).paddingAll(16),
-        bottomNavigationBar: SiButton.primary(
-          onPressed: () {
-            SiLogger.data('Save');
-          },
-          text: 'Save',
-        ).paddingSymmetric(v: context.viewPadding.bottom + 8, h: 16),
       ),
     );
   }
@@ -96,7 +87,20 @@ class TransactionIncomeForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(body: Text('Income'));
+    return Scaffold(
+      body: Column(spacing: 16, children: [TextField(), TextField()]),
+      bottomNavigationBar: SafeArea(
+        maintainBottomViewPadding: true,
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: SiButton.primary(
+            onPressed: () {},
+            text: 'Add Transaction',
+            icon: HugeIcon(icon: HugeIcons.strokeRoundedPlusSign),
+          ),
+        ),
+      ),
+    );
   }
 }
 

@@ -42,7 +42,13 @@ class _SiNavigationBar extends StatelessWidget {
       maintainBottomViewPadding: true,
       child: Container(
         height: 80,
-        color: context.colorScheme.surface,
+        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        padding: EdgeInsets.symmetric(horizontal: 8),
+        decoration: BoxDecoration(
+          color: context.colorScheme.surface,
+          boxShadow: SiShadows.medium,
+          borderRadius: BorderRadius.circular(1000),
+        ),
         alignment: Alignment.center,
         child: Row(
           spacing: 4,
@@ -54,7 +60,7 @@ class _SiNavigationBar extends StatelessWidget {
                 color: SiColors.grayscale3,
               ),
               isSelected: isHomeActive,
-              padding: EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               selectedIcon: HugeIcon(icon: HugeIcons.strokeRoundedHome01),
               onPressed: () =>
                   _navigate(isHomeActive, () => HomeRoute().go(context)),
@@ -64,7 +70,7 @@ class _SiNavigationBar extends StatelessWidget {
                 icon: HugeIcons.strokeRoundedArrowLeftRight,
                 color: SiColors.grayscale3,
               ),
-              padding: EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isTransactionActive,
               selectedIcon: HugeIcon(
                 icon: HugeIcons.strokeRoundedArrowLeftRight,
@@ -86,7 +92,7 @@ class _SiNavigationBar extends StatelessWidget {
                 icon: HugeIcons.strokeRoundedTarget02,
                 color: SiColors.grayscale3,
               ),
-              padding: EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isGoalsActive,
               selectedIcon: HugeIcon(icon: HugeIcons.strokeRoundedTarget02),
               onPressed: () =>
@@ -97,7 +103,7 @@ class _SiNavigationBar extends StatelessWidget {
                 icon: HugeIcons.strokeRoundedCalculator01,
                 color: SiColors.grayscale3,
               ),
-              padding: EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isBudgetingActive,
               selectedIcon: HugeIcon(icon: HugeIcons.strokeRoundedCalculator01),
               onPressed: () => _navigate(

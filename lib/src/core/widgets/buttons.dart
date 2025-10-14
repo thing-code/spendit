@@ -13,52 +13,64 @@ class SiButton extends StatelessWidget {
   factory SiButton.primary({
     required VoidCallback? onPressed,
     required String text,
+    Widget? icon,
     Size size = const Size.fromHeight(48),
   }) => SiButton._(
     key: Key('primary_button'),
-    child: FilledButton(
+    child: FilledButton.icon(
       onPressed: onPressed,
       style: ButtonStyle(minimumSize: WidgetStatePropertyAll(size)),
-      child: Text(text),
+      label: Text(text),
+      icon: icon,
+      iconAlignment: IconAlignment.start,
     ),
   );
 
   factory SiButton.secondary({
     required VoidCallback? onPressed,
     required String text,
+    Widget? icon,
     Size size = const Size.fromHeight(48),
   }) => SiButton._(
     key: Key('secondary_button'),
-    child: FilledButton.tonal(
+    child: FilledButton.tonalIcon(
       onPressed: onPressed,
       style: ButtonStyle(minimumSize: WidgetStatePropertyAll(size)),
-      child: Text(text),
+      label: Text(text),
+      icon: icon,
+      iconAlignment: IconAlignment.start,
     ),
   );
 
   factory SiButton.outlined({
     required VoidCallback? onPressed,
     required String text,
+    Widget? icon,
     Size size = const Size.fromHeight(48),
   }) => SiButton._(
     key: Key('outlined_button'),
-    child: OutlinedButton(
+    child: OutlinedButton.icon(
       onPressed: onPressed,
       style: ButtonStyle(minimumSize: WidgetStatePropertyAll(size)),
-      child: Text(text),
+      label: Text(text),
+      icon: icon,
+      iconAlignment: IconAlignment.start,
     ),
   );
 
   factory SiButton.text({
     required VoidCallback? onPressed,
     required String text,
+    Widget? icon,
     Size size = const Size.fromHeight(48),
   }) => SiButton._(
     key: Key('text_button'),
-    child: TextButton(
+    child: TextButton.icon(
       onPressed: onPressed,
       style: ButtonStyle(minimumSize: WidgetStatePropertyAll(size)),
-      child: Text(text),
+      label: Text(text),
+      icon: icon,
+      iconAlignment: IconAlignment.start,
     ),
   );
 }
