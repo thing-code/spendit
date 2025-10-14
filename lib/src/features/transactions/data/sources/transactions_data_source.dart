@@ -60,8 +60,8 @@ class TransactionsDataSourceImpl extends TransactionsDataSource {
     final db = await database;
 
     final data = switch (req) {
-      Expense() => req.copyWith(updatedAt: DateTime.now()),
-      Income() => req.copyWith(updatedAt: DateTime.now()),
+      TxnExpense() => req.copyWith(updatedAt: DateTime.now()),
+      TxnIncome() => req.copyWith(updatedAt: DateTime.now()),
       _ => req,
     };
 

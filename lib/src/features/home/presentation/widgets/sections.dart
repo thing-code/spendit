@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:spendit/src/core/core.dart';
-import 'package:spendit/src/features/transactions/presentation/providers/transactions_provider.dart';
 
+import '../../../../core/core.dart';
 import '../../../transactions/domain/models/models.dart';
+import '../../../transactions/presentation/providers/transactions_provider.dart';
+import '../providers/balance_provider.dart';
 import 'widgets.dart';
 
 class BalanceSection extends ConsumerWidget {
@@ -12,6 +13,8 @@ class BalanceSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final balance = ref.watch(balanceProvider);
+    final visible = ref.watch(transactionVisibilityProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 4,
@@ -24,7 +27,7 @@ class BalanceSection extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Rp 1.000.000',
+              visible ? (balance.value ?? 0).currency : kHiddenAmount,
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -32,8 +35,13 @@ class BalanceSection extends ConsumerWidget {
               ),
             ),
             IconButton(
-              onPressed: () {},
-              icon: HugeIcon(icon: HugeIcons.strokeRoundedView),
+              onPressed: () =>
+                  ref.read(transactionVisibilityProvider.notifier).toggle(),
+              icon: HugeIcon(
+                icon: visible
+                    ? HugeIcons.strokeRoundedView
+                    : HugeIcons.strokeRoundedViewOff,
+              ),
             ),
           ],
         ),

@@ -41,3 +41,5 @@ abstract class SqlCommand {
 final kTransactionTable = 'transactions';
 final kGoalsTable = 'goals';
 final kGoalsProgressTable = 'goals_progress';
+
+final kHiddenAmount = 'Rp. ●●●●●●';

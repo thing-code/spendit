@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:spendit/src/features/home/presentation/providers/balance_provider.dart';
 
 import '../../../../core/core.dart';
 import '../../../transactions/domain/models/models.dart';
@@ -12,9 +14,9 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final name = switch (transaction) {
-      Expense(:var notes, :var category) => notes ?? category.title,
-      Income(:var notes, :var category) => notes ?? category.title,
-      Transfer(:var type) => type.title,
+      TxnExpense(:var notes, :var category) => notes ?? category.title,
+      TxnIncome(:var notes, :var category) => notes ?? category.title,
+      TxnGoals(:var type) => type.title,
     };
 
     return Card(
@@ -158,13 +160,17 @@ class GoalCard extends StatelessWidget {
   }
 }
 
-class TransactionTypeCard extends StatelessWidget {
+class TransactionTypeCard extends ConsumerWidget {
   const TransactionTypeCard(this.type, {super.key});
 
   final TransactionType type;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final totalIncome = ref.watch(totalIncomeProvider);
+    final totalExpense = ref.watch(totalExpenseProvider);
+    final visible = ref.watch(transactionVisibilityProvider);
+
     final background = switch (type) {
       TransactionType.income => SiColors.primaryContainer,
       TransactionType.expense => SiColors.secondaryContainer,
@@ -193,6 +199,12 @@ class TransactionTypeCard extends StatelessWidget {
         color: context.colorScheme.onPrimary,
         size: 16,
       ),
+    };
+
+    final amount = switch (type) {
+      TransactionType.income => totalIncome.value ?? 0,
+      TransactionType.expense => totalExpense.value ?? 0,
+      _ => 0,
     };
 
     final name = switch (type) {
@@ -229,7 +241,7 @@ class TransactionTypeCard extends StatelessWidget {
             ],
           ),
           Text(
-            'Rp. 50.000.000',
+            visible ? amount.currency : kHiddenAmount,
             style: context.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),

@@ -6,7 +6,7 @@ part of 'transactions.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Income _$IncomeFromJson(Map<String, dynamic> json) => Income(
+TxnIncome _$TxnIncomeFromJson(Map<String, dynamic> json) => TxnIncome(
   id: (json['id'] as num?)?.toInt(),
   type:
       $enumDecodeNullable(_$TransactionTypeEnumMap, json['type']) ??
@@ -21,7 +21,7 @@ Income _$IncomeFromJson(Map<String, dynamic> json) => Income(
   $type: json['runtimeType'] as String?,
 );
 
-Map<String, dynamic> _$IncomeToJson(Income instance) => <String, dynamic>{
+Map<String, dynamic> _$TxnIncomeToJson(TxnIncome instance) => <String, dynamic>{
   'type': _$TransactionTypeEnumMap[instance.type]!,
   'amount': instance.amount,
   'category': _$IncomeCategoryEnumMap[instance.category]!,
@@ -43,7 +43,7 @@ const _$IncomeCategoryEnumMap = {
   IncomeCategory.freelance: 'freelance',
 };
 
-Expense _$ExpenseFromJson(Map<String, dynamic> json) => Expense(
+TxnExpense _$TxnExpenseFromJson(Map<String, dynamic> json) => TxnExpense(
   id: (json['id'] as num?)?.toInt(),
   type:
       $enumDecodeNullable(_$TransactionTypeEnumMap, json['type']) ??
@@ -58,15 +58,16 @@ Expense _$ExpenseFromJson(Map<String, dynamic> json) => Expense(
   $type: json['runtimeType'] as String?,
 );
 
-Map<String, dynamic> _$ExpenseToJson(Expense instance) => <String, dynamic>{
-  'type': _$TransactionTypeEnumMap[instance.type]!,
-  'amount': instance.amount,
-  'category': _$ExpenseCategoryEnumMap[instance.category]!,
-  'notes': instance.notes,
-  'created_at': instance.createdAt.toIso8601String(),
-  'updated_at': instance.updatedAt?.toIso8601String(),
-  'runtimeType': instance.$type,
-};
+Map<String, dynamic> _$TxnExpenseToJson(TxnExpense instance) =>
+    <String, dynamic>{
+      'type': _$TransactionTypeEnumMap[instance.type]!,
+      'amount': instance.amount,
+      'category': _$ExpenseCategoryEnumMap[instance.category]!,
+      'notes': instance.notes,
+      'created_at': instance.createdAt.toIso8601String(),
+      'updated_at': instance.updatedAt?.toIso8601String(),
+      'runtimeType': instance.$type,
+    };
 
 const _$ExpenseCategoryEnumMap = {
   ExpenseCategory.family: 'family',
@@ -79,7 +80,7 @@ const _$ExpenseCategoryEnumMap = {
   ExpenseCategory.other: 'other',
 };
 
-Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
+TxnGoals _$TxnGoalsFromJson(Map<String, dynamic> json) => TxnGoals(
   id: (json['id'] as num?)?.toInt(),
   type:
       $enumDecodeNullable(_$TransactionTypeEnumMap, json['type']) ??
@@ -90,7 +91,7 @@ Transfer _$TransferFromJson(Map<String, dynamic> json) => Transfer(
   $type: json['runtimeType'] as String?,
 );
 
-Map<String, dynamic> _$TransferToJson(Transfer instance) => <String, dynamic>{
+Map<String, dynamic> _$TxnGoalsToJson(TxnGoals instance) => <String, dynamic>{
   'type': _$TransactionTypeEnumMap[instance.type]!,
   'amount': instance.amount,
   'goal_id': instance.goalId,

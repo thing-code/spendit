@@ -15,7 +15,7 @@ sealed class Transactions with _$Transactions {
     String? notes,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
-  }) = Income;
+  }) = TxnIncome;
 
   const factory Transactions.expense({
     @JsonKey(includeToJson: false) int? id,
@@ -25,15 +25,15 @@ sealed class Transactions with _$Transactions {
     String? notes,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
-  }) = Expense;
+  }) = TxnExpense;
 
-  const factory Transactions.transfer({
+  const factory Transactions.goals({
     @JsonKey(includeToJson: false) int? id,
     @Default(TransactionType.goals) TransactionType type,
     required int amount,
     @JsonKey(name: 'goal_id') required int goalId,
     @JsonKey(name: 'created_at') required DateTime createdAt,
-  }) = Transfer;
+  }) = TxnGoals;
 
   factory Transactions.fromJson(Map<String, dynamic> json) =>
       _$TransactionsFromJson(json);
