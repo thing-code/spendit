@@ -1,9 +1,10 @@
+import 'package:amicons/amicons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hugeicons/hugeicons.dart';
-import 'package:spendit/src/core/core.dart';
-import 'package:spendit/src/features/home/presentation/providers/balance_provider.dart';
+
+import '../../../../core/core.dart';
+import '../../../home/presentation/providers/balance_provider.dart';
 
 Future<bool?> showTransactionForm(BuildContext context) =>
     showCupertinoSheet<bool>(
@@ -47,15 +48,9 @@ class TransactionFormWidget extends ConsumerWidget {
               labelStyle: context.textTheme.labelSmall,
               tabs: TransactionType.values.map((type) {
                 final icon = switch (type) {
-                  TransactionType.expense => HugeIcon(
-                    icon: HugeIcons.strokeRoundedCircleArrowUpRight02,
-                  ),
-                  TransactionType.income => HugeIcon(
-                    icon: HugeIcons.strokeRoundedCircleArrowDownLeft,
-                  ),
-                  TransactionType.goals => HugeIcon(
-                    icon: HugeIcons.strokeRoundedTarget01,
-                  ),
+                  TransactionType.expense => Icon(Amicons.vuesax_export_3),
+                  TransactionType.income => Icon(Amicons.vuesax_import_2),
+                  TransactionType.goals => Icon(Amicons.vuesax_like),
                 };
                 return Tab(
                   text: type.title,
@@ -96,7 +91,7 @@ class TransactionIncomeForm extends ConsumerWidget {
           child: SiButton.primary(
             onPressed: () {},
             text: 'Add Transaction',
-            icon: HugeIcon(icon: HugeIcons.strokeRoundedPlusSign),
+            icon: Icon(Amicons.lucide_plus),
           ),
         ),
       ),

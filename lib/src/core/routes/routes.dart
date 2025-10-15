@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:spendit/src/core/widgets/navigations.dart';
-import 'package:spendit/src/features/budgeting/presentation/pages/budgeting_page.dart';
-import 'package:spendit/src/features/goals/presentation/pages/goals_page.dart';
-import 'package:spendit/src/features/transactions/presentation/pages/transactions_page.dart';
+import '../widgets/navigations.dart';
+import '../../features/budgeting/presentation/pages/budgeting_page.dart';
+import '../../features/goals/presentation/pages/goals_page.dart';
+import '../../features/transactions/presentation/pages/transactions_page.dart';
 
 import '../../features/home/presentation/pages/home_page.dart';
 

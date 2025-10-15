@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:spendit/src/core/core.dart';
+import '../core.dart';
 
 class SiAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SiAppBar({

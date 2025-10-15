@@ -1,8 +1,9 @@
+import 'package:amicons/amicons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hugeicons/hugeicons.dart';
-import 'package:spendit/src/core/core.dart';
-import 'package:spendit/src/features/transactions/presentation/widgets/widgets.dart';
+import '../core.dart';
+
+import '../../features/transactions/presentation/widgets/widgets.dart';
 
 class SiNavigationWidget extends StatelessWidget {
   const SiNavigationWidget({
@@ -55,26 +56,21 @@ class _SiNavigationBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: HugeIcon(
-                icon: HugeIcons.strokeRoundedHome01,
-                color: SiColors.grayscale3,
-              ),
+              icon: Icon(Amicons.vuesax_home_1, color: SiColors.grayscale3),
               isSelected: isHomeActive,
               padding: EdgeInsets.symmetric(horizontal: 16),
-              selectedIcon: HugeIcon(icon: HugeIcons.strokeRoundedHome01),
+              selectedIcon: Icon(Amicons.vuesax_home_fill),
               onPressed: () =>
                   _navigate(isHomeActive, () => HomeRoute().go(context)),
             ),
             IconButton(
-              icon: HugeIcon(
-                icon: HugeIcons.strokeRoundedArrowLeftRight,
+              icon: Icon(
+                Amicons.vuesax_receipt_item,
                 color: SiColors.grayscale3,
               ),
               padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isTransactionActive,
-              selectedIcon: HugeIcon(
-                icon: HugeIcons.strokeRoundedArrowLeftRight,
-              ),
+              selectedIcon: Icon(Amicons.vuesax_receipt_item_fill),
               onPressed: () => _navigate(
                 isTransactionActive,
                 () => TransactionRoute().push(context),
@@ -88,24 +84,18 @@ class _SiNavigationBar extends StatelessWidget {
               icon: Icon(Icons.add),
             ),
             IconButton(
-              icon: HugeIcon(
-                icon: HugeIcons.strokeRoundedTarget02,
-                color: SiColors.grayscale3,
-              ),
+              icon: Icon(Amicons.vuesax_like, color: SiColors.grayscale3),
               padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isGoalsActive,
-              selectedIcon: HugeIcon(icon: HugeIcons.strokeRoundedTarget02),
+              selectedIcon: Icon(Amicons.vuesax_like_fill),
               onPressed: () =>
                   _navigate(isGoalsActive, () => GoalsRoute().push(context)),
             ),
             IconButton(
-              icon: HugeIcon(
-                icon: HugeIcons.strokeRoundedCalculator01,
-                color: SiColors.grayscale3,
-              ),
+              icon: Icon(Amicons.vuesax_calculator, color: SiColors.grayscale3),
               padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isBudgetingActive,
-              selectedIcon: HugeIcon(icon: HugeIcons.strokeRoundedCalculator01),
+              selectedIcon: Icon(Amicons.vuesax_calculator_fill),
               onPressed: () => _navigate(
                 isBudgetingActive,
                 () => BudgetingRoute().push(context),

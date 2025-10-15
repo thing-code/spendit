@@ -1,10 +1,10 @@
+import 'package:amicons/amicons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hugeicons/hugeicons.dart';
-import 'package:spendit/src/features/home/presentation/providers/balance_provider.dart';
 
 import '../../../../core/core.dart';
 import '../../../transactions/domain/models/models.dart';
+import '../providers/balance_provider.dart';
 
 class TransactionCard extends StatelessWidget {
   const TransactionCard({super.key, required this.transaction});
@@ -17,6 +17,12 @@ class TransactionCard extends StatelessWidget {
       TxnExpense(:var notes, :var category) => notes ?? category.title,
       TxnIncome(:var notes, :var category) => notes ?? category.title,
       TxnGoals(:var type) => type.title,
+    };
+
+    final operation = switch (transaction) {
+      TxnExpense() => Icon(Amicons.lucide_minus, size: 12),
+      TxnIncome() => Icon(Amicons.lucide_plus, size: 12),
+      TxnGoals() => null,
     };
 
     return Card(
@@ -34,7 +40,7 @@ class TransactionCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     color: SiColors.primaryContainer,
                   ),
-                  child: HugeIcon(icon: HugeIcons.strokeRoundedTarget02),
+                  child: Icon(Icons.add),
                 ),
                 Expanded(
                   child: Column(
@@ -59,7 +65,7 @@ class TransactionCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   spacing: 6,
                   children: [
-                    HugeIcon(icon: HugeIcons.strokeRoundedMinusSign, size: 12),
+                    ?operation,
                     Text(
                       transaction.amount.currency,
                       style: TextStyle(fontWeight: FontWeight.w600, height: 1),
@@ -96,10 +102,7 @@ class GoalCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     color: SiColors.secondaryContainer,
                   ),
-                  child: HugeIcon(
-                    icon: HugeIcons.strokeRoundedTarget02,
-                    color: SiColors.secondary,
-                  ),
+                  child: Icon(Amicons.vuesax_like, color: SiColors.secondary),
                 ),
                 Expanded(
                   child: Column(
@@ -184,18 +187,18 @@ class TransactionTypeCard extends ConsumerWidget {
     };
 
     final icon = switch (type) {
-      TransactionType.income => HugeIcon(
-        icon: HugeIcons.strokeRoundedArrowDownLeft01,
+      TransactionType.income => Icon(
+        Amicons.lucide_arrow_down_left,
         color: context.colorScheme.onPrimary,
         size: 16,
       ),
-      TransactionType.expense => HugeIcon(
-        icon: HugeIcons.strokeRoundedArrowUpRight01,
+      TransactionType.expense => Icon(
+        Amicons.lucide_arrow_up_right,
         color: context.colorScheme.onSecondary,
         size: 16,
       ),
-      _ => HugeIcon(
-        icon: HugeIcons.strokeRoundedArrowDataTransferHorizontal,
+      _ => Icon(
+        Amicons.vuesax_wallet_1,
         color: context.colorScheme.onPrimary,
         size: 16,
       ),

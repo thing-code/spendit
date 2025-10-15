@@ -1,6 +1,6 @@
+import 'package:amicons/amicons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../core/core.dart';
 import '../../../transactions/domain/models/models.dart';
@@ -37,10 +37,8 @@ class BalanceSection extends ConsumerWidget {
             IconButton(
               onPressed: () =>
                   ref.read(transactionVisibilityProvider.notifier).toggle(),
-              icon: HugeIcon(
-                icon: visible
-                    ? HugeIcons.strokeRoundedView
-                    : HugeIcons.strokeRoundedViewOff,
+              icon: Icon(
+                visible ? Amicons.lucide_eye : Amicons.lucide_eye_closed,
               ),
             ),
           ],
@@ -75,8 +73,8 @@ class RecentTransactionsSection extends ConsumerWidget {
                       color: context.colorScheme.primary,
                     ),
                   ),
-                  HugeIcon(
-                    icon: HugeIcons.strokeRoundedArrowRight01,
+                  Icon(
+                    Amicons.vuesax_arrow_right_3,
                     size: 16,
                     color: context.colorScheme.primary,
                   ),
@@ -103,7 +101,7 @@ class RecentTransactionsSection extends ConsumerWidget {
             spacing: 8,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              HugeIcon(icon: HugeIcons.strokeRoundedSearchList02, size: 56),
+              Icon(Amicons.vuesax_empty_wallet_time_fill, size: 56),
               Text('No Recent Transactions'),
             ],
           ),

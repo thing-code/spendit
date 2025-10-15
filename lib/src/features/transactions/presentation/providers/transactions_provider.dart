@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:spendit/src/core/core.dart';
+import '../../../../core/core.dart';
 
 import '../../data/repositories/transactions_repository.dart';
 import '../../domain/models/models.dart';
