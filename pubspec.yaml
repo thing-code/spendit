@@ -13,21 +13,21 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_gen: ^5.12.0
-  flutter_native_splash: ^2.4.6
-  flutter_riverpod: ^3.0.1
+  flutter_native_splash: ^2.4.7
+  flutter_riverpod: ^3.0.3
   freezed_annotation: ^3.1.0
   gap: ^3.0.1
-  go_router: ^16.2.4
+  go_router: ^16.2.5
   intl: ^0.20.2
   json_annotation: ^4.9.0
   logging: ^1.3.0
   path: ^1.9.1
   reactive_forms: ^18.1.1
-  riverpod_annotation: ^3.0.1
-  riverpod_sqflite: ^0.3.1
+  riverpod_annotation: ^3.0.3
+  riverpod_sqflite: ^0.3.3
   sqflite: ^2.4.2
   sqflite_common_ffi: ^2.3.6
-  syncfusion_flutter_charts: ^31.1.22
+  syncfusion_flutter_charts: ^31.2.2
   thing_toast: ^0.4.0
 
 dev_dependencies:
@@ -35,13 +35,13 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^6.0.0
   flutter_gen_runner: ^5.12.0
-  riverpod_generator: ^3.0.1
+  riverpod_generator: ^3.0.3
   build_runner: ^2.7.1
   go_router_builder: ^4.1.0
   freezed: ^3.2.3
   json_serializable: ^6.11.1
   mocktail: ^1.0.4
-  riverpod_lint: ^3.0.1
+  riverpod_lint: ^3.0.3
   custom_lint: ^0.8.0
 
 flutter:

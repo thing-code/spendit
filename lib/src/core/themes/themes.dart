@@ -17,14 +17,14 @@ abstract final class SiTheme {
     primaryColor: SiColors.primary,
     colorScheme: ColorScheme.dark(
       primary: SiColors.primary,
-      onPrimary: Colors.white,
+      onPrimary: SiColors.textPrimary,
       primaryContainer: SiColors.primaryContainer,
       secondary: SiColors.secondary,
-      onSecondary: Colors.white,
+      onSecondary: SiColors.surface,
       secondaryContainer: SiColors.secondaryContainer,
       surface: SiColors.surface,
       error: SiColors.danger,
-      onError: Colors.white,
+      onError: SiColors.textPrimary,
       onSurface: SiColors.textPrimary,
     ),
     pageTransitionsTheme: PageTransitionsTheme(

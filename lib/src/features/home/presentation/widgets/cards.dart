@@ -186,15 +186,21 @@ class TransactionTypeCard extends ConsumerWidget {
       _ => SiColors.primary,
     };
 
+    final textColor = switch (type) {
+      TransactionType.income => SiColors.textPrimary,
+      TransactionType.expense => SiColors.secondaryContainer,
+      _ => SiColors.textPrimary,
+    };
+
     final icon = switch (type) {
       TransactionType.income => Icon(
         Amicons.lucide_arrow_down_left,
-        color: context.colorScheme.onPrimary,
+        color: context.colorScheme.primary,
         size: 16,
       ),
       TransactionType.expense => Icon(
         Amicons.lucide_arrow_up_right,
-        color: context.colorScheme.onSecondary,
+        color: context.colorScheme.secondary,
         size: 16,
       ),
       _ => Icon(
@@ -211,9 +217,9 @@ class TransactionTypeCard extends ConsumerWidget {
     };
 
     final name = switch (type) {
-      TransactionType.income => 'Incomes',
-      TransactionType.expense => 'Expenses',
-      _ => 'Transfers',
+      TransactionType.income => 'Income',
+      TransactionType.expense => 'Expense',
+      _ => 'Goals',
     };
 
     return Container(
@@ -232,7 +238,14 @@ class TransactionTypeCard extends ConsumerWidget {
             spacing: 16,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(name, style: context.textTheme.bodyMedium),
+              Text(
+                name,
+                style: context.textTheme.bodyMedium?.copyWith(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: textColor,
+                ),
+              ),
               Container(
                 padding: EdgeInsets.all(4),
                 decoration: BoxDecoration(
@@ -247,6 +260,7 @@ class TransactionTypeCard extends ConsumerWidget {
             visible ? amount.currency : kHiddenAmount,
             style: context.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
+              color: textColor,
             ),
           ),
         ],

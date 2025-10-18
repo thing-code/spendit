@@ -48,9 +48,13 @@ class TransactionFormWidget extends ConsumerWidget {
               labelStyle: context.textTheme.labelSmall,
               tabs: TransactionType.values.map((type) {
                 final icon = switch (type) {
-                  TransactionType.expense => Icon(Amicons.vuesax_export_3),
-                  TransactionType.income => Icon(Amicons.vuesax_import_2),
-                  TransactionType.goals => Icon(Amicons.vuesax_like),
+                  TransactionType.income => Icon(
+                    Amicons.lucide_arrow_down_left,
+                  ),
+                  TransactionType.expense => Icon(
+                    Amicons.lucide_arrow_up_right,
+                  ),
+                  TransactionType.goals => Icon(Amicons.lucide_goal),
                 };
                 return Tab(
                   text: type.title,
@@ -83,7 +87,27 @@ class TransactionIncomeForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: Column(spacing: 16, children: [TextField(), TextField()]),
+      body: Column(
+        spacing: 16,
+        children: [
+          TextField(),
+          TextField(
+            textAlign: TextAlign.center,
+            decoration: InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: SiColors.card),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: SiColors.primary),
+              ),
+              errorBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: SiColors.danger),
+              ),
+              filled: false,
+            ),
+          ),
+        ],
+      ),
       bottomNavigationBar: SafeArea(
         maintainBottomViewPadding: true,
         child: Padding(

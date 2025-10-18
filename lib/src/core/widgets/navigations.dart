@@ -1,9 +1,9 @@
 import 'package:amicons/amicons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../core.dart';
 
 import '../../features/transactions/presentation/widgets/widgets.dart';
+import '../core.dart';
 
 class SiNavigationWidget extends StatelessWidget {
   const SiNavigationWidget({
@@ -64,13 +64,10 @@ class _SiNavigationBar extends StatelessWidget {
                   _navigate(isHomeActive, () => HomeRoute().go(context)),
             ),
             IconButton(
-              icon: Icon(
-                Amicons.vuesax_receipt_item,
-                color: SiColors.grayscale3,
-              ),
+              icon: Icon(Amicons.vuesax_receipt_2, color: SiColors.grayscale3),
               padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isTransactionActive,
-              selectedIcon: Icon(Amicons.vuesax_receipt_item_fill),
+              selectedIcon: Icon(Amicons.vuesax_receipt_2_fill),
               onPressed: () => _navigate(
                 isTransactionActive,
                 () => TransactionRoute().push(context),
@@ -92,10 +89,10 @@ class _SiNavigationBar extends StatelessWidget {
                   _navigate(isGoalsActive, () => GoalsRoute().push(context)),
             ),
             IconButton(
-              icon: Icon(Amicons.vuesax_calculator, color: SiColors.grayscale3),
+              icon: Icon(Amicons.lucide_calculator, color: SiColors.grayscale3),
               padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isBudgetingActive,
-              selectedIcon: Icon(Amicons.vuesax_calculator_fill),
+              selectedIcon: Icon(Amicons.lucide_calculator),
               onPressed: () => _navigate(
                 isBudgetingActive,
                 () => BudgetingRoute().push(context),
