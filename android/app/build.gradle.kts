@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "app.strdy.spendit"
+    namespace = "id.thing_code.spend_it"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -23,7 +23,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "app.strdy.spendit"
+        applicationId = "id.thing_code.spend_it"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

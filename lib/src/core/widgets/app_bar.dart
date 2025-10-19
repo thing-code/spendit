@@ -21,15 +21,7 @@ class SiAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: DefaultTextStyle(
-        style:
-            context.textTheme.titleMedium?.copyWith(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ) ??
-            TextStyle(),
-        child: title,
-      ),
+      title: title,
       automaticallyImplyLeading: false,
       centerTitle: centerTitle,
       leading: canPop && context.canPop() ? _backButton(context) : null,

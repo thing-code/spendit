@@ -29,7 +29,7 @@ class SiBaseInput<T> extends StatelessWidget {
   final bool obsecureText;
   final ValueChanged<FormControl<T>>? onChanged;
   final ValueChanged<FormControl<T>>? onSubmitted;
-  final ValueChanged<FormControl<T>>? onTap;
+  final void Function(FormControl<T> value, BuildContext context)? onTap;
   final bool readOnly;
   final Map<String, String Function(Object)>? validationMessages;
   final Widget? suffixIcon;
@@ -38,7 +38,7 @@ class SiBaseInput<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 4,
+      spacing: 8,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ?_label,
@@ -56,9 +56,9 @@ class SiBaseInput<T> extends StatelessWidget {
           obscureText: obsecureText,
           onChanged: onChanged,
           onSubmitted: onSubmitted,
-          onTap: onTap,
+          onTap: onTap != null ? (_) => onTap?.call(control, context) : null,
           onTapOutside: (event) => control.unfocus(),
-          readOnly: readOnly,
+          readOnly: readOnly || control.disabled,
           validationMessages: validationMessages,
           decoration: InputDecoration(
             prefixIcon: prefixIcon != null
@@ -84,20 +84,4 @@ class SiBaseInput<T> extends StatelessWidget {
       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
     );
   }
-}
-
-class SiTextInput extends SiBaseInput<String> {
-  const SiTextInput({
-    super.key,
-    required super.control,
-    super.maxLines,
-    super.readOnly,
-    super.label,
-    super.placeholder,
-    super.onChanged,
-    super.prefixIcon,
-    super.suffixIcon,
-    super.obsecureText,
-    super.validationMessages,
-  });
 }

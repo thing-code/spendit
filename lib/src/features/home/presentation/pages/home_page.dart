@@ -13,7 +13,7 @@ class HomePage extends ConsumerWidget {
       body: NestedScrollView(
         headerSliverBuilder: _homeAppBar,
         body: Column(
-          spacing: 16,
+          spacing: 24,
           children: [
             // * Total Transactions
             Column(

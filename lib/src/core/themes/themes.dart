@@ -81,7 +81,7 @@ abstract final class SiTheme {
         fontSize: 18,
       ),
     ),
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       backgroundColor: SiColors.surface,
       foregroundColor: Colors.white,
       systemOverlayStyle: SystemUiOverlayStyle(
@@ -93,6 +93,7 @@ abstract final class SiTheme {
       elevation: 0,
       actionsPadding: EdgeInsets.only(right: 8),
       centerTitle: true,
+      titleTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
@@ -143,6 +144,8 @@ abstract final class SiTheme {
         color: SiColors.textSecondary,
         height: 1,
       ),
+      errorStyle: TextStyle(fontSize: 0),
+      constraints: BoxConstraints(minHeight: 40),
       contentPadding: EdgeInsets.symmetric(horizontal: 16),
       enabledBorder: _border(SiColors.card),
       focusedBorder: _border(SiColors.primary),

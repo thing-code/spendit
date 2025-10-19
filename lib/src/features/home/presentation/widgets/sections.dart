@@ -56,7 +56,7 @@ class RecentTransactionsSection extends ConsumerWidget {
     final transactions = ref.watch(transactionProvider);
 
     return Column(
-      spacing: 12,
+      spacing: 16,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
