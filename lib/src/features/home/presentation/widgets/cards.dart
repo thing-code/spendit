@@ -25,6 +25,12 @@ class TransactionCard extends StatelessWidget {
       TxnGoals() => null,
     };
 
+    final icon = switch (transaction) {
+      TxnExpense(:var category) => _expenseIcon(category),
+      TxnIncome(:var category) => _incomeIcon(category),
+      TxnGoals() => Icon(Amicons.lucide_goal),
+    };
+
     return Card(
       child: InkResponse(
         onTap: () {},
@@ -40,7 +46,7 @@ class TransactionCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     color: SiColors.primaryContainer,
                   ),
-                  child: Icon(Icons.add),
+                  child: icon,
                 ),
                 Expanded(
                   child: Column(
@@ -78,6 +84,27 @@ class TransactionCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Icon _incomeIcon(IncomeCategory category) {
+    return switch (category) {
+      IncomeCategory.salary => Icon(Amicons.vuesax_wallet_1),
+      IncomeCategory.investment => Icon(Amicons.vuesax_diagram),
+      IncomeCategory.freelance => Icon(Amicons.lucide_briefcase_business),
+    };
+  }
+
+  Icon _expenseIcon(ExpenseCategory category) {
+    return switch (category) {
+      ExpenseCategory.bill => Icon(Amicons.vuesax_receipt_item),
+      ExpenseCategory.family => Icon(Amicons.vuesax_house),
+      ExpenseCategory.food => Icon(Amicons.lucide_ham),
+      ExpenseCategory.health => Icon(Amicons.vuesax_health),
+      ExpenseCategory.other => Icon(Amicons.vuesax_more),
+      ExpenseCategory.reward => Icon(Amicons.vuesax_gift),
+      ExpenseCategory.shopping => Icon(Amicons.vuesax_shopping_cart),
+      ExpenseCategory.transport => Icon(Amicons.vuesax_truck_fast),
+    };
   }
 }
 

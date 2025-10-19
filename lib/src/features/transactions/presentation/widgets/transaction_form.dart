@@ -2,11 +2,15 @@ import 'package:amicons/amicons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:spendit/src/core/core.dart';
+import 'package:spendit/src/features/home/presentation/providers/balance_provider.dart';
 import 'package:spendit/src/features/transactions/domain/forms/forms.dart';
+import 'package:spendit/src/features/transactions/domain/models/models.dart';
+import 'package:spendit/src/features/transactions/presentation/providers/transactions_provider.dart';
 
-import '../../../../core/core.dart';
-import '../../../home/presentation/providers/balance_provider.dart';
+import 'category_input.dart';
 
 Future<bool?> showTransactionForm(BuildContext context) =>
     showCupertinoSheet<bool>(
@@ -89,122 +93,57 @@ class TransactionIncomeForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final form = ref.watch(incomeFormProvider);
-    return Scaffold(
-      body: ReactiveForm(
-        formGroup: form,
-        child: Column(
+    return ReactiveForm(
+      formGroup: form,
+      child: Scaffold(
+        body: Column(
           spacing: 16,
           children: [
             SiCurrencyInput(control: form.amount),
             IncomeCategoryInput(control: form.category, label: 'Category'),
+            SiTextInput(
+              control: form.notes,
+              label: 'Notes',
+              placeholder: 'Your transaction notes',
+            ),
           ],
         ),
-      ),
-      bottomNavigationBar: SafeArea(
-        maintainBottomViewPadding: true,
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: SiButton.primary(
-            onPressed: () {},
-            text: 'Add Transaction',
-            icon: Icon(Amicons.lucide_plus),
+        bottomNavigationBar: SafeArea(
+          maintainBottomViewPadding: true,
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: ReactiveFormConsumer(
+              builder: (context, formGroup, child) {
+                final invalid =
+                    form.amount.value == null && form.category.value == null;
+
+                return SiButton.primary(
+                  onPressed: invalid
+                      ? null
+                      : () async {
+                          final req = TxnIncome(
+                            amount: form.amount.value ?? 0,
+                            category: form.category.value!,
+                            notes: form.notes.value,
+                            createdAt: DateTime.now(),
+                          );
+                          await ref
+                              .read(transactionProvider.notifier)
+                              .createTransaction(req);
+                          if (context.mounted) {
+                            context.pop();
+                          }
+                        },
+                  text: 'Add Transaction',
+                  icon: Icon(Amicons.lucide_plus),
+                );
+              },
+            ),
           ),
         ),
       ),
     );
   }
-}
-
-class IncomeCategoryInput extends SiBaseInput<IncomeCategory> {
-  IncomeCategoryInput({
-    super.key,
-    required super.control,
-    super.label,
-    ValueChanged<IncomeCategory?>? onChanged,
-  }) : super(
-         readOnly: true,
-         valueAccessor: IncomeCategoryValueAccessor(),
-         suffixIcon: Icon(Amicons.vuesax_arrow_down_1),
-         onTap: (ctrl, context) async {
-           final selected = await _showOptions(context, control);
-
-           if (selected != null) {
-             control.updateValue(selected);
-             onChanged?.call(selected);
-           }
-         },
-         inputType: TextInputType.none,
-         placeholder: 'Income Category',
-       );
-
-  static Future<IncomeCategory?> _showOptions(
-    BuildContext context,
-    FormControl<IncomeCategory> control,
-  ) {
-    return SiBottomSheet<IncomeCategory>(context).show(
-      showIndicator: true,
-      showCloseButton: false,
-      title: Text('Select Income Category'),
-      builder: (close) {
-        return ReactiveValueListenableBuilder(
-          formControl: control,
-          builder: (context, _, _) => Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              spacing: 8,
-              children: IncomeCategory.values
-                  .map(
-                    (category) => GestureDetector(
-                      onTap: () => close(category),
-                      child: Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: control.value == category
-                                ? SiColors.secondary
-                                : SiColors.grayscale2,
-                          ),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          spacing: 8,
-                          children: [
-                            Text(
-                              category.title,
-                              style: context.textTheme.bodyLarge,
-                            ),
-                            if (control.value == category)
-                              Icon(
-                                Amicons.lucide_check,
-                                size: 16,
-                                color: SiColors.secondary,
-                              ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-                  .toList(),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class IncomeCategoryValueAccessor
-    extends ControlValueAccessor<IncomeCategory, String> {
-  @override
-  String? modelToViewValue(IncomeCategory? modelValue) {
-    if (modelValue == null) return '';
-    return modelValue.title;
-  }
-
-  @override
-  IncomeCategory? viewToModelValue(String? viewValue) => null;
 }
 
 /// * Transaction Expense Form

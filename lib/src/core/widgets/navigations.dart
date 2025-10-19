@@ -56,18 +56,18 @@ class _SiNavigationBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: Icon(Amicons.vuesax_home_1, color: SiColors.grayscale3),
+              icon: Icon(Amicons.lucide_house, color: SiColors.grayscale3),
               isSelected: isHomeActive,
               padding: EdgeInsets.symmetric(horizontal: 16),
-              selectedIcon: Icon(Amicons.vuesax_home_fill),
+              selectedIcon: Icon(Amicons.lucide_house),
               onPressed: () =>
                   _navigate(isHomeActive, () => HomeRoute().go(context)),
             ),
             IconButton(
-              icon: Icon(Amicons.vuesax_receipt_2, color: SiColors.grayscale3),
+              icon: Icon(Amicons.lucide_repeat, color: SiColors.grayscale3),
               padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isTransactionActive,
-              selectedIcon: Icon(Amicons.vuesax_receipt_2_fill),
+              selectedIcon: Icon(Amicons.lucide_repeat),
               onPressed: () => _navigate(
                 isTransactionActive,
                 () => TransactionRoute().push(context),
@@ -81,10 +81,10 @@ class _SiNavigationBar extends StatelessWidget {
               icon: Icon(Icons.add),
             ),
             IconButton(
-              icon: Icon(Amicons.vuesax_like, color: SiColors.grayscale3),
+              icon: Icon(Amicons.lucide_goal, color: SiColors.grayscale3),
               padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isGoalsActive,
-              selectedIcon: Icon(Amicons.vuesax_like_fill),
+              selectedIcon: Icon(Amicons.lucide_goal),
               onPressed: () =>
                   _navigate(isGoalsActive, () => GoalsRoute().push(context)),
             ),

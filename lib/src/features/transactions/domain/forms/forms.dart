@@ -18,9 +18,7 @@ class TransactionExpenseForm extends FormGroup {
   TransactionExpenseForm()
     : super({
         'amount': FormControl<int>(),
-        'category': FormControl<ExpenseCategory>(
-          validators: [RequiredValidator()],
-        ),
+        'category': FormControl<ExpenseCategory>(),
         'notes': FormControl<String>(),
       });
 
@@ -34,9 +32,7 @@ class TransactionIncomeForm extends FormGroup {
   TransactionIncomeForm()
     : super({
         'amount': FormControl<int>(),
-        'category': FormControl<IncomeCategory>(
-          validators: [RequiredValidator()],
-        ),
+        'category': FormControl<IncomeCategory>(),
         'notes': FormControl<String>(),
       });
 
