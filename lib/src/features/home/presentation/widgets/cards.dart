@@ -14,21 +14,21 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final name = switch (transaction) {
-      TxnExpense(:var notes, :var category) => notes ?? category.title,
-      TxnIncome(:var notes, :var category) => notes ?? category.title,
-      TxnGoals(:var type) => type.title,
+      Expense(:var notes, :var category) => notes ?? category.title,
+      Income(:var notes, :var category) => notes ?? category.title,
+      Goals(:var type) => type.title,
     };
 
     final operation = switch (transaction) {
-      TxnExpense() => Icon(Amicons.lucide_minus, size: 12),
-      TxnIncome() => Icon(Amicons.lucide_plus, size: 12),
-      TxnGoals() => null,
+      Expense() => Icon(Amicons.lucide_minus, size: 12),
+      Income() => Icon(Amicons.lucide_plus, size: 12),
+      Goals() => null,
     };
 
     final icon = switch (transaction) {
-      TxnExpense(:var category) => _expenseIcon(category),
-      TxnIncome(:var category) => _incomeIcon(category),
-      TxnGoals() => Icon(Amicons.lucide_goal),
+      Expense(:var category) => _expenseIcon(category),
+      Income(:var category) => _incomeIcon(category),
+      Goals() => Icon(Amicons.lucide_goal),
     };
 
     return Card(

@@ -31,7 +31,7 @@ void main() {
 
     group('Insert Transaction', () {
       test('Should insert income and return id', () async {
-        final income = TxnIncome(
+        final income = Income(
           amount: 5000000,
           category: IncomeCategory.salary,
           notes: 'Gajian Bulan Oktober',
@@ -46,7 +46,7 @@ void main() {
       });
 
       test('Should insert expense and return id', () async {
-        final expense = TxnExpense(
+        final expense = Expense(
           amount: 25000,
           category: ExpenseCategory.food,
           notes: 'Beli Nasi Padang',
@@ -62,14 +62,14 @@ void main() {
     });
 
     group('Query Transactions', () {
-      final income = TxnIncome(
+      final income = Income(
         amount: 5000000,
         category: IncomeCategory.salary,
         notes: 'Gajian Bulan Oktober',
         createdAt: DateTime.now(),
       );
 
-      final expense = TxnExpense(
+      final expense = Expense(
         amount: 25000,
         category: ExpenseCategory.food,
         notes: 'Beli Nasi Padang',
@@ -120,7 +120,7 @@ void main() {
 
     group('Update Transaction', () {
       test('Should update transaction and return affected row', () async {
-        final income = TxnIncome(
+        final income = Income(
           amount: 5000000,
           category: IncomeCategory.salary,
           notes: 'Gajian Bulan Oktober',
@@ -145,7 +145,7 @@ void main() {
 
     group('Delete Transaction', () {
       test('Should delete transaction and return affected row', () async {
-        final income = TxnIncome(
+        final income = Income(
           amount: 5000000,
           category: IncomeCategory.salary,
           notes: 'Gajian Bulan Oktober',

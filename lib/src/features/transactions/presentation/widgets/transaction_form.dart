@@ -121,7 +121,7 @@ class TransactionIncomeForm extends ConsumerWidget {
                   onPressed: invalid
                       ? null
                       : () async {
-                          final req = TxnIncome(
+                          final req = Income(
                             amount: form.amount.value ?? 0,
                             category: form.category.value!,
                             notes: form.notes.value,

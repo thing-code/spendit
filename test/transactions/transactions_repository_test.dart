@@ -8,9 +8,9 @@ import 'package:spendit/src/features/transactions/domain/models/models.dart';
 class MockTransactionsDataSource extends Mock
     implements TransactionsDataSource {}
 
-class FakeIncome extends Fake implements TxnIncome {}
+class FakeIncome extends Fake implements Income {}
 
-class FakeExpense extends Fake implements TxnExpense {}
+class FakeExpense extends Fake implements Expense {}
 
 void main() {
   group('Transactions Repository Test', () {
@@ -26,7 +26,7 @@ void main() {
 
     group('Insert Transaction', () {
       test('Should insert income successfully', () async {
-        final income = TxnIncome(
+        final income = Income(
           amount: 5000000,
           category: IncomeCategory.salary,
           notes: 'Gajian Bulan Oktober',
@@ -43,7 +43,7 @@ void main() {
       });
 
       test('Should insert expense successfully', () async {
-        final expense = TxnExpense(
+        final expense = Expense(
           amount: 25000,
           category: ExpenseCategory.food,
           notes: 'Beli Nasi Padang',
@@ -62,7 +62,7 @@ void main() {
 
     group('Get Transactions', () {
       test('Should return transaction with spesific id', () async {
-        final income = TxnIncome(
+        final income = Income(
           id: 1,
           amount: 5000000,
           category: IncomeCategory.salary,
@@ -75,7 +75,7 @@ void main() {
         final result = await repository.getById(1);
 
         expect(result, isA<Transactions>());
-        expect(result, isA<TxnIncome>());
+        expect(result, isA<Income>());
         expect(result?.id, 1);
 
         verify(() => mockDataSource.getById(1)).called(1);
@@ -95,14 +95,14 @@ void main() {
 
       test('Should get all transactions', () async {
         final transactions = [
-          TxnIncome(
+          Income(
             id: 1,
             amount: 5000000,
             category: IncomeCategory.salary,
             notes: 'Gajian Bulan Oktober',
             createdAt: DateTime.now(),
           ),
-          TxnExpense(
+          Expense(
             id: 2,
             amount: 25000,
             category: ExpenseCategory.food,
@@ -126,7 +126,7 @@ void main() {
 
     group('Update Transactions', () {
       test('Should update transaction', () async {
-        final income = TxnIncome(
+        final income = Income(
           id: 1,
           amount: 5000000,
           category: IncomeCategory.salary,
@@ -147,7 +147,7 @@ void main() {
 
     group('Delete Transactions', () {
       test('Should delete transaction', () async {
-        final income = TxnIncome(
+        final income = Income(
           id: 1,
           amount: 5000000,
           category: IncomeCategory.salary,
