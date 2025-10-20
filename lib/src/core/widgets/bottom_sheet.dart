@@ -1,6 +1,6 @@
-import 'package:amicons/amicons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:solar_icons/solar_icons.dart';
 import 'package:spendit/src/core/core.dart';
 
 /// Class for showing BottomSheet
@@ -128,7 +128,7 @@ class _BottomSheetAppBar extends StatelessWidget
       leading: onBackPressed != null
           ? IconButton(
               onPressed: onBackPressed,
-              icon: Icon(Amicons.vuesax_arrow_left_2),
+              icon: Icon(SolarIconsOutline.altArrowLeft),
             )
           : null,
       centerTitle: centerTitle,

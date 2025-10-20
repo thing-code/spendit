@@ -1,6 +1,6 @@
-import 'package:amicons/amicons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:solar_icons/solar_icons.dart';
 
 import '../../../../core/core.dart';
 import '../../../transactions/domain/models/models.dart';
@@ -14,21 +14,21 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final name = switch (transaction) {
-      Expense(:var notes, :var category) => notes ?? category.title,
-      Income(:var notes, :var category) => notes ?? category.title,
+      Expense(:var category) => category.title,
+      Income(:var category) => category.title,
       Goals(:var type) => type.title,
     };
 
     final operation = switch (transaction) {
-      Expense() => Icon(Amicons.lucide_minus, size: 12),
-      Income() => Icon(Amicons.lucide_plus, size: 12),
+      Expense() => Icon(Icons.add, size: 12),
+      Income() => Icon(Icons.remove, size: 12),
       Goals() => null,
     };
 
     final icon = switch (transaction) {
       Expense(:var category) => _expenseIcon(category),
       Income(:var category) => _incomeIcon(category),
-      Goals() => Icon(Amicons.lucide_goal),
+      Goals() => Icon(SolarIconsBold.cup1),
     };
 
     return Card(
@@ -88,22 +88,22 @@ class TransactionCard extends StatelessWidget {
 
   Icon _incomeIcon(IncomeCategory category) {
     return switch (category) {
-      IncomeCategory.salary => Icon(Amicons.vuesax_wallet_1),
-      IncomeCategory.investment => Icon(Amicons.vuesax_diagram),
-      IncomeCategory.freelance => Icon(Amicons.lucide_briefcase_business),
+      IncomeCategory.salary => Icon(SolarIconsBold.walletMoney),
+      IncomeCategory.investment => Icon(SolarIconsBold.graphUp),
+      IncomeCategory.freelance => Icon(SolarIconsBold.suitcase),
     };
   }
 
   Icon _expenseIcon(ExpenseCategory category) {
     return switch (category) {
-      ExpenseCategory.bill => Icon(Amicons.vuesax_receipt_item),
-      ExpenseCategory.family => Icon(Amicons.vuesax_house),
-      ExpenseCategory.food => Icon(Amicons.lucide_ham),
-      ExpenseCategory.health => Icon(Amicons.vuesax_health),
-      ExpenseCategory.other => Icon(Amicons.vuesax_more),
-      ExpenseCategory.reward => Icon(Amicons.vuesax_gift),
-      ExpenseCategory.shopping => Icon(Amicons.vuesax_shopping_cart),
-      ExpenseCategory.transport => Icon(Amicons.vuesax_truck_fast),
+      ExpenseCategory.bill => Icon(SolarIconsBold.bill),
+      ExpenseCategory.family => Icon(SolarIconsBold.home),
+      ExpenseCategory.food => Icon(SolarIconsBold.chefHatMinimalistic),
+      ExpenseCategory.health => Icon(SolarIconsBold.heartPulse),
+      ExpenseCategory.other => Icon(SolarIconsBold.widget_2),
+      ExpenseCategory.reward => Icon(SolarIconsBold.confetti),
+      ExpenseCategory.shopping => Icon(SolarIconsBold.cartLarge),
+      ExpenseCategory.transport => Icon(SolarIconsBold.scooter),
     };
   }
 }
@@ -129,7 +129,7 @@ class GoalCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     color: SiColors.secondaryContainer,
                   ),
-                  child: Icon(Amicons.vuesax_like, color: SiColors.secondary),
+                  child: Icon(SolarIconsBold.cup1, color: SiColors.secondary),
                 ),
                 Expanded(
                   child: Column(
@@ -221,20 +221,16 @@ class TransactionTypeCard extends ConsumerWidget {
 
     final icon = switch (type) {
       TransactionType.income => Icon(
-        Amicons.lucide_arrow_down_left,
+        SolarIconsOutline.arrowLeftDown,
         color: context.colorScheme.primary,
         size: 16,
       ),
       TransactionType.expense => Icon(
-        Amicons.lucide_arrow_up_right,
+        SolarIconsOutline.arrowRightUp,
         color: context.colorScheme.secondary,
         size: 16,
       ),
-      _ => Icon(
-        Amicons.vuesax_wallet_1,
-        color: context.colorScheme.onPrimary,
-        size: 16,
-      ),
+      _ => Icon(Icons.add, color: context.colorScheme.onPrimary, size: 16),
     };
 
     final amount = switch (type) {

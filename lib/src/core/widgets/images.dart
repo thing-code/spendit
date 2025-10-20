@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:amicons/amicons.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:solar_icons/solar_icons.dart';
 
 import '../core.dart';
 
@@ -78,7 +78,7 @@ class _SiImagesState extends State<SiImages> {
         if (_timer == null && _retryCount < _maxRetry) {
           _timer = Timer(_interval, _retry);
         }
-        return Icon(Amicons.vuesax_gallery_slash_fill, color: SiColors.danger);
+        return Icon(SolarIconsOutline.galleryRemove, color: SiColors.danger);
       },
     );
   }

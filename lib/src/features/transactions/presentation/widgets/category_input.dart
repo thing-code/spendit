@@ -1,6 +1,6 @@
-import 'package:amicons/amicons.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:solar_icons/solar_icons.dart';
 import 'package:spendit/src/core/core.dart';
 
 class IncomeCategoryInput extends SiBaseInput<IncomeCategory> {
@@ -12,7 +12,7 @@ class IncomeCategoryInput extends SiBaseInput<IncomeCategory> {
   }) : super(
          readOnly: true,
          valueAccessor: IncomeCategoryValueAccessor(),
-         suffixIcon: Icon(Amicons.vuesax_arrow_down_1),
+         suffixIcon: Icon(SolarIconsOutline.altArrowDown),
          onTap: (ctrl, context) async {
            final selected = await _showOptions(context, control);
 
@@ -65,7 +65,7 @@ class IncomeCategoryInput extends SiBaseInput<IncomeCategory> {
                             ),
                             if (control.value == category)
                               Icon(
-                                Amicons.lucide_check,
+                                SolarIconsOutline.unread,
                                 size: 16,
                                 color: SiColors.secondary,
                               ),
@@ -104,7 +104,7 @@ class ExpenseCategoryInput extends SiBaseInput<ExpenseCategory> {
   }) : super(
          readOnly: true,
          valueAccessor: ExpenseCategoryValueAccessor(),
-         suffixIcon: Icon(Amicons.vuesax_arrow_down_1),
+         suffixIcon: Icon(SolarIconsOutline.altArrowDown),
          onTap: (ctrl, context) async {
            final selected = await _showOptions(context, control);
 
@@ -157,7 +157,7 @@ class ExpenseCategoryInput extends SiBaseInput<ExpenseCategory> {
                             ),
                             if (control.value == category)
                               Icon(
-                                Amicons.lucide_check,
+                                SolarIconsOutline.unread,
                                 size: 16,
                                 color: SiColors.secondary,
                               ),

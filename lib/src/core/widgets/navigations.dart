@@ -1,6 +1,6 @@
-import 'package:amicons/amicons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:solar_icons/solar_icons.dart';
 
 import '../../features/transactions/presentation/widgets/widgets.dart';
 import '../core.dart';
@@ -56,18 +56,21 @@ class _SiNavigationBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: Icon(Amicons.lucide_house, color: SiColors.grayscale3),
+              icon: Icon(SolarIconsOutline.home, color: SiColors.grayscale3),
               isSelected: isHomeActive,
               padding: EdgeInsets.symmetric(horizontal: 16),
-              selectedIcon: Icon(Amicons.lucide_house),
+              selectedIcon: Icon(SolarIconsBold.home),
               onPressed: () =>
                   _navigate(isHomeActive, () => HomeRoute().go(context)),
             ),
             IconButton(
-              icon: Icon(Amicons.lucide_repeat, color: SiColors.grayscale3),
+              icon: Icon(
+                SolarIconsOutline.transferHorizontal,
+                color: SiColors.grayscale3,
+              ),
               padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isTransactionActive,
-              selectedIcon: Icon(Amicons.lucide_repeat),
+              selectedIcon: Icon(SolarIconsBold.transferHorizontal),
               onPressed: () => _navigate(
                 isTransactionActive,
                 () => TransactionRoute().push(context),
@@ -81,18 +84,21 @@ class _SiNavigationBar extends StatelessWidget {
               icon: Icon(Icons.add),
             ),
             IconButton(
-              icon: Icon(Amicons.lucide_goal, color: SiColors.grayscale3),
+              icon: Icon(SolarIconsOutline.cup1, color: SiColors.grayscale3),
               padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isGoalsActive,
-              selectedIcon: Icon(Amicons.lucide_goal),
+              selectedIcon: Icon(SolarIconsBold.cup1),
               onPressed: () =>
                   _navigate(isGoalsActive, () => GoalsRoute().push(context)),
             ),
             IconButton(
-              icon: Icon(Amicons.lucide_calculator, color: SiColors.grayscale3),
+              icon: Icon(
+                SolarIconsOutline.calculatorMinimalistic,
+                color: SiColors.grayscale3,
+              ),
               padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isBudgetingActive,
-              selectedIcon: Icon(Amicons.lucide_calculator),
+              selectedIcon: Icon(SolarIconsBold.calculatorMinimalistic),
               onPressed: () => _navigate(
                 isBudgetingActive,
                 () => BudgetingRoute().push(context),

@@ -1,6 +1,6 @@
-import 'package:amicons/amicons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:solar_icons/solar_icons.dart';
 
 import '../../../../core/core.dart';
 import '../../../transactions/domain/models/models.dart';
@@ -38,7 +38,7 @@ class BalanceSection extends ConsumerWidget {
               onPressed: () =>
                   ref.read(transactionVisibilityProvider.notifier).toggle(),
               icon: Icon(
-                visible ? Amicons.lucide_eye : Amicons.lucide_eye_closed,
+                visible ? SolarIconsOutline.eye : SolarIconsOutline.eyeClosed,
               ),
             ),
           ],
@@ -74,7 +74,7 @@ class RecentTransactionsSection extends ConsumerWidget {
                     ),
                   ),
                   Icon(
-                    Amicons.vuesax_arrow_right_3,
+                    SolarIconsOutline.altArrowRight,
                     size: 16,
                     color: context.colorScheme.primary,
                   ),
@@ -101,7 +101,7 @@ class RecentTransactionsSection extends ConsumerWidget {
             spacing: 8,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Amicons.vuesax_empty_wallet_time_fill, size: 56),
+              Icon(SolarIconsOutline.confoundedSquare, size: 56),
               Text('No Recent Transactions'),
             ],
           ),

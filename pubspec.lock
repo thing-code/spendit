@@ -9,14 +9,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "85.0.0"
-  amicons:
-    dependency: "direct main"
-    description:
-      name: amicons
-      sha256: b0216f8c4e205853650fec7fc6baa23fb996c114bf6320bbf1dbb801d352e86f
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
   analyzer:
     dependency: transitive
     description:
@@ -946,6 +938,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  solar_icons:
+    dependency: "direct main"
+    description:
+      name: solar_icons
+      sha256: "2865a62fb0a39a7c2403205bfe05453bd3f2fedbaa8e5c3d436cf2a080afe259"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.5"
   source_gen:
     dependency: transitive
     description:
