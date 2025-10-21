@@ -26,9 +26,15 @@ class TransactionCard extends StatelessWidget {
     };
 
     final icon = switch (transaction) {
-      Income(:var category) => Icon(category.icon),
-      Expense(:var category) => Icon(category.icon),
-      Goals() => Icon(SolarIconsBold.cup1),
+      Income(:var category) => Icon(
+        category.icon,
+        color: context.colorScheme.primary,
+      ),
+      Expense(:var category) => Icon(
+        category.icon,
+        color: context.colorScheme.primary,
+      ),
+      Goals() => Icon(SolarIconsBold.cup1, color: context.colorScheme.primary),
     };
 
     return Card(

@@ -23,7 +23,7 @@ enum IncomeCategory {
 }
 
 enum ExpenseCategory {
-  family('Family', SolarIconsBold.home),
+  family('Family', SolarIconsBold.home1),
   shopping('Shopping', SolarIconsBold.cartLarge),
   reward('Reward', SolarIconsBold.confetti),
   health('Health', SolarIconsBold.heartPulse),

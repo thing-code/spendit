@@ -65,12 +65,12 @@ class _SiNavigationBar extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(
-                SolarIconsOutline.transferHorizontal,
+                SolarIconsOutline.transferVertical,
                 color: SiColors.grayscale3,
               ),
               padding: EdgeInsets.symmetric(horizontal: 16),
               isSelected: isTransactionActive,
-              selectedIcon: Icon(SolarIconsBold.transferHorizontal),
+              selectedIcon: Icon(SolarIconsBold.transferVertical),
               onPressed: () => _navigate(
                 isTransactionActive,
                 () => TransactionRoute().push(context),

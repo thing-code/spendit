@@ -97,7 +97,14 @@ class TransactionIncomeForm extends ConsumerWidget {
         body: Column(
           spacing: 16,
           children: [
-            SiCurrencyInput(control: form.amount),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+              decoration: BoxDecoration(
+                color: SiColors.card,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: SiCurrencyInput(control: form.amount),
+            ),
             IncomeCategoryInput(control: form.category, label: 'Category'),
             SiTextInput(
               control: form.notes,
@@ -157,7 +164,14 @@ class TransactionExpenseForm extends ConsumerWidget {
         body: Column(
           spacing: 16,
           children: [
-            SiCurrencyInput(control: form.amount),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+              decoration: BoxDecoration(
+                color: SiColors.card,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: SiCurrencyInput(control: form.amount),
+            ),
             ExpenseCategoryInput(control: form.category, label: 'Category'),
             SiTextInput(
               control: form.notes,
