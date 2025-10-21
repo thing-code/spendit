@@ -14,20 +14,20 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final name = switch (transaction) {
-      Expense(:var category) => category.title,
       Income(:var category) => category.title,
+      Expense(:var category) => category.title,
       Goals(:var type) => type.title,
     };
 
     final operation = switch (transaction) {
-      Expense() => Icon(Icons.add, size: 12),
-      Income() => Icon(Icons.remove, size: 12),
+      Income() => Icon(Icons.add, size: 12),
+      Expense() => Icon(Icons.remove, size: 12),
       Goals() => null,
     };
 
     final icon = switch (transaction) {
-      Expense(:var category) => _expenseIcon(category),
-      Income(:var category) => _incomeIcon(category),
+      Income(:var category) => Icon(category.icon),
+      Expense(:var category) => Icon(category.icon),
       Goals() => Icon(SolarIconsBold.cup1),
     };
 
@@ -84,27 +84,6 @@ class TransactionCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Icon _incomeIcon(IncomeCategory category) {
-    return switch (category) {
-      IncomeCategory.salary => Icon(SolarIconsBold.walletMoney),
-      IncomeCategory.investment => Icon(SolarIconsBold.graphUp),
-      IncomeCategory.freelance => Icon(SolarIconsBold.suitcase),
-    };
-  }
-
-  Icon _expenseIcon(ExpenseCategory category) {
-    return switch (category) {
-      ExpenseCategory.bill => Icon(SolarIconsBold.bill),
-      ExpenseCategory.family => Icon(SolarIconsBold.home),
-      ExpenseCategory.food => Icon(SolarIconsBold.chefHatMinimalistic),
-      ExpenseCategory.health => Icon(SolarIconsBold.heartPulse),
-      ExpenseCategory.other => Icon(SolarIconsBold.widget_2),
-      ExpenseCategory.reward => Icon(SolarIconsBold.confetti),
-      ExpenseCategory.shopping => Icon(SolarIconsBold.cartLarge),
-      ExpenseCategory.transport => Icon(SolarIconsBold.scooter),
-    };
   }
 }
 

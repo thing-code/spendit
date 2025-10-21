@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:solar_icons/solar_icons.dart';
+
 enum TransactionType {
   income('Income'),
   expense('Expense'),
@@ -9,26 +12,28 @@ enum TransactionType {
 }
 
 enum IncomeCategory {
-  salary('Salary'),
-  investment('Investment'),
-  freelance('Freelance');
+  salary('Salary', SolarIconsBold.walletMoney),
+  investment('Investment', SolarIconsBold.graphUp),
+  freelance('Freelance', SolarIconsBold.moneyBag);
 
   final String title;
+  final IconData icon;
 
-  const IncomeCategory(this.title);
+  const IncomeCategory(this.title, this.icon);
 }
 
 enum ExpenseCategory {
-  family('Family'),
-  shopping('Shopping'),
-  reward('Reward'),
-  health('Health'),
-  bill('Bill'),
-  transport('Transport'),
-  food('Food'),
-  other('Other');
+  family('Family', SolarIconsBold.home),
+  shopping('Shopping', SolarIconsBold.cartLarge),
+  reward('Reward', SolarIconsBold.confetti),
+  health('Health', SolarIconsBold.heartPulse),
+  bill('Bill', SolarIconsBold.bill),
+  transport('Transport', SolarIconsBold.scooter),
+  food('Food', SolarIconsBold.chefHatMinimalistic),
+  other('Other', SolarIconsBold.widget_2);
 
   final String title;
+  final IconData icon;
 
-  const ExpenseCategory(this.title);
+  const ExpenseCategory(this.title, this.icon);
 }
