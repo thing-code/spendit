@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+
 import '../../../../core/core.dart';
 
 class TransactionsPage extends ConsumerWidget {
@@ -9,6 +11,7 @@ class TransactionsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: SiAppBar(title: Text('Transactions'), canPop: false),
+      body: Column(children: [Text(DateFormat.MMMM().format(DateTime.now()))]),
     );
   }
 }

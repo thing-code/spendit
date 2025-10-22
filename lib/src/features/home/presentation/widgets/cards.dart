@@ -26,15 +26,15 @@ class TransactionCard extends StatelessWidget {
     };
 
     final icon = switch (transaction) {
-      Income(:var category) => Icon(
-        category.icon,
-        color: context.colorScheme.primary,
-      ),
-      Expense(:var category) => Icon(
-        category.icon,
-        color: context.colorScheme.primary,
-      ),
-      Goals() => Icon(SolarIconsBold.cup1, color: context.colorScheme.primary),
+      Income(:var category) => Icon(category.icon),
+      Expense(:var category) => Icon(category.icon),
+      Goals() => Icon(SolarIconsBold.cup1),
+    };
+
+    final iconBackground = switch (transaction) {
+      Income(:var category) => incomeCategoryColors[category],
+      Expense(:var category) => expenseCategoryColors[category],
+      Goals() => context.colorScheme.primaryContainer,
     };
 
     return Card(
@@ -50,7 +50,7 @@ class TransactionCard extends StatelessWidget {
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: SiColors.primaryContainer,
+                    color: iconBackground,
                   ),
                   child: icon,
                 ),
