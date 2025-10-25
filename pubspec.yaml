@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   cached_network_image: ^3.4.1
-  device_info_plus: ^12.1.0
+  device_info_plus: ^12.2.0
   flutter:
     sdk: flutter
   flutter_gen: ^5.12.0
@@ -16,18 +16,17 @@ dependencies:
   flutter_riverpod: ^3.0.3
   freezed_annotation: ^3.1.0
   gap: ^3.0.1
-  go_router: ^16.2.5
+  go_router: ^16.3.0
   intl: ^0.20.2
   json_annotation: ^4.9.0
   logging: ^1.3.0
   path: ^1.9.1
   reactive_forms: ^18.1.1
   riverpod_annotation: ^3.0.3
-  riverpod_sqflite: ^0.3.3
   solar_icons: ^0.0.5
   sqflite: ^2.4.2
   sqflite_common_ffi: ^2.3.6
-  syncfusion_flutter_charts: ^31.2.2
+  syncfusion_flutter_charts: ^31.2.3
   thing_toast: ^0.4.0
 
 dev_dependencies:
@@ -37,7 +36,7 @@ dev_dependencies:
   flutter_gen_runner: ^5.12.0
   riverpod_generator: ^3.0.3
   build_runner: ^2.7.1
-  go_router_builder: ^4.1.0
+  go_router_builder: ^4.1.1
   freezed: ^3.2.3
   json_serializable: ^6.11.1
   mocktail: ^1.0.4
