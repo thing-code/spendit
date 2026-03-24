@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -58,7 +57,7 @@ class IncomeRepositoryImpl implements IncomeRepository {
       return Left(e.toString());
     }
   }
-  
+
   @override
   Future<Either<String, List<Income>>> readByMonth(DateTime date) async {
     try {

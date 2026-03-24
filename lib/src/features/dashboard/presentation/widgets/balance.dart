@@ -37,9 +37,9 @@ class COSBalance extends ConsumerWidget {
     if (income.hasError || expense.hasError || balance.hasError) {
       return Center(child: Text('Error Occured'));
     }
-    final tIncome = income.hasValue ? income.valueOrNull!.fold(0, (v0, v1) => v0 + v1.value) : 0;
-    final tExpense = expense.hasValue ? expense.valueOrNull!.fold(0, (v0, v1) => v0 + v1.value) : 0;
-    final tBalance = balance.hasValue ? balance.valueOrNull! : 0;
+    final tIncome = income.hasValue ? income.value!.fold(0, (v0, v1) => v0 + v1.value) : 0;
+    final tExpense = expense.hasValue ? expense.value!.fold(0, (v0, v1) => v0 + v1.value) : 0;
+    final tBalance = balance.hasValue ? balance.value! : 0;
     return COSBalanceData(balance: tBalance, income: tIncome, expense: tExpense);
   }
 }
@@ -91,7 +91,9 @@ class COSBalanceData extends StatelessWidget {
               Row(
                 spacing: 12.w,
                 children: [
-                  Expanded(child: TransactionFlowCard(type: TransactionType.income, value: income)),
+                  Expanded(
+                    child: TransactionFlowCard(type: TransactionType.income, value: income),
+                  ),
                   Expanded(
                     child: TransactionFlowCard(type: TransactionType.expense, value: expense),
                   ),

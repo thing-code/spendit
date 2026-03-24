@@ -19,8 +19,7 @@ class GoalsHeader extends ConsumerWidget {
           FilledButton(
             onPressed: () async {
               final res = await showCupertinoSheet<Goals>(
-                context: context,
-                pageBuilder: (_) => GoalsForm(),
+                context: context, builder: (_) => GoalsForm(),
               );
               if (res == null) return;
               final created = await ref.read(goalsStateProvider.notifier).add(res);

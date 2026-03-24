@@ -1,4 +1,3 @@
-
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 
 import '../../common.dart';
@@ -57,9 +56,9 @@ class COSDropdownInput<T> extends StatelessWidget {
             fit: FlexFit.loose,
             menuProps: MenuProps(
               borderRadius: BorderRadius.circular(12),
+              shape: null,
               margin: EdgeInsets.symmetric(vertical: 4),
             ),
-            suggestedItemProps: SuggestedItemProps(),
             loadingBuilder: (ctx, se) => Center(child: CircularProgressIndicator()),
             emptyBuilder: (ctx, se) => Center(child: Text('No Data.')),
             errorBuilder: (ctx, se, _) => Center(child: Text('An Error Ocurred.')),

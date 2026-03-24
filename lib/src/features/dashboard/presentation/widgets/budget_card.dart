@@ -14,8 +14,7 @@ class BudgetCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         showCupertinoSheet(
-          context: context,
-          pageBuilder: (dctx) => BudgetForm(budget: budget, dctx: dctx),
+          context: context, builder: (dctx) => BudgetForm(budget: budget, dctx: dctx),
         );
       },
       child: Card(

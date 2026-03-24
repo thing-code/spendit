@@ -41,7 +41,7 @@ class GoalsForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final fg = ref.watch(GoalsFgProvider(goals: goals));
+    final fg = ref.watch(goalsFgProvider(goals: goals));
     return COSBottomSheetWrapper(
       title: goals == null ? 'Create New Goals' : 'Update Goals',
       onSave: () {

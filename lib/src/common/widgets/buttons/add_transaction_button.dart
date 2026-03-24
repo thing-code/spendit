@@ -21,14 +21,12 @@ class COSAddTransactionButton extends ConsumerWidget {
         children: [
           FloatingActionButton(
             onPressed: () async {
-              createTransaction(context);
-              return;
               showOptions(context).then((type) async {
                 if (type == null) return;
                 if (context.mounted) {
                   final res = await showCupertinoSheet<(Income?, Expense?, DateTime?)>(
                     context: context,
-                    pageBuilder: (dctx) => TransactionForm(type: type),
+                    builder: (dctx) => TransactionForm(type: type),
                   );
                   if (res == null) return;
                   if (res.$1 != null && res.$3 != null && context.mounted) {
@@ -54,7 +52,7 @@ class COSAddTransactionButton extends ConsumerWidget {
   Future<void> createTransaction(BuildContext context) async {
     await showCupertinoSheet(
       context: context,
-      pageBuilder:
+      builder:
           (context) => Scaffold(
             body: Padding(
               padding: EdgeInsets.all(16),

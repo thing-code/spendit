@@ -48,8 +48,7 @@ class _GoalsOnData extends ConsumerWidget {
               goals: goals,
               onEdit: () async {
                 final res = await showCupertinoSheet<Goals>(
-                  context: context,
-                  pageBuilder: (_) => GoalsForm(goals: goals),
+                  context: context, builder: (_) => GoalsForm(goals: goals),
                 );
                 if (res == null) return;
                 final updated = await ref.read(goalsStateProvider.notifier).edit(goals);
@@ -59,8 +58,7 @@ class _GoalsOnData extends ConsumerWidget {
               },
               onAddFunds:
                   () => showCupertinoSheet<bool>(
-                    context: context,
-                    pageBuilder: (context) => FundsForm(goals),
+                    context: context, builder: (context) => FundsForm(goals),
                   ),
             );
           },
