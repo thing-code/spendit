@@ -36,6 +36,21 @@ const config: ExpoConfig = {
                     imageWidth: 76
                 }
             }
+        ],
+        [
+            "expo-font",
+            {
+                fonts: [
+                    "./assets/fonts/SpaceGrotesk-Bold.ttf",
+                    "./assets/fonts/SpaceGrotesk-Medium.ttf",
+                    "./assets/fonts/SpaceGrotesk-Regular.ttf",
+                    "./assets/fonts/SpaceGrotesk-Semibold.ttf",
+                    "./assets/fonts/Urbanist-Bold.ttf",
+                    "./assets/fonts/Urbanist-Medium.ttf",
+                    "./assets/fonts/Urbanist-Regular.ttf",
+                    "./assets/fonts/Urbanist-Semibold.ttf",
+                ],
+            }
         ]
     ],
     experiments: {
