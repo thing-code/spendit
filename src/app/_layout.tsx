@@ -10,8 +10,7 @@ export default function RootLayout() {
         <Stack.Header style={{
           backgroundColor: theme.colors.background,
           color: theme.colors.textPrimary
-        }}>
-          
+        }} hidden>
         </Stack.Header>
       </Stack.Screen>
     </Stack>
