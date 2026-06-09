@@ -1,4 +1,3 @@
-import theme from "@/theme/theme";
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
@@ -6,12 +5,8 @@ export default function RootLayout() {
     <Stack>
       <Stack.Screen options={{
         title: "Home",
+        headerShown: false,
       }} name="(main)">
-        <Stack.Header style={{
-          backgroundColor: theme.colors.background,
-          color: theme.colors.textPrimary
-        }} hidden>
-        </Stack.Header>
       </Stack.Screen>
     </Stack>
   );
