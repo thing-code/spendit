@@ -1,0 +1,30 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
+
+@theme {
+  --color-primary: #22c55e;
+  --color-dark-primary: #16a34a;
+  --color-accent: #86efac;
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-divider: #334155;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
+  --color-success: #22c55e;
+  --color-info: #f59e0b;
+  --color-warning: #ef4444;
+  --color-error: #38bdf8;
+
+  --font-urbanist: "Urbanist-Regular";
+  --font-urbanist-medium: "Urbanist-Medium";
+  --font-urbanist-semibold: "Urbanist-SemiBold";
+  --font-urbanist-bold: "Urbanist-Bold";
+  --font-space-grotesk: "SpaceGrotesk-Regular";
+  --font-space-grotesk-medium: "SpaceGrotesk-Medium";
+  --font-space-grotesk-semibold: "SpaceGrotesk-SemiBold";
+  --font-space-grotesk-bold: "SpaceGrotesk-Bold";
+}
