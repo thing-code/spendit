@@ -1,18 +1,17 @@
 {
-  "fill" : {
-    "automatic-gradient" : "extended-gray:1.00000,1.00000"
-  },
+  "fill" : "automatic",
   "groups" : [
     {
       "layers" : [
         {
-          "image-name" : "spendit-logo.png",
-          "name" : "spendit-logo",
+          "glass" : false,
+          "image-name" : "splash-icon.png",
+          "name" : "splash-icon",
           "position" : {
-            "scale" : 1.17,
+            "scale" : 1,
             "translation-in-points" : [
-              -42.70499999999993,
-              7.478737098593911
+              0,
+              0
             ]
           }
         }
