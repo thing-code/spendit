@@ -1,10 +1,15 @@
-import HomeHeader from "@/components/home-header";
+import { Stack } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 
 export default function HomePage() {
   return (
     <>
-      <HomeHeader />
+      <Stack.Toolbar placement="bottom">
+        <Stack.Toolbar.Button icon={"plus"} />
+        <Stack.Toolbar.Spacer width={24} />
+        <Stack.Toolbar.Button icon={"plus"} />
+      </Stack.Toolbar>
+      {/* <HomeHeader /> */}
       <ScrollView className="p-4 bg-background">
         <View className="bg-surface p-4 rounded-2xl flex-col gap-2">
           <Text className="text-text-primary text-base font-urbanist-medium">
