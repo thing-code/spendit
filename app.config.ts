@@ -8,6 +8,7 @@ const config: ExpoConfig = {
   icon: "./assets/images/icon.png",
   scheme: "spendit",
   userInterfaceStyle: "dark",
+  platforms: ["android", "ios"],
   ios: {
     bundleIdentifier: "com.thingcode.spendit",
     icon: "./assets/spendit.icon",
@@ -15,15 +16,11 @@ const config: ExpoConfig = {
   android: {
     package: "com.thingcode.spendit",
     adaptiveIcon: {
-      backgroundColor: "#E6F4FE",
+      backgroundColor: "#0f172a",
       foregroundImage: "./assets/images/android-icon-foreground.png",
       monochromeImage: "./assets/images/android-icon-monochrome.png",
     },
     predictiveBackGestureEnabled: false,
-  },
-  web: {
-    output: "static",
-    favicon: "./assets/images/favicon.png",
   },
   plugins: [
     "expo-router",
@@ -33,7 +30,7 @@ const config: ExpoConfig = {
     [
       "expo-splash-screen",
       {
-        backgroundColor: "#208AEF",
+        backgroundColor: "#0f172a",
         android: {
           image: "./assets/images/splash-icon.png",
           imageWidth: 76,
